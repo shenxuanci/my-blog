@@ -707,7 +707,8 @@ test("production dependency lock excludes known vulnerable build-chain versions"
 
   // GHSA-rgw5-rvv9-x895 patches each major line separately, so a single
   // ">= 5.0.9" floor would reject 1.1.18 even though it carries the fix.
-  // minimatch@3 needs the CommonJS 1.x line; 5.x is ESM-only.
+  // minimatch@3 needs the 1.x line: 5.x still ships a CommonJS build but
+  // exports { expand, ... } instead of the bare function minimatch@3 calls.
   const braceExpansionFloor = { 1: "1.1.18", 2: "2.1.4", 3: "3.0.6", 4: "5.0.9", 5: "5.0.9" };
   assert.ok(
     versions("brace-expansion").every((version) => {
@@ -725,12 +726,23 @@ test("production dependency lock excludes known vulnerable build-chain versions"
 });
 
 test("the stylus build chain can still brace-expand after security overrides", () => {
-  // brace-expansion 5.x is ESM-only, so overriding it into minimatch@3 (CommonJS)
-  // silently breaks brace patterns with "expand is not a function". Version
-  // assertions alone cannot catch that, so exercise the real call path.
-  const stylusRequire = createRequire(new URL("../../node_modules/stylus/lib/utils.js", import.meta.url));
+  // brace-expansion 5.x moved from `module.exports = expand` to a named-export
+  // object, so overriding it into minimatch@3 leaves that package's
+  // `require('brace-expansion')(pattern)` call throwing "expand is not a
+  // function". Version assertions cannot see an export-shape mismatch, so
+  // exercise the real call path.
+  //
+  // Resolve through require.resolve rather than a hardcoded ../../node_modules
+  // URL: a git worktree has no node_modules of its own, and only require()
+  // resolution climbs to the parent repo. new URL() and glob's cwd-relative
+  // patterns do not, so the old form failed in every worktree whether or not
+  // the override was actually broken.
+  const stylusRequire = createRequire(require.resolve("stylus"));
   const glob = stylusRequire("glob");
-  const matched = glob.sync("node_modules/hexo-theme-fluid/source/css/{main,highlight}.styl");
+  const fluidRoot = require.resolve("hexo-theme-fluid/package.json")
+    .replace(/[\\/]package\.json$/, "")
+    .replace(/\\/g, "/");
+  const matched = glob.sync(`${fluidRoot}/source/css/{main,highlight}.styl`);
   assert.equal(matched.length, 2, "brace expansion must resolve both branches");
 });
 
