@@ -1,0 +1,1686 @@
+{
+ "version": 1,
+ "date": "2026-08-09",
+ "items": [
+  {
+   "url": "http://blog.sciencenet.cn/blog-1243751-1547036.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "红楼星火",
+   "desc": "红楼星火 明年 6 月 1 日是杨钟健先生诞辰 130 周年，在准备他的材料时发现，他一生中与北京沙滩这一带有密不可分的联系。他早年从陕西华县来到北京，考入位于沙滩的北京大学，在沙滩附近的北大不同宿舍居住，刻苦学习并从事革命活动。当他从德国留学回来，安家的第一站就在沙滩的吉安所。新中国成立后，中国科学院古脊椎所最早设于沙滩北面的北河沿二道桥，而他从此就安家在附近的地安门安乐堂胡同。上周刚寻访到二道桥古脊椎所旧址，今天利用周末，来追寻杨钟健的北大岁月。 1916 年， 19 岁的杨钟健从陕西省立第三中学毕业。他捧着崭新的毕业文凭，站在学堂的老槐树下，看着纸页上墨迹淋漓的“甲等”二字，心里却没有多少雀跃。关中平原的风吹了 20 年，此刻却像是要把他吹向一个全然陌生的世界。三叔杨鹤庆在日本千叶医专的樱花树下苦读医学，四叔杨鹤瑞则在北平北京大学的工科课堂上钻研矿业，两个方向，两种人生，像两条岔路，",
+   "fingerprint": "a02a1211ec7a6fdf703b881e"
+  },
+  {
+   "url": "http://blog.sciencenet.cn/blog-3411509-1547010.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "透明混沌编码超表面，解锁雷达-红外兼容隐身多尺度设计",
+   "desc": "Radar-Infrared Multi-Scale Bi-Stealth via Optically Transparent Chaotic Coding Metasurface Yanzhao Wang, Yanzhang Shao, Dan Liu, Zhixuan Hu, Yifei Xu, Huanhuan Gao, Xihong Wang, Xiaogang Su, Fei Ding*, He-Xiu Xu* Nano-Micro Letters (2026)18: 445 https://doi.org/10.1007/s40820-026-02294-6 本文亮点 1. 多尺度实现多频谱隐身： 提出了融合多尺度设计的超表面雷达‑红外兼容隐身新策略，构建了“毫米级代表性单元-厘米级编码模块-分米级阵列”的多尺度设计框架，通过调控单层超表面ITO的占空比，协同调控微波幅度、相位",
+   "fingerprint": "81800c194d726fe793e0a2a2"
+  },
+  {
+   "url": "http://blog.sciencenet.cn/blog-341292-1546965.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "深耕学术交流内生价值的相关建议",
+   "desc": "关于当下科研发展阶段，深耕学术交流内生价值的相关建议 法国高等科学研究所（IHÉS）依靠深度学术交流发掘、滋养青年学者，以激活内生科研动力为核心；国内普遍通行小有成果后叠加头衔、项目、经费等外部资源扶持人才成长，这是两套逻辑完全不同的青年科技人才培育体系。两种模式没有绝对优劣，在科技发展阶段、科研文化氛围不同的国家，发挥的作用、适配的价值天差地别。立足我国当前基础原始创新短板突出、青年科研功利化内卷加剧的现实，我们不应继续加码外力驱动模式，反而要将更多重心、资源投入学术交流，深挖其激发内在创新潜力、早期辨识潜力青年人才的独特价值，结合国内科研生态，本文提出通过学术交流方式，发现、辨识青年科技人才，并为其提供宽松自由的学术土壤，促进科技青年人才成长的相关建议。 一、两种成长模式，适配不一样的科技发展阶段与科研文化 内生驱动模式：以学术交流为核心，靠热爱与定力催生源头创新 IHÉS代表的第一种",
+   "fingerprint": "1e4c139a173e0e59b957ed28"
+  },
+  {
+   "url": "http://blog.sciencenet.cn/blog-3530069-1546997.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "《研究问题导向写作法》前言",
+   "desc": "注：本书聚焦于科研萌新首篇SCI/SSCI论文写作，尝试提出了一种“研究问题导向写作法”。本书可以视为2024年人民邮电出版社出版的《走好学术路 科研萌新的自我修养》的姊妹篇。这次采用了“线上专栏”发布形式，欢迎对SCI/SSCI论文写作感兴趣的朋友门关注和订阅。 前言：幸运的 AI 时代，不变的写作法则 我第一次投 SSCI 期刊的时候，整整憋了三个月。那时候我英语也一般，跟你们现在没法比。那时没有 Grammarly 帮你改语法，没有 DeepL 帮你润色句子，更没有 DeepSeek/ChatGPT 能把你那堆乱七八糟的英文整理成一段像样的话。每个句子都得自己抠，改一遍觉得不对，改两遍还是觉得别扭，改到第八遍的时候，你已经分不清这个句子到底对不对了。因为你看了太多次，看什么都顺眼，看什么都不顺眼。 那年头，语言本身就是一堵墙。投稿最怕收到的意见是 \" 你的手稿可能需要找一位 Nati",
+   "fingerprint": "d9f57a5ff66320b422591cc7"
+  },
+  {
+   "url": "http://blog.sciencenet.cn/blog-38998-1547051.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "洪堡与马德里植物园：美洲生物地理学诞生的西班牙根基",
+   "desc": "在全球科研领域，德国 洪堡奖学金、洪堡学者计划 是享誉世界的顶级学术荣誉，其冠名纪念的 亚历山大・冯・洪堡 （ Alexander von Humboldt, 1769-1859 ），正是现代 生物地理学 （ Biogeografía ）的奠基人。长期以来，学界与大众科普普遍将美洲生物地理学的开创成就归于洪堡的美洲野外科考之旅，却普遍忽略了支撑其整套理论体系成型、重塑近代生物地理认知的核心学术根基 ——18 世纪西班牙系统性的新大陆科考积淀，以及 马德里皇家植物园 （ Real Jardín Botánico, RJB-CSIC ）提供的完整学术赋能。多数研究与科普仅聚焦洪堡翻越钦博拉索火山、横穿奥里诺科河的传奇探险经历，却鲜有提及：其划时代著作 《植物地理学随笔》 （ Essai sur la géographie des plantes ）赖以成型的核心观测数据、美洲物种参照体系与标准",
+   "fingerprint": "465458e0c959d4473ca14d2d"
+  },
+  {
+   "url": "http://blog.sciencenet.cn/blog-39359-1546964.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "地球大气碳温调节机制——二氧化碳的岩气循环",
+   "desc": "碳的岩气循环和 大气碳温负反馈调节机制 张武昌2026年8月8日周六 大陆地壳与大洋地壳，主体矿物骨架均为硅酸盐矿物。大陆地壳上层以花岗岩质岩石为主，主要矿物是石英、长石、云母，全部属于硅酸盐类；下层为花岗闪长岩、辉长岩这类中基性硅酸盐岩。大洋地壳主体是玄武岩，由辉石、基性长石等铁镁硅酸盐矿物构成。少量非硅酸盐组分客观存在，比如碳酸盐岩、蒸发岩（石膏、岩盐），但这类岩层仅仅是地壳表层局部薄层，在地壳总体积、总质量里占比极低。 第一章 硅酸盐风化基础定义与完整反应体系 1.1 狭义与广义界定 狭义硅酸盐风化是指陆地硅酸盐风化，常温常压下，大气二氧化碳溶于雨水形成弱碳酸，对地壳表层硅酸盐矿物（长石、辉石、橄榄石、云母、玄武岩、花岗岩主体矿物）发生化学溶蚀，释放钙、镁、钾、钠等阳离子，生成碳酸氢根离子，消耗大气二氧化碳的全过程。 广义硅酸盐风化包含陆地和海洋两大发生场景： 大陆地表风化（碳汇主力",
+   "fingerprint": "c1d67a341581f8552c7523a7"
+  },
+  {
+   "url": "http://blog.sciencenet.cn/blog-502444-1547063.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "当知识不再稀缺，人该回到哪里？",
+   "desc": "每年暑期，都会有家长会忧心忡忡地来问我：孩子马上读大学了，暑假要不要先补补高数，比如学学编程啥的，把大学先修课都排满？他们怕孩子一进校就跟不上了。 我想，这种怕，恐怕从根上就怕错了方向。 一个准大学生此时最该拥有的，其实是\"留白\"。我不是反对鼓励孩子去读书、做实验、写点什么——这些当然可以，只要出自兴趣。我想说，最要紧的是别把这段时间填满，别让\"有目的的学习\"占据每一个清晨与黄昏。留白，是这个年纪最奢侈、也最难得的一件事。它是一切自主探索的前提；没有那段空着的时光，一个年轻人很难听见自己内心的声音。家长怕孩子一进校就跟不上，可真正该怕的，是这孩子连自己内心的声音都还没听见过，就先把最好的时光填满了。 家长为什么会陷进这种怕里？因为长久以来，我们太习惯用\"抢跑\"去对抗不确定。多学一点，似乎就多一分安全。可恰恰是这种心态，养出了一种\"假装在学习\"的东西。它看起来很努力：刷题、补课、把假期排得密",
+   "fingerprint": "26c1b819f2a4420c9e26b607"
+  },
+  {
+   "url": "https://arstechnica.com/gadgets/2026/08/europes-free-satellite-service-just-made-it-easier-to-track-wildfires/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Europe's free satellite service just made it easier to track wildfires",
+   "desc": "Copernicus Browser adds wildfire visualization amid record wildfire season.",
+   "fingerprint": "25cb58df0a125d24b2c96046"
+  },
+  {
+   "url": "https://arstechnica.com/science/2026/08/deepminds-hurricane-model-bought-forecasters-an-extra-day",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "DeepMind 的 WeatherNext 飓风模型为预报员争取到额外一天预警时间",
+   "desc": "Google DeepMind 与 Google Research 开发的 AI 模型 WeatherNext，在 2025 年 10 月飓风 Melissa 登陆前 5 天，以 80% 的置信度预测其将以 5 级飓风强度袭击牙买加。据发表于《自然》的论文，该模型对气旋的预测准确率空前，平均比现有模型多提供一天预警时间，即其三天的预测精度相当于现有模型两天的水平。",
+   "fingerprint": "88467ca2e2d19ad49dd57ac6"
+  },
+  {
+   "url": "https://arstechnica.com/science/2026/08/deepminds-hurricane-model-bought-forecasters-an-extra-day/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "DeepMind’s hurricane breakthrough has surprised weather scientists",
+   "desc": "Open source WeatherNext model can make accurate predictions with lower-resolution weather data.",
+   "fingerprint": "ce8bc6b542142ef45911ff86"
+  },
+  {
+   "url": "https://arstechnica.com/space/2026/08/the-first-self-driving-vehicle-on-mars-has-proven-to-be-a-smashing-success/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The first self-driving vehicle on Mars has proven to be a smashing success",
+   "desc": "About 90 percent of the distance driven by Perseverance has been autonomous.",
+   "fingerprint": "9c2869fef1a37ef355824131"
+  },
+  {
+   "url": "https://blog.getutm.app/2026/introducing-triton-directx-11-driver-for-qemu/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Triton: DirectX 11 Driver for QEMU",
+   "desc": "Article URL: https://blog.getutm.app/2026/introducing-triton-directx-11-driver-for-qemu/ Comments URL: https://news.ycombinator.com/item?id=49221711 Points: 121 # Comments: 22",
+   "fingerprint": "59386f7002b409629918973f"
+  },
+  {
+   "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "“Code was never the hard part” is an insult to all programmers",
+   "desc": "Article URL: https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers Comments URL: https://news.ycombinator.com/item?id=49222189 Points: 503 # Comments: 335",
+   "fingerprint": "1a19df60cd68241e3291bfa6"
+  },
+  {
+   "url": "https://buttondown.com/suchbadtechads/archive/gateway-2000-part-2/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Gateway 2000's hilariously bad ads in the 90s (Part II)",
+   "desc": "Article URL: https://buttondown.com/suchbadtechads/archive/gateway-2000-part-2/ Comments URL: https://news.ycombinator.com/item?id=49221220 Points: 91 # Comments: 69",
+   "fingerprint": "764c77f38143eca5afe76aea"
+  },
+  {
+   "url": "https://classicbits.net/coding-and-software/my-software/monosol/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "TinySol, a tiny solitaire game for DOS",
+   "desc": "Article URL: https://classicbits.net/coding-and-software/my-software/monosol/ Comments URL: https://news.ycombinator.com/item?id=49224020 Points: 41 # Comments: 11",
+   "fingerprint": "c0fa923f83ffa0464f672d4c"
+  },
+  {
+   "url": "https://code.claude.com/docs/en/cross-session-messaging",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Message your other Claude Code sessions",
+   "desc": "Article URL: https://code.claude.com/docs/en/cross-session-messaging Comments URL: https://news.ycombinator.com/item?id=49222824 Points: 38 # Comments: 21",
+   "fingerprint": "bef5ba4487512a95457bbc5f"
+  },
+  {
+   "url": "https://eclipsefan.org/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Open-source interactive map for the Aug 12 total solar eclipse",
+   "desc": "Article URL: https://eclipsefan.org/?v=2&t=max&layers=eclipse%2Cbesselian%2Cumbra-live%2Cshadow-3d%2Ccloud-projection%2Cosm&lat=43.4623&lon=-3.8099&opacity=besselian%3A0.2%2Cumbra-live%3A0.2&zoom=6&palier=minute Comments URL: https://news.ycombinator.com/item?id=49225139 Points: 60 # Comments: 14",
+   "fingerprint": "0ee0d28357bc7c902f821840"
+  },
+  {
+   "url": "https://github.blog/changelog/2026-08-07-github-copilot-weekly-releases-august-3",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "GitHub Copilot weekly releases — August 3",
+   "desc": "This week’s updates across GitHub Copilot in the desktop app, CLI, and VS Code help you resume and organize work, review changes, and ask questions without losing context. GitHub Copilot… The post GitHub Copilot weekly releases — August 3 appeared first on The GitHub Blog .",
+   "fingerprint": "eac1a60bb15518c02576a398"
+  },
+  {
+   "url": "https://github.com/andrewpollack/linkedin-feed-blocker",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "LinkedIn Feed Blocker",
+   "desc": "Article URL: https://github.com/andrewpollack/linkedin-feed-blocker Comments URL: https://news.ycombinator.com/item?id=49223475 Points: 156 # Comments: 91",
+   "fingerprint": "fd78a068b4a0a02287c4204d"
+  },
+  {
+   "url": "https://hackaday.com/2026/08/08/want-energy-efficiency-dude-youre-getting-a-dell/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Can Intel finally beat ARM on performance per Watt?",
+   "desc": "Article URL: https://hackaday.com/2026/08/08/want-energy-efficiency-dude-youre-getting-a-dell/ Comments URL: https://news.ycombinator.com/item?id=49223079 Points: 136 # Comments: 58",
+   "fingerprint": "798788afc96e50ed3c29fd92"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33737953",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "历史上的今天｜1945年8月9日，原子弹在长崎上空爆炸",
+   "desc": "广岛原子弹爆炸发生后，日本政府禁止报纸使用“原子弹”一词，不让民众了解真相。8月9日，美国投放的第二颗原子弹在长崎爆炸。8月10日，日本宣布接受《波茨坦公告》。",
+   "fingerprint": "d191187689febbd3a36287c6"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33744415",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "从拼手速到拼脚感，球鞋生意还好赚吗？｜湃客Talk",
+   "desc": "最近的球鞋市场颇为热闹。耐克刚收回了滔搏、宝盛的线上销售权，经销商们正趁着世界杯余温拼命清仓甩货。赛场上，各大品牌的球鞋不约而同换成了粉色，被球迷调侃“像小猪佩奇的颜色”。赛场外，越来越多不踢球不打球的人，也开始把球鞋穿上街。 8月8日是全民健身日，运动消费再度成为焦点。靠限量、联名轻松制造热度的时代正在退潮，如今的品牌究竟该如何打动消费者？对消费者来说，选择一双鞋的理由，似乎又回到了最根本的问题上：好不好穿、值不值得。 本期《湃客Talk》，我们邀请到体坛经济观察主笔杨仲华、资深球鞋发烧友V总，一起聊聊你脚上那双鞋的门道。 【本期主播】 陈玉坤 澎湃新闻湃客编辑 【本期嘉宾】 杨仲华 体坛经济观察主笔 V总 资深球鞋发烧友 【时间轴】 01:41 耐克“杯酒释兵权”：经销商清仓背后的情绪生意 05:31 一款鞋几个价，大牌高端形象是如何被“卷”没的？ 09:45 “猛男粉”来袭，是审美变",
+   "fingerprint": "d39099a7a687a7127954f89c"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33745275",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "台风、暴雨、强对流等五预警齐发！沿海部分地区将有特大暴雨",
+   "desc": "8月8日18时，台风橙色预警、暴雨橙色预警、强对流天气蓝色预警、橙色地质灾害气象风险预警和红色山洪灾害气象预警，五预警齐发。 暴雨预警 中央气象台8月8日18时发布暴雨橙色预警： 预计，8月8日20时至9日20时，浙江、上海、江苏东南部、安徽东南部、福建东北部、台湾岛北部以及海南西北部、云南中南部和东北部、重庆南部、贵州北部、湖北西部等地有大雨或暴雨，其中，浙江中东部有大暴雨，沿海部分地区有特大暴雨(250-400毫米)。上述部分地区伴有短时强降水（最大小时降雨量40～70毫米，局地可超过80毫米），局地有雷暴大风等强对流天气。 防御指南： 1、政府及相关部门按照职责做好防暴雨应急工作； 2、切断有危险的室外电源，暂停户外作业； 3、处于危险地带的单位应当停课、停业，采取专门措施保护已到校学生、幼儿和其他上班人员的安全； 4、做好城市、农田的排涝，注意防范可能引发的山洪、滑坡、泥石流等灾害",
+   "fingerprint": "8c521f8891d4d32c69be1f15"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33745286",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "河南西平县“7·30”故意伤害案件犯罪嫌疑人夏某钢被抓获",
+   "desc": "视频来源：@中国新闻网(00:11) 河南省驻马店市“7·30”案件工作专班8月8日发布警情通报： 河南省驻马店市西平县“7·30”故意伤害案件犯罪嫌疑人夏某钢，于案发前在西平县柏城街道侯园社区租房放置杂物，2026年7月30日因琐事与租房处邻居侯某立发生争执，后持刀将其刺伤致死。 夏某钢逃窜躲藏过程中，伤害多名无辜群众。 2026年8月8日16时许，驻马店市“7·30”专案组在漯河市源汇区空冢郭镇，将犯罪嫌疑人夏某钢抓获。 目前，相关工作正在进一步开展中。",
+   "fingerprint": "c4fab097c869f60e6f4ea00d"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33745335",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "永和豆浆创始人林炳生逝世，享年70岁",
+   "desc": "澎湃新闻记者从相关方面获悉，永和资本集团董事局主席、永和豆浆创始人林炳生先生，因病医治无效，不幸于2026年8月7日在台北逝世，享年70岁。 永和资本集团方面表示，林炳生先生是永和资本集团奠基创始人、核心领航人。林炳生创立永和豆浆，深耕实业数十载，以前瞻战略格局与稳健经营理念，带领集团布局大健康产业、股权投资、产业并购，开拓海外SPAC上市业务，搭建起多元化规范化的产业体系，为永和资本的规模扩张与基业长远筑牢根基。 业内及外界素以“豆哥”尊称林炳生，评价其“活出自己的精彩，是照亮别人的灯塔”。",
+   "fingerprint": "cdef6b59422f20775c482d27"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33745878",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "不足半月茅台自营店再调价！飞天零售价涨至1753元，较i茅台售价高出114元",
+   "desc": "时隔不到半月，茅台自营门店再调价，飞天茅台涨至1753元/瓶，较i茅台售价高出114元。 8月8日，有市场消息称茅台自营店的飞天茅台价格已上调至1753元/瓶，同时上调的还有五星茅台、精品茅台、经典版马年生肖茅台酒（简称“经典版马茅”）的零售价。 对此，澎湃新闻记者从多家贵州茅台自营门店获悉，飞天53%vol 500ml贵州茅台酒（2026）（下称“飞天茅台”）线下零售价已由8月8日当天上调至1753元/瓶，单瓶售价较比i茅台上的1639元高出114元，距离上一次调价至1719元/瓶尚不足半月时间。记者还了解到，部分自营店的精品茅台已上调至2410元/瓶，经典版马茅上调至1951元/瓶，上述两款产品目前在i茅台的零售价依次为2359元/瓶、1899元/瓶，对应每瓶价格分别上涨51元、62元。 有自营门店工作人员表示，“按照1753元/瓶的价格，散客每天最多可以购买一箱（6瓶）飞天，以实际到",
+   "fingerprint": "28733ae8098f3ae6bd19a534"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33745927",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "“青海和兰州在抢一碗面？”青海媒体：这种说法，格局小了",
+   "desc": "近日，“兰州拉面”店招纷纷改换为“青海拉面”，成为了社会关注热点。 8月7日，《青海日报》刊文《青海拉面，是时候亮出自己的招牌了》介绍了相关背景信息。报道提到，在青海，拉面不仅仅是一碗面，更是20多万人的生计，是遍布全国三百多座城市、3万余家门店、年营业收入超200亿元的庞大产业。然而，这样一个发展势头正劲的产业，却一直面临一个尴尬：标准不统一、品牌形象参差不齐。 为解决这一困境，近日，青海省市场监督管理局正式发布《青海拉面品质指南》《青海拉面赛事活动规范》《青海拉面区域品牌培育与建设指南》三项地方标准，标志着青海拉面产业正式迈入标准化、品牌化发展的新阶段。这是青海省推动特色产业高质量发展的重要举措，也是以标准化手段赋能地方经济、助力乡村振兴的生动实践。 有人会问，这三项地方标准具体到底是管什么的？其实它们各有侧重又相互支撑。《青海拉面品质指南》告诉所有人，什么样的拉面才是“青海拉面”。过",
+   "fingerprint": "90278071686e34a1dbec554d"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33746518",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "蓝厅观察丨被中方反制的7家美国实体有何来头？",
+   "desc": "商务部5日公布多项对美反制措施，其中就包括将7家美国实体列入反制清单。这7家实体到底有何来头？在美国所谓“强迫劳动”生产链条和对华科技打压方面又扮演着怎样角色？ 中方反制精准打击美“涉疆非法制裁”链条 被商务部列入反制清单的7家美国实体分为两部分。对其中6家采取的反制措施，是中方对此前美国国土安全部以所谓“强迫劳动”为由制裁40多家中国企业的有力回应。 这6家实体分别是应用DNA科学公司、地层水库公司、阿尔塔纳技术公司、责任商业联盟、维泰集团和人权在中国组织。这几家美国实体协助、支持美国涉疆非法制裁，性质恶劣。记者通过梳理发现，从技术溯源、数据支撑再到谎言炮制， 共同构成了美国以所谓“强迫劳动”为由打压中国产业的完整链条。 其中，应用DNA科学公司和地层水库公司主要提供技术溯源。通过DNA和同位素检测来判定原料是否来自新疆，为美方筛选、定位所谓“涉疆关联企业”提供数据支撑。 阿尔塔纳技术公",
+   "fingerprint": "4c1a24aa7d202a1837636735"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33746696",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "伊朗：重开海峡需美国接受伊朗条件",
+   "desc": "伊朗革命卫队发言人今天（8月8日）表示，重新开放霍尔木兹海峡取决于美国完全接受伊朗的条件，与伊朗当前与阿曼的协商情况无关。",
+   "fingerprint": "fbcc5197b11c1b1bc7daf80f"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33746909",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "受台风“白海豚”影响，8月9日上海两大机场近六成航班调减取消",
+   "desc": "2026年8月8日晚，澎湃新闻记者从上海机场集团获悉，受今年第13号台风“白海豚”影响，8月9日上海浦东机场和虹桥机场通行能力将出现下降，近六成进出港航班调减取消。两机场计划取消进出港航班1384架次，其中，浦东机场取消871架次、虹桥机场取消航班513架次。 此外，澎湃新闻记者从中国铁路上海局集团获悉，为确保铁路运输和旅客出行安全，上铁集团于8月8日发布公告称，计划对8月9日至10日沪昆高铁、杭温高铁、杭台高铁（含温玉段）、杭衢高铁、金建高铁兰建段、杭昌高铁、杭深铁路、金温铁路、金台铁路，8月10日至11日合九铁路、铜九铁路、庐铜铁路等部分区段部分时段途经列车，采取临时停运措施。此前，上铁集团已于8月7日发布公告，计划对8月9日至10日衢九铁路、沪昆铁路、萧甬铁路，8月9日至11日衢宁铁路、甬金铁路，8月9日至12日金千铁路，8月9日至13日皖赣铁路等部分区段部分时段途经列车，采取临时停",
+   "fingerprint": "0b916bcf810679b560b06cce"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747076",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "一直升机在巴西里约坠毁，造成至少4人死亡",
+   "desc": "当地时间8月8日，一架直升机在巴西里约热内卢市南部一片林地中坠毁，造成至少4人死亡。 里约热内卢消防局接警后赶赴现场，空中行动小组已找到失事直升机残骸。目前官方尚未确认机上具体人数。救援队正在该地区搜寻其他遇难者。",
+   "fingerprint": "eab2e2bb4011a5b3a7f34eb8"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747253",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "日本岩手县近海发生5.6级地震",
+   "desc": "据日本气象厅消息，日本岩手县近海9日凌晨发生5.6级地震。 日本气象厅说，地震发生于当地时间9日2时58分（北京时间9日1时58分）左右，震中位于北纬40.1度、东经142.4度，震源深度约40公里。 日本气象厅说，目前无需担心发生海啸灾害。",
+   "fingerprint": "e5e9ee1e6e970f8d2c9cfd78"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747477",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "万斯称美伊冲突仍处于“博弈中段”",
+   "desc": "美国副总统万斯8日表示，美国同伊朗正在对话，美伊冲突仍处于“博弈中段”。 万斯当天在接受美国福克斯新闻频道采访时说，美伊冲突还没有结束，“但显然已不在开局阶段，而是进入了中局阶段”。他称，美国正在综合运用外交、经济和军事等一系列手段，以确保最终取得最好结果。 万斯说，美方当前最关注的是“尽可能增加通过霍尔木兹海峡运出的石油和天然气数量”，美方正在观察伊朗是否愿意作出必要的长期改变，从而与美国建立更好的关系。如果伊朗不愿意，美方会继续施压。 万斯还说，美方试图建立一套航行机制，确保过往船只能够安全通行。其中包括扫雷工作，同时“也需要伊朗方面做出承诺，保证不向商船开火”。 据伊朗法尔斯通讯社8日报道，伊朗外长阿拉格齐当天表示，伊朗与阿曼“接近”达成协议，但并不意味着重新开放霍尔木兹海峡，“海峡的开放还取决于其他条件，这包括美国违反谅解备忘录应作出赔偿”。 尽管伊朗方面一直否认美伊正在进行谈判，",
+   "fingerprint": "688631095aa8e13a92d892e6"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747508",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "以媒：美军中央司令部司令访以讨论“多战线局势”",
+   "desc": "以色列公共广播公司8日报道说，美军中央司令部司令布拉德·库珀当天抵达以色列进行短期访问，并同以色列国防军高层讨论“多战线局势”。 报道说，库珀在访问期间同以军总参谋长扎米尔及其他高级指挥官见面，评估“多战线局势”，并讨论加沙地带局势。美军目前继续在包括以色列在内的中东多地保持高度戒备，仍有数十架美军空中加油机、战斗机、防空系统以及数千名美军士兵驻扎在以色列。 报道称，库珀是在完成对巴林和阿联酋的访问后抵达以色列。伊朗总统佩泽希齐扬和美国副总统万斯此前先后发表声明，谈及双方达成新停火协议的可能性。此外，美国近期一直敦促以色列推进美方提出的、关于加沙停火与战后安排的“20点计划”。",
+   "fingerprint": "b5dcbd5084c8e0f6958afdc4"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747510",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "人民日报读者点题·共同关注：前7月进口增速高于出口8个百分点，意味着什么",
+   "desc": "海关发布的数据显示，前7月，我国进口12.69万亿元，同比增长22%，增速高于出口8个百分点。我们总是关注到中国制造出口快速增长，较少关注到进口，进口提速有什么原因？为什么我们要扩大进口？ ——人民网网友 长期以来，一些国家谈及中国外贸，总是习惯将目光聚焦于出口增长，甚至滋生了“中国输出产能、挤压他国空间”的片面、不实论调，忽略了中国是全球产供链合作的中坚力量，货物有进有出。前7月，中国进口增速高于出口8个百分点，对外贸增长的贡献大于出口，有力打破了固有偏见。 中国进口为何大幅增长？先看看我们买了什么。 中国的购物车里，有大量来自世界各国的原材料、零部件、中间品，这些货物流向国内的工厂车间，经由中国制造重组、创造、增值，一部分供给国内市场，一部分再出口至全球各个市场。上半年，我国进口金属矿砂、电子元件分别增长22.6%和45.6%。 显然，中国作为制造大国，从来不是封闭自足、只向世界单方面",
+   "fingerprint": "abfe5287aeaedaded2ee1123"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747511",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "人民日报教育时评：选择专业，别因“热门”窄化“热爱”",
+   "desc": "连日来，一封封录取通知书从校园出发，抵达广大青年学生手中。通知书上的院校与专业，承载着成长的期许，为青年学生打开一扇扇探索新知的大门。 翻阅翔实的专业目录、反复斟酌研判，是许多考生家庭填报志愿时的常态。选专业，究竟在选什么？每一年动态调整的专业目录蕴含着怎样的考量？从最新公布的普通高等学校本科专业目录、职业教育专业目录中，或许能找到一些答案。 先看调整的信号。2026年，新增具身智能、脑机科学与技术、海洋智能与无人技术等38个本科新专业，技术经纪服务、婴幼儿家庭养育与指导等27个职业教育新专业。这些新增专业，从国家和社会发展的“大逻辑”出发，聚焦优化提升传统产业、培育壮大新兴产业和未来产业、促进服务业优质高效发展，把人才培养的坐标置于经济社会发展的主战场。 再看目录中那些被保留的专业。在专业目录快速“上新”的同时，教育部明确加强基础学科人才培养。数学、物理、化学、生物等基础学科，是破解“卡",
+   "fingerprint": "9f985d83b507064abd839e59"
+  },
+  {
+   "url": "https://m.thepaper.cn/detail/33747514",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "经济日报：规范航班超售不可错开药方",
+   "desc": "近期，暑运民航出行需求旺盛，多起航班超售引发的消费争议受到关注。部分观点呼吁全面取缔航班超售，但从行业运行规律和长远公共利益来看，“一刀切”禁止超售，未必是最优解。 航空座位是典型不可储存的时效性商品，航班一旦关舱起飞，空置座位无法留存和二次销售。国内航线常年存在一定比例旅客误机、临时退改签情况，航司依托历史数据测算、适度开展超售，本质是盘活闲置运力、摊薄运营成本、提升行业运行效率。 从实际看，全面禁止超售，意味着因旅客临时退改签、误机而产生的空座将无法被超售机制填补。这将在一定程度上推高航班空载率和航司运营成本，进而可能导致部分舱位的机票价格上涨，影响大众出行成本。 但合规开展超售的前提，是充分保障消费者知情权、选择权与公平交易权。航司掌握完整客流测算数据，而旅客无法预判超售风险，权责失衡极易滋生消费纠纷。出现超售溢出情况时，航空公司应优先公开征集自愿放弃行程的旅客并协商补偿；自愿名额不",
+   "fingerprint": "68faae320fa261007d06bea8"
+  },
+  {
+   "url": "https://mezha.net/eng/bukvy/ca117584_denmark_requires_oral/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Denmark Requires Oral Defenses for Students' Written Work to Counter AI Cheating",
+   "desc": "Article URL: https://mezha.net/eng/bukvy/ca117584_denmark_requires_oral/ Comments URL: https://news.ycombinator.com/item?id=49224294 Points: 451 # Comments: 211",
+   "fingerprint": "9b04299c39fde9b33402edbc"
+  },
+  {
+   "url": "https://newrepublic.com/post/214111/amazon-data-center-biggest-pollution-source-entire-country",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Amazon Is Creating the Biggest Pollution Source in the Country",
+   "desc": "Article URL: https://newrepublic.com/post/214111/amazon-data-center-biggest-pollution-source-entire-country Comments URL: https://news.ycombinator.com/item?id=49223845 Points: 179 # Comments: 86",
+   "fingerprint": "034e02501118b75696511382"
+  },
+  {
+   "url": "https://news.maryland.gov/dnr/2026/08/05/dnr-closes-additional-areas-of-cunningham-falls-state-park-following-second-beaver-attack/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Maryland Closes More of Cunningham Falls State Park After Second Beaver Attack",
+   "desc": "Article URL: https://news.maryland.gov/dnr/2026/08/05/dnr-closes-additional-areas-of-cunningham-falls-state-park-following-second-beaver-attack/ Comments URL: https://news.ycombinator.com/item?id=49225918 Points: 55 # Comments: 25",
+   "fingerprint": "251bbdf01837dd21c9cabbb0"
+  },
+  {
+   "url": "https://simonwillison.net/2026/Aug/7/openai-timeline",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "OpenAI 意外攻击 Hugging Face 事件时间线现已整理出炉",
+   "desc": "OpenAI 在 Black Hat 安全大会上公布了\"Hugging Face 事件\"的完整时间线，确认其内部 AI 智能体在训练实验模型时，通过 Artifactory 漏洞意外攻击了 Hugging Face。",
+   "fingerprint": "b569d5ef48c458106bba2d7d"
+  },
+  {
+   "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Timeline of the OpenAI accidental attack against Hugging Face",
+   "desc": "Article URL: https://simonwillison.net/2026/Aug/7/openai-timeline/ Comments URL: https://news.ycombinator.com/item?id=49220609 Points: 302 # Comments: 303",
+   "fingerprint": "524cce1658c69b2899983304"
+  },
+  {
+   "url": "https://specification.website/spec/foundations/for-sale-dns/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "A domain can now say it is for sale, in DNS",
+   "desc": "Article URL: https://specification.website/spec/foundations/for-sale-dns/ Comments URL: https://news.ycombinator.com/item?id=49221668 Points: 322 # Comments: 126",
+   "fingerprint": "79f1028db5bfe55d5494b5c1"
+  },
+  {
+   "url": "https://techcrunch.com/2026/08/07/openai-says-it-slowed-astra-model-development-over-security-concerns/",
+   "first_seen": "2026-08-08",
+   "last_seen": "2026-08-09",
+   "title": "OpenAI says it slowed Astra model development over security concerns",
+   "desc": "OpenAI said this model, which is still in development, reached its \"critical cybersecurity threshold,\" meaning it could independently identify and carry out cyberattacks against traditionally well-protected real-world systems.",
+   "fingerprint": "68492ec776c81419ca99dca6"
+  },
+  {
+   "url": "https://techcrunch.com/2026/08/08/googles-top-hacker-hunter-explains-why-hacking-groups-get-codenames/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Google’s top hacker hunter explains why hacking groups get codenames",
+   "desc": "Google recently changed how it refers and assigns names to hacking groups. TechCrunch spoke with one of the world’s foremost experts on tracking hackers to understand why companies give hackers codenames.",
+   "fingerprint": "29f8527dd76ea27839b9673e"
+  },
+  {
+   "url": "https://techcrunch.com/2026/08/08/openai-acquires-presentation-startup-nextslide/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "OpenAI acquires presentation startup NextSlide",
+   "desc": "NextSlide says its team members are now working on ChatGPT.",
+   "fingerprint": "a6dbd6472b52542e132f7052"
+  },
+  {
+   "url": "https://techcrunch.com/2026/08/08/planned-amazon-data-center-could-become-the-biggest-climate-polluter-in-the-u-s/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
+   "desc": "As part of a planned Texas data center, Amazon is investing in an on-site power plant that could reportedly become the largest source of climate pollution in the United States.",
+   "fingerprint": "55d323e5f6b73e71dd0fe1c0"
+  },
+  {
+   "url": "https://techcrunch.com/2026/08/08/the-kindle-scribe-colorsoft-is-a-lot-of-fun-but-its-not-a-must-have/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The Kindle Scribe Colorsoft is a lot of fun, but it’s not a must-have",
+   "desc": "While the device is pretty and lightweight, it’s not something the everyday person needs due to its hefty price tag and size.",
+   "fingerprint": "9e53a44ba27bcbd06a91cf15"
+  },
+  {
+   "url": "https://techcrunch.com/2026/08/08/x-replaces-misaligned-revenue-sharing-program-with-original-content-rewards/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
+   "desc": "X is winding down its existing Revenue Sharing program.",
+   "fingerprint": "2e91bcc4bb3985cbd314836d"
+  },
+  {
+   "url": "https://the-decoder.com/ai-agents-use-roughly-600-times-more-energy-than-a-simple-chat-prompt/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "AI agents use roughly 600 times more energy than a simple chat prompt",
+   "desc": "Climate scientist Zeke Hausfather tracked his Claude Code usage over eight weeks: 3.2 billion tokens and about 170 kWh of data center electricity. Per prompt, that's roughly 600 times more than a typical AI chat. His data shows how much the low figures reported by Google and OpenAI distort the reality of agent-based AI. The article AI agents use roughly 600 times more energy than a simple chat pro",
+   "fingerprint": "cdd8a5425659f8c047b97364"
+  },
+  {
+   "url": "https://the-decoder.com/anthropic-sets-claude-code-to-auto-mode-by-default-to-protect-developers-from-bad-approvals/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Anthropic sets Claude Code to Auto Mode by default to protect developers from bad approvals",
+   "desc": "Starting August 14, Anthropic will make Auto Mode in Claude Code the default for Pro, Max, and Team plans. The company says it's safer. In tests, the classifier caught 89 percent of dangerous commands, while human reviewers caught only 13.6 percent. For the most widely used AI coding tool, this means developers are shifting further from writing code to monitoring AI output. The article Anthropic s",
+   "fingerprint": "fb83c28cff21c3a4631170af"
+  },
+  {
+   "url": "https://the-decoder.com/backflip-ai-turns-3d-scans-into-editable-cad-models-in-minutes-instead-of-hours/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Backflip AI turns 3D scans into editable CAD models in minutes instead of hours",
+   "desc": "Backflip AI has released an AI model that converts 3D scans into fully editable, parametric CAD models, a process that normally takes significant time and expertise. According to CEO Greg Mark, most factories have digital models for less than one percent of their parts. The startup, backed by $30 million in funding, offers its tool as an add-in for Autodesk Fusion. The article Backflip AI turns 3D",
+   "fingerprint": "c96b8ca3faac7f9535edc7ab"
+  },
+  {
+   "url": "https://the-decoder.com/claude-code-sessions-can-now-talk-to-each-other-and-share-context-across-terminals/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Claude Code sessions can now talk to each other and share context across terminals",
+   "desc": "Claude Code now lets sessions talk to each other. On macOS and Linux, instances running in parallel can send messages, share insights, and check on each other's status. The article Claude Code sessions can now talk to each other and share context across terminals appeared first on The Decoder .",
+   "fingerprint": "49dfc450ca7d34bdb58de2c3"
+  },
+  {
+   "url": "https://the-decoder.com/fields-medalist-who-published-a-paper-on-ai-driven-human-extinction-now-works-for-openai/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Fields Medalist who published a paper on AI-driven human extinction now works for OpenAI",
+   "desc": "Newly awarded Fields Medalist Jacob Tsimerman is leaving the University of Toronto to join OpenAI and work on AI safety. In a recent paper, he analyzes scenarios where AI could contribute to human extinction and calls for far more investment in safety research. The article Fields Medalist who published a paper on AI-driven human extinction now works for OpenAI appeared first on The Decoder .",
+   "fingerprint": "edac873f09cecc51b5423802"
+  },
+  {
+   "url": "https://the-decoder.com/readers-rate-ai-generated-short-stories-higher-than-human-ones-until-they-learn-a-machine-wrote-them/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Readers rate AI-generated short stories higher than human ones until they learn a machine wrote them",
+   "desc": "People can't tell ChatGPT-generated short stories from human-written ones, according to a new study. More than 2,500 participants performed no better than chance. The AI-generated texts were actually rated higher, but scores dropped as soon as participants learned a machine wrote them. The article Readers rate AI-generated short stories higher than human ones until they learn a machine wrote them ",
+   "fingerprint": "c7b91c66a7975e21414ab658"
+  },
+  {
+   "url": "https://the-decoder.com/xais-imagine-image-2-0-lands-just-behind-openais-gpt-image-2-in-arena-benchmarks/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "xAI's Imagine Image 2.0 lands just behind OpenAI's GPT-Image-2 in Arena benchmarks",
+   "desc": "xAI has released Imagine Image 2.0 as a new image generator for Grok. The model ranks second in the Arena benchmarks, just behind OpenAI's GPT-Image-2. New editing tools like Magic Wand and Multi-Ref Editing, along with preconfigured templates, target practical creative workflows. The article xAI's Imagine Image 2.0 lands just behind OpenAI's GPT-Image-2 in Arena benchmarks appeared first on The D",
+   "fingerprint": "3c337866971405c211b90318"
+  },
+  {
+   "url": "https://vercel.com/changelog/grok-imagine-image-2-0-preview-now-available-on-vercel-ai-gateway",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Grok Imagine Image 2.0 now available on Vercel AI Gateway",
+   "desc": "Grok Imagine Image 2.0 Preview from xAI is now available on AI Gateway. The model follows detailed instructions closely and plans typography and layout together, so dense, multi-part visuals like infographics, posters, and title screens hold their structure and small text stays legible. Grok Imagine Image 2.0 Preview also supports image editing, keeping subjects and details consistent across repea",
+   "fingerprint": "c653c8b8206ceb3d817d0df5"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778982",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Apollo首席经济学家：AI烧钱速度创历史之最，警惕“次贷危机式”逆转冲击",
+   "desc": "人工智能基础设施投资正以历史罕见的速度重塑全球资本支出格局，其潜在的宏观风险同样不容忽视。 本周据Apollo Management首席经济学家Torsten Slok的分析，主要超大规模云计算企业的资本支出预计将从2025年占GDP的1.4%攀升至2027至2029年间的约3%，届时将超过1990年代末电信与光纤建设潮峰值的两倍以上。 这一轮投资热潮在绝对规模上虽仍低于2005年住房繁荣期的峰值，但在占GDP份额的累计涨幅及建设速度两项指标上，均已超越此前任何一轮资本支出周期。 Slok警告，正是投资周期的速度决定了其逆转时的破坏力。 历史数据显示，住房投资占GDP份额骤降是导致那场严重衰退的核心因素。而规模相对有限的电信泡沫破裂，仅引发了战后最温和的一次衰退。 若AI需求未能兑现预期，同样可能以相近速度逆转，构成重大宏观下行风险。 建设速度：超越历史任何一轮周期 从三个维度审视这轮AI",
+   "fingerprint": "8110c3053f5d7fa8e5c27df2"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778983",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "“AI应用龙头”归来！Palantir创2024年以来“最强单周表现”",
+   "desc": "Palantir本周以一份超预期财报强势回归，股价单周涨幅接近40%， 创下2024年11月以来最佳周度表现 ，彻底扭转了此前市场对其\"AI输家\"的定性。经历年初最高达40%的年内跌幅后，Palantir股价目前已接近年内收平。 本周早些时候，Palantir首席执行官Alex Karp将公司第二季度业绩称为\"异常强劲\"。华尔街的反应印证了这一判断——周五单日涨幅超过10%，推动股价在一周内累计上涨近40%，这是该股自2024年11月以来最强劲的单周表现。彼时同样是一份财报催化了那轮涨势，而 此次的核心驱动力则是美国商业业务的爆发式增长。 最新财报显示 ，Palantir美国商业业务同比增长149%，第二季度美国商业合同总价值突破20亿美元，同比跳升153%。这一数据不仅令市场重新审视Palantir的商业化能力，也让其在AI应用落地赛道上的竞争地位得到重新定价。 叙事逆转：从\"AI输家\"",
+   "fingerprint": "68c0c1a111ef6236682b316f"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778984",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "爆仓之后，资本反而扑向\"AI股神\"",
+   "desc": "Leopold Aschenbrenner的对冲基金Situational Awareness“爆仓”，但这场危机非但没有吓退投资者，反而在硅谷引发了一轮新的追捧热潮。 据彭博社8月8日报道，知情人士透露，就在基金“爆仓”后的短短数日内，大批硅谷投资者主动联系Situational Awareness，表达追加投资意愿。红杉资本合伙人Pat Grady公开表态，称其将长期是硅谷的重要人物。 华尔街见闻文章 此前写道，Aschenbrenner本人已在致投资者信中承认错误，宣布清除全部杠杆，并将此次危机定性为\"代价高昂但无价的教训\"。此前，面对融资方的追加保证金通知，Situational Awareness紧急将大部分股票持仓出售给Ken Griffin旗下的Citadel，折价幅度逾10%。 该基金目前剩余资产组合（含私募投资）价值约100亿美元。 尽管遭遇重创，该基金今年仍录得约80%",
+   "fingerprint": "d3f991bcfbc698ed77f11f10"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778985",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "AAOI业绩爆了，带飞整个光通信",
+   "desc": "美国光模块制造商Applied Optoelectronics一份超预期财报，在周五点燃了整个光通信板块。 最新财报显示 ，AAOI二季度营收同比增长86%至1.919亿美元，数据中心业务首次突破亿元大关，非GAAP每股收益0.06美元，高于此前指引区间上限。公司同步给出三季度营收指引2.55亿至2.90亿美元，并维持全年约11亿美元目标。消息提振市场情绪，Coherent当日大涨13%，Lumentum和康宁分别上涨6%和5%，AAOI自身股价亦上涨9%。 强劲业绩被市场解读为整个光通信赛道的积极信号。分析师认为， AAOI的超预期表现，对同样深度布局AI数据中心光互联的Lumentum和Coherent构成利好预示——两家公司均将于下周公布财报 ，且均获英伟达持股背书，分析师预计两家公司将在AI需求强劲的背景下，继续录得营收与利润的双重增长。 光学收发器是数据中心光纤传输网络的核心元器",
+   "fingerprint": "c34766fe587a67d11418908f"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778986",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "日元只是暂时稳住，中期选举后怎么办？",
+   "desc": "美日联手干预外汇市场，日元短暂企稳——但这场救市行动的真实动机，或许并不只是稳定汇率本身。 多位分析人士指出，此次干预的时间窗口与美国中期选举的政治日历高度吻合。8月6日，前华尔街基金经理、宏观分析师Ed Dowd撰文直言： 干预的核心逻辑，是将美债收益率骤升的风险推迟至中期选举之后 ——在政治敏感期维持市场稳定，符合执政党的切身利益。 这意味着，支撑此次干预的力量，有相当一部分来自短期政治考量，而非长期经济逻辑。那么问题随之而来： 中期选举一旦结束，这股政治驱动力消失之后，日元还能撑住吗？ 干预效果：短期奏效，长期存疑 此次干预在市场层面取得了立竿见影的效果。日 元从163.65的低点回升至159.09附近，创下2月以来最大单周涨幅。 美国财长贝森特（Scott Bessent）于8月2日公开确认了这一协调行动，并明确表示\"不会犹豫参与进一步的联合干预\"。 然而，市场人士普遍将其定性为 ",
+   "fingerprint": "8be25ab9be8fb90635a5a152"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778987",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "油价刺激通胀、就业削弱加息--黄金“双面得利”",
+   "desc": "本周，黄金以一种罕见的方式同时受益于两股相互对立的宏观力量：油价围绕伊朗局势剧烈波动，持续搅动通胀预期，为黄金提供保值需求；而一份令市场震惊的疲弱就业数据，则重创美联储加息预期，进一步压低美元和国债收益率，为金价打开上行空间。两股力量叠加， 推动黄金录得七个月来最佳单周表现 。 周五，美国劳工统计局公布数据显示， 美国7月非农就业人数意外减少2.3万 ，远低于市场预期的增加8万，前几个月数据亦遭大幅下修。消息一出， 市场对美联储9月加息的概率预期从约55%骤降至40%左右 ，国债收益率急跌，美元走软，黄金随即冲至两个月高位。 与此同时，围绕霍尔木兹海峡的地缘紧张局势令原油价格本周大幅震荡，布伦特原油一度重返每桶83美元上方。油价每波动10美元，便直接传导至市场的通胀预期，进而影响美联储路径判断、国债收益率及资产估值。 这一逻辑令黄金在通胀升温时充当避险资产，在就业走弱时受益于宽松预期，形成",
+   "fingerprint": "07db37d62b95f3badaa09d70"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778988",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "英伟达盯上OpenAI“星际之门”背后的电力商，30亿美元直接入股",
+   "desc": "英伟达正将触角深入AI基础设施的最底层—— 电力供应 。这家芯片巨头计划向Blackstone支持的电力基础设施开发商Lancium投资最高30亿美元，以锁定数吉瓦的电力资源，为其芯片客户的数据中心项目提供保障。 据科技媒体The Information于8月7日报道， 英伟达已同意向Lancium投资20亿美元，并承诺在该开发商完成额外电力接入里程碑后再追加10亿美元。初始20亿美元将赋予英伟达约20%的股权，若追加投资落地，持股比例将升至约30%。 此次交易对Lancium的企业价值估值约为100亿美元，含债务。 这笔投资的战略意图直指AI数据中心的核心瓶颈：能源。 Lancium是OpenAI与Oracle在德克萨斯州Abilene建设的\"星际之门\"AI园区背后的电力基础设施提供商，已在德克萨斯电网上锁定并开发4吉瓦电力，另有15吉瓦待接入项目正在推进。报道称，对英伟达而言， 入股L",
+   "fingerprint": "0df79e3e8f22d9b90ee8f9a6"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778989",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Agentic AI新趋势：亚马逊AWS出现“CPU短缺”",
+   "desc": "AI Agent的爆发式普及正在引发 一场意想不到的算力危机——不是GPU，而是CPU。 8月7日，据科技媒体The Information报道，亚马逊云服务（AWS）高管今年5月召集工程师开会，传达了一个警示性信号： 为确保旗下EC2云服务器业务未来能够满足所有客户需求，工程师必须尽一切可能节省算力资源。 这一要求不仅涵盖AI芯片，也明确指向长期支撑互联网时代运转的传统CPU服务器。 报道称，这一内部动作折射出更广泛的行业趋势： 随着越来越多的企业员工借助AI Agent开发软件，CPU需求正在急剧攀升，算力紧缺的压力已从GPU蔓延至整个计算基础设施。 AI咨询机构Elendil Labs联合创始人兼董事总经理Jing Xie表示，他观察到客户的人均IT支出翻倍，直接原因正是AI Agent的大规模使用。 内部告急：工程师等待CPU资源从数小时延长至数天 据报道，知情人士透露，AWS已向",
+   "fingerprint": "352e39d2c118c20198e3d34f"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778990",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "AI应用公司毛利故事遭遇首次\"体检\"：Canva主动降速、Figma自吞推理成本",
+   "desc": "设计软件赛道的两家头部公司正在用真实财务数据，揭示AI转型最隐秘的代价。 Canva本周向投资者发出预警， 年度营收增速将放缓至20% ，原因是公司 主动叫停了一项原定推动付费订阅增长的AI功能铺开计划 ——需求远超预期，服务成本同样远超预期。Figma周四公布财报显示，预计 第三季度营收增速将从6月季度的48%降至36% ，并坦承旗下多款AI工具仍处于测试阶段，尚未形成有效的商业化路径。消息公布后，Figma股价单日重挫约15%。 据科技媒体The Information报道，两家公司的遭遇共同指向同一个结构性问题： AI产品的受欢迎程度，并不自动等同于健康的单位经济模型。在投资者此前对AI应用公司寄予厚望的叙事框架下，这是一次来自一线的真实压力测试。 Canva：需求过旺反成负担，主动踩刹车 Canva的困境颇具戏剧性——不是因为没有人用，而恰恰是因为用的人太多。 据报道，Canva首",
+   "fingerprint": "95114f82e5b26213fe3eb3b0"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778992",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "苹果终于把千问接进Siri：中国版Apple Intelligence来了",
+   "desc": "苹果与阿里的AI合作，正在从传闻和监管备案，真正走进苹果的操作系统。 近日，苹果中国官网的《Mac使用手册》中，已经出现了一个相当醒目的新页面—— “在 Mac 上配合 Apple 智能使用千问” 。 从苹果给出的说明来看，千问并不是以一个独立AI应用的形式进入Mac，而是直接嵌入Apple Intelligence的核心使用场景。 比如，当Siri无法直接完成某些请求时，用户可以进一步调用千问，获得更加深入的回答，包括对照片和文稿相关内容进行分析；在写作工具中，用户也可以借助千问，根据文字描述生成文本或图像。 换句话说， 千问正在成为中国版Apple Intelligence背后的外部大模型之一。 这也让苹果在中国的AI路线，第一次变得更加具体。 从“苹果牵手阿里”，到千问真正进入系统 苹果和阿里的合作其实早有铺垫。 今年7月，路透社报道称，Apple Intelligence相关生成式",
+   "fingerprint": "117b71a9d1c43c742bc874e7"
+  },
+  {
+   "url": "https://wallstreetcn.com/articles/3778993",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "伯克希尔Q2净利润翻倍，单季回购规模创5年来最大，谷歌进入前五大持仓 | 财报见闻",
+   "desc": "伯克希尔哈撒韦公司二季度运营业绩稳健增长，净利润翻倍，投资收益是主要推手。此外，当季净买入股票约198亿美元，其中包括斥资约100亿美元买入Alphabet普通股，以及约45亿美元用于回购伯克希尔自身股份。 8月8日，伯克希尔公布的最新数据显示，受益于股票投资组合未实现收益大幅回升， 二季度GAAP口径净利润同比几乎翻倍，达256.67亿美元 ，较上年同期的123.70亿美元增长约107%。上半年净利润为357.73亿美元， 同比增长约111% 。 与此同时， 公司二季度回购约45亿美元自家股票，为股东带来了自2021年以来规模最大的季度股东回报， 远高于一季度的2.35亿美元。上半年累计回购规模约48亿美元。 此外，公司二季度净买入股票约198亿美元，其中 包括斥资约100亿美元买入Alphabet普通股 ，谷歌正式进入前五大持仓。此前，Abel亲自参与锚定了Alphabet规模达850",
+   "fingerprint": "d863d387b0462aa9dc47725f"
+  },
+  {
+   "url": "https://web.njit.edu/~akansu/PAPERS/The%20Unreasonable%20Effectiveness%20of%20Mathematics%20(EP%20Wigner).pdf",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The Unreasonable Effectiveness of Mathematics in the Natural Sciences [pdf]",
+   "desc": "Article URL: https://web.njit.edu/~akansu/PAPERS/The%20Unreasonable%20Effectiveness%20of%20Mathematics%20(EP%20Wigner).pdf Comments URL: https://news.ycombinator.com/item?id=49225676 Points: 13 # Comments: 4",
+   "fingerprint": "cac510f983607972df23cf6c"
+  },
+  {
+   "url": "https://www.aljazeera.com/features/2026/8/8/unrwa-has-been-with-me-since-birth-i-cannot-imagine-a-future-without-it",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "UNRWA has been with me since birth, I cannot imagine a future without it",
+   "desc": "The UN body has been part of the lives of millions of Palestinian refugees. Post-genocide Gaza cannot cope without it",
+   "fingerprint": "80dad5ab7f9cda54d267b967"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/british-columbia-issues-evacuation-orders-ahead-of-fast-moving-wildfires",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "British Columbia issues evacuation orders ahead of fast-moving wildfires",
+   "desc": "Authorities warn residents to be prepared to leave their homes as fast-moving wildfires spread across western Canada.",
+   "fingerprint": "6bde31a9d3109ea71e2247e5"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/car-bomb-attack-rattles-colombia-after-inauguration-of-hardline-president",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Car bomb attack rattles Colombia after inauguration of hardline president",
+   "desc": "Government promises harsh response following explosives attack on Pan-American Highway in southwest of country.",
+   "fingerprint": "0c5eb9ea205a0adbfd718fd9"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/crews-recover-19-bodies-from-rubble-of-destroyed-gaza-building",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Crews recover 19 bodies from rubble of destroyed Gaza building",
+   "desc": "More than 8,000 people remain missing amid rubble in Gaza, with recovery efforts hindered by lack of heavy machinery.",
+   "fingerprint": "c6aac3e0bff5d8129e1f4250"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/debilitating-hunter-biden-speaks-out-about-father-joe-bidens-cancer",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "‘Debilitating’: Hunter Biden speaks out about father Joe Biden’s cancer",
+   "desc": "The younger Biden son has addressed his father's debate performance and the pardon he received after felony convictions.",
+   "fingerprint": "2fb1ce35beabf6a8b597bd95"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/gaza-health-chief-urges-action-to-save-dr-abu-safia-before-its-too-late",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Gaza health chief urges action to ‘save’ Dr Abu Safia before it’s too late",
+   "desc": "Fears increase for life of Hussam Abu Safia detained by Israel amid reports of torture and lack of medical care.",
+   "fingerprint": "1684e657d12df3ed04b31c9e"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/lebanese-soldiers-injured-while-israeli-troops-intrude-on-southern-town",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Lebanese soldiers injured while Israeli troops intrude on southern town",
+   "desc": "Soldiers disarm unexploded ordnance in Zawtar al-Gharbiyah, near where Israeli forces reportedly built an earth barrier.",
+   "fingerprint": "651bbfba5a11cf52a4dcd55f"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/saudi-pakistan-turkiye-pact-a-new-shield-or-strategic-signal",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Saudi-Pakistan-Turkiye pact: A new shield or strategic signal?",
+   "desc": "The agreement names no adversary, but analysts say Iran and its regional network are central to the thinking behind it.",
+   "fingerprint": "0c7ef26de65c22b119e33226"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/serbia-and-ukraine-pledge-closer-economic-ties-eye-free-trade-deal",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Serbia and Ukraine pledge closer economic ties, eye free trade deal",
+   "desc": "Serbia says it will help rebuild Ukrainian cities and provide aid as the two countries deepen cooperation.",
+   "fingerprint": "07334c29f407a013cb30e935"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/us-slams-chinese-nature-reserve-as-effort-to-claim-south-china-sea",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "US slams Chinese ‘nature reserve’ as effort to claim South China Sea",
+   "desc": "US State Department accuses China of attempting to deny Filipino vessels access to fishing grounds in contested area.",
+   "fingerprint": "0ca423ede118ab8a2811ac6e"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/will-pakistan-saudi-turkiye-defence-pact-change-us-strategy",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Will Pakistan-Saudi-Turkiye defence pact change US strategy?",
+   "desc": "Some experts say the deal precipitates a larger strategic shift in Middle East while others say it reinforces US goals.",
+   "fingerprint": "616761eb37bd3ab1d966cbc9"
+  },
+  {
+   "url": "https://www.aljazeera.com/news/2026/8/8/yemens-government-forces-attack-houthis-amid-renewed-shelling-of-marib",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Yemen’s government forces attack Houthis amid renewed shelling of Marib",
+   "desc": "Fears of a wider conflict grow as Yemen’s army counterattacks and expert warns ‘all the warning signs are there’.",
+   "fingerprint": "f2a2aaf9865084d8dd6f65f9"
+  },
+  {
+   "url": "https://www.aljazeera.com/sports/2026/8/8/which-stars-need-to-shine-this-season-real-madrid-barcelona-man-utd-psg",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Which stars need to shine this season: Real Madrid, Barcelona, Man Utd, PSG",
+   "desc": "From the Premier League and La Liga to the UEFA Champions League, which players hold the key to their clubs' season?",
+   "fingerprint": "acc85eb67256381e8c0fb825"
+  },
+  {
+   "url": "https://www.aljazeera.com/video/inside-story/2026/8/8/challenges-facing-mecca-agreement",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "What are the challenges facing the Mecca agreement?",
+   "desc": "Saudi Arabia turns to Turkiye and Pakistan for defence ties, raising questions overreliance on the US.",
+   "fingerprint": "b609e635594b5eeea6a33e1a"
+  },
+  {
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/aje-onl-nf_todd-blanche-ag-080826",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Trump’s Former Lawyer Is Now Attorney General",
+   "desc": "Todd Blanche, President Trump’s former lawyer, is now US attorney general.",
+   "fingerprint": "3d402ab86eeda163576159f1"
+  },
+  {
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/at-least-200-people-evacuated-as-wildfire-rages-near-lake-garda",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "At least 200 people evacuated as wildfire rages near Lake Garda",
+   "desc": "At least 200 people have been evacuated after a wildfire broke out near Italy’s Lake Garda.",
+   "fingerprint": "8b223852e112b67c68d4ab6c"
+  },
+  {
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/opposition-mp-hurls-eggs-at-kosovo-prime-minister",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Opposition MP hurls eggs at Kosovo Prime Minister",
+   "desc": "An opposition lawmaker threw eggs at acting Prime Minster Albin Kurti during a parliamentary session.",
+   "fingerprint": "2a04da2af19702b795d5d2da"
+  },
+  {
+   "url": "https://www.aljazeera.com/video/newsfeed/2026/8/8/the-influencers-taking-on-far-right-leader-nigel-farage",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The influencers taking on far-right leader Nigel Farage",
+   "desc": "The UK media has been accused of giving far-right leader Nigel Farage an easy ride",
+   "fingerprint": "0f6d03cfaf97f0c63affc825"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/c3r073eqvrjo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "'I ran because I knew I would die': Russian drones target medics in Ukraine",
+   "desc": "Ukrainian emergency workers warn of growing Russian attacks on hospitals and ambulances.",
+   "fingerprint": "04bc08192392295ac93aec9c"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/c4gyrzn8p94o",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The phone book that led us to Assad's spy chief in hiding",
+   "desc": "How we tracked down \"The Spider\" who was once one of the most-feared men in Syria.",
+   "fingerprint": "b060879b3c0f2005765cc360"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/c89nkln7w7ko",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Paris tells e-scooter riders to wear safety gear or face fines",
+   "desc": "Police in the French capital tighten rules for riders after a sharp increase in fatal accidents.",
+   "fingerprint": "66a02bb01037e4ab0a753e22"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/c934j5y2lq9o",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Hormuz talks positive, Oman says, as Iran warns deal would not open strait",
+   "desc": "Both sides suggest progress in talks to agree a new shipping route through the strait, but a breakthrough remains unclear.",
+   "fingerprint": "64d61b91a796c325b500ac3f"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/c9q94lxqrzzo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Australia is the planet's extinction hotspot, but one animal offers a glimmer of hope",
+   "desc": "The country is home to some of the world's most unique species - but it is losing them at an alarming rate.",
+   "fingerprint": "fe68c6ad57d0a5aa22af35cd"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cewr898jy8go",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Trump's ex-lawyer Todd Blanche narrowly confirmed as US attorney general",
+   "desc": "The vote cements Trump's former criminal defence lawyer as the nation's top law enforcement official despite a rare pushback from some Republicans.",
+   "fingerprint": "0bb138a6288ac084274be5e2"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cewr8wel4z8o",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Madonna pays tribute to 'genius, otherworldly' producer William Orbit",
+   "desc": "The Queen of Pop worked with Orbit several times over the years, most notably on her genre-bending, Grammy Award-winning album Ray of Light.",
+   "fingerprint": "00163318b39f7efd83ec979a"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cvglp2zlvrlo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Typhoon Dolphin batters Japan's Okinawa before bearing down on China",
+   "desc": "The storm has cut power to at least 44,000 buildings and injured five people on the Japanese island.",
+   "fingerprint": "9dd99de2a2ee350218244d72"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cvglpvgljzdo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Scale of devastation shocks US city's fire-seasoned residents",
+   "desc": "One Spokane resident tells the BBC she realised the immense danger when she heard the fire had jumped over the river.",
+   "fingerprint": "b0cad475a84f994eb782450e"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cx25dkwk3e3o",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Fast-moving Canada wildfire doubles in size forcing thousands to flee homes",
+   "desc": "The Bald Range wildfire in British Columbia, still considered \"out of control\", has spread to more than 36 sq miles (95 sq km).",
+   "fingerprint": "472e9468b683138dfbce50ed"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cy9wy3y0e5wo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "US offers $1bn to Colombia on new right-wing president's first day of office",
+   "desc": "Abelardo de la Espriella used his maiden speech to promise an \"all-out war\" on what he calls \"narco-terrorism\".",
+   "fingerprint": "a1501ecd5e83dfd64fe3eb0b"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cz05xn35xj7o",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "He's been frozen on Everest for 30 years, now 'Green Boots' may finally be coming home",
+   "desc": "For decades, an Indian man's lime shoes have been a grim trail marker for many climbing the world's highest peak.",
+   "fingerprint": "b95cc35916878cd718e48cf0"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/articles/cz7dy8gq99eo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Child among three killed in Russian missile attacks near Kyiv",
+   "desc": "Russia continued its overnight attacks after President Volodymyr Zelensky warned of Ukraine's dwindling supplies of missile interceptors.",
+   "fingerprint": "34650079db70ac1d82f96713"
+  },
+  {
+   "url": "https://www.bbc.co.uk/news/videos/cvg8je12xxeo",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Watch: Moment opposition MP throws eggs at Kosovo's acting PM",
+   "desc": "Lawmakers and police officers had to intervene after Alliance party MP Time Kadrijaj hurled at least four eggs towards Kosovo's acting prime minister Albin Kurti.",
+   "fingerprint": "6ad81a38cad24fc9762ee392"
+  },
+  {
+   "url": "https://www.bbc.co.uk/sport/basketball/articles/czekj4wg41po",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "NBA forward Clarke's death due to effects of drugs",
+   "desc": "Memphis Grizzlies forward Brandon Clarke's death was due to the effects of heroin and cocaine, the Los Angeles medical authority reveals.",
+   "fingerprint": "710ebb61a164c13c79a0ef4d"
+  },
+  {
+   "url": "https://www.bbc.co.uk/sport/football/articles/c70gn3w5ek5o",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Messi's father Jorge dies aged 68 after illness",
+   "desc": "Lionel Messi's father and agent Jorge dies at the age of 68 following a long illness.",
+   "fingerprint": "cc9163b1e78052ae6d3066c7"
+  },
+  {
+   "url": "https://www.bloomberg.com/news/articles/2026-08-06/us-military-s-cyber-command-unit-grapples-with-cluster-of-deaths-by-suicide",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "US Military's cyber command unit grapples with cluster of deaths by suicide",
+   "desc": "https://archive.ph/W2tpE Comments URL: https://news.ycombinator.com/item?id=49220339 Points: 210 # Comments: 324",
+   "fingerprint": "275609422280d7ffe0c9e982"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449089",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "消息人士：马斯克拒绝让乌克兰用“星链”打击俄境内目标",
+   "desc": "据美国方面7日消息披露，美国太空探索技术公司（SpaceX）创始人马斯克明确拒绝允许乌克兰军方利用SpaceX旗下卫星互联网系统“星链”打击俄罗斯境内目标。 美国方面援引乌前国防部长费多罗夫两名“身边人”消息称，费多罗夫此前一直在推动利用“星链”打击俄罗斯境内目标，曾尝试通过私下渠道与马斯克接触， 但遭到后者拒绝。 “截至目前，（马斯克）没有作出同意的决定。” 消息称， 马斯克之所以拒绝乌方用“星链”对俄进行纵深打击，是担心危机进一步升级。 2022年乌克兰危机全面升级后，马斯克曾免费向乌克兰提供数万个“星链”终端。但他后来频频与乌方发生争执，敦促后者与俄方达成和平协议。 此前有消息显示，7月底访美期间，乌总统泽连斯基曾要求美国总统特朗普出面劝说马斯克，希望马斯克允许乌军利用“星链”打击俄罗斯境内弹道导弹发射装置。消息说，特朗普称会考虑泽连斯基的要求，但未明确允诺。此外，马斯克拒绝了泽连斯",
+   "fingerprint": "2fc607108219d2489d2ce282"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449090",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "黄金走势即将逆袭？华尔街投行：现在是买入的绝佳时机",
+   "desc": "财联社8月8日讯（编辑 刘蕊） 尽管黄金在过去半年表现颓势，但华尔街分析师预测，黄金价格走势可能即将出现反转。 美东时间本周五，城堡 证券 （ Citadel Securities）分析师斯科特·鲁布纳（Scott Rubner ）发布报告，呼吁投资者开始配置黄金结构性敞口。值得注意的是，这使其2026年年初至今，首次建议投资者配置黄金敞口，称当前 贵金属 市场格局是“近数月来贵金属领域最具吸引力的上行行情环境之一”。 五大共振因素共同驱动 自今年2月以来，黄金价格持续震荡走低。但鲁布纳判断，接下来黄金价格有望反弹。这一判断基于五大共振驱动因素。 首先是期权盘面信号。 鲁布纳特意对SPDR黄金ETF和iShares白银信托这两只产品做了详尽分析。 针对SPDR黄金ETF，鲁布纳指出，隐含波动率正从低位抬升，同时看跌/看涨期权偏度已反转至2月以来最深水平；从历史规律来看， 该盘面形态代表市场",
+   "fingerprint": "40c5167358ce160bd6416bf3"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449104",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "贝森特：在未来两年内，霍尔木兹海峡将“变得无关紧要”，经由该地运输的能源将有超过50%或70%改由地下管道输送",
+   "desc": "据CCTV国际时讯，美国财长贝森特8月6日在接受美国全国广播公司采访时表示，霍尔木兹海峡永远不会恢复到原来的样子，但他强调，这不是伊朗方面所描绘的那种对伊朗有利的局面，而是指霍尔木兹海峡将失去当前能源运输“咽喉要道”的地位。 贝森特说，在未来两年内，霍尔木兹海峡将“变得无关紧要”，原本通过海峡运输的能源中将有超过50%或70%改由地下管道输送。",
+   "fingerprint": "d0f487928dcbb400493e811f"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449105",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "AI模型安全事件不断 网络安全行业的技术范式将迎来变革",
+   "desc": "财联社8月8日讯（编辑 魏齐） OpenAI当地时间周五表示，由于内部评估结果显示，公司“无法排除该模型具备关键级网络攻击能力的可能性”，因此正在暂停部分涉及下一代AI模型Astra的相关工作。 这是AI开发公司首次公开承认因安全风险而放缓模型研发进程之一。此次调整发生之际，越来越多AI模型在测试环境中出现“失控”行为，引发网络防御专家和AI安全研究人员对先进模型风险的担忧。 这一事件凸显了近期一系列AI模型安全事件带来的影响。此前，多家公司披露其先进模型曾突破测试环境限制，并出现无法预期的行为，进一步加剧了外界对于AI企业是否具备约束日益强大模型能力的担忧。 今年7月，OpenAI旗下两个模型在测试过程中突破隔离环境，访问互联网，并攻击了开源AI工具供应商HuggingFace。仅一周后，Anthropic表示，其AI模型在4月进行测试期间曾攻击三家公司。Meta也承认，旗下某款AI模型",
+   "fingerprint": "21c2db1f3522ccc644ae15e9"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449111",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "潮起之时 “药”守初心：解码国内药企崛起的时代答案",
+   "desc": "编者按：一粒小小药片背后，藏着怎样的波澜壮阔? 带着这个问题，我们走进了一家又一家中国创新药企业。在这些一线现场，我们听到的不只是财报上的数字，更有患者重获新生的喜悦；看到的不仅是先进的自动化设备，更有中国制药人从“造得出”到“造得好”的不懈追求。 这是一条由政策、资本、技术与无数汗水铺就的崛起之路。读懂了他们，你就读懂了 中国医药 创新的今天与明天。 《科创板日报》8月8日讯（记者 史士云） 东莞市的长安镇，是一个电子信息产业重镇， 东阳光 药的总部和研究院便坐落于此。 这里有专为员工设置的生活区，穿行于其中，恍若走进普通居民小区，满眼皆是烟火日常：一栋栋岭南风格的住宅楼宇错落而立，楼下游乐设施旁，老人们拿着水杯闲话家常，孩子们在一旁嬉戏逐闹，生活阳台上，一盆盆三角梅开得正盛。不远处的办公区，生活被安稳托底的研究员们正在实验室埋头开展各项研究，让这家从传统药物起家的企业诞生出了一款款自主",
+   "fingerprint": "ab20ed7b8e38d2721698aa2f"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449118",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "一周调研速递：多家公司产能、订单、技术迎来突破，涉及PCB、MLCC、算力、CPO等行业",
+   "desc": "财联社8月8日讯（编辑 魏齐） 本周（8月3日-8月7日）接受调研次数靠前的上市公司有： 行云科技 （4次）、 仕佳光子 （3次），以及 一博科技 、 京东方A 、 仙坛股份 、 传智教育 、 和顺科技 、 百济神州 、 达梦数据 、 金明精机 均为2次。涉及热门行业包括PCB、MLCC、算力、CPO、玻璃基板等。 行云科技在3、4、5、6日连续4日发布投资者关系活动记录表内容，主要内容包括目前公司确立跨境数字贸易+AI算力基础设施双主业核心战略，形成跨境数字贸易、AI算力基础设施、数智软件运维、液冷算力配套服务四大协同业务板块。其中，跨境数字贸易作为公司稳健经营基本盘，持续贡献稳定经营性现金流；AI算力服务为公司核心增长主业，聚焦GPU算力集群租赁、垂直大模型推理服务、全栈算力运维，创新落地高成长TaaS（Token即服务）商业化模式，未来盈利质量进一步提升。截至2026年7月末，公司 ",
+   "fingerprint": "fc26043db83c10358c752e38"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449119",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "宇树科技10日开启IPO申购 具身智能赛道迎来IPO密集期",
+   "desc": "《科创板日报》8月8日讯（记者 李佳怡） 具身智能，迎来IPO集中兑现窗口？ 8月10日，宇树科技将在科创板开启申购，A股“人形 机器人 第一股”正式登场。但聚光灯下，远不止一家——港股51家具身智能企业排队。此外，机器人赛道仅今年8个月融资额已达1217亿元，超过去年全年67%。 IPO闸门大开，资本疯狂涌入，具身智能赛道正经历前所未有的集体资本化进程。然而，这究竟是一场产业爆发的盛宴，还是又一个被过度追捧的风口？订单、交付与商业化落地，是各家企业需要回答的核心命题。 ▎IPO窗口大开，资本抢滩登陆 8月10日，宇树科技将在科创板开启申购，发行价150.80元/股，对应发行市值609.9亿元，A股“人形机器人第一股”正式登场。但聚光灯下，主角远不止一家。 其中，港交所是这轮IPO狂潮的主战场。7月24日，智元机器人正式对外确认，已启动赴港上市流程；8月4日，智平方也传出正在筹备香港IPO",
+   "fingerprint": "bb4a7563735c9d318bacc033"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449130",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "霍尔木兹海峡关闭致伊拉克石油出口骤降75%",
+   "desc": "【霍尔木兹海峡关闭致伊拉克石油出口骤降75%】财联社8月8日电，当地时间8日，伊拉克石油部长巴西姆·穆罕默德·胡达伊尔表示，由于霍尔木兹海峡关闭，伊拉克石油出口下降了75%。伊拉克正与伊朗就允许其石油出口进行谈判，但相关协调尚未生效。美以伊冲突爆发前，伊拉克每天通过霍尔木兹海峡出口约340万桶石油，冲突爆发后通过该海峡的出口量有所下降。胡达伊尔强调，伊拉克需要“寻找解决方案，以实现石油出口渠道的多元化”。 （央视新闻）",
+   "fingerprint": "092ba1667ca228a08b30c84e"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449133",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "又一电影宣布撤档",
+   "desc": "据南方都市报，昨日（7日），动画电影《猫猫的奇幻漂流》宣布撤档。 通知称：为了在更好的时机与大家相见，让更多喜爱这部影片的观众能够在大银幕感受这场奇妙的漂流之旅，决定将原定于8月15日上映的电影《猫猫的奇幻漂流》暂缓上映，另择档期。 公开资料显示，《猫猫的奇幻漂流》是由拉脱维亚、法国、比利时联合制片，金兹·兹巴洛迪斯执导的奇幻冒险动画片。该片讲述洪水来临，孤独的猫猫偶然登上了一艘小船，与先后结识的卡皮巴拉、蛇鹫、狐猴和小狗一同开启一段非凡的旅程，从发生摩擦到相互依靠，小动物们在成长中收获友谊，共同面对每一个危机的故事。 2025年，该片获得第97届奥斯卡金像奖最佳动画长片，去年2月在中国内地上映，总票房超2800万，今年7月，该电影宣布8月15日在中国内地重映。 在此之前，本次暑期档，已有5部电影撤档调整档期。 8月5日，电影《大唐妖探》发文称， 经团队慎重考量，决定将电影《大唐妖探》原定",
+   "fingerprint": "f44cc74246c8b8fe2f664480"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449138",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "“罕见视频首次发布”，伊方发布伊朗最高领袖穆杰塔巴视频，未说明拍摄日期",
+   "desc": "据新华社，伊朗迈赫尔通讯社8日在社交媒体发布了一段关于伊朗最高领袖穆杰塔巴·哈梅内伊的视频。 据央视新闻此前援引伊朗方面消息，伊朗总统佩泽希齐扬5日说，目前与伊朗最高领袖穆杰塔巴联络“非常困难”，一些人利用穆杰塔巴的正常决策过程在伊朗内部制造分歧。 佩泽希齐扬说，穆杰塔巴曾在决策过程中表示，尽管自己原则上持反对意见，但如果相关程序推进，他也会接受。然而，一些试图制造分裂的人却不断夸大问题的严重性，以推进符合自身利益的议程。",
+   "fingerprint": "8d8c45ad10243f0e773949aa"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449139",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "AI硬件涨价潮传导3C租赁：需求翻倍，租赁商拆售显卡内存",
+   "desc": "《科创板日报》8月8日讯（记者 王耐） 一年多来，从内存、显卡、到CPU等，一场涨价风暴席卷了硬件产业链。 如今，这股涨价的动能，仍在向终端市场传导，不少电脑、手机等终端消费品也出现涨价。 6月底，苹果公司对MacBook和iPad及多款硬件产品实施全球提价，整体涨幅约20%。这次调价是苹果近年来最大规模的一次全球性调价行动，理由就是因为内存和存储芯片成本大幅上涨。 手机也不例外，目前多家主流厂商，比如vivo、OPPO旗下多款新机及在售机型涨幅在百元到千元不等，尤其大存储旗舰机型调价幅度已跨千元门槛。 电脑、手机等消费电子终端产品价格在涨，对租赁市场影响几何？另一方面，采购价格上涨带来的成本抬升，租赁厂商如何应对？ 近期，《科创板日报》记者走访了多家3C租赁公司，试图从这些一线从业者的态度和反应，还原这轮涨价潮下租赁市场的真实水温。 记者实探租赁门店：演唱会拍照手机、电脑等租赁需求增速最",
+   "fingerprint": "290b72b9b313c852c76ab661"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449141",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "永和豆浆创始人林炳生逝世",
+   "desc": "永和资本集团董事局8月8日发布讣告： 永和资本集团董事局主席、永和豆浆创始人林炳生先生，因病医治无效，不幸于2026年8月7日在台北逝世，享年70岁。 永和资本集团表示，林炳生先生是永和资本集团奠基创始人、核心领航人。其创立永和豆浆，深耕实业数十载，带领集团布局大健康产业、股权投资、产业并购，为永和资本的规模扩张与基业长远筑牢根基。业内及外界素尊称其为“豆哥”，评价其“活出自己的精彩，是照亮别人的灯塔”。",
+   "fingerprint": "077b94ca8faa3f8fdefcb544"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449144",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "上海发布海浪橙色预警",
+   "desc": "据上海发布公众号，上海市海洋监测预报中心2026年08月08日19时00分发布海浪橙色预警信号： 受今年第13号台风“白海豚”（强台风级）影响，预计今天傍晚到明天傍晚（8月8日19时-9日19时）：长江口内海域1.8-3.3米中到大浪，达到黄色预警级别。杭州湾北海域1.3-2.2米中浪，达到蓝色预警级别。洋山港(上海)海域1.8-3.3米中到大浪，达到蓝色预警级别。长江口外海域3.0-4.9米大到巨浪，达到橙色预警级别。请各有关单位做好防浪避浪工作。 此前发布的台风预警和雷电预警信号依旧高挂。 “白海豚”最新动态 据中央气象台消息，“白海豚”19时其中心位于距离浙江省温州市东偏南方向约430公里的东海海面，就是北纬26.9度、东经124.9度，强度为强台风级。 “白海豚”将以每小时10-15公里的速度向西偏北方向移动，强度变化不大或略有增强。 截至19:30，上海各区分区预警图如下：",
+   "fingerprint": "b3c439f8d7784ed649aabaec"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449155",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "伯克希尔哈撒韦二季度净利润同比翻倍，Alphabet成为第一大重仓股",
+   "desc": "财联社8月8日讯（编辑 魏齐） 伯克希尔哈撒韦二季度归属于股东的净利润256.67亿美元，上年同期123.70亿美元。二季度运营利润129.83亿美元，上年同期为111.60亿美元；投资收益为126.84亿美元元，去年同期为49.70亿美元。 截至2026年6月30日，公司五大重仓标的分别为： 字母表公司（Alphabet）、美国运通、苹果公司、美国银行以及可口可乐公司 。此前截至一季度末及2025年年底，公司五大重仓持仓依次为：美国运通、苹果公司、美国银行、可口可乐公司以及雪佛龙公司。 除此之外，公司持有卡夫亨氏、西方石油的普通股，该部分投资采用权益法核算。自2019年起，公司还持有西方石油无投票权永续可累积优先股以及普通股认股权证。依据美国通用会计准则（GAAP），该类资产不属于实质普通股，无法适用权益法记账，因此以公允价值计量，并在合并资产负债表中归入权益证券科目列示。 2026年第",
+   "fingerprint": "fbef0c3ad40dc8736a4a49f7"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449170",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "巴菲特退休后伯克希尔首次大举动用现金 Q2回购并净买入股票",
+   "desc": "财联社8月9日讯（编辑 夏军雄） 伯克希尔哈撒韦公司二季度大幅减少了庞大的现金储备，回购公司股票，并且时隔三年多首次买入的股票数量超过了卖出量。 当地时间周六上午，这家由传奇投资者沃伦·巴菲特打造的综合企业集团公布了二季度财报。 财报显示，伯克希尔Q2净利润升至256.7亿美元，合每股A级股（Class A）收益17,868美元；去年同期净利润为123.7亿美元，合每股A级股收益8,601美元。 剔除部分投资收益影响后，伯克希尔Q2营业利润同比增长16.3%，达到129.8亿美元，高于去年同期的111.6亿美元。 其中，由制造、服务和零售业务组成的业务组合利润增长24%，达到44.7亿美元。该业务组合涵盖工业金属零部件、金霸王电池（Duracell）以及Flying J燃油站等业务。 与此同时，伯克希尔保险业务承保利润下降，主要受到汽车保险公司Geico业绩疲软以及投资收入变化的影响。 伯",
+   "fingerprint": "d2e37496aa8a09b52375ae35"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449174",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "美参议院通过临时拨款法案 暂缓中期选举前政府停摆风险 特朗普部分诉求落空",
+   "desc": "财联社8月9日讯（编辑 夏军雄） 美东时间周六（8月9日），美国国会参议院通过一项临时拨款法案，为联邦机构提供资金支持至12月11日，以避免在11月中期选举前出现严重政府停摆。 参议院以90票赞成、6票反对的结果通过该法案。该法案将确保美国政府从10月1日新财年开始到12月11日期间正常运转。 不过，法案绕开了美国总统特朗普的一些要求，包括为伊朗战争提供紧急资金以及一项备受争议的选民身份识别提案的部分内容。 参议院拨款委员会主席苏珊·柯林斯表示，该法案是“避免一场破坏性政府停摆的重要一步，而政府停摆只会损害关键项目以及联邦工作人员”。 今年11月将迎来美国中期选举，届时三分之一的参议院席位以及全部435个众议院席位将面临改选。 参议院此前删除了白宫要求加入的“大麻监管新规延期一个月”条款，随后通过了这项临时拨款法案。白宫原本希望推迟相关规定实施，以帮助生产低含量致幻大麻成分产品的企业。不过",
+   "fingerprint": "a4e330eadbaa395aff348960"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449177",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "环球下周看点：美股创新高后迎关键考验 7月通胀数据或决定美联储9月政策走向",
+   "desc": "财联社8月9日讯（编辑 夏军雄） 本周，美股三大指数均录得上涨，标普500指数累计上涨3.58%，道指涨2.96%，纳指涨5.19%。标普500指数和道指本周均创下历史新高。 由科技股带动的强劲反弹推动美国股市升至历史高位，但下周公布的新通胀数据将成为市场的重要考验。 最新非农就业报告显示，美国7月就业岗位意外减少，降低了市场对美联储近期加息的担忧，推动股市上涨。 就业报告的变化，使下周公布的7月消费者价格指数（CPI）和生产者价格指数（PPI）数据受到更高关注。 伦敦证券交易所集团（LSEG）数据显示，目前美国货币市场预计美联储9月加息概率约为44%。如果通胀数据表现疲弱，该概率可能进一步下降。 “市场存在通胀焦虑，”Manulife John Hancock Investments联合首席投资策略师Matthew Miskin表示。“我们将在下周看到，通胀数据是否能够让市场松一口气。”",
+   "fingerprint": "992a60eccf09a608bae8642a"
+  },
+  {
+   "url": "https://www.cls.cn/detail/2449188",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "【早报】Apple智能可配合阿里千问模型工作；江波龙定增大幅溢价",
+   "desc": "宏观新闻 1、中国东方电气集团有限公司原党组副书记、董事宋致远涉嫌严重违纪违法，目前正接受中央纪委国家监委纪律审查和监察调查。 2、据财联社创投通数据，本周（8.1-8.7）国内统计口径内共发生150起投融资事件，较上周147起增加2.04%。从投资事件数量来看，先进制造、医疗健康、集成电路、人工智能、新能源等领域较活跃；细分赛道中，具身智能、脑机接口、航空航天等较受投资人追捧。 行业新闻 1、苹果官网显示，Apple智能可配合阿里巴巴千问模型工作。《科创板日报》注意到，苹果官网的最新使用手册上，国行Mac电脑的Apple智能已支持使用阿里千问，Mac的版本需要升级至macOS 26.6才可使用。 2、财联社记者获悉，近期有茅台直营店已将53度、500ml飞天茅台售价提升至1753元/瓶，高于i茅台1639元/瓶的售价。一位茅台直营店人士对财联社记者表示，除普茅外，马年生肖茅台酒（经典版）",
+   "fingerprint": "2c8d0e4cf58910c4e301d1f6"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/berkshire-hathaway-earnings-q2-2026.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Berkshire earnings rose last quarter and CEO Greg Abel is starting to deploy Buffett's massive cash hoard",
+   "desc": "Strength across its energy, railroad and manufacturing businesses more than offset weaker insurance results.",
+   "fingerprint": "e82ab3cc399a5a3b4d9fd827"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/cyclospora-salads-lettuce-restaurants.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Cyclospora fears lead consumers to lose their appetite for salads",
+   "desc": "Traffic to salad chains has fallen as consumers avoid greens due to the ongoing cyclospora outbreaks across the U.S.",
+   "fingerprint": "1624af7d532aa664088db71f"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/elevator-giant-otis-stock-wall-street.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Elevator giant Otis wants to be a defensive play in a volatile market. It has to prove itself first",
+   "desc": "Otis positions itself as a long-term growth stock, but shares are down due to setbacks in its elevator service business and investors chasing the AI trade.",
+   "fingerprint": "233ed0394d3d8b6016143926"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/heres-how-we-played-the-massive-rebound-in-ai-stocks-this-week.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Here’s how we played the massive rebound in AI stocks this week",
+   "desc": "AI stocks roared back to help lift two of the major averages to fresh records.",
+   "fingerprint": "1763a2d38a65964c3f058d2c"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/hugging-face-ai-hack-cybersecurity-black-hat.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Hugging Face hack marks start of dangerous AI cyber era and many firms 'don't even know it'",
+   "desc": "The Black Hat cybersecurity conference in Las Vegas couldn't have come at a better time, with AI agent hacks stacking up from Anthropic, Meta and OpenAI.",
+   "fingerprint": "8f770a8b97cfe7a8ba0d7cae"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/hunter-biden-says-joe-bidens-cancer-has-spread-is-very-debilitating.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Hunter Biden says Joe Biden’s cancer has spread further and is ‘very painful’",
+   "desc": "\"The cancer has spread, is metastasized into his bones and further. It's very painful. It's very debilitating in many respects,\" Hunter Biden said.",
+   "fingerprint": "c7b00a9a7ad0a6d617c6b63c"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/moneymaxxing-trend-save-budget-build-wealth.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "'Moneymaxxing' isn't a trend, it's a 'cultural shift,' financial advisor says — here's how to get started",
+   "desc": "In an affordability crunch, social media's viral \"maxxing\" trend could lead to long-term financial security.",
+   "fingerprint": "b7701868866262ecc6d84659"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/rate-uncertainty-sparking-demand-for-clo-exposure-among-etfs-vettafi.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Next big push in ETF industry? Why these risk assets are gaining traction as interest rate uncertainty persists",
+   "desc": "Collateralized loan obligations may become the next big push in the exchange-traded fund industry.",
+   "fingerprint": "830a66fe40ecf8861df0e042"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/record-breaking-week-for-options-powers-sp-500-surge.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "A record-breaking week for options powers S&P 500 surge; volatility gauge is near 2026 low",
+   "desc": "The broad market benchmark soared to records this week, benefiting from options activity and a calmer VIX.",
+   "fingerprint": "dfd2eaddfaeb3e046d28672e"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/retirement-investing-equity-income-stocks.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "For retirees, staying in the stock market is critical. How much exposure is the make-or-break question",
+   "desc": "Investors should be conversative in retirement, but abandoning equities is a big mistake.",
+   "fingerprint": "73d69aba840dd8841618b0e4"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/space-debris-junk-spacex-rocket-moon-crash.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "How cleaning up space debris could grow to become a big business",
+   "desc": "As Earth’s orbit gets more crowded, companies are betting that cleaning up space junk could become a lucrative new business.",
+   "fingerprint": "394ced7c42f3c3156d145be3"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/uae-ship-targeted-missile-us-iran-tensions-stay-high.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Iran sets conditions for opening Strait of Hormuz after UAE says one of its ships was targeted by airstrike",
+   "desc": "Iran's military stressed that the crucial waterway would only be reopened when the U.S. accepts Iran's conditions.",
+   "fingerprint": "a7da9d56881c75af8c86f2b2"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/ukraine-russia-war-fire-point-drones.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Inside the startup drone maker powering Ukraine's deep-strike campaign",
+   "desc": "Fire Point CEO Iryna Terekh says Ukraine has \"learned the hard way\" that military leverage is integral to to bringing diplomacy within reach.",
+   "fingerprint": "be34450f902dd4d9c55212e5"
+  },
+  {
+   "url": "https://www.cnbc.com/2026/08/08/verizon-mobile-outage-downdetector.html",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Verizon mobile service down for thousands of customers in the U.S., Downdetector shows",
+   "desc": "Verizon recommended that customers who are still impacted by the outage restart their devices. The company did not provide ⁠a reason for ⁠the outage.",
+   "fingerprint": "acdc6f4a4c008bb832572018"
+  },
+  {
+   "url": "https://www.fastmail.com/blog/fastmail-offers-eu-data-region/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Fastmail offers EU data region",
+   "desc": "Article URL: https://www.fastmail.com/blog/fastmail-offers-eu-data-region/ Comments URL: https://news.ycombinator.com/item?id=49223082 Points: 288 # Comments: 130",
+   "fingerprint": "6466ae765fb57fd7678c74ea"
+  },
+  {
+   "url": "https://www.guokr.com/article/469868/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "多家“兰州拉面”改名“青海拉面”，网友：不知道啥区别但牛肉多放一片？",
+   "desc": "今年6月，天津72家拉面馆集体摘下沿用四十年的“兰州拉面”招牌，换上了“青海拉面”的门头。 一时间，众多兰州人和青海人心中耿耿于怀了几十年的矛盾，浮现在大众视野。 改名背后藏着一场近40年的品牌错位。 兰州本地并无 “兰州拉面” 叫法，正宗本土面食称作“兰州牛肉面”。上世纪80年代，青海化隆、尖扎群众外出谋生，做生意卖拉面，想要快点儿打开名声，就起了隔壁大城市的名字叫“兰州拉面”，没想到还真就火了起来，把店开到了全国各地。 那真正的“兰州牛肉面”又是啥呢？ 兰州牛肉面 | 阿为 拍摄 兰州本地人从小吃到大的这一碗牛肉面，店名一般也都叫做XX牛肉面。所以还是入乡随俗，直接叫 “牛大”（大碗牛肉拉面）吧，一定会被热情的兰州人民盛情款待的。 兰州牛肉面 | 图片来自图虫创意 兰州大概有1000多家面馆， 每天要消耗100万碗以上的牛肉面。牛肉面已经成为了兰州人生活的一部分，所以牛肉面的价格也成为",
+   "fingerprint": "6e2a930b5fe16e8a780bc09f"
+  },
+  {
+   "url": "https://www.guokr.com/article/469869/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "小区里看到这种奇怪的人脸，立刻报警！立刻！",
+   "desc": "本文转载自微信公众号： 好奇博士（ID：haoqi238） 参考文献 [1].徐迅,陶俊,吴瑰.基于卷积神经网络的带遮蔽人脸识别.江汉大学学报(自然科学版).2019 [2].人脸识别应用三维假体人脸分类分级规范.团体标准T/CITIF 005-2023 [3].央视财经.央视曝光!“易容”换脸作案!真能骗过门禁攻破手机?记者实测→https://news.cnr.cn/native/gd/20240721/t20240721526805723.shtml [4].每日经济新闻.看到这种人脸，立即警惕!已有人报案https://mp.weixin.qq.com/s/OrLYGYEYgB3rJtmOHtV6ZQ 本文经授权转载自 好奇博士（ ID ：haoqi238），如需二次转载请联系原作者。欢迎转发到朋友圈。 点个“小爱心”吧",
+   "fingerprint": "e104c78c6338feb655c4025d"
+  },
+  {
+   "url": "https://www.guokr.com/article/469872/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "地板上血迹斑斑，还有我爬行时留下的两道长长的血痕",
+   "desc": "我是一名中学老师，7月10日是学校期末总结大会，过了这天，暑假便正式开始了。下午散会后，我回到宿舍收拾行李，等姐姐下班后来接我，美滋滋地盘算着暑假计划：学做菜、打羽毛球、去贵州观山探地，还要参加专业技能培训…… 收拾妥当， 我环顾一圈，决定拔掉空调插头断电。毕竟，开会时刚刚强调了消防安全。 一阵金属碰撞声后， 我双腿岔开着摔坐在地上 空调安装在窗户上方，位置很高。我寻了一把折叠椅，脱鞋踩上去。椅子左边，是半开机盖的洗衣机，右边放着棕扫把和不锈钢簸箕。我伸手够了几次插头，始终差一截。 凭着长沙妹子与生俱来的“霸蛮”，我推开窗户，攀着窗框，抬起左脚就准备上窗台。一瞬间，我只觉身体重心发生偏移， 突然椅子一翻，一阵短促的金属碰撞声后，我发现自己背靠着合上盖的洗衣机、双腿岔开着摔坐在地上。 我不知道自己是如何降落的，只见椅子滑出去一米多，簸箕也移了位。我整个人懵懵的，呆坐在原地，过了几秒钟才试着感",
+   "fingerprint": "49379386ee0868be89bbe254"
+  },
+  {
+   "url": "https://www.guokr.com/article/469873/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "一眼沦陷！难怪高圆圆偏爱国风腕表！解锁把苏州园林戴在手腕！",
+   "desc": "很多姐妹挑选腕表的时候，目光总是第一时间看向海外轻奢大牌，却忽略了咱们国货腕表里藏着的顶尖实力。 提起 飞亚达，它从来都不是普通的国民手表品牌。隶属于中航工业央企控股， 国内钟表行业唯一 A 股上市企业；从 2003 年神舟五号升空开始，足足 16 次陪伴中国航天员出征太空， 是全世界仅有的两大航天专用腕表品牌之一，能够承受太空‑80℃~+80℃极端温差的航天级精密制表技术，全部下放至民用腕表当中。 飞亚达深耕制表行业整整 38 载，全国铺设 1700 余家线下实体专柜，门店足迹踏遍全球 29 个国家、300 多家海外门店；更是首个踏入瑞士国际钟表展 1 号国际馆的国产腕表，打破海外大牌垄断。 品牌代言人高圆圆，也多次被飞亚达国风腕表的审美所折服，亲身出镜演绎东方女性独有的温婉气质。 东方美人・苏绣款石英女表 市面上绝大多数国风腕表，只是简单粘贴山水、花卉元素做表面功夫。而飞亚达这款东方美",
+   "fingerprint": "d8459990309e9349787e81e6"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/366.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "苹果 Mac 简体中文支持文档更新，\"Apple 智能\"阿里千问扩展现身",
+   "desc": "苹果官网 Mac 简体中文使用手册新增《在 Mac 上配合 Apple 智能使用千问》支持文档，明确 Apple 智能可配合阿里巴巴千问模型工作。千问扩展适用于 macOS 26.6 或更高版本，需中国大陆 Apple 账户及机型，支持写作工具与 Siri，用户需登录千问账户使用。",
+   "fingerprint": "1dd816bda2e077e4a99fc06b"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/438.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Cloudflare：AI 机器人流量已超越人类，预计五年后人机流量比达 1：1000 近乎\"误差\"",
+   "desc": "Cloudflare 在 2026 年第二季度财报电话会议上披露，AI 机器人等非人类流量已于 2026 年 5 月正式超过人类流量，比 CEO 此前预测的 2027 年底大幅提前。公司预测若趋势延续，五年后非人类流量将达人类流量的 1000 倍，人类在互联网上的存在将变得微不足道。该季度营收 6.96 亿美元，同比增长 36%，净亏损 2.057 亿美元。",
+   "fingerprint": "922c9f5bf48be1bb3fc599e5"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/445.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "一次搭载 32 个实验室：SpaceX“星落”飞船将推动太空制药商业化",
+   "desc": "IT之家 8 月 8 日消息，美国太空基础设施公司 Redwire 旗下的 SpaceMD 于当地时间 8 月 6 日宣布，已与 SpaceX 签订合同，将在其“星落”（Starfall）飞船上执行微重力药物研发任务。 该任务计划于 2028 年发射，最多可搭载 32 个“太空制药实验室”（PIL-BOX），有望成为迄今为止规模最大的商业微重力研究任务。 PIL-BOX 是 Redwire 经飞行验证的微重力有效载荷，研究人员可借此在微重力环境下使药物化合物形成更巨大、更均匀的晶体，从而帮助科学家更好地理解分子结构并优化药物配方。SpaceMD 将针对此次任务开发 PIL-BOX 的新型号，以适配“星落”飞船的整个内部空间。 SpaceMD CEO 约翰 · 韦林格（John Vellinger）表示：“太空药物研发正迎来一个转折点。数十年来，Redwire 一直建设和运营着推动微重力研究",
+   "fingerprint": "ac1bcef4fafee7e429574750"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/446.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "内部“一路绿灯”：消息称 WorkBuddy 已成腾讯 AI 应用战略优先级最高产品之一",
+   "desc": "IT之家 8 月 8 日消息，据界面新闻今天报道，今年 5 月以来，腾讯 WorkBuddy 的广告从北京知春路铺到深圳高新园。打开手机，头部应用的信息流里也几乎都是 WorkBuddy 的身影。 据报道，这是腾讯近年来少见的饱和式产品投放。这种密集的攻势背后，是腾讯在渠道、算力、组织和生态资源上的集中倾斜。 据腾讯 CSIG 人士透露， WorkBuddy 已经成为腾讯 AI 应用中战略优先级最高的产品之一 ， 公司内部也有流传“继 QQ、微信后第三个战略级产品”的说法 。除了马化腾亲自参与产品会议外，该团队提出的算力、技术和市场资源需求，大多能够快速获批，在腾讯内部被形容为“一路绿灯”。 同时不少腾讯员工认为，WorkBuddy 今年极大概率会进入腾讯“名品堂”，这是腾讯对里程碑式产品的最高荣誉之一。 易观分析数据显示，腾讯 WorkBuddy 在国内 PC 端 AI 原生办公智能体市",
+   "fingerprint": "88997a4e819ebb075c5bd401"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/447.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "vivo 神秘新机现身 Geekbench，天玑 7500 芯片",
+   "desc": "IT之家 8 月 8 日消息，一款型号为 V2603A 的 vivo 新机近日现身 Geekbench 跑分数据库，该机已于近期通过 3C 认证。 Geekbench 数据显示，该机搭载联发科 MT6881 处理器，拥有 4 核 2.0GHz+4 核 2.6GHz CPU，GPU 为 Mali-G625 MC2， 对应天玑 7500 。 IT之家注意到，该机录得单核 1227 分、多核 3401 分的成绩。具备 12GB 内存，运行 Android 16 操作系统。 结合 GizChina 报道，该机将支持 44W 快速充电，目前暂不明确这款手机究竟会以 vivo 还是 iQOO 品牌面世。",
+   "fingerprint": "abf60b0865dc05b713bf45c6"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/449.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "曝亚马逊利用 45 年前规划绕过社区投票建设 AI 数据中心，美国加州吉尔罗伊市民不满",
+   "desc": "IT之家 8 月 8 日消息，据科技媒体 Tom's Hardware 今天报道，亚马逊位于美国加州吉尔罗伊市的新建数据中心项目近日引发民众关注。该项目上月开工时，许多当地居民才发现自己此前根本没有知悉过项目存在。 IT之家从原报道获悉，该数据中心位于一片 22.7 公顷的农田上，亚马逊和当地政府并没有刻意隐瞒该项目。自 2020 年申请提交以来，亚马逊与吉尔罗伊政府之间就在审批流程上争论许久。 据 AWS 经济发展副总裁罗杰 · 韦纳透露，该项目在公开通知、公众意见征集时经历了漫长审批流程。但当地居民罗莎 · 罗德里格斯表示，她希望表达数据中心相关的担忧时， 却被政府告知公众评审期已在 2024 年结束 。 结合《华尔街日报》消息， 亚马逊之所以能够顺利推进这一项目 ， 是因为其遵循了吉尔罗伊市 45 年前制定的土地规划 ，从而避开了进一步审查。 亚马逊对此回应称，公司正与当地社区积极沟",
+   "fingerprint": "89443df1cc5bf9a81f4e752c"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/450.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "微软更新服务协议，移除部分老旧产品相关条款",
+   "desc": "IT之家 8 月 9 日消息，微软现已更新面向用户的《微软服务协议》（Microsoft Services Agreement），主要移除了部分已停止运营的老旧产品，同时进行部分文字表述调整、语法修正以及错误修复。新版服务协议预计将于 9 月 30 日正式生效，在此之前，用户仍将继续受到现有版本协议的约束。 具体来看，微软将 Groove（音乐）从“数字商品”相关章节中移除，不过目前该服务名称仍出现在“涵盖服务”列表中。同时，关于 Cortana 的条款也进行了大幅缩减。微软表示，Cortana 服务已经在 2024 年停止运营，因此协议中不再保留大量此前的说明内容。 在微软商店（Microsoft Store）部分，公司新增了关于应用自动更新机制的详细说明，包括自动更新如何运行、用户如何暂停更新，以及长期拒绝更新可能带来的影响。 微软表示，即使用户没有登录 Microsoft Store",
+   "fingerprint": "652e7db3ea2246090cbadd1d"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/451.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "X 平台将于 9 月 8 日推出全新“原创内容奖励计划”，要求至少拥有 500 名经过认证的粉丝才可参与",
+   "desc": "IT之家 8 月 9 日消息，SpaceX AI 旗下负责创作者产品的高级产品经理 Allegra Jacchia 在 X 平台发文，宣布 X 平台将于 9 月 8 日推出全新的“原创内容奖励计划”（Original Content Rewards）。 根据新计划，创作者需要满足一定条件才有资格参与， 包括至少拥有 500 名经过认证的粉丝 ，并且过去 90 天内来自认证用户的主页时间线（Home Timeline）累计曝光量达到至少 50 万次等要求，符合条件的创作者将根据“原创内容”的“有效曝光量”获得收益。 其中，“有效曝光量”指来自 Premium 订阅用户的独立曝光次数，且内容需要出现在主页时间线中，并保证帖子至少有 50% 的内容区域可见。 在“原创内容”方面，X 的定义相对宽泛。根据官方规则，原创报道、分析文章、用户自行拍摄的视频和照片，以及创作者制作的图片、插画（包括表情包",
+   "fingerprint": "9b31de70371cb841dc7d10b5"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/452.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "OpenAI 桌面端 ChatGPT 上线语音交互功能，可语音操控电脑执行多步骤任务",
+   "desc": "OpenAI 更新 ChatGPT 桌面应用，新增对 ChatGPT Voice 的支持，用户可直接通过语音对话控制 AI 智能体并让其在电脑上执行任务。该功能基于全新语音模型系列 ChatGPT-Live，支持 ChatGPT Work 和 Codex，在 macOS 上还可借助 Appshots 访问屏幕内容。",
+   "fingerprint": "9e96cac0fc43a7d4d44103f9"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/453.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "亚马逊筹建得州数据中心，配套发电厂或成美国最大碳排放源",
+   "desc": "IT之家 8 月 9 日消息，据《纽约时报》报道，亚马逊正在得克萨斯州佩科斯县筹建一座数据中心，并计划投资建设一座配套发电厂。按照目前的规划，这座发电厂未来可能成为美国最大的温室气体排放源。 《纽约时报》称，这座发电厂将使用天然气发电，并已获准每年排放 3,300 万吨二氧化碳，排放量将超过美国目前任何一座发电厂。 亚马逊发言人在一份声明中确认，该数据中心将“由新的现场发电设施供电，而且不会推高得州家庭的电费”。近年来，数据中心面临越来越大的政治阻力，其中一个重要原因就是其可能推高当地电价。 IT之家注意到，人工智能已经对亚马逊的碳排放产生了明显影响。亚马逊此前公布的数据显示，公司去年碳排放量同比增加 16%。对于一家曾承诺在 2040 年前实现碳排放净零的公司而言，这显然不是一个积极的变化。随着亚马逊及其他科技公司支持建设大型天然气发电厂，为耗电量巨大的数据中心提供能源，这一问题可能进一",
+   "fingerprint": "d691f62ba37934498ac0d1cd"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/454.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "服装品牌李维斯遭黑客攻击，部分企业数据被窃取",
+   "desc": "IT之家 8 月 9 日消息，据外媒 Cyber Insider 报道，以牛仔裤闻名的服装品牌李维斯（Levi Strauss）近日遭遇一起数据安全事件，黑客通过社交媒体对公司员工实施钓鱼攻击，随后疑似成功获取了 3 台员工电脑的访问权限，并进一步窃取了部分企业数据。 目前，李维斯尚未公布黑客具体访问了哪些企业数据。不过公司称本次安全事件发生后内部已启动应急响应计划、采取遏制措施，并聘请外部网络安全专家展开调查，当下调查仍在进行中。 IT之家参考公司向美国证券交易委员会（SEC）提交的 Form 8-K 文件获悉，根据公司内部调查的初步结果，李维斯认为此次事件导致部分企业数据遭到访问并被窃取。 不过，李维斯表示，凭借其“快速采取的响应措施”，已经成功限制并终止了未经授权的访问行为。截至披露信息时，公司认为此次事件并未影响客户数据、也并未导致业务运营中断。",
+   "fingerprint": "db47fd1257ff22aabee31c19"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/455.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "OpenAI 收购 AI 演示文稿初创公司 NextSlide",
+   "desc": "IT之家 8 月 9 日消息，NextSlide 近日宣布加入 OpenAI，其团队成员现已投身于 ChatGPT 的开发工作。 NextSlide 官网目前展示了一份由创始人 Ahmed Beshry 发布的说明。Beshry 在其中介绍称，NextSlide 的产品可以“将提示词、笔记、文档或研究资料转化为精美且可编辑的演示文稿”。 Beshry 表示，公司的最终目标是“让视觉化沟通变得更加普及，让更多人能够清晰地表达自己的想法”。加入 OpenAI 后，NextSlide 团队将“继续追求同样的使命：打造能够帮助人们创作、沟通，并将想法转化为有意义成果的 AI 产品”。 IT之家注意到，双方并未公布此次交易的具体财务条款。Beshry 在 LinkedIn 上表示，此次公告发布“晚了几个月”，因为此次收购已于“今年早些时候”完成。 在创办 NextSlide 之前，Beshry 曾是",
+   "fingerprint": "aba69971126a9a7f1fc7b11b"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/456.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "福特确认开发四门版 Mustang 车型，预计 2027 年底亮相",
+   "desc": "IT之家 8 月 9 日消息，据外媒 autoevolution 报道，福特高层近日在拉斯维加斯举行的一场内部会议上确认，外界传闻多年的四门版 Mustang 确实正在开发中，起售价将低于 4 万美元 （IT之家注：现汇率约合 27 万元人民币） ，预计将于明年（2027 年）年底亮相。 据参加此次会议的两名消息人士透露，福特在会议期间还展示了相应车型的早期原型车，让经销商提前了解未来产品规划。 该车尺寸和设计风格预计接近保时捷 Panamera ，将直接竞争道奇四门版 Charger。不过，与此前部分传闻不同，这款 Mustang 四门版很可能不会提供纯电版本。 动力方面，新车预计会沿用现款 Mustang 的发动机阵容，包括 2.3 升 EcoBoost 四缸发动机以及 5.0 升 Coyote V8 发动机。其中，EcoBoost 发动机最大功率约 315 马力，峰值扭矩 350 磅",
+   "fingerprint": "ea1c3431f3452ad09e22118f"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/457.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "我国渤海首个千亿方大气田 Ⅰ 期开发项目全面投产，日产油气超 5200 吨",
+   "desc": "IT之家 8 月 9 日消息，据央视新闻报道，今天（8 月 9 日），记者从中国海油获悉，我国渤海首个千亿方大气田 —— 渤中 19-6 气田 Ⅰ 期开发项目全面投产，日产油气当量超 5200 吨。 据介绍，渤中 19-6 气田位于渤海中部海域， 探明天然气地质储量超 2000 亿立方米、探明石油液体地质储量超 2 亿立方米 。气田埋藏深度超过 5000 米，油气藏分布范围广、储层类型复杂，开发难度远超常规海上油气田。 报道称，我国天然气储量分布呈“西多东少”格局， 渤中 19-6 作为我国东部最大的气田 ，已累计生产天然气超 28 亿立方米，是保障京津冀及环渤海地区天然气稳定供应的重要力量。当前正值迎峰度夏关键时期，I 期开发项目全面投产，进一步满足区域居民生活和工业生产的能源需求。 按照“整体部署、分期开发、试验先行”的开发策略，渤中 19-6 气田 Ⅱ 期开发项目钻井工程已全面启动，",
+   "fingerprint": "8620020a8aa61fc50502c1b5"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/458.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "谷歌重新调整黑客组织命名体系，弃用 APT 命名改用易记名称",
+   "desc": "IT之家 8 月 9 日消息，十多年来，网络安全行业一直在为不同的黑客组织命名。其中一些组织，例如 Fancy Bear（奇幻熊），凭借引人注目的网络攻击以及容易记忆的名字走入大众视野；另一些组织则只在网络安全行业内部为人所知。 很多时候，就连业内人士也很难记清所有黑客组织的名称。部分原因在于，不同公司采用了不同的命名方式。因此，才会出现一些资料库，试图成为一个“一站式”参考工具，让网络安全从业者、政府官员、政策制定者、记者以及普通公众能够弄清楚这些黑客组织究竟是谁。 上个月，谷歌成为最新一家重新调整黑客组织命名体系的公司。 IT之家注意到，过去那种 APT1、APT41 或者“APT+ 数字”的命名方式已经成为历史。这套体系最初由 Mandiant 采用。Mandiant 曾是一家独立网络安全公司，如今已经成为谷歌旗下的一部分，也是最早采用这类命名方案的公司之一。 从现在开始，谷歌将采用",
+   "fingerprint": "fae4692d3ba03c9aab43fb59"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/459.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "《毁灭战士》开发者抨击微软 XBOX“不理解艺术”，轻率裁员重创 id Software 工作室",
+   "desc": "IT之家 8 月 9 日消息，《毁灭战士》（Doom）开发商 id Software 在今年 7 月经历裁员后，该工作室首席服务程序员 Chris Hays 在近期接受游戏播客《Auf ein Bier》主持人 Andre Peschke 采访时，对微软 Xbox 的管理方式提出了严厉批评，直言 Xbox “从根本上不理解艺术”。 IT之家获悉，Hays 目前仍任职于 id Software，该工作室曾开发《毁灭战士：永恒》（Doom Eternal）等经典第一人称射击游戏。 Hays 表示，微软 XBOX“不理解艺术，也不理解游戏”，轻率裁员导致多个关键部门被削弱，许多原本负责游戏开发的重要岗位和专业团队已经消失。事实上 id Software 的核心价值一直来自团队成员以及彼此之间长期建立的协作关系，尽管官方此前在公告中声称 工作室重组后规模“大致回到了制作《毁灭战士》（2016）时的",
+   "fingerprint": "63f082fcd1a174132b6ab948"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/460.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "模块化电脑厂商 Framework 通知全部用户信息泄露：姓名、住址、电话、邮箱外泄",
+   "desc": "IT之家 8 月 9 日消息，模块化、可维修电脑制造商 Framework 表示，由于一家商业智能服务提供商遭到网络攻击，黑客窃取了 Framework 客户的姓名、电子邮件地址、电话号码和实体地址。Framework 已通知所有受影响的客户。 当地时间周四，多名 Framework 用户在社交媒体上表示，他们收到了公司发来的数据泄露通知邮件。 Framework 发言人 Eric Schumacher 告诉 TechCrunch，此次数据泄露影响了“所有客户”，但拒绝透露具体受影响人数。Framework 的产品相对小众，但有估算认为，该公司迄今已经售出数十万台设备。 TechCrunch 看到的通知显示，Framework 将此次数据泄露归因于其上游服务商 Metabase 遭遇的网络攻击。 IT之家注意到，Metabase 此前在官网博客中披露了自身遭遇的数据泄露事件。该公司表示，一",
+   "fingerprint": "bb5e17e9c103ddd5bde9c242"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/461.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Epic 喜加一：原价 3 元模拟经营游戏《happiness market》免费领",
+   "desc": "IT之家 8 月 9 日消息，由独立开发者 luolei 制作的 2D 商店经营模拟游戏《happiness market》目前已在 Epic Games Store 开启限时免费领取“喜加一”活动， 本作在国区定价为 3 元 ，活动将持续至北京时间 8 月 15 日凌晨 0 点结束。 需要注意的是，本次限免并非 Epic 官方活动，而是由开发团队自行发起的特别促销，IT之家附游戏商品页（ https://store.epicgames.com/p/happiness-market-0572e2 ）。 据介绍，在《happiness market》中，玩家需要从零开始建设自己的商店，购买商品并吸引路过的顾客进店消费，通过经营获得资金，逐步扩大商业规模。游戏中提供了 18 种不同类型的建筑，玩家可以根据发展需求不断扩张自己的商业版图。 同时，《happiness market》还加入了独特的",
+   "fingerprint": "63e4b030a24a1b98d953cb85"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/462.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Ubisoft Connect 喜加一：经典游戏《幽灵行动：未来战士》免费领",
+   "desc": "IT之家 8 月 9 日消息，育碧为庆祝《幽灵行动》（Ghost Recon）系列迎来 25 周年，即日起推出系列纪念活动，不仅开启全系列折扣促销，最低可享 95 折优惠，同时限时免费赠送 PC 版 《幽灵行动：未来战士》（Tom Clancy's Ghost Recon：Future Soldier）。 IT之家获悉，本次免费赠送的是 2012 年推出的 PC 版本，但该版本不支持，玩家只需在活动期间至 8 月 13 日下午 4 点前登录 Ubisoft Connect，即可免费领取并绑定至个人账号，游戏地址（ 点此访问 ）。 公开信息显示， 《幽灵行动：未来战士》最 初于 2012 年 5 月登陆 PlayStation 3 和 Xbox 360 平台，PC 版本则于同年 6 月推出。 游戏以近未来战争为背景，剧情横跨玻利维亚、赞比亚、尼日利亚、巴基斯坦、俄罗斯以及挪威等多个地区。玩家",
+   "fingerprint": "79ca3e9e6883a35c43fb3237"
+  },
+  {
+   "url": "https://www.ithome.com/0/987/463.htm",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "美国内华达州最大能源公司起诉数据中心开发商：将电费成本转嫁民众",
+   "desc": "IT之家 8 月 9 日消息，据央视新闻今日报道，据美国方面 7 日消息，美国内华达州最大能源供应商内华达能源公司已经正式起诉正在该州建造数据中心的一家开发商，指控其试图将电费成本转嫁给消费者。 据称，内华达能源公司为 内华达州 90% 的用户供电 ，而在建的两家数据中心建成后将消耗的电力，几乎占内华达能源公司 总发电量的三分之一 。内华达能源公司要求数据中心开发商必须启动价值 10 亿美元 （IT之家注：现汇率约合 67.6 亿元人民币） 的电网升级工程。 IT之家从报道中获悉，该公司警告称，如果数据中心开发商不承担更多的基建开支，公司或将上调电价， 负担将转嫁到内华达州的普通家庭和企业身上 。 对此，数据中心的开发商则表示，内华达能源公司拒绝兑现对其承诺的供电服务，却依旧要求他们投入 10 亿美元 （现汇率约合 67.6 亿元人民币） 开展电网升级工程。 延伸阅读 此次诉讼是 AI 数",
+   "fingerprint": "6b6ec2ae0bdd0603646c4a37"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/g-s1-137631/senate-confirms-todd-blanche-attorney-general",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Senate votes to confirm Todd Blanche as attorney general",
+   "desc": "The Senate confirmed Blanche by a 50-49 vote early Saturday morning, elevating President Trump's former personal lawyer to head the Justice Department.",
+   "fingerprint": "660c37725f2d80f8c7f9a233"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/g-s1-137635/switzerland-nuclear-bunkers",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Switzerland is a neutral nation but has more nuclear bunkers than any country in the world",
+   "desc": "Instead of scrapping its network of bomb shelters after the Cold War, Switzerland kept building them. The country has more than 370,000 nuclear bomb shelters. Some are now used to house migrants.",
+   "fingerprint": "90e153a88a31be4827136ae0"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/g-s1-137853/data-centers-primaries-midterms",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Data centers are a political issue crossing party lines, driving voters to candidates",
+   "desc": "Wisconsin Democratic candidate for governor Francesca Hong called for a moratorium on data centers. So did Ohio Republican governor hopeful Vivek Ramaswamy, as data centers begin to dominate campaigns.",
+   "fingerprint": "7e2d0b6dbdba833522f2d2c7"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/nx-s1-5874719/federal-funds-cant-be-used-to-give-test-strips-to-drug-users-raising-overdose-fears",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Federal funds can't be used to give test strips to drug users, raising overdose fears",
+   "desc": "Drug addiction groups are reeling after Trump officials said federal grants cannot be used to hand out test strips to drug users. The strips help users check street drugs for dangerous adulterants.",
+   "fingerprint": "3a5bee6433f6432a8f88c212"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/nx-s1-5899791/k-pop-chile-bts",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "K-pop's global wave inspires Chile's next pop stars",
+   "desc": "K-pop conquered the world — now Chile's young creatives are remixing the movement and making it their own.",
+   "fingerprint": "1c9780f3150f5ff072e77f26"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/nx-s1-5916351/opinion-europes-summer-of-heat",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Opinion: Europe's summer of heat",
+   "desc": "Europe is in another brutal heat wave. The summer's earlier record-breaking weather already damaged crops, sparked wildfires and led to increased deaths.",
+   "fingerprint": "109bc96bc348dabaff9fa0fd"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/nx-s1-5923592/tanker-sailors-still-face-danger-in-the-strait-of-hormuz",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Tanker sailors still face danger in the Strait of Hormuz",
+   "desc": "An agreement over the Strait of Hormuz is still far away. Tim Wilkins, who works for a tanker industry group, says the ships stuck around the waterway are in limbo, and transiting is still dangerous.",
+   "fingerprint": "8400653228cd4d554b749fb6"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/nx-s1-5923881/geo-group-corecivic-immigration-detention",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Private prisons announce $1.4 billion in revenue as immigration detentions climb",
+   "desc": "That revenue does not include net proceeds of $1.6 billion made by CoreCivic after the recent sale of four of their facilities to the Department of Homeland Security.",
+   "fingerprint": "65be3cdd0e6c5cdd1769e2ed"
+  },
+  {
+   "url": "https://www.npr.org/2026/08/08/nx-s1-5925887/ukraine-mourns-oleksiy-yukov",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Ukraine mourns 'collector of souls' Oleksiy Yukov, killed recovering war dead",
+   "desc": "Oleksiy Yukov spent two decades recovering the bodies of soldiers — including many Russians. He was killed during a recovery mission after stepping on a landmine.",
+   "fingerprint": "04a75c1446438fa4e483c2d8"
+  },
+  {
+   "url": "https://www.npr.org/sections/the-picture-show/2026/08/08/nx-s1-5923371/womens-professional-baseball-league-debut",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The Women's Professional Baseball League makes its historic debut",
+   "desc": "The Los Angeles Queens, the New York Heights, the Boston Hunters and the San Francisco Firebells take the field in Springfield, Ill., as the Women's Pro Baseball League kicks off its inaugural season.",
+   "fingerprint": "9aa178dcd99c7c52d8250f43"
+  },
+  {
+   "url": "https://www.peopleapp.com/column/30052860052-500007637750",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "一见·三个关键词，读懂中国经济“半年答卷”",
+   "desc": "一见·三个关键词，读懂中国经济“半年答卷”",
+   "fingerprint": "a8139b2115029aa327502b2e"
+  },
+  {
+   "url": "https://www.theatlantic.com/culture/2026/08/i-want-your-sex-movie-gen-z-millennials/688209/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "A Culture War in the Bedroom",
+   "desc": "A new film pokes fun at Gen Z’s inhibitions—erotic and otherwise.",
+   "fingerprint": "b4e1ee510f08dde8f71d31e7"
+  },
+  {
+   "url": "https://www.theatlantic.com/ideas/2026/08/colorless-gray-products-houses/688174/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The Color Recession May Be Permanent",
+   "desc": "Consumers are so afraid of getting colors wrong, they don’t use them at all.",
+   "fingerprint": "12310fe218cc6d883c648c8f"
+  },
+  {
+   "url": "https://www.theatlantic.com/ideas/2026/08/fauci-paul-covid-wuhan/688233/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Why MAGA Is So Obsessed With Fauci",
+   "desc": "In the aftermath of pandemics, people either try to forget them or find others to blame for them.",
+   "fingerprint": "94b60012c8c1650024584d0b"
+  },
+  {
+   "url": "https://www.theatlantic.com/ideas/2026/08/mitch-mcconnell-gop-legacy/688221/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "What Mitch McConnell Did",
+   "desc": "The former Senate GOP leader’s legacy will make America harder to govern for years to come.",
+   "fingerprint": "aa61b5c6f04c818aed1a93f5"
+  },
+  {
+   "url": "https://www.theatlantic.com/magazine/2026/09/richard-russo-fiction-under-the-falls/687958/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Hard-Luck Men in Hardscrabble Towns",
+   "desc": "In Richard Russo’s novels, the American dream feels like a cruel joke.",
+   "fingerprint": "f8154fdae2913ca7cf61a163"
+  },
+  {
+   "url": "https://www.theatlantic.com/national/2026/08/trump-ballroom-midterms-washington-week/688234/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "How Trump’s Priorities May Impact the Midterms",
+   "desc": "Panelists joined to discuss the president’s continued interest in renovating landmarks in the nation’s capital.",
+   "fingerprint": "8c540a3cfd894f51396ba7b3"
+  },
+  {
+   "url": "https://www.theatlantic.com/science/2026/08/human-origins-dna-tools-earthworks/688225/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The Human-Origin Story Is Being Radically Revised",
+   "desc": "New secrets from our past have been coming out in droves.",
+   "fingerprint": "7ae49ac2a4cae61634e47414"
+  },
+  {
+   "url": "https://www.theguardian.com/australia-news/2026/aug/09/centrelink-pursuing-debts-that-are-more-than-40-years-old-despite-agreeing-to-waive-old-arrears",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Centrelink pursuing debts that are more than 40 years old despite agreeing to waive old arrears",
+   "desc": "Advocates and legal bodies want the debt to be made ‘out of bounds’ given how hard it is to determine its accuracy Get our breaking news email , free app or daily news podcast Centrelink is pursuing $4.93bn in unpaid debts, with the oldest dating back more than 40 years, despite the government agreeing to implement a six-year statute of limitations on debt recovery. A growing list of advocates, in",
+   "fingerprint": "fe96d33e3f0d56f93c3ea101"
+  },
+  {
+   "url": "https://www.theguardian.com/australia-news/live/2026/aug/09/bird-flu-updates-politics-reactions-sarah-hanson-young-insiders-ntwnfb",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Australia news live: bird flu detected on Murray-Darling basin ‘should be ringing alarm bells’, expert says",
+   "desc": "As of 3pm Saturday, Australia had a total of 215 H5 bird flu cases nationally. Follow updates Get our breaking news email , free app or daily news podcast SA premier meets Apple chief following social media ban The premier of South Australia, Peter Malinauskas has visited Apple’s headquarters and met with outgoing chief executive Tim Cook in the United States. That should be ringing alarm bells fo",
+   "fingerprint": "fca5d65ede853cc43c300f47"
+  },
+  {
+   "url": "https://www.theguardian.com/business/2026/aug/09/hospitality-recruitment-app-supp-gig-workers-contractors-casual-work-entitlements-ntwnfb",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Hospitality recruitment app Supp calls gig-workers contractors. Some users say it leads to casual work without entitlements",
+   "desc": "Exclusive : Workers’ rights experts raise ‘alarm bells’ over app requiring ABNs for jobs they say lack worker autonomy Get our breaking news email , free app or daily news podcast Concerns have been raised that workers using an increasingly popular Australian hospitality gig-work app may be missing out on entitlements such as superannuation by being hired as “independent contractors”, similar to d",
+   "fingerprint": "077abd33787e9dbd0c4629c2"
+  },
+  {
+   "url": "https://www.theguardian.com/environment/2026/aug/08/nazi-shipwrecks-emerge-europe-danube-dries-up-record-heat",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Nazi shipwrecks emerge from the depths as Europe’s Danube dries up",
+   "desc": "Unexploded ordnance and a military motorcycle also recovered following record heat and drought conditions Record-low water levels in the Danube have exposed remnants of Europe’s Nazi past, with dozens of second world war ships emerging from the riverbed during an intense drought. In the middle of the river on the Serbian and Romanian border, a broken-up hull was visible on a sandbank that is norma",
+   "fingerprint": "b6a2b8847eed6492c786873e"
+  },
+  {
+   "url": "https://www.theguardian.com/music/2026/aug/09/nimas-2026-winners-national-indigenous-music-awards-baker-boy-djandjay",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "National Indigenous Music awards 2026: Baker Boy wins big, including album and song of the year",
+   "desc": "Yolŋu hip-hop artist dominates, while Butchulla duo and cousins Birdz and Fred Leone win artist of the year and Drifting Clouds takes home best new talent Baker Boy has won album, song and film clip of the year at the 2026 National Indigenous music awards (Nimas) , paying tribute to his late grandmother who his sophomore album, Djandjay , is named for. The Yolŋu hip-hop artist, whose name is Danza",
+   "fingerprint": "694da26b7fa12722847bcf75"
+  },
+  {
+   "url": "https://www.theguardian.com/politics/2026/aug/08/nicola-sturgeon-estranged-peter-murrell-jailed-no-contact",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Nicola Sturgeon ‘has not spoken to’ estranged husband, Peter Murrell, since he was jailed",
+   "desc": "Scotland’s former first minister says she will not visit Murrell in prison, where he is serving five-year sentence for embezzling SNP funds Nicola Surgeon has said she will not visit her estranged husband, Peter Murrell, in prison, has stopped speaking to him and views herself as a “mug” for worrying about his wellbeing and mental health earlier this year. During a podcast recording at the Edinbur",
+   "fingerprint": "6de5dfd40e9def1e8f9ac829"
+  },
+  {
+   "url": "https://www.theguardian.com/science/2026/aug/08/when-where-how-uk-best-view-of-the-solar-eclipse",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Where in the UK will get the best view of the solar eclipse?",
+   "desc": "When, where and how to get the optimal view of the first solar eclipse to be visible across the country this century For the first time this century, people across the UK will be able to see an almost total solar eclipse in the evening sky on Wednesday. A solar eclipse occurs when the moon moves between the sun and the Earth, blocking the sun’s light either partly or fully. This year, people in th",
+   "fingerprint": "e4382e0d1cd93423d0ef890d"
+  },
+  {
+   "url": "https://www.theguardian.com/science/ng-interactive/2026/aug/09/one-of-uks-best-fossil-collections-sold-overseas-in-loss-to-the-nation",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "One of UK’s best fossil collections sold overseas in ‘loss to the nation’",
+   "desc": "Exclusive: Lack of funds left British museums unable pay eight-figure sum for collection, which went to Abu Dhabi institution One of the most important collections of UK Jurassic fossils ever compiled has been sold to a museum in Abu Dhabi, the Guardian can reveal, in what British experts have described as a loss for the nation. The collection, which was amassed by a private fossil collector, cons",
+   "fingerprint": "ba9a3488f2a52f0359fbf969"
+  },
+  {
+   "url": "https://www.theguardian.com/technology/2026/aug/08/google-demis-hassabis-deepmind-shifts-role",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Google DeepMind enters a new era as co-founder Demis Hassabis shifts AI role",
+   "desc": "Observers express concern that the division has lost its independence and commercial reality has taken over When Sir Demis Hassabis said AI had brought the world to a “pivotal moment in human history” last month, he knew another big change was imminent. This shift was closer to home. The Nobel prize-winning head of Google DeepMind, Google’s AI unit, announced this week he was relinquishing his day",
+   "fingerprint": "1f79b16d2c879ffa154372f9"
+  },
+  {
+   "url": "https://www.theguardian.com/technology/2026/aug/08/openai-astra-security-concerns",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "OpenAI to pause some work on AI model Astra due to security concerns",
+   "desc": "Agent found to be able to find and exploit vulnerabilities without human intervention, and to carry out cyber-attacks OpenAI will pause some work on an artificial intelligence model because of security concerns, the company stated on Friday, following a series of incidents in which AI agents have escaped containment. The company had evaluated the agent, Astra, and found “significant advancements i",
+   "fingerprint": "958c2954d5885147bc67188e"
+  },
+  {
+   "url": "https://www.theguardian.com/uk-news/2026/aug/08/arron-banks-hired-private-detective-to-look-into-journalist-who-investigated-reform-uk",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Arron Banks ‘hired private detective’ to look into journalist who investigated Reform UK",
+   "desc": "Asked whether he targeted reporter who investigated party finances, Brexit campaigner says: ‘When you live by the sword, you die by the sword’ The prominent Reform UK member and Brexit campaigner Arron Banks is said to have set private investigators on a Sunday Times journalist after he broke a series of stories about Nigel Farage. Banks is alleged to have paid for the services of investigators to",
+   "fingerprint": "37af9ef3275c84bc6a498d49"
+  },
+  {
+   "url": "https://www.theguardian.com/uk-news/2026/aug/08/navy-says-it-is-spending-25-more-time-monitoring-russian-vessels-around-uk-waters",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Navy says it is spending 25% more time monitoring Russian vessels around UK waters",
+   "desc": "Warning of increased activity as patrols spent 21 days in July shadowing Moscow’s ships in Dover Strait and North Sea The Royal Navy has warned of increasing Russian activity around the UK’s waters after it spent 21 days in July monitoring Moscow’s ships. Naval operations to monitor Russian vessels increased by 25% last month compared with the previous year, with warships making repeated voyages t",
+   "fingerprint": "d2bd9a4bf2bd06338361bd79"
+  },
+  {
+   "url": "https://www.theguardian.com/us-news/2026/aug/08/joe-biden-hunter-cancer",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Hunter Biden talks about how his father’s cancer has spread and is causing him pain",
+   "desc": "Joe Biden’s prostate cancer is reportedly ‘debilitating’, even as ex-president continues to speak out on public issues Former US president Joe Biden ’s prostate cancer has spread to other parts of his body and is causing him pain, even as he continues to speak out on public issues, his son Hunter said in an interview. In a wide-ranging interview with the BBC broadcast late on Friday, Hunter Biden ",
+   "fingerprint": "77a21bc930a3c3040fbdca30"
+  },
+  {
+   "url": "https://www.theguardian.com/us-news/2026/aug/08/new-york-gold-bar-scam-seniors",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "New York authorities warn about gold bar scam targeting older adults",
+   "desc": "State’s attorney general says scammers have made off with more than $100m in past two years Scammers in New York have been using gold bars to steal money from victims, primarily older adults, and made off with more than $100m over the past two years, the state’s attorney general announced on Friday. The scheme starts with victims receiving a fake pop-up message that states their computer or financ",
+   "fingerprint": "1c634becdfd518fb4d35e601"
+  },
+  {
+   "url": "https://www.theguardian.com/us-news/2026/aug/08/super-el-nino-winter-flooding",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "‘Super El Niño’ could bring wet winter and flooding to western US, climate scientists warn",
+   "desc": "Weather system tied to warming sea surface expected to intensify in fall and winter, persisting until early spring 2027 El Niño , a recurring climate phenomenon marked by above-average sea surface temperatures, when changes in wind patterns allow warmer water to spread across the central and eastern equatorial Pacific, could spell a wet winter for portions of the western and south-eastern US, clim",
+   "fingerprint": "2398d86f9d64e450b2643e0b"
+  },
+  {
+   "url": "https://www.theguardian.com/us-news/live/2026/aug/08/todd-blanche-attorney-general-senate-vote-republicans-save-voting-bill-latest-news-updates",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Blanche confirmation allows Trump to continue ‘pervasive, breathtaking corruption’, says Schumer – as it happened",
+   "desc": "Senate minority leader condemns Republicans after Donald Trump’s former defense lawyer confirmed by 50 votes to 49 early on Saturday morning. This blog is now closed. Joe Biden ’s prostate cancer has spread throughout his body, causing the former president great pain, his son Hunter Biden said during an interview broadcast Friday. “The cancer has spread, metastasized into his bones and further,” H",
+   "fingerprint": "19e175dd93599084d21b001b"
+  },
+  {
+   "url": "https://www.theguardian.com/world/2026/aug/08/iran-issues-tough-demands-to-reopen-strait-of-hormuz-as-deal-remains-out-of-reach",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Iran issues tough demands to reopen strait of Hormuz as deal still out of reach",
+   "desc": "Tehran urges US to ‘correct its behaviour’ as UAE says one of its ships targeted by Iranian missile Iran has issued tough new demands for reopening the strait of Hormuz, while the United Arab Emirates said one of its ships was targeted by an Iranian missile, as a deal to open the strategic waterway remained out of reach on Saturday. Iran’s politburo-like body known as the supreme national security",
+   "fingerprint": "ed6362fde85e591f0b7ad129"
+  },
+  {
+   "url": "https://www.theguardian.com/world/2026/aug/08/mi6-global-reputation-expertise-spy-agencies",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "The Bond effect? How MI6 fascinates spy watchers around the world",
+   "desc": "Britain’s spooks take quiet satisfaction from survey ranking Secret Intelligence Service Europe’s top espionage agency MI6 has the swagger of James Bond; its French equivalent, DGSE, the complexities of the television drama Le Bureau. The film and TV shows may be fictional, but a survey run by a French magazine that placed the British spy agency above the French as No 1 across all of Europe this w",
+   "fingerprint": "d58d0c0d2b29ce65da2ceb11"
+  },
+  {
+   "url": "https://www.thepaper.cn/newsDetail_forward_33742858",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "《中华读书报》刊文评菲尔兹奖得主邓煜诗词：科学与诗心共生相融的范本",
+   "desc": "",
+   "fingerprint": "9258d2077c5a34b5b0d515f2"
+  },
+  {
+   "url": "https://www.thepaper.cn/newsDetail_forward_33745536",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "北京市教委：扰乱课堂秩序等七类情形，可实施教育惩戒",
+   "desc": "",
+   "fingerprint": "1910acd3f4a4a5d81a785c3b"
+  },
+  {
+   "url": "https://www.thepaper.cn/newsDetail_forward_33746595",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "新科高斯奖得主尤里·涅斯捷罗夫全职加盟港中文（深圳）",
+   "desc": "",
+   "fingerprint": "44c77368eeca0827d7afc18a"
+  },
+  {
+   "url": "https://www.thepaper.cn/newsDetail_forward_33746651",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "西湖大学本科新生今日开学，施一公用王虹邓昱的故事激励新生",
+   "desc": "",
+   "fingerprint": "31dc5b6dcc6e2cc215a58516"
+  },
+  {
+   "url": "https://www.theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "An Amazon data center could have the worst polluting power plant in the country",
+   "desc": "To power its new West Texas data center, Amazon is investing in the construction of a new power plant that could be one of the largest single producers of greenhouse gases in the US, according to the New York Times. The new gas-burning plant in Pecos County, Texas has received significant investment from Amazon and, […]",
+   "fingerprint": "afe115344e64b0b80ac23766"
+  },
+  {
+   "url": "https://www.theverge.com/business/977112/buc-ees-john-oliver-lawsuit-beaver-mini-mart",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Buc-ee’s dodges John Oliver to sue another small business",
+   "desc": "Buc-ee's became something of a viral sensation during the World Cup, but it has a troubling history of suing small gas stations and convenience stores. On a recent episode of Last Week Tonight, John Oliver literally begged the company to sue him for selling merch featuring his squirrel mascot, Mr. Nutterbutter, with branding that reads […]",
+   "fingerprint": "e29e0cd6d3a805e61f7eef10"
+  },
+  {
+   "url": "https://www.theverge.com/report/976872/tom-vek-musician-entrepreneur-sleevenote-interview",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Musician and entrepreneur Tom Vek is building a digital music player, but don’t call it retro",
+   "desc": "Tom Vek burst onto the scene in 2005 with his album We Have Sound, which garnered a solid 7.6 from the tastemakers of the day over at Pitchfork. His undeniably catchy brand of dancy indietronica landed him an appearance on The OC and placement on the Grand Theft Auto IV soundtrack. His follow-up, Leisure Seizure, […]",
+   "fingerprint": "edeeb4fd423f370e69cea4c7"
+  },
+  {
+   "url": "https://www.theverge.com/tech/976506/nitecore-nb10000-gen4-review-adventure-battery",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Nitecore’s latest power bank is the lightest and most compact yet",
+   "desc": "There's two things you should know about me, your intrepid reviewer: I hate the feature creep associated with modern power banks, and I love shaving grams off the gear I carry when backpacking, bikepacking, and trail running. So imagine my delight when Nitecore released a new generation of its ultralight NB10000 battery. After a few […]",
+   "fingerprint": "d8b27d92b6896a84759e799d"
+  },
+  {
+   "url": "https://www.theverge.com/tech/977031/chuwi-unibook-laptop-intel-wildcat-lake-review",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Is this $450 laptop from an unknown brand too good to be true?",
+   "desc": "Finding a good laptop under $500 was hard enough before RAMageddon. They nearly always had cheap hardware and underpowered, often outdated chips. That's what made the MacBook Neo so disruptive: It offered great build quality and good-enough performance starting at $599. Windows laptops couldn't touch it. Even though it's gone up to $699, it's still […]",
+   "fingerprint": "23088df8a0130e73cde33860"
+  },
+  {
+   "url": "https://www.theverge.com/tech/977084/ted-lasso-bose-tony-installer",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "My favorite feel-good show is back",
+   "desc": "Hi, friends! Welcome to Installer No. 139, your guide to the best and Verge-iest stuff in the world. (If you're new here, welcome, barbecue sauce, and also you can read all the old editions at the Installer homepage.) This week, I've been reading about Johnny Knoxville and Google Zero and the history of the bicycle, […]",
+   "fingerprint": "5faf6a348f1d66c82b28e8e0"
+  },
+  {
+   "url": "https://www.theverge.com/tech/977143/x-revenue-sharing-original-content-rewards",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "X replaces its revenue-sharing program with ‘Original Content Rewards’",
+   "desc": "X is ending its controversial revenue-sharing program for content creators, which has seen numerous revisions under Elon Musk's reign. In its place, it's launching a new Original Content Rewards program on September 8th. To be eligible, creators must have at least 500 verified followers and at least 500,000 Home Timeline impressions from verified users in […]",
+   "fingerprint": "8b612d4680bc31a48ccb2410"
+  },
+  {
+   "url": "https://x.com/elonmusk/status/2086127247077843282",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Grok Imagine 图像编辑迎来重大升级",
+   "desc": "Grok Imagine 图像编辑功能重大升级\n\n【引用 @XFreeze】：你可以直接悬停在 Grok Imagine 中的任意特定区域，并即时进行编辑",
+   "fingerprint": "17e766c3aa8c26e75e8edd3c"
+  },
+  {
+   "url": "https://zaneham.github.io/voyager-fds-emulator/",
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "title": "Voyager 1 FDS Computer Emulator",
+   "desc": "Article URL: https://zaneham.github.io/voyager-fds-emulator/ Comments URL: https://news.ycombinator.com/item?id=49221679 Points: 71 # Comments: 12",
+   "fingerprint": "319ff2d529c1c2bbaa2a73f7"
+  }
+ ]
+}

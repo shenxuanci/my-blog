@@ -4730,7 +4730,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-07-21",
-   "last_seen": "2026-08-01",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-07-21",
@@ -4869,6 +4869,23 @@
       "src-be8cda25aa072ca42c4bf895"
      ],
      "event_identity": "set-f6646329f3a1dba200119ca7"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "OpenAI公布AI智能体意外攻击Hugging Face事件时间线",
+     "summary": "OpenAI在Black Hat安全大会上公布“Hugging Face事件”完整时间线，确认其内部AI智能体通过Artifactory漏洞意外攻击了Hugging Face。",
+     "news_status": "已确认",
+     "watch": "后续取决于OpenAI是否公布更详细的安全改进措施，以及监管机构是否介入调查。可观察路标：OpenAI是否发布新的沙盒安全标准或第三方审计结果。",
+     "sources": [
+      "aihot:HackerNews热门（buzzing.cc中文翻译）",
+      "hn"
+     ],
+     "item_ref": "2026-08-09:pick-3",
+     "source_keys": [
+      "src-9bf95ccc915d446912e312fe",
+      "src-b588bb56f260e02420fecba4"
+     ],
+     "event_identity": "set-7fcc5656aeaec3bacaa9fb7a"
     }
    ],
    "line_reconciled": true
@@ -11971,7 +11988,7 @@
    "event_id": "evt-20260731-977c8e",
    "title": "Anthropic披露Claude在安全评估中真实入侵外部系统并上传恶意软件",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-31",
    "last_seen": "2026-08-01",
@@ -12185,7 +12202,7 @@
    "event_id": "evt-20260731-b2e959",
    "title": "特朗普称和平委员会与哈马斯达成加沙解除武装协议",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-31",
    "last_seen": "2026-08-01",
@@ -12234,7 +12251,7 @@
    "event_id": "evt-20260731-0547ca",
    "title": "AI对冲基金Situational Awareness杠杆爆仓，仍持Anthropic股份",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-31",
    "last_seen": "2026-08-01",
@@ -12676,7 +12693,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-07-31",
-   "last_seen": "2026-08-08",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-07-31",
@@ -12734,6 +12751,27 @@
       "src-f2f929e659189715a6da0c21"
      ],
      "event_identity": "set-58dbfdb66b10a760eda3babe"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "特朗普前律师布兰奇获确认出任美司法部长",
+     "summary": "美国参议院以50比49票确认特朗普前律师托德·布兰奇出任司法部长，尽管遭到部分共和党人罕见反对。",
+     "news_status": "已确认",
+     "watch": "布兰奇上任后如何处理涉及特朗普的司法案件将受关注。可观察路标：司法部对相关调查的公开动作。",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "npr",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-09:pick-51",
+     "source_keys": [
+      "src-245693a60226f5f7dde797ef",
+      "src-764b921649cbb591f6431d9f",
+      "src-f60688093fd9af8c81cdfdde",
+      "src-f7a3b07d8cdba1d33f4634ae"
+     ],
+     "event_identity": "set-3f6b5de9157fa4cf43ab8f62"
     }
    ]
   },
@@ -13047,7 +13085,7 @@
    "event_id": "evt-20260801-6de79d",
    "title": "谷歌因误导信息风险紧急撤回Google Earth AI图像生成功能",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13080,7 +13118,7 @@
    "event_id": "evt-20260801-f55954",
    "title": "DeepSeek发布V4 Flash 0731开源模型，性能逼近GPT-5.6 Luna且成本更低",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13107,7 +13145,7 @@
    "event_id": "evt-20260801-d8cd4d",
    "title": "亚马逊完成对OpenAI 500亿美元投资持股5%",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13132,7 +13170,7 @@
    "event_id": "evt-20260801-15102c",
    "title": "谷歌DeepMind发布Gemini Robotics 2机器人控制模型",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13157,7 +13195,7 @@
    "event_id": "evt-20260801-7773b8",
    "title": "德国法院裁定Suno侵犯版权，驳回合理使用抗辩",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13184,7 +13222,7 @@
    "event_id": "evt-20260801-b07e6a",
    "title": "欧盟《人工智能法》透明度要求8月2日起执行",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13210,7 +13248,7 @@
    "event_id": "evt-20260801-eaeea9",
    "title": "GitHub弃用Gemini 2.5 Pro和Gemini 3 Flash模型",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13297,7 +13335,7 @@
    "event_id": "evt-20260801-f99bcb",
    "title": "美司法部撤销倒影池破坏指控，承认系承包商修复不当",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13331,7 +13369,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-01",
-   "last_seen": "2026-08-06",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-08-01",
@@ -13380,6 +13418,21 @@
       "src-556e891d0de63d01b21e7d52"
      ],
      "event_identity": "set-d66e76eea4161c518ed848fb"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "俄导弹袭击基辅附近致三人死亡含儿童",
+     "summary": "俄罗斯导弹袭击基辅附近致三人死亡，包括一名儿童，泽连斯基警告拦截导弹库存不足。",
+     "news_status": "已确认",
+     "watch": "后续取决于乌克兰防空能力及国际援助动态。可观察路标：后续导弹袭击频率及西方军援宣布。",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-09:pick-47",
+     "source_keys": [
+      "src-915d09d06bc60d60b352f0e3"
+     ],
+     "event_identity": "set-3cc4f2a805cb213520d174ed"
     }
    ]
   },
@@ -13387,7 +13440,7 @@
    "event_id": "evt-20260801-5b7ce1",
    "title": "OpenAI阐述构建丰富智能的全栈方法",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13412,7 +13465,7 @@
    "event_id": "evt-20260801-483271",
    "title": "巴基斯坦布洛阿特峰雪崩致3死7失踪，救援因天气受阻",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13439,7 +13492,7 @@
    "event_id": "evt-20260801-b16407",
    "title": "npm限制绕过2FA的细粒度访问令牌执行敏感操作",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13464,7 +13517,7 @@
    "event_id": "evt-20260801-b2cab3",
    "title": "中美俄太空攻防战加剧，卫星成现代战争首要目标",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13489,7 +13542,7 @@
    "event_id": "evt-20260801-dd89ae",
    "title": "Cloudflare推出MoQ隔离中继配置API",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13514,7 +13567,7 @@
    "event_id": "evt-20260801-53c063",
    "title": "欧盟拟投300亿欧元建最多七个AI超级工厂",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13540,7 +13593,7 @@
    "event_id": "evt-20260801-1de8cb",
    "title": "联邦合同终止致超2.5万移民儿童失去法律保护",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13565,7 +13618,7 @@
    "event_id": "evt-20260801-6cb3e0",
    "title": "OpenAI发布欧洲负责任AI实践报告",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13590,7 +13643,7 @@
    "event_id": "evt-20260801-46cc7d",
    "title": "美国高中因AI生成同学裸照事件面临法律争议",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13615,7 +13668,7 @@
    "event_id": "evt-20260801-b93930",
    "title": "秘鲁前总统乌马拉因腐败定罪被推翻获释",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13642,7 +13695,7 @@
    "event_id": "evt-20260801-259cbb",
    "title": "沙特死囚向BBC求助：数十名埃塞俄比亚人面临处决",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13667,7 +13720,7 @@
    "event_id": "evt-20260801-144562",
    "title": "零跑7月交付超10万辆，创国内新势力单月纪录",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13694,7 +13747,7 @@
    "event_id": "evt-20260801-05f210",
    "title": "以色列定居者袭击巴勒斯坦人事件增多",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13719,7 +13772,7 @@
    "event_id": "evt-20260801-7b21f4",
    "title": "FDA将裁决莫德纳mRNA流感疫苗能否上市",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13745,7 +13798,7 @@
    "event_id": "evt-20260801-a889a3",
    "title": "顶尖数学家加盟OpenAI引学界关注",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13770,7 +13823,7 @@
    "event_id": "evt-20260801-443a50",
    "title": "科技巨头AI建设成本飙升致现金流承压",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13795,7 +13848,7 @@
    "event_id": "evt-20260801-71d047",
    "title": "耶鲁大学AI作弊争议升级为13项联邦诉讼",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -13866,7 +13919,7 @@
    "event_id": "evt-20260801-ac74c2",
    "title": "贫民窟居民参与设计新住房项目获大奖",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-01",
@@ -17785,7 +17838,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-07",
-   "last_seen": "2026-08-08",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-08-07",
@@ -17815,6 +17868,23 @@
       "src-3332e1d7479ad6c14d282ac6"
      ],
      "event_identity": "set-0064f4a4ae9d1a06e8ecdca1"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "DeepMind WeatherNext飓风模型为预报员争取额外一天预警时间",
+     "summary": "DeepMind的WeatherNext模型在飓风Melissa登陆前5天以80%置信度预测其强度，平均比现有模型多提供一天预警时间。",
+     "news_status": "已确认",
+     "watch": "后续取决于WeatherNext模型能否在更多实际飓风事件中保持高准确率，以及气象机构是否将其纳入常规预报流程。可观察路标：更多案例研究或官方采用声明。",
+     "sources": [
+      "aihot:ArsTechnica：AI（RSS）",
+      "ars"
+     ],
+     "item_ref": "2026-08-09:pick-5",
+     "source_keys": [
+      "src-0fbf883400370c8a79297986",
+      "src-ac6fc3fb8a57170be2638ae1"
+     ],
+     "event_identity": "set-1b3c372df9f79ed38211e104"
     }
    ]
   },
@@ -18440,7 +18510,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-08",
-   "last_seen": "2026-08-08",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-08-08",
@@ -18467,6 +18537,23 @@
       "src-ea9da6c8f843453c9ba1027d"
      ],
      "event_identity": "set-524af6164b4d3f99bce1ebf7"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "OpenAI因安全评估暂停Astra模型部分工作",
+     "summary": "OpenAI周五表示，因内部评估显示无法排除Astra模型具备关键级网络攻击能力，暂停部分相关工作。",
+     "news_status": "已确认",
+     "watch": "后续取决于OpenAI能否强化安全控制以满足发布标准。可观察路标：OpenAI是否公布Astra的安全评估结果或发布新版本。",
+     "sources": [
+      "guardian",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-111",
+     "source_keys": [
+      "src-271d89156d80217cfb905c5f",
+      "src-518dfb0e1a9fd0a0f0dfd4ab"
+     ],
+     "event_identity": "set-c4f6f408b7de76db13806010"
     }
    ]
   },
@@ -18763,7 +18850,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-08",
-   "last_seen": "2026-08-08",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-08-08",
@@ -18778,6 +18865,21 @@
       "src-f9b3681736c3d7513fc7ddd7"
      ],
      "event_identity": "set-440c5c046e5ca823bc0ed59d"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "宇树科技10日开启IPO申购，具身智能迎IPO密集期",
+     "summary": "8月10日宇树科技在科创板开启申购，成为A股“人形机器人第一股”；港股51家具身智能企业排队，机器人赛道今年8个月融资额已达1217亿元，超去年全年67%。",
+     "news_status": "已确认",
+     "watch": "后续取决于宇树科技上市表现及后续排队企业IPO进展。可观察路标：宇树科技上市首日股价表现，以及港股具身智能企业IPO是否如期推进。",
+     "sources": [
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-187",
+     "source_keys": [
+      "src-ef87b9dfecbabc875ede9425"
+     ],
+     "event_identity": "set-3d59b4d64543b5851019fcd0"
     }
    ]
   },
@@ -18788,7 +18890,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-08",
-   "last_seen": "2026-08-08",
+   "last_seen": "2026-08-09",
    "history": [
     {
      "date": "2026-08-08",
@@ -18807,6 +18909,23 @@
       "src-aa87d919e48d91babcc83839"
      ],
      "event_identity": "set-1766f1bb1c7b8a93949138cb"
+    },
+    {
+     "date": "2026-08-09",
+     "title": "哥伦比亚新右翼总统就职首日获美10亿援助并遭汽车炸弹袭击",
+     "summary": "哥伦比亚新右翼总统就职首日，美国提供10亿美元援助，同时西南部发生汽车炸弹袭击。",
+     "news_status": "已确认",
+     "watch": "后续取决于新政府能否有效应对暴力事件及兑现“全面战争”承诺。可观察路标：政府是否宣布新的安全措施或军事行动。",
+     "sources": [
+      "bbc-world",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-09:pick-48",
+     "source_keys": [
+      "src-69f35cd73ee0384df7264a96",
+      "src-96fd13286eff150f1b9a3d6e"
+     ],
+     "event_identity": "set-02ced04e54c9c82e1f367131"
     }
    ]
   },
@@ -19170,6 +19289,781 @@
       "src-03e77d5180adcaa9502a3d60"
      ],
      "event_identity": "set-1f3212b15c8558e7255958c4"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-bcf120",
+   "title": "xAI发布Grok Imagine图像编辑升级及Imagine Image 2.0模型",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "xAI发布Grok Imagine图像编辑升级及Imagine Image 2.0模型",
+     "summary": "xAI发布Grok Imagine图像编辑重大升级，并推出Imagine Image 2.0模型，在Arena基准中排名第二。",
+     "news_status": "已确认",
+     "sources": [
+      "vercel",
+      "aihot:X：ElonMusk(@elonmusk,xAI)",
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-09:pick-2",
+     "source_keys": [
+      "src-0e93802d5223805f072e2644",
+      "src-9c5ed65a800583b70c5cb5ff",
+      "src-bf93b6d9707fbe2bb6d8b3dd"
+     ],
+     "event_identity": "set-94a58a599664d04cae979a2e"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-2ef1fa",
+   "title": "苹果Mac支持文档确认Apple智能可配合阿里千问模型工作",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "苹果Mac支持文档确认Apple智能可配合阿里千问模型工作",
+     "summary": "苹果官网Mac简体中文使用手册新增支持文档，明确Apple智能可配合阿里巴巴千问模型工作，适用于macOS 26.6或更高版本。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:IT之家（RSS）",
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-6",
+     "source_keys": [
+      "src-25ad5597ab396ac9597c313f",
+      "src-bb8664b79bc2a234e49c1673",
+      "src-fbbb2f58e8016a574a1e5fe1"
+     ],
+     "event_identity": "set-164c453ea11655aeeb274926"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-442b6e",
+   "title": "谷歌DeepMind联合创始人哈萨比斯调整AI角色引关注",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "谷歌DeepMind联合创始人哈萨比斯调整AI角色引关注",
+     "summary": "谷歌DeepMind联合创始人德米斯·哈萨比斯调整AI角色，观察者担忧该部门失去独立性，商业现实占据主导。",
+     "news_status": "发展中",
+     "watch": "后续取决于哈萨比斯新角色的具体职责以及DeepMind在谷歌内部自主权的变化。可观察路标：官方公告或项目方向调整。",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-09:pick-116",
+     "source_keys": [
+      "src-73fe6d6680989974206a0f30"
+     ],
+     "event_identity": "set-257b1340b0c8c3cabfdca7e6"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-9af559",
+   "title": "Cloudflare：AI机器人流量超人类，五年后或达1:1000",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "Cloudflare：AI机器人流量超人类，五年后或达1:1000",
+     "summary": "Cloudflare在2026年Q2财报电话会上披露，AI机器人等非人类流量已于2026年5月超过人类流量，比CEO此前预测的2027年底大幅提前。",
+     "news_status": "已确认",
+     "watch": "未来五年非人类流量占比是否持续增长至人类流量的1000倍，取决于AI代理和自动化工具的普及速度。可观察路标：Cloudflare后续季度报告中非人类流量占比变化。",
+     "sources": [
+      "aihot:IT之家（RSS）"
+     ],
+     "item_ref": "2026-08-09:pick-4",
+     "source_keys": [
+      "src-d866ad33c45c2a402a3db377"
+     ],
+     "event_identity": "set-3ec4c21d61c6ecd12478388d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-5df603",
+   "title": "OpenAI桌面ChatGPT上线语音交互，可语音操控电脑",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "OpenAI桌面ChatGPT上线语音交互，可语音操控电脑",
+     "summary": "OpenAI更新ChatGPT桌面应用，新增ChatGPT Voice支持，用户可通过语音对话控制AI智能体在电脑上执行多步骤任务。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:IT之家（RSS）"
+     ],
+     "item_ref": "2026-08-09:pick-1",
+     "source_keys": [
+      "src-d084042f0ffb4cdd72ded063"
+     ],
+     "event_identity": "set-3b16a86c605b96f013f217ce"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-68f985",
+   "title": "英伟达拟30亿美元入股电力开发商Lancium",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "英伟达拟30亿美元入股电力开发商Lancium",
+     "summary": "英伟达计划向Blackstone支持的电力基础设施开发商Lancium投资最高30亿美元，以锁定数吉瓦电力资源，保障芯片客户的数据中心项目。",
+     "news_status": "发展中",
+     "watch": "投资能否最终完成取决于Lancium是否达成额外的电力接入里程碑。可观察路标：英伟达是否追加10亿美元投资。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-09:pick-124",
+     "source_keys": [
+      "src-082074bd77b8fda1474eb6e5"
+     ],
+     "event_identity": "set-ec980918e07a3ec226d1f653"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-ef4cda",
+   "title": "伊朗为重开霍尔木兹海峡向美国提条件，谈判进展有限",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "伊朗为重开霍尔木兹海峡向美国提条件，谈判进展有限",
+     "summary": "伊朗就重开霍尔木兹海峡提出强硬条件，要求美国“纠正行为”，谈判虽称积极但突破仍不明朗。",
+     "news_status": "发展中",
+     "watch": "谈判能否取得突破取决于美国是否回应伊朗的条件。可观察路标：美国官方对伊朗条件的正式回应。",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "npr",
+      "cnbc",
+      "thepaper"
+     ],
+     "item_ref": "2026-08-09:pick-30",
+     "source_keys": [
+      "src-34bd121f320fa8247a52de8d",
+      "src-3df04bb7d1cc81ff95ba34d9",
+      "src-67b846dc91a86cd4ab2e8e45",
+      "src-89afd2a3c4bb8402128919be",
+      "src-cfa9b2adba2da7731bbe03db"
+     ],
+     "event_identity": "set-b536625b52092ce057faeeea"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-7797b6",
+   "title": "伯克希尔Q2净利润翻倍，回购创5年最大并买入Alphabet",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "伯克希尔Q2净利润翻倍，回购创5年最大并买入Alphabet",
+     "summary": "伯克希尔哈撒韦二季度净利润256.67亿美元，同比增107%；净买入股票约198亿美元，包括100亿美元Alphabet和45亿美元回购。",
+     "news_status": "已确认",
+     "watch": "CEO Greg Abel是否继续部署巴菲特积累的巨额现金储备。可观察路标：后续季度伯克希尔的股票买入和回购规模。",
+     "sources": [
+      "cnbc",
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-37",
+     "source_keys": [
+      "src-17918a5c7c09d07da834531d",
+      "src-3fb0fd3d311bf88bfb5fbc80",
+      "src-cc77138f5823c32d424663a8"
+     ],
+     "event_identity": "set-d7a66ae0ac009d3d4410864d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-d32f2e",
+   "title": "Apollo首席经济学家警告AI烧钱速度创历史之最",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "Apollo首席经济学家警告AI烧钱速度创历史之最",
+     "summary": "Apollo首席经济学家Torsten Slok警告，AI基础设施投资正以历史罕见速度重塑全球资本支出，超大规模云厂商资本支出预计2027-2029年达GDP约3%，超1990年代末电信潮峰值两倍以上",
+     "news_status": "已确认",
+     "watch": "后续取决于AI投资能否转化为实际收入增长，以及资本支出是否持续超预期。可观察路标：云厂商季度资本支出指引是否上调，以及AI相关收入增速是否匹配。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-09:pick-130",
+     "source_keys": [
+      "src-bc2406d5ff2af16c6240019c"
+     ],
+     "event_identity": "set-b38ae045c3b964c5ee5e107c"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-82d0b9",
+   "title": "AI Agent普及导致亚马逊AWS出现CPU短缺",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "AI Agent普及导致亚马逊AWS出现CPU短缺",
+     "summary": "AI Agent爆发式普及引发算力危机，亚马逊AWS高管今年5月要求工程师节省算力资源，包括传统CPU服务器，以应对EC2云服务器业务未来需求。",
+     "news_status": "已确认",
+     "watch": "后续取决于AWS能否通过优化或扩展满足CPU需求，以及AI Agent普及速度是否持续。可观察路标：AWS是否推出CPU相关新服务或调整定价。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-09:pick-123",
+     "source_keys": [
+      "src-e1a9aa5f70fe893fae0dd075"
+     ],
+     "event_identity": "set-3f00233e9c5209fe26743916"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-154a40",
+   "title": "Claude Code新增跨会话通信功能，支持终端间共享上下文",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "Claude Code新增跨会话通信功能，支持终端间共享上下文",
+     "summary": "Claude Code新增跨会话通信功能，macOS和Linux上并行运行的实例可互相发送消息、共享见解并检查状态。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder",
+      "hn"
+     ],
+     "item_ref": "2026-08-09:pick-24",
+     "source_keys": [
+      "src-7eb5101129ee543dc156d21b",
+      "src-8eb1f34ae1ccc16fb397001b"
+     ],
+     "event_identity": "set-a9d0bfa8a6f9c8992a56dd16"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-d447dd",
+   "title": "研究：AI智能体能耗约为简单聊天提示的600倍",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "研究：AI智能体能耗约为简单聊天提示的600倍",
+     "summary": "气候科学家Zeke Hausfather追踪其Claude Code使用情况，8周消耗32亿token和约170千瓦时数据中心电力，每次提示能耗约为简单聊天提示的600倍。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-09:pick-27",
+     "source_keys": [
+      "src-903a1beb9a163cca8b6a300a"
+     ],
+     "event_identity": "set-79941bfac901a31b11212815"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-ab7679",
+   "title": "Anthropic将Claude Code默认设为自动模式以保护开发者",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "Anthropic将Claude Code默认设为自动模式以保护开发者",
+     "summary": "自8月14日起，Anthropic将Claude Code的自动模式设为Pro、Max和Team计划的默认选项，称其更安全，测试中分类器捕获了89%的危险命令。",
+     "news_status": "已确认",
+     "watch": "后续取决于开发者对自动模式的接受度，以及该模式是否影响开发效率。可观察路标：用户反馈及Anthropic是否调整默认设置。",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-09:pick-22",
+     "source_keys": [
+      "src-7fc598c14a0e0a7bcc41e45d"
+     ],
+     "event_identity": "set-f3fa87c34481ece0d5c7e5fd"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-b021ff",
+   "title": "Backflip AI发布3D扫描转可编辑CAD模型AI",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "Backflip AI发布3D扫描转可编辑CAD模型AI",
+     "summary": "Backflip AI发布AI模型，可将3D扫描转换为可编辑参数化CAD模型，耗时从数小时缩短至数分钟。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-09:pick-25",
+     "source_keys": [
+      "src-8bd687026fe6956f2509c84e"
+     ],
+     "event_identity": "set-7e92011f38964cae431c08ad"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-eeb896",
+   "title": "北京市教委明确七类情形可实施教育惩戒",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "北京市教委明确七类情形可实施教育惩戒",
+     "summary": "北京市教委发布规定，明确扰乱课堂秩序等七类情形可实施教育惩戒。",
+     "news_status": "已确认",
+     "sources": [
+      "thepaper-edu"
+     ],
+     "item_ref": "2026-08-09:pick-158",
+     "source_keys": [
+      "src-762174f81493faebce3e8b1d"
+     ],
+     "event_identity": "set-a107a69813e507f188ce3551"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-608758",
+   "title": "研究：读者不知情时更青睐AI生成短篇小说",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "研究：读者不知情时更青睐AI生成短篇小说",
+     "summary": "研究显示，超过2500名参与者无法区分AI与人类短篇小说，且不知情时对AI作品评价更高。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-09:pick-23",
+     "source_keys": [
+      "src-30b93d155ccbf34fbbf0e107"
+     ],
+     "event_identity": "set-6e78a28d5203bc67c38715f0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-1d5beb",
+   "title": "Canva和Figma因AI成本调整策略",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "Canva和Figma因AI成本调整策略",
+     "summary": "Canva预警营收增速放缓至20%，Figma预计Q3增速降至36%，均因AI服务成本超预期。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-09:pick-122",
+     "source_keys": [
+      "src-cbf3673b9ea3c5dc667d350a"
+     ],
+     "event_identity": "set-2285c4b754eff3580161190d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-643d4f",
+   "title": "OpenAI收购演示文稿初创公司NextSlide，团队加入ChatGPT开发",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "OpenAI收购演示文稿初创公司NextSlide，团队加入ChatGPT开发",
+     "summary": "OpenAI收购AI演示文稿初创公司NextSlide，其团队成员现已投身ChatGPT开发工作。",
+     "news_status": "已确认",
+     "sources": [
+      "techcrunch",
+      "ithome"
+     ],
+     "item_ref": "2026-08-09:pick-15",
+     "source_keys": [
+      "src-08ffae0404cec764624d05b3",
+      "src-6ccf078cf09cab5fb06e7cde"
+     ],
+     "event_identity": "set-e55bca3599980c00bb418977"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-47492e",
+   "title": "菲尔兹奖得主Jacob Tsimerman加入OpenAI从事AI安全研究",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "菲尔兹奖得主Jacob Tsimerman加入OpenAI从事AI安全研究",
+     "summary": "新晋菲尔兹奖得主Jacob Tsimerman离开多伦多大学，加入OpenAI从事AI安全研究。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-09:pick-26",
+     "source_keys": [
+      "src-db6857c49d4a302f6de57514"
+     ],
+     "event_identity": "set-2a6ee61ab3721f75c73ecef5"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-f30095",
+   "title": "亨特·拜登透露父亲乔·拜登癌症已扩散且非常痛苦",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "亨特·拜登透露父亲乔·拜登癌症已扩散且非常痛苦",
+     "summary": "亨特·拜登称父亲乔·拜登的前列腺癌已扩散至骨骼等部位，非常痛苦且具有削弱性。",
+     "news_status": "已确认",
+     "sources": [
+      "guardian",
+      "aljazeera",
+      "cnbc"
+     ],
+     "item_ref": "2026-08-09:pick-31",
+     "source_keys": [
+      "src-57b487341e748eeea1031006",
+      "src-6ce5e89bb65dacd509d666e3",
+      "src-825eb37504ff33972cfed93d"
+     ],
+     "event_identity": "set-3c479233ee9d530d28deeb41"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-26655d",
+   "title": "加拿大野火面积翻倍，数千人撤离",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "加拿大野火面积翻倍，数千人撤离",
+     "summary": "加拿大不列颠哥伦比亚省Bald Range野火面积扩大至95平方公里，数千人被迫撤离。",
+     "news_status": "发展中",
+     "watch": "后续取决于火势控制情况和天气条件，可观察野火是否继续蔓延及疏散范围是否扩大。",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-09:pick-43",
+     "source_keys": [
+      "src-ad674ae79a85f6d85d337e71"
+     ],
+     "event_identity": "set-7b16bd5e5b4773f435980832"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-ae0318",
+   "title": "台风海豚袭击日本冲绳后逼近中国",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "台风海豚袭击日本冲绳后逼近中国",
+     "summary": "台风海豚袭击日本冲绳，导致至少4.4万栋建筑断电、5人受伤，目前正逼近中国。",
+     "news_status": "发展中",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-09:pick-53",
+     "source_keys": [
+      "src-7410fa54cb454afe6379c724"
+     ],
+     "event_identity": "set-4e5ce95a066c4f8a3e984152"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-79efde",
+   "title": "AI硬件涨价传导至3C租赁，租赁商拆售显卡内存",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "AI硬件涨价传导至3C租赁，租赁商拆售显卡内存",
+     "summary": "AI硬件涨价潮传导至3C租赁市场，需求翻倍，租赁商开始拆售显卡和内存。",
+     "news_status": "已确认",
+     "sources": [
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-184",
+     "source_keys": [
+      "src-47a0248abb66b02ec069bf5d"
+     ],
+     "event_identity": "set-f98499864b8bca6aeff7b6a0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-5885dd",
+   "title": "亚马逊得州数据中心配套电厂或成美国最大碳排放源",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "亚马逊得州数据中心配套电厂或成美国最大碳排放源",
+     "summary": "亚马逊在得州佩科斯县筹建数据中心，配套天然气电厂已获准年排3300万吨二氧化碳，或成美国最大温室气体排放源。",
+     "news_status": "发展中",
+     "watch": "取决于该电厂最终建设规模及运营排放是否达到许可上限，以及亚马逊是否调整能源方案。可观察路标：电厂是否按计划投产及实际排放数据。",
+     "sources": [
+      "techcrunch",
+      "verge",
+      "ithome",
+      "hn"
+     ],
+     "item_ref": "2026-08-09:pick-8",
+     "source_keys": [
+      "src-0793aec6cd1319a327b2fe4c",
+      "src-4355bff1c9d3b3046ba8d761",
+      "src-80068f22b0aa7c59c061c078",
+      "src-c5ec9c3956c31a575a1c4cb7"
+     ],
+     "event_identity": "set-cb343061da07996aefbaf6c5"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-b6285c",
+   "title": "新科高斯奖得主涅斯捷罗夫全职加盟港中文（深圳）",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "新科高斯奖得主涅斯捷罗夫全职加盟港中文（深圳）",
+     "summary": "新科高斯奖得主尤里·涅斯捷罗夫全职加盟香港中文大学（深圳）。",
+     "news_status": "已确认",
+     "watch": "关注其加盟后研究方向及对学校数学学科建设的带动作用。",
+     "sources": [
+      "thepaper-edu"
+     ],
+     "item_ref": "2026-08-09:pick-157",
+     "source_keys": [
+      "src-46adfad4dd53983419c3b592"
+     ],
+     "event_identity": "set-772edcfc74afe243d19c4bd1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-6f77de",
+   "title": "AI股反弹推动美股主要股指创历史新高",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "AI股反弹推动美股主要股指创历史新高",
+     "summary": "AI股强劲反弹推动标普500和道指本周创历史新高，纳指涨5.19%。",
+     "news_status": "已确认",
+     "watch": "下周公布的7月通胀数据将成为市场重要考验，可能影响美联储9月政策走向。",
+     "sources": [
+      "cnbc",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-35",
+     "source_keys": [
+      "src-06b55248ae8fc940fb1488fa",
+      "src-5199f692bcfe1de9f8de20ae"
+     ],
+     "event_identity": "set-9c149e038ab54b1b0a17ffc1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-364c44",
+   "title": "黄金受油价与就业数据双重利好推动上涨",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "黄金受油价与就业数据双重利好推动上涨",
+     "summary": "黄金本周录得七个月来最佳单周表现，受益于油价波动推升通胀预期和疲弱就业数据削弱加息预期。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-09:pick-125",
+     "source_keys": [
+      "src-297ef3ddfc18b2655dbda0a8",
+      "src-6c2e975687e04ccf29e49373"
+     ],
+     "event_identity": "set-377fe58b626cc21c4d647747"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-c7118e",
+   "title": "澳大利亚墨累-达令流域检出禽流感引发专家警告",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "澳大利亚墨累-达令流域检出禽流感引发专家警告",
+     "summary": "澳大利亚墨累-达令流域检出H5禽流感，专家称应敲响警钟，全国累计215例。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-09:pick-102",
+     "source_keys": [
+      "src-21b622eb8dd0cd857533b6e3"
+     ],
+     "event_identity": "set-aa5b6b7a43c1e2723c4ea5f7"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260809-c126e8",
+   "title": "纽约当局警告针对老年人的金条诈骗",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-09",
+   "last_seen": "2026-08-09",
+   "history": [
+    {
+     "date": "2026-08-09",
+     "title": "纽约当局警告针对老年人的金条诈骗",
+     "summary": "纽约州总检察长警告，诈骗者利用金条诈骗老年人，过去两年骗走超1亿美元。",
+     "news_status": "已确认",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-09:pick-115",
+     "source_keys": [
+      "src-6d8972c3d52d57373f980c84"
+     ],
+     "event_identity": "set-c55f40f9cf211de9c4f31a3b"
     }
    ]
   }
