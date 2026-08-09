@@ -1159,6 +1159,23 @@ def test_no_candidate_or_no_watch_is_neutral_without_judge_call():
     assert judge.calls == []
 
 
+@pytest.mark.parametrize("case_field", ["review_cases", "enrich_review_cases"])
+def test_evaluator_rejects_review_cases_with_too_many_sources_before_judge(case_field):
+    evidence = valid_evidence()
+    evidence[case_field][0]["sources"] = [
+        {"source": f"Outlet {index}", "title": "Report", "snippet": "Evidence"}
+        for index in range(6)
+    ]
+    judge = Judge()
+
+    report = rollout().evaluate_rollout(
+        evidence, shadow_success=True, judge_llm=judge)
+
+    assert report["selection"]["status"] == "needs_review"
+    assert report["trajectory"]["status"] == "needs_review"
+    assert judge.calls == []
+
+
 def test_first_day_and_same_day_rerun_both_remain_trajectory_neutral():
     class NoMatchLLM:
         def json_call(self, _system, _user):

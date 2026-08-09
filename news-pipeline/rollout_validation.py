@@ -484,6 +484,7 @@ def _validate_evidence_allowlist(evidence):
                                        for source in claim["sources"])
                                 for claim in public["claims"])))
                 or not isinstance(case.get("sources"), list)
+                or len(case["sources"]) > 5
                 or any(not isinstance(source, dict)
                        or set(source) != {"source", "title", "snippet"}
                        or not bounded_text(source.get("source"), 200, empty=False)
