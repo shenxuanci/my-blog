@@ -703,7 +703,8 @@ deep_sources:
     enabled: false
 
   # ---------- 第三阶段：英文财经（顺序单源启用） ----------
-  # 2026-07-26 启用。URL 用自有域名而非 noahpinion.substack.com：
+  # 2026-07-26 启用，2026-08-09 完成人工门并保留。URL 用自有域名而非
+  # noahpinion.substack.com：
   # *.substack.com 在 Actions 出口被封（见 importai 记录），自定义域不受影响。
   - id: noahpinion
     name: Noahpinion
@@ -713,9 +714,8 @@ deep_sources:
     channel: society_finance
     topic_filter: finance
     enabled: true
-  # 2026-07-26 预检通过、尚未启用：自有域名不受 *.substack.com 的 Actions 出口
-  # 封锁影响，deep_fetcher 本地实测 78 小时窗口取 5 篇，供给密度高于同栏其他候选。
-  # 按 Issue #32，需在 #31（Noahpinion）判定后显式启用，再起算 7 个有效日观察，
+  # 2026-08-09 启用：自有域名不受 *.substack.com 的封锁影响；仍须先通过
+  # GitHub Actions 出口验证，再从首个有效生产产出日起算 7 个有效日观察。
   # 复核重点是短文密度与 AI 主题偏移（topic_filter: finance 是否拦得住）。
   - id: marginal-revolution
     name: Marginal Revolution
@@ -724,7 +724,7 @@ deep_sources:
     lang: en
     channel: society_finance
     topic_filter: finance
-    enabled: false
+    enabled: true
   # 2026-07-26 判死，退出候选队列：feed 可达且可解析，但最新一篇停在
   # 2026-05-03，近三个月未更新；78 小时生产窗口下恒为 0 篇，不构成深读供给。
   - id: apricitas

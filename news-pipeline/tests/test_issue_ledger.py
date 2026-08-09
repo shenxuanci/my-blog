@@ -532,6 +532,10 @@ def test_source_metrics_day_is_neutral_until_both_inputs_are_complete():
 def test_manual_review_records_enrich_sample_counts_only_for_enrich():
     il = ledger()
     daily = state("2026-07-26", [attempt(10, 1, enrich="needs_review")])
+    daily["enrich_sample"] = {
+        "ai": ["pick-1"], "finance": ["pick-2"],
+        "society": ["pick-3"], "tech": ["pick-4"], "world": ["pick-5"],
+    }
 
     reviewed = il.apply_manual_review(
         daily, gate="enrich", status="pass", run_id="10", run_attempt=1,
@@ -550,6 +554,44 @@ def test_manual_review_records_enrich_sample_counts_only_for_enrich():
         il.apply_manual_review(
             daily, gate="enrich", status="pass", run_id="10", run_attempt=1,
             samples_passed=6, samples_total=5)
+
+
+def test_enrich_manual_review_requires_complete_counts_for_a_verdict():
+    il = ledger()
+    daily = state("2026-07-26", [attempt(10, 1, enrich="needs_review")])
+    daily["enrich_sample"] = {
+        "ai": ["pick-1"],
+        "finance": ["pick-2"],
+    }
+
+    with pytest.raises(ValueError, match="all sampled items"):
+        il.apply_manual_review(
+            daily, gate="enrich", status="pass", run_id="10", run_attempt=1,
+            samples_passed=1, samples_total=1)
+    with pytest.raises(ValueError, match="sample counts"):
+        il.apply_manual_review(
+            daily, gate="enrich", status="pass", run_id="10", run_attempt=1)
+
+    reviewed = il.apply_manual_review(
+        daily, gate="enrich", status="pass", run_id="10", run_attempt=1,
+        samples_passed=1, samples_total=2)
+    assert reviewed["manual_reviews"]["enrich"]["samples"] == {
+        "passed": 1, "total": 2}
+
+
+def test_neutral_enrich_review_rejects_sample_counts():
+    il = ledger()
+    daily = state("2026-07-26", [attempt(10, 1, enrich="needs_review")])
+    daily["enrich_sample"] = {"ai": ["pick-1"]}
+
+    with pytest.raises(ValueError, match="neutral.*sample counts"):
+        il.apply_manual_review(
+            daily, gate="enrich", status="neutral", run_id="10",
+            run_attempt=1, samples_passed=0, samples_total=1)
+
+    reviewed = il.apply_manual_review(
+        daily, gate="enrich", status="neutral", run_id="10", run_attempt=1)
+    assert "samples" not in reviewed["manual_reviews"]["enrich"]
 
 
 def test_window_start_tracks_the_latest_shared_runtime_change():

@@ -2023,6 +2023,26 @@ def test_removed_field_breakdown_separates_evidence_copies_from_audit_removals()
     assert _breakdown_invariant(quality)
 
 
+def test_evidence_copy_removal_cannot_leave_an_orphan_watch_detail():
+    copied_watch = "未来走向取决于监管审批时间表和公开听证会是否按期举行" * 3
+    item = source_item(desc=copied_watch)
+    item["evidence_basis"] = "fulltext"
+    event = enriched_event()
+    event["watch"] = copied_watch
+    event["watch_detail"] = (
+        "详情走向将继续观察审批时间表，并以公开听证会日期为路标。")
+    quality = dn.new_quality_stats()
+
+    dn.sanitize_objectivity_event(event, [item], quality)
+
+    assert "watch" not in event
+    assert "watch_detail" not in event
+    assert quality["removed_field_counts"]["watch"] == 1
+    assert quality["removed_field_counts"]["watch_detail"] == 1
+    assert quality["removed_field_reasons"]["evidence_copy"] == 2
+    assert _breakdown_invariant(quality)
+
+
 ENGLISH_DESC = "A new field report shows how scientists use AI coding agents to modernize legacy code."
 CHINESE_DESC = "微软开源 4B 参数的 Mage-VL 与 Mage-Flow 模型，分别用于图像理解和图像编辑。"
 

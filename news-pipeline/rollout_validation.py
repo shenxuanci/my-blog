@@ -19,7 +19,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 
-EVIDENCE_VERSION = "rollout-evidence-v1"
+EVIDENCE_VERSION = "rollout-evidence-v2"
 REPORT_VERSION = "rollout-report-v1"
 
 SELECTION_METRICS = {
@@ -341,6 +341,7 @@ def build_stage_fingerprints(*, config, runtime_paths, trajectory_ui_paths,
 def build_rollout_evidence(*, date_str, mode, runtime_seconds, selection,
                            trajectory, review_cases, runtime_paths,
                            trajectory_ui_paths, config, enrich_sample=None,
+                           enrich_review_cases=None,
                            runtime_environment=None):
     """Build a JSON-safe evidence envelope from already allow-listed inputs."""
     return {
@@ -359,18 +360,20 @@ def build_rollout_evidence(*, date_str, mode, runtime_seconds, selection,
             runtime_environment=runtime_environment),
         "review_cases": copy.deepcopy(review_cases),
         "enrich_sample": copy.deepcopy(enrich_sample or {}),
+        "enrich_review_cases": copy.deepcopy(enrich_review_cases or []),
     }
 
 
 EVIDENCE_ENVELOPE_FIELDS = frozenset({
     "version", "date", "run", "selection", "trajectory", "fingerprints",
-    "review_cases", "enrich_sample"})
+    "review_cases", "enrich_sample", "enrich_review_cases"})
 
 
 def _validate_enrich_sample(sample):
     """The enrich sample names items by identifier only; no text may ride along."""
     if not isinstance(sample, dict) or len(sample) > 12:
         raise ValueError("rollout evidence violates the allow-list")
+    flattened = []
     for category, ids in sample.items():
         if (not isinstance(category, str) or not category
                 or not isinstance(ids, list) or len(ids) > 4):
@@ -379,6 +382,10 @@ def _validate_enrich_sample(sample):
             if (not isinstance(item_id, str) or not item_id
                     or len(item_id) > 64):
                 raise ValueError("rollout evidence violates the allow-list")
+            flattened.append(item_id)
+    if len(flattened) > 5 or len(set(flattened)) != len(flattened):
+        raise ValueError("rollout evidence violates the allow-list")
+    return flattened
 
 
 def _reject_forbidden_keys(value, path="evidence"):
@@ -396,7 +403,7 @@ def _reject_forbidden_keys(value, path="evidence"):
 def _validate_evidence_allowlist(evidence):
     if set(evidence) != EVIDENCE_ENVELOPE_FIELDS:
         raise ValueError("rollout evidence violates the allow-list")
-    _validate_enrich_sample(evidence.get("enrich_sample"))
+    sampled_ids = _validate_enrich_sample(evidence.get("enrich_sample"))
     if (not isinstance(evidence.get("run"), dict)
             or set(evidence["run"]) != {"status", "mode", "runtime_seconds"}
             or not isinstance(evidence.get("selection"), dict)
@@ -405,10 +412,11 @@ def _validate_evidence_allowlist(evidence):
             or set(evidence["trajectory"]) != TRAJECTORY_METRICS
             or not isinstance(evidence.get("fingerprints"), dict)
             or set(evidence["fingerprints"]) != {"runtime", "trajectory_ui"}
-            or not isinstance(evidence.get("review_cases"), list)):
+            or not isinstance(evidence.get("review_cases"), list)
+            or not isinstance(evidence.get("enrich_review_cases"), list)):
         raise ValueError("rollout evidence violates the allow-list")
     public_fields = {
-        "id", "title", "summary", "context", "watch", "watch_detail", "claims",
+        "id", "title", "summary", "context", "detail", "watch", "watch_detail", "claims",
         "trusted_continuation", "day_count", "history",
     }
     history_fields = {"date", "title", "summary", "watch", "item_ref"}
@@ -429,22 +437,28 @@ def _validate_evidence_allowlist(evidence):
         return all(bounded_text(row[field], limits[field])
                    for field in limits if field in row)
 
-    for case in evidence["review_cases"]:
+    def valid_review_case(case, *, indexed):
         if not isinstance(case, dict):
-            raise ValueError("rollout evidence violates the allow-list")
+            return False
         public = case.get("public")
-        if (set(case) != {"idx", "picked_index", "public", "sources",
-                          "verified_history"}
-                or type(case.get("idx")) is not int or case["idx"] < 0
-                or type(case.get("picked_index")) is not int
-                or case["picked_index"] < 0
+        expected_fields = ({"idx", "picked_index", "public", "sources",
+                            "verified_history"} if indexed else
+                           {"public", "sources", "verified_history"})
+        return not (
+                set(case) != expected_fields
+                or (indexed and (type(case.get("idx")) is not int
+                                 or case["idx"] < 0))
+                or (indexed and (type(case.get("picked_index")) is not int
+                                 or case["picked_index"] < 0))
                 or not isinstance(public, dict)
                 or not set(public).issubset(public_fields)
                 or not bounded_text(public.get("id"), 80, empty=False)
                 or not _PUBLIC_ITEM_ID_RE.fullmatch(public["id"])
-                or not bounded_text(public.get("title"), 80, empty=False)
+                or not bounded_text(
+                    public.get("title"), 80 if indexed else 300, empty=False)
                 or not bounded_text(public.get("summary"), 160)
                 or ("context" in public and not bounded_text(public["context"], 240))
+                or ("detail" in public and not bounded_text(public["detail"], 1200))
                 or ("watch" in public and not bounded_text(public["watch"], 160))
                 or ("watch_detail" in public
                     and not bounded_text(public["watch_detail"], 260))
@@ -478,8 +492,20 @@ def _validate_evidence_allowlist(evidence):
                        for source in case["sources"])
                 or not isinstance(case.get("verified_history"), list)
                 or any(not valid_history_row(row)
-                       for row in case["verified_history"])):
+                       for row in case["verified_history"]))
+
+    for case in evidence["review_cases"]:
+        if not valid_review_case(case, indexed=True):
             raise ValueError("rollout evidence violates the allow-list")
+    for case in evidence["enrich_review_cases"]:
+        if not valid_review_case(case, indexed=False):
+            raise ValueError("rollout evidence violates the allow-list")
+    enrich_case_ids = [
+        case["public"]["id"] for case in evidence["enrich_review_cases"]
+    ]
+    if (len(enrich_case_ids) != len(sampled_ids)
+            or set(enrich_case_ids) != set(sampled_ids)):
+        raise ValueError("rollout evidence violates the allow-list")
 
 
 def write_rollout_evidence(evidence, *, data_dir, environ=None):
@@ -497,7 +523,7 @@ def write_rollout_evidence(evidence, *, data_dir, environ=None):
     if target == repository_data or repository_data in target.parents:
         raise ValueError("ROLLOUT_EVIDENCE_PATH must be outside source/news/data")
     if not isinstance(evidence, dict) or evidence.get("version") != EVIDENCE_VERSION:
-        raise ValueError("unsupported rollout evidence")
+        raise ValueError("unsupported rollout evidence version")
     _reject_forbidden_keys(evidence)
     _validate_evidence_allowlist(evidence)
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -897,7 +923,7 @@ def shadow_satisfies_selection(outcome):
 
 def parse_cli_args(argv=None):
     parser = argparse.ArgumentParser(description="Evaluate rollout evidence")
-    parser.add_argument("--evidence", required=True, help="rollout-evidence-v1 JSON")
+    parser.add_argument("--evidence", required=True, help="rollout-evidence-v2 JSON")
     parser.add_argument(
         "--shadow-outcome", required=True,
         choices=("success", "failure", "accepted"))

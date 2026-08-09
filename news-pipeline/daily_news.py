@@ -611,7 +611,8 @@ def append_github_selection_summary(summary, environ=None):
 
 def emit_rollout_evidence(date_str, policy, runtime_seconds, selection_stats,
                           trajectory_health, review_cases, data_dir,
-                          config, enrich_sample=None, environ=None):
+                          config, enrich_sample=None, enrich_review_cases=None,
+                          environ=None):
     """Write acceptance evidence without coupling it to publication output."""
     environ = os.environ if environ is None else environ
     if not str(environ.get("ROLLOUT_EVIDENCE_PATH") or "").strip():
@@ -645,6 +646,7 @@ def emit_rollout_evidence(date_str, policy, runtime_seconds, selection_stats,
         ],
         config=config,
         enrich_sample=enrich_sample or {},
+        enrich_review_cases=enrich_review_cases or [],
     )
     return rollout_validation.write_rollout_evidence(
         evidence, data_dir=data_dir, environ=environ)
@@ -4356,6 +4358,7 @@ def sanitize_objectivity_event(event, items=None, quality=None):
                 field, event.get(field), evidence_texts):
             event.pop(field, None)
             count_removed_field(quality, field, "evidence_copy")
+    _remove_orphan_watch_detail(event, quality, reason="evidence_copy")
     kept_claims = []
     for claim in event.get("claims") or []:
         if _is_direct_evidence_copy("claims", claim.get("text"), evidence_texts):
@@ -5955,6 +5958,61 @@ def _build_trajectory_review_cases(picked, items, cfg):
     return cases
 
 
+def build_enrich_review_cases(picked, items, cfg, enrich_sample):
+    """Retain bounded evidence for every item named by the enrich sample."""
+    sampled_ids = [
+        item_id
+        for category in sorted(enrich_sample or {})
+        for item_id in enrich_sample[category]
+    ]
+    source_limit = 4 if _rollout_output_enabled(cfg) else 5
+    public_by_id = {}
+    for event in picked or []:
+        public = event_to_item(
+            event, items or [], "pick", source_limit=source_limit,
+            trajectory_enabled=_trajectory_enabled(cfg))
+        item_id = str(public.get("id") or "")
+        if item_id:
+            public_by_id[item_id] = (event, public)
+
+    cases = []
+    for item_id in sampled_ids:
+        pair = public_by_id.get(item_id)
+        if pair is None:
+            continue
+        event, public = pair
+        public_projection = {
+            field: copy.deepcopy(public[field])
+            for field in (
+                "id", "title", "summary", "context", "detail", "watch",
+                "watch_detail", "claims", "trusted_continuation", "day_count",
+                "history")
+            if field in public
+        }
+        sources = []
+        for source_index in _serialized_source_ids(
+                event, items or [], limit=source_limit):
+            source = items[source_index]
+            sources.append({
+                "source": str(source.get("source") or ""),
+                "title": str(source.get("title") or ""),
+                "snippet": str(source.get("desc") or "")[:400],
+            })
+        verified_history = []
+        if public.get("trusted_continuation") is True:
+            verified_history = [{
+                field: copy.deepcopy(row[field])
+                for field in ("date", "title", "summary", "watch", "item_ref")
+                if field in row
+            } for row in event.get("history_prev", []) if isinstance(row, dict)]
+        cases.append({
+            "public": public_projection,
+            "sources": sources,
+            "verified_history": verified_history,
+        })
+    return cases
+
+
 def prepare_registry_transaction(llm, registry, picked, date_str, cfg,
                                  secondary=None, feedback=None, items=None,
                                  trajectory_audit_llm=None, trajectory_health=None,
@@ -6993,6 +7051,14 @@ def event_to_item(ev, items, tier, *, full_objectivity=False, source_limit=5,
             ev["summary"] = fallback
     if full_objectivity:
         sanitize_objectivity_event(ev, items)
+    public_watch = (
+        _valid_trajectory_watch(ev.get("watch"))
+        if trajectory_enabled else None
+    )
+    public_watch_detail = (
+        _valid_trajectory_watch(ev.get("watch_detail"), detail=True)
+        if public_watch is not None else None
+    )
     sources = []
     seen_urls = set()
     for i in sorted_ids:
@@ -7018,10 +7084,9 @@ def event_to_item(ev, items, tier, *, full_objectivity=False, source_limit=5,
         **({"summary": ev["summary"]} if ev.get("summary") else {}),
         "status": ev.get("status", ""),
         "tags": ev.get("tags", []),
-        **({"watch": ev["watch"]} if trajectory_enabled and ev.get("watch") else {}),
-        **({"watch_detail": ev["watch_detail"]}
-           if trajectory_enabled and ev.get("watch")
-           and ev.get("watch_detail") else {}),
+        **({"watch": public_watch} if public_watch is not None else {}),
+        **({"watch_detail": public_watch_detail}
+           if public_watch_detail is not None else {}),
         **({"context": ev["context"]}
            if trajectory_enabled and ev.get("context") else {}),
         **({"detail": ev["detail"]} if ev.get("detail") else {}),
@@ -8897,10 +8962,13 @@ def _run_pipeline(started_at, args, cfg, policy):
 
     finalize_selection_gate_metrics(selection_stats, picked, cfg)
     try:
+        enrich_sample = build_enrich_sample(picked, date_str)
         emit_rollout_evidence(
             date_str, policy, time.perf_counter() - started_at,
             selection_stats, trajectory_health, trajectory_review_cases,
-            _data_dir, cfg, enrich_sample=build_enrich_sample(picked, date_str))
+            _data_dir, cfg, enrich_sample=enrich_sample,
+            enrich_review_cases=build_enrich_review_cases(
+                picked, items, cfg, enrich_sample))
     except Exception as exc:
         log(f"  rollout evidence 写入失败（不影响当日日报）: {exc}")
 

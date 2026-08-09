@@ -252,6 +252,21 @@ def test_public_item_never_emits_watch_detail_without_short_watch():
     assert "watch_detail" not in item
 
 
+def test_public_item_never_emits_watch_detail_with_an_invalid_short_watch():
+    item = dn.event_to_item(
+        {
+            **_event(),
+            "watch": "x" * (dn.OBJECTIVITY_FIELD_LIMITS["watch"] + 1),
+            "watch_detail": "Detailed watch.",
+        },
+        [_source_item()],
+        "pick",
+    )
+
+    assert "watch" not in item
+    assert "watch_detail" not in item
+
+
 def test_quality_stats_use_v3_extension_field_contract():
     quality = dn.new_quality_stats()
 

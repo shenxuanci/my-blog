@@ -168,6 +168,19 @@ def apply_manual_review(state, *, gate, status, run_id, run_attempt,
         raise ValueError("manual review status must be pass, fail, or neutral")
     counts = _review_sample_counts(gate, samples_passed, samples_total)
     updated = copy.deepcopy(state)
+    if gate == "enrich":
+        sample = updated.get("enrich_sample")
+        sample = sample if isinstance(sample, dict) else {}
+        expected_total = sum(
+            len(ids) for ids in sample.values() if isinstance(ids, list))
+        if status == "neutral":
+            if counts is not None:
+                raise ValueError("neutral enrich review cannot include sample counts")
+        else:
+            if counts is None:
+                raise ValueError("enrich verdict requires sample counts")
+            if counts["total"] != expected_total:
+                raise ValueError("enrich verdict must review all sampled items")
     aggregate = updated.get("aggregate")
     aggregate = aggregate if isinstance(aggregate, dict) else {}
     if aggregate.get("publication") != "success":

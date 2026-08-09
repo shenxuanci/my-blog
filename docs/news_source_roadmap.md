@@ -10,13 +10,13 @@
 
 2026-08-05 的定时日报发布成功，但 objectivity shadow 在长驻进程内调用 `trafilatura` / `lxml` 时触发原生堆崩溃；提交 `a8941b0` / `1957a0b` 已把静态 HTML 解析隔离到可超时终止的一次性子进程，并将依赖锁、Python 完整版本与实现、runner OS/架构和 `RUNTIME_ENVIRONMENT_EPOCH` 纳入共享运行时指纹。生产树的 `validate + shadow_mode:force` Run #31005512218 已成功，验证指纹为 `92ef27552658`；旧指纹的线上样本不得混入新窗口。新窗口从该指纹的首个有效 publish 起算，逐门状态与计数只以 GitHub Issue #15 的幂等台账为准，本文不复制易变快照。
 
-删除字段分项诊断已升级为 v3：字段包含 `watch_detail`，不再包含新闻 `why` 与 `significance`，原因集合包含 `generation_invalid`；v1／v2 历史继续兼容且不回写。enrich 安全指标由台账自动判，文字抽样仍需人工回填；不得只凭分项计数调整闸门或 enrich 提示词。
+删除字段分项诊断已升级为 v3：字段包含 `watch_detail`，不再包含新闻 `why` 与 `significance`，原因集合包含 `generation_invalid`；v1／v2 历史继续兼容且不回写。enrich 安全指标由台账自动判，文字抽样仍需人工回填；不得只凭分项计数调整闸门或 enrich 提示词。旧 `rollout-evidence-v1` 不补审，也不用于新窗口人工复核；新窗口从 `rollout-evidence-v2` 首个有效 publish 起算。
 
 - `pass` 仅让对应门 +1，`neutral` / `needs_review` 冻结对应时钟。`fail` 只清零**连续型**门（选材、轨迹、客观性 shadow）；**累计型**门（enrich、信源指标）只统计有效日，缺数据的一天冻结而不清零。
 - **共享运行时指纹变化重置全部五门**——样本构成变了，变更前后的证据不得混用；指纹覆盖生产 Python、`requirements.txt`、Python 完整版本与实现、runner OS/架构及显式 epoch，且不读取 Secret。仅轨迹 UI 指纹变化只重置轨迹门。观察期内冻结这些范围，必要变更按所属阶段重计。
 - 同一北京日期重跑只更新当日台账，不增加日数；任一次发布失败都使当日各门按失败处理，后续成功重跑不覆盖。前一日完全没有台账记录时，`Rollout Heartbeat` 补一条 `neutral` 缺口行——冻结全部门，不计入也不清零。初验、Judge 或台账异常只告警，不阻断发布、不自动回滚。
 - 选材 7 日和轨迹 5 日都达标后只标记「待人工最终确认」，不自动关闭 #15 或 #10，也不替代下列 enrich、客观性和信源观察门。
-- 云端 `rollout-review` 现已一次性记录**五门**：选材、轨迹、enrich 安全指标、客观性 shadow、信源指标。仍需人工执行的只剩 enrich 的三项**文字质量**判断（管线会把每日确定性抽样 id 传入台账，人工用 `Rollout Manual Review` 回填 `samples_passed` / `samples_total`）；修复前台账中缺失的抽样清单不能反推或补算人工通过率。45 条客观性夹具使用独立的、仅限 `main` 的手动 `Objectivity Acceptance` workflow，不属于每日自动台账。
+- 云端 `rollout-review` 现已一次性记录**五门**：选材、轨迹、enrich 安全指标、客观性 shadow、信源指标。仍需人工执行的只剩 enrich 的三项**文字质量**判断。`rollout-evidence-v2` 用独立的 `enrich_review_cases` 完整覆盖每日确定性抽样，原有 `review_cases` 继续只供轨迹 Judge 使用。单日 `pass` 表示机械安全通过且当天全部抽样完成复核；单条缺陷只写入 `samples_passed` / `samples_total`，最终由至少 5 个有效日且窗口累计通过率 ≥80% 裁决。证据不完整时提交 `neutral` 且不提交样本计数。修复前台账中缺失的抽样清单不能反推或补算人工通过率。45 条客观性夹具使用独立的、仅限 `main` 的手动 `Objectivity Acceptance` workflow，不属于每日自动台账。
 - `objectivity.mode` 继续保持 `interim`。新闻阅读结构统一为「来龙／起因 → 现状 → 走向」；新数据不再生成或存储新闻 `why`，前端同时隐藏旧日报中的该字段，深读和论文不变。详情深化的长内容只在 shadow 中生成。客观性 Judge 已增加非法批次递归拆分、单条重试和每轮 60 次调用预算；详情合同变化后必须重新执行 45 条夹具三轮验收，任一 `max_tokens` 截断均按失败处理，成本告警必须先查明原因才可人工接受。夹具三轮、配对成本门、7 日 shadow、5 日文字质量门和人工确认全部通过后才可启用 active，不自动切换公开模式。
 - 同日事件初次归并与发布前复核共享每次运行最多 20 次 LLM 调用；耗尽后仅合并共享同一原始条目的确定性重复，其余保留并告警。候选对数、桥接批次数、调用数、延后批次数和预算耗尽状态进入 `quality-health.json`，成本告警不阻断日报。
 
@@ -79,13 +79,13 @@
 - **`*.substack.com` 在 GitHub Actions 出口不可达（2026-07-26 实证）**：importai 连续 9 天 0 抓取，同一 URL 本地返回 HTTP 200；而同为 Substack 出版物但走自有域名的 interconnects.ai、latent.space、oneusefulthing.org、construction-physics.com 在 CI 全部 9/9 成功。因此 Substack 候选一律换作者自有域名；无自有域名者直接判死，不接受第三方镜像。
 - **周更/低频源不按日历天判**：数据门看抓取稳定性与链路是否跑通，人工门的 3 篇可取历史文章。给周更源设 14 天在线窗口只是在等日历——窗口内连 3 篇都产不出。
 
-## 阶段一：阮一峰《科技爱好者周刊》（#29，数据门已过）
+## 阶段一：阮一峰《科技爱好者周刊》（#29，保留）
 
 已启用 `https://www.ruanyifeng.com/blog/atom.xml`，进 `tech_business` 栏。
 
 2026-07-26 用 `deep_health.json` 07-13~07-25 实测判定**数据门通过**：抓取 8/8 零失败（所有深读源里最稳，同期其余 12 源各有 5 天失败，那 5 天是全域一次性停摆）；07-18 一篇走完 fetched → 候选 → 评分 → 主题匹配 → 过线 → 入选全链路。13 天供给 fetched 4 / 候选 2 / 入选 1，周更密度低但稳定。
 
-剩余只有人工门：抽 3 篇近期周刊确认阅读价值、栏目匹配、非重复替代。确认后关 #29。
+2026-08-09 完成人工门：抽查第 402、403、404 期，分别提供 AI 组织讽刺、Dropbox 技术商业分析和本地 AI 硬件解释，均有独特中文策展与解读价值，匹配 `tech_business`，也不是现有逐条新闻源或 AIHOT 的重复替代。同期 14 日 `deep_health.json` 为 14/14 抓取成功、3 篇主题匹配过线、1 篇入选；低频符合周更预期，因此保留并关闭 #29。
 
 ## 阶段二：晚点 LatePost（#30，受阻于对方 TLS 信任链）
 
@@ -98,8 +98,8 @@
 
 ## 阶段三：英文财经深读（`society_finance` 栏串行）
 
-1. **Noahpinion（#31，2026-07-26 启用）**：URL 用自有域名 `https://www.noahpinion.blog/feed`（非 `noahpinion.substack.com`，见上条出口封锁）。本地实测生产 78 小时窗口 1 篇、30 天 5 篇。原定 07-27 起算 7 个有效日；截至 2026-08-06，配置仍为 `enabled: true` 且 Issue 仍待人工判定，不能把计划结束日当成已验收。
-2. **Marginal Revolution（#32，尚未启用）**：`https://marginalrevolution.com/feed`，自有域名不受封锁，本地实测 78 小时取 5 篇。原排期 08-03 接续 Noahpinion，但截至 2026-08-06 配置仍为 `enabled: false`；必须在 #31 判定后显式启用，届时才开始 7 个有效日观察，重点复核短文密度和 AI 主题偏移。
+1. **Noahpinion（#31，保留）**：URL 用自有域名 `https://www.noahpinion.blog/feed`（非 `noahpinion.substack.com`，见上条出口封锁）。2026-08-09 抽查产业政策综述、韩国股市与 AI 内存周期、零售自动化政策三篇，均有独立机制分析，匹配 `society_finance`；14 日 `deep_health.json` 为 14/14 抓取成功、4 篇主题匹配过线且全部入选，说明 `topic_filter: finance` 能筛出财经与公共经济政策内容，保留并关闭 #31。
+2. **Marginal Revolution（#32，2026-08-09 启用）**：`https://marginalrevolution.com/feed`，保留 `topic_filter: finance`。自有域名本地预检可达不构成验收；必须先在临时分支的 `Daily News Briefing` `validate + shadow_mode:force` 中验证 GitHub Actions 出口抓取，成功后才允许进入 `main`，并从首个有效生产产出日起算 7 个有效日观察。重点复核短文密度和 AI 主题偏移。
 3. ~~Apricitas Economics~~（#33 判死）：feed 可达可解析，但最新一篇停在 2026-05-03、近三个月未更，78 小时窗口恒为 0 篇。
 4. ~~Kyla's Newsletter~~（#34 判死）：`*.substack.com` 被封且 `kylascanlon.com/feed` 返回 404 无自有域名可换；源本身最新一篇停在 2026-05-28。
 
@@ -109,11 +109,11 @@ Money Stuff 与 FT Alphaville 均不再探测：前者无官方 RSS，不接受�
 
 ---
 
-## 完整队列复盘（#35，等待 #31／#32 收口）
+## 完整队列复盘（#35，等待 #32 收口）
 
-范围已收缩为三源：阮一峰（人工门待确认）、Noahpinion（已启用、待判定）、Marginal Revolution（尚未启用）。Apricitas 与 Kyla 已判死销账，晚点独立受阻于对方 TLS 信任链。
+范围已收缩为三源：阮一峰与 Noahpinion 已完成抽查并保留，Marginal Revolution 已启用并等待 Actions 出口验证及 7 个有效日观察。Apricitas 与 Kyla 已判死销账，晚点独立受阻于对方 TLS 信任链。
 
-原定 2026-08-10 复盘建立在 Marginal Revolution 已于 08-03 启用的前提上；该前提没有发生，因此日期作废。改为 #32 实际启用并完成 7 个有效日后的次日统一判断保留/停用、样本稀疏和 30 分钟软预算下的阅读密度；晚点若标准 CA 包仍不能完成验证，不等它，记为「受阻未验」。复盘完成前不启动新的镜像候选。
+完整复盘不再绑定失效的日历日期；改为 #32 从首个有效生产产出日起完成 7 个有效日后的次日，统一判断保留/停用、样本稀疏和 30 分钟软预算下的阅读密度。晚点若标准 CA 包仍不能完成验证，不等它，记为「受阻未验」。复盘完成前不启动新的镜像候选。
 
 ## 镜像候选调研（等待完整队列复盘）
 
@@ -128,7 +128,7 @@ Money Stuff 与 FT Alphaville 均不再探测：前者无官方 RSS，不接受�
 
 ## 主管线「缺什么补源」评估（Issue #40，等待信源指标 14 日门）
 
-成本护栏首个有效 publish 后重新攒满 14 个有效日，再拿 `source_health.json`、shadow summary 与漏读记录做一次补源评估，预期方向 finance（历次实证最薄）。漏读只作人工评估证据，不自动改评分或加源；没有漏读记录时必须记为「无证据」，不得反向推断当前供给完整。
+当前共享运行时指纹的首个有效 publish 后重新攒满 14 个有效日，再拿 `source_health.json`、shadow summary 与漏读记录做一次补源评估，预期方向 finance（历次实证最薄）。本项不绑定旧预计日期，也不依赖已过期的成本护栏阻塞关系；漏读只作人工评估证据，不自动改评分或加源，没有漏读记录时必须记为「无证据」，不得反向推断当前供给完整。
 
 | 漏读原因 | 人工评估要回答的问题 |
 |---|---|

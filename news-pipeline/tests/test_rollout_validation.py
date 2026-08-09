@@ -106,16 +106,28 @@ def valid_case(idx=0, *, trusted=True, watch="Watch adoption and observe the nex
     }
 
 
-def valid_evidence(cases=None, **overrides):
+def valid_enrich_case(idx=0):
+    case = valid_case(idx, trusted=False, watch="")
+    case.pop("idx")
+    case.pop("picked_index")
+    case["public"].pop("watch")
+    case["public"].pop("watch_detail")
+    case["public"]["detail"] = "Detailed current status supported by the source."
+    return case
+
+
+def valid_evidence(cases=None, enrich_cases=None, **overrides):
     evidence = {
-        "version": "rollout-evidence-v1",
+        "version": "rollout-evidence-v2",
         "date": "2026-07-22",
         "run": {"status": "success", "mode": "shadow", "runtime_seconds": 12.5},
         "selection": valid_metrics(),
         "trajectory": valid_health(),
         "fingerprints": {"runtime": "a" * 64, "trajectory_ui": "b" * 64},
         "review_cases": list(cases if cases is not None else [valid_case()]),
-        "enrich_sample": {"ai": ["top-1"], "world": ["more-2"]},
+        "enrich_sample": {"ai": ["pick-0"]},
+        "enrich_review_cases": list(
+            enrich_cases if enrich_cases is not None else [valid_enrich_case()]),
     }
     evidence.update(overrides)
     return evidence
@@ -290,6 +302,76 @@ def test_transaction_counts_and_projects_multiple_final_trusted_continuations():
                for case in review_cases)
 
 
+def test_enrich_review_cases_cover_sampled_items_without_trajectory_fields():
+    fixture = json.loads(
+        (PIPELINE_DIR / "fixtures" / "trajectory_rollout.json").read_text(
+            encoding="utf-8"))
+    picked = copy.deepcopy(fixture["picked"])
+    one_off = {
+        "ids": [1],
+        "category": "world",
+        "title": "One-off verified event",
+        "summary": "A one-off event with no trajectory fields.",
+        "detail": "The retained detail explains the supported current status.",
+        "status": "confirmed",
+        "score": 80,
+        "tier": "T1",
+        "tags": [],
+    }
+    picked.append(one_off)
+    items = copy.deepcopy(fixture["items"])
+    items.append({
+        "title": "One-off source title",
+        "desc": "The source supports the one-off event and its current status.",
+        "url": "https://example.test/one-off",
+        "source": "Second News",
+        "source_id": "second-news",
+        "source_type": "fact",
+        "tier": "T1",
+        "credibility": 9,
+        "time": "2026-07-21T02:00:00+00:00",
+    })
+    sample = dn.build_enrich_sample(picked, fixture["date"])
+
+    builder = getattr(dn, "build_enrich_review_cases", None)
+    assert callable(builder), "enrich evidence builder is required"
+    cases = builder(picked, items, {"trajectory": {"enabled": True}}, sample)
+
+    expected_ids = {
+        item_id for ids in sample.values() for item_id in ids
+    }
+    assert {case["public"]["id"] for case in cases} == expected_ids
+    one_off_case = next(
+        case for case in cases if case["public"]["id"] == "pick-1")
+    assert one_off_case["public"]["detail"] == one_off["detail"]
+    assert "watch" not in one_off_case["public"]
+    assert one_off_case["sources"][0]["snippet"].startswith("The source supports")
+
+    trajectory_cases = dn._build_trajectory_review_cases(
+        picked, items, {"trajectory": {"enabled": True}})
+    assert "pick-1" not in {
+        case["public"]["id"] for case in trajectory_cases
+    }
+
+
+def test_enrich_review_case_mapping_is_stable_for_same_day_reruns():
+    fixture = json.loads(
+        (PIPELINE_DIR / "fixtures" / "trajectory_rollout.json").read_text(
+            encoding="utf-8"))
+    picked = copy.deepcopy(fixture["picked"])
+    sample = dn.build_enrich_sample(picked, fixture["date"])
+    builder = getattr(dn, "build_enrich_review_cases", None)
+    assert callable(builder), "enrich evidence builder is required"
+
+    first = builder(
+        picked, fixture["items"], {"trajectory": {"enabled": True}}, sample)
+    second = builder(
+        list(reversed(picked)), fixture["items"],
+        {"trajectory": {"enabled": True}}, sample)
+
+    assert first == second
+
+
 def test_evidence_is_allow_listed_fingerprinted_and_written_only_to_explicit_temp_path(
         tmp_path, monkeypatch):
     rv = rollout()
@@ -306,9 +388,11 @@ def test_evidence_is_allow_listed_fingerprinted_and_written_only_to_explicit_tem
     evidence = rv.build_rollout_evidence(
         date_str="2026-07-22", mode="shadow", runtime_seconds=1.25,
         selection=stats, trajectory=valid_health(), review_cases=[valid_case()],
+        enrich_sample={"ai": ["pick-0"]},
+        enrich_review_cases=[valid_enrich_case()],
         runtime_paths=[runtime_file], trajectory_ui_paths=[ui_file], config={})
 
-    assert evidence["version"] == "rollout-evidence-v1"
+    assert evidence["version"] == "rollout-evidence-v2"
     assert evidence["run"] == {"status": "success", "mode": "shadow", "runtime_seconds": 1.25}
     assert len(evidence["fingerprints"]["runtime"]) == 64
     assert len(evidence["fingerprints"]["trajectory_ui"]) == 64
@@ -361,6 +445,67 @@ def test_rollout_allowlist_rejects_detail_watch_without_short_watch(tmp_path):
     with pytest.raises(ValueError, match="allow-list"):
         rv.write_rollout_evidence(
             valid_evidence([case]),
+            data_dir=tmp_path / "data",
+            environ={
+                "ROLLOUT_EVIDENCE_PATH": str(tmp_path / "evidence.json"),
+            },
+        )
+
+
+@pytest.mark.parametrize("mutate", [
+    lambda evidence: evidence["enrich_review_cases"].clear(),
+    lambda evidence: evidence["enrich_review_cases"].append(
+        copy.deepcopy(evidence["enrich_review_cases"][0])),
+    lambda evidence: evidence["enrich_review_cases"][0]["public"].update(
+        {"id": "pick-99"}),
+    lambda evidence: evidence["enrich_review_cases"][0]["public"].update(
+        {"detail": "x" * 1201}),
+    lambda evidence: evidence["enrich_review_cases"][0].update(
+        {"unexpected": "value"}),
+])
+def test_enrich_review_cases_must_exactly_cover_the_sample(tmp_path, mutate):
+    rv = rollout()
+    evidence = valid_evidence()
+    mutate(evidence)
+
+    with pytest.raises(ValueError, match="allow-list"):
+        rv.write_rollout_evidence(
+            evidence,
+            data_dir=tmp_path / "data",
+            environ={
+                "ROLLOUT_EVIDENCE_PATH": str(tmp_path / "evidence.json"),
+            },
+        )
+
+
+def test_enrich_review_case_title_uses_the_public_source_fallback_limit(tmp_path):
+    rv = rollout()
+    evidence = valid_evidence()
+    evidence["enrich_review_cases"][0]["public"]["title"] = "x" * 300
+
+    assert rv.write_rollout_evidence(
+        evidence,
+        data_dir=tmp_path / "data",
+        environ={"ROLLOUT_EVIDENCE_PATH": str(tmp_path / "evidence.json")},
+    ) is True
+
+    evidence["enrich_review_cases"][0]["public"]["title"] = "x" * 301
+    with pytest.raises(ValueError, match="allow-list"):
+        rv.write_rollout_evidence(
+            evidence,
+            data_dir=tmp_path / "data",
+            environ={"ROLLOUT_EVIDENCE_PATH": str(tmp_path / "evidence.json")},
+        )
+
+
+def test_v1_rollout_evidence_is_not_rewritten_as_current_evidence(tmp_path):
+    rv = rollout()
+    evidence = valid_evidence()
+    evidence["version"] = "rollout-evidence-v1"
+
+    with pytest.raises(ValueError, match="version"):
+        rv.write_rollout_evidence(
+            evidence,
             data_dir=tmp_path / "data",
             environ={
                 "ROLLOUT_EVIDENCE_PATH": str(tmp_path / "evidence.json"),
@@ -581,7 +726,7 @@ def test_daily_pipeline_evidence_emitter_is_opt_in_and_import_context_safe(tmp_p
     assert dn.emit_rollout_evidence(*args, environ={}) is False
     assert dn.emit_rollout_evidence(
         *args, environ={"ROLLOUT_EVIDENCE_PATH": str(output)}) is True
-    assert json.loads(output.read_text(encoding="utf-8"))["version"] == "rollout-evidence-v1"
+    assert json.loads(output.read_text(encoding="utf-8"))["version"] == "rollout-evidence-v2"
 
 
 def test_evaluator_batches_every_case_once_and_emits_versioned_pass_report():
