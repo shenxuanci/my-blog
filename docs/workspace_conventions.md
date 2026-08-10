@@ -20,6 +20,7 @@
 | ├── `/source/news` | 每日日报静态页 | `index.html` 只保留语义页面骨架，`news.css` 存放独立样式，`js/` 存放原生 ES Modules，`fonts/` 只存上线所需的 WOFF2、生成 CSS 和字体许可证，`data/` 主要由管线和页面 API 产出。个人状态文件虽由 Hexo `exclude` 与 `.vercelignore` 排除出静态部署，仍以公开 Git 仓库为后端，不得写入秘密或可识别个人身份的信息。可人工维护 `source/news/data/interest_profile.md` 的兴趣画像要点，其余数据优先通过管线或页面操作生成。 |
 | **`/api`** | Vercel Serverless 接口 | 后端业务逻辑。**一个文件对应一个明确的接口职责**。包括后台文章/设置接口，以及日报反馈、收藏、稍后读和漏读写回接口；`vocab.js` 仅为停用功能保留，非接口逻辑不要放进这里。 |
 | **`/tools`** | 迁移和维护工具 | 存放如 `clean-post-inline-styles.mjs`、字体字符清单与生成脚本等一次性或维护工具；字体源 OTF 和工具中间产物不得入库。 |
+| **`/tests`** | 文章页与后台的 Node 回归 | 只放 `npm run test:post` 的套件（当前为 `test_post_reading.mjs`、`test_admin_editor.mjs`），命名 `test_<范围>.mjs`。日报相关测试一律归 `/news-pipeline/tests`；这里不放临时调试脚本，用完即删。 |
 | **`/scripts`** | Hexo 构建期扩展 | Hexo 启动时自动加载的脚本，如 `twikoo-path.js` 覆盖主题注入点。只放构建期逻辑，前端资源仍归 `/source/js` 与 `/source/css`。 |
 | **`/news-pipeline`** | 每日日报生成管线 | Python 管线、新闻源、评分配置和测试。改日报生成逻辑只在这里动手。 |
 | **`/.github/workflows`** | GitHub Actions | 仅存放仓库自动化工作流：每日生成与云端五门验收台账 `daily-news.yml`、手动只读夹具验收 `objectivity-acceptance.yml`、人工复核回填 `rollout-manual-review.yml`、台账缺口检测 `rollout-heartbeat.yml`。只有 `daily-news.yml` 允许自动 push，且仅限 `main` 分支上的 `source/news/data/`（commit 步骤同时判 `github.ref`，并显式 `git push origin HEAD:main`）。 |

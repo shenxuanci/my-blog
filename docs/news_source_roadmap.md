@@ -2,13 +2,18 @@
 
 > 日报信源扩展的活跃待办清单。信源终局定案写在 `news-pipeline/sources.yaml` 尾部注释，现行机制写在 `readme.md` 日报章节；本文件只记**还没做完的事**，全部完成后删除。
 >
-> 最后更新：2026-08-06
+> 最后更新：2026-08-10
 
 ## 当前生产基线（以 Issue #15 为准）
 
 生产 provider 仍为 DeepSeek；StepFun 实验 Run #30346999214 在正常新闻阶段 A 触发 HTTP 451，只保留人工实验能力，不作为自动回退。`objectivity.mode` 继续保持 `interim`。
 
-2026-08-05 的定时日报发布成功，但 objectivity shadow 在长驻进程内调用 `trafilatura` / `lxml` 时触发原生堆崩溃；提交 `a8941b0` / `1957a0b` 已把静态 HTML 解析隔离到可超时终止的一次性子进程，并将依赖锁、Python 完整版本与实现、runner OS/架构和 `RUNTIME_ENVIRONMENT_EPOCH` 纳入共享运行时指纹。生产树的 `validate + shadow_mode:force` Run #31005512218 已成功，验证指纹为 `92ef27552658`；旧指纹的线上样本不得混入新窗口。新窗口从该指纹的首个有效 publish 起算，逐门状态与计数只以 GitHub Issue #15 的幂等台账为准，本文不复制易变快照。
+2026-08-05 的定时日报发布成功，但 objectivity shadow 在长驻进程内调用 `trafilatura` / `lxml` 时触发原生堆崩溃；提交 `a8941b0` / `1957a0b` 已把静态 HTML 解析隔离到可超时终止的一次性子进程，并将依赖锁、Python 完整版本与实现、runner OS/架构和 `RUNTIME_ENVIRONMENT_EPOCH` 纳入共享运行时指纹。该轮的生产树 `validate + shadow_mode:force` Run #31005512218 已成功，但那次的指纹此后已被两次生产改动取代，只作历史证据。
+
+**本文不再钉住指纹值**：指纹覆盖 `daily_news.py`、`rollout_validation.py`、`article_extractor.py`、`requirements.txt` 四个文件加运行环境投影，任何一次生产改动都会换值，写在文档里必然过期。**当前有效指纹一律从 Issue #15 最新台账行的 `fingerprints.runtime` 读**，旧指纹的线上样本不得混入新窗口，新窗口从该指纹的首个有效 publish 起算。
+
+- 2026-08-09 的 `c9e6874` / `cf8ad85` 使指纹从 `6ddea22e1061` 变为 `554ec8975549`（2026-08-10 台账行，sha `b7902c6`），五门已在该日重新起算。
+- 2026-08-10 的 `0af1b8c`（周综述审修）又改了 `daily_news.py`，**因此下一次 publish 会再换一次指纹并再次重置全部五门**；08-10 那一天的样本不能计入新窗口。查台账时先比对指纹再读计数，否则会把跨指纹的日数错当连续。
 
 删除字段分项诊断已升级为 v3：字段包含 `watch_detail`，不再包含新闻 `why` 与 `significance`，原因集合包含 `generation_invalid`；v1／v2 历史继续兼容且不回写。enrich 安全指标由台账自动判，文字抽样仍需人工回填；不得只凭分项计数调整闸门或 enrich 提示词。旧 `rollout-evidence-v1` 不补审，也不用于新窗口人工复核；新窗口从 `rollout-evidence-v2` 首个有效 publish 起算。
 
@@ -37,6 +42,8 @@
 2026-07-18 公开路径落地的是 **interim wording hotfix**，不是已验收的完整证据系统。
 
 详情合同变更后的 DeepSeek 45-case / three-run 夹具与配对成本门已于 2026-08-06 从 `main@a135d84` 完整通过（Run #31027819706）：三轮最差结果为红线 0、标签一致率 93.33%、归因 100%、结构 100%。内容调用由父提交基线的 406 次降至候选的 292 次；全部输入按 cache miss 计价的三轮标准化费用由 `$0.05603542` 降至 `$0.04242406`，实际缓存折扣费用也由 `$0.0350317464` 降至 `$0.02486246`，且截断、终止错误和计费错误均为 0。此前 Run #31007436430 的 HTTP 402 失败只保留为历史失败证据，不混入本次结果。
+
+**该夹具结果已因运行时变化失效，只作历史证据**：`c9e6874`、`cf8ad85`、`0af1b8c` 三次提交在此之后改了 `daily_news.py` 与 `rollout_validation.py`，按上文规则必须按当前运行时重跑 45 条夹具三轮门与配对成本门。`0af1b8c` 的周综述自动审修新增了模型调用，配对成本门的「调用数不得增加」需要按新口径重新取证——周综述费用计入公开生成账单，而配对门只计 enrich 与内容 audit/repair/fallback，重跑前先确认两者边界没有被这次改动混淆。
 
 该结果只通过固定夹具和零增量成本门。`--objectivity-shadow` 的 7-day 指标门、enrich 五日文字质量门与人工最终确认仍需从新运行时累积，因此 **active mode is not enabled**，**live acceptance has not occurred**。夹具门通过只授予继续观察和人工评审资格。
 详细行为见 `readme.md` 日报章节；标签接受集与安全边界的决策见 `docs/adr/0005-objectivity-label-accepted-sets.md`。

@@ -31,6 +31,7 @@
 - `source/about/`、`source/friends/`、`source/guestbook/` 存放独立页面的 Markdown 源文件。
 - `api/` 存放业务 API 接口。每个文件只负责一件事，使用 camelCase 命名，例如 `adminArticles.js`、`newsState.js`；`vocab.js` 是停用单词本的保留接口。
 - `tools/` 存放迁移和维护工具脚本。
+- `tests/` 存放文章页与后台的 Node 回归（`npm run test:post`）；日报相关测试归 `news-pipeline/tests/`，不要放这里。
 - `docs/` 存放维护规范与项目文档；`docs/archive/` 只存仍有兼容、迁移或排障价值的历史记录。
 - `news-pipeline/` 存放每日日报生成管线。改信源优先改 `sources.yaml`，改评分和阈值优先改 `config.yaml`。
 

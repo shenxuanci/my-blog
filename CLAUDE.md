@@ -21,6 +21,7 @@
 - **`source/about/`, `source/friends/`, `source/guestbook/`**：独立页面的 Markdown 源文件。
 - **`api/` (Vercel接口)**：纯业务接口，一文件一职责，小驼峰命名（如 `adminArticles.js`、`newsState.js`）；`vocab.js` 是停用单词本的保留接口。
 - **`tools/`**：迁移和维护工具脚本。
+- **`tests/`**：文章页与后台的 Node 回归（`npm run test:post`）；日报相关测试归 `news-pipeline/tests/`，不要放这里。
 - **`news-pipeline/`**：每日新闻日报生成管线（Python），由 GitHub Actions 每日运行，数据写入 `source/news/data/`；本目录是唯一真源。
 - **`docs/`**：维护规范与项目文档；`archive/` 只存仍有兼容、迁移或排障价值的历史记录。完成的计划和一次性报告不长期保留。
 
