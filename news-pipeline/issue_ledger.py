@@ -483,7 +483,7 @@ def evaluate_objectivity_shadow(shadow_summary, *, shadow_outcome):
     """Judge the daily objectivity shadow observation."""
     if shadow_outcome == "accepted":
         return {"status": "neutral",
-                "reasons": ["shadow acceptance already complete"]}
+                "reasons": ["shadow capped; sample on demand with force"]}
     if shadow_outcome != "success":
         return {"status": "fail", "reasons": ["objectivity shadow run did not succeed"]}
     if not isinstance(shadow_summary, dict):
@@ -516,7 +516,7 @@ def evaluate_source_metrics(
     """Judge whether one day contributes a complete source-metric observation."""
     if shadow_outcome == "accepted":
         return {"status": "neutral",
-                "reasons": ["shadow acceptance already complete"]}
+                "reasons": ["shadow capped; sample on demand with force"]}
     days = (source_health or {}).get("days")
     rows = days.get(str(date)) if isinstance(days, dict) else None
     if not isinstance(rows, dict) or not rows:
@@ -794,7 +794,7 @@ def _finalize(states_by_date, date, updated):
                           content_counts=(passed, total))
 
 
-def shadow_status(client, *, issue_number):
+def shadow_status(client=None, *, issue_number=None):
     """Report shadow as capped: auto runs stop, manual `force` still works.
 
     Retired with ADR 0016. The accumulated sample is treated as sufficient, so
@@ -802,17 +802,19 @@ def shadow_status(client, *, issue_number):
     rule a runtime-fingerprint change zeroed every clock, the targets were
     therefore unreachable, and `shadow_mode:auto` would have run a second full
     pipeline every single day with no terminating condition.
+
+    Deliberately does no network I/O. The verdict is now a constant, so reading
+    the issue could only change whether this call *fails*: the workflow treats a
+    non-zero exit as "status unknown" and fail-opens into a paid shadow run, so
+    one rate-limited API call would buy a full extra pipeline for a verdict that
+    was never in doubt. `client` and `issue_number` are accepted and ignored to
+    keep the call signature stable.
     """
-    issue = client.get_issue(issue_number)
-    streaks = (
-        {gate: 0 for gate in GATES} if str(issue.get("state") or "").lower() != "open"
-        else compute_streaks(
-            list(_states_by_date(client.list_comments(issue_number)).values())))
     return {
         "status": "accepted",
         "needed": False,
         "accepted": True,
-        "streaks": streaks,
+        "streaks": {gate: 0 for gate in GATES},
     }
 
 
@@ -1043,15 +1045,13 @@ def _load_report(path):
 def main(argv=None, *, environ=None, client_factory=GitHubClient):
     environ = os.environ if environ is None else environ
     args = parse_cli_args(argv)
-    client = client_factory(
-        environ.get("GITHUB_REPOSITORY", ""), environ.get("GITHUB_TOKEN", ""))
-    if args.command == "check-open":
-        issue = client.get_issue(args.issue)
-        is_open = str(issue.get("state") or "").lower() == "open"
-        _write_output(environ, "open", str(is_open).lower())
-        result = {"status": "open" if is_open else "closed", "open": is_open}
-    elif args.command == "shadow-status":
-        result = shadow_status(client, issue_number=args.issue)
+    # shadow-status is answered without a client on purpose: it needs no network
+    # I/O since ADR 0016, and constructing GitHubClient raises when the token or
+    # GITHUB_REPOSITORY is absent. Any raise exits non-zero, which the workflow
+    # reads as "status unknown" and fail-opens into a paid shadow run -- so a
+    # missing env var must not be able to trigger one.
+    if args.command == "shadow-status":
+        result = shadow_status()
         _write_output(environ, "needed", str(result["needed"]).lower())
         _write_output(environ, "accepted", str(result["accepted"]).lower())
         _write_output(
@@ -1060,6 +1060,15 @@ def main(argv=None, *, environ=None, client_factory=GitHubClient):
         _write_output(
             environ, "source_metrics",
             result["streaks"]["source_metrics"])
+        print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+        return result
+    client = client_factory(
+        environ.get("GITHUB_REPOSITORY", ""), environ.get("GITHUB_TOKEN", ""))
+    if args.command == "check-open":
+        issue = client.get_issue(args.issue)
+        is_open = str(issue.get("state") or "").lower() == "open"
+        _write_output(environ, "open", str(is_open).lower())
+        result = {"status": "open" if is_open else "closed", "open": is_open}
     elif args.command == "heartbeat":
         result = heartbeat_issue(
             client, issue_number=args.issue, date=args.date)

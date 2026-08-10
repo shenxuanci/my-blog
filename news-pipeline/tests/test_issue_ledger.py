@@ -716,8 +716,7 @@ def test_shadow_status_is_capped_so_auto_runs_never_pay_for_shadow_again():
     The retired rule compared streaks against a 7/14-day target. Because a
     runtime-fingerprint change zeroes every clock, those targets were
     unreachable and `auto` would have run a second full pipeline every day
-    forever. Capping it keeps the streaks visible for diagnostics while the
-    workflow stops paying; `shadow_mode:force` remains the way to sample.
+    forever. `shadow_mode:force` remains the way to sample.
     """
     il = ledger()
     comments = []
@@ -734,57 +733,90 @@ def test_shadow_status_is_capped_so_auto_runs_never_pay_for_shadow_again():
     assert result["needed"] is False
     assert result["accepted"] is True
     assert result["status"] == "accepted"
-    assert result["streaks"]["objectivity_shadow"] == 14
-    assert result["streaks"]["source_metrics"] == 14
 
 
-def test_shadow_status_stays_accepted_far_short_of_the_retired_targets():
+def test_shadow_status_never_touches_the_network_so_it_cannot_fail_open():
+    """The verdict is a constant, so any API call is pure downside risk.
+
+    The workflow treats a non-zero exit from `shadow-status` as "status
+    unknown" and fail-opens into a paid shadow run. While this returned real
+    streak data that trade-off was right; now that the answer is fixed, one
+    rate-limited or 502'd request would buy a full extra pipeline for a verdict
+    that was never in doubt. So it must not perform I/O at all.
+    """
     il = ledger()
-    comments = []
-    for day in range(1, 4):
-        daily = state(
-            f"2026-07-{day:02d}",
-            [attempt(day, 1, runtime="a", trajectory_ui="b")],
-        )
-        comments.append(bot_comment(day, daily))
-    client = FakeClient(comments=comments)
 
-    result = il.shadow_status(client, issue_number=15)
+    class Exploding:
+        def get_issue(self, issue_number):
+            raise AssertionError("shadow_status must not call the API")
 
-    assert result["needed"] is False
-    assert result["accepted"] is True
-    # Streaks are still reported for the dashboard, they just gate nothing.
-    assert result["streaks"]["objectivity_shadow"] == 3
-    assert result["streaks"]["source_metrics"] == 3
+        def list_comments(self, issue_number):
+            raise AssertionError("shadow_status must not call the API")
+
+    for args, kwargs in (((), {}), ((Exploding(),), {"issue_number": 15})):
+        result = il.shadow_status(*args, **kwargs)
+        assert result["accepted"] is True
+        assert result["needed"] is False
+        assert result["streaks"] == {gate: 0 for gate in il.GATES}
 
 
-def test_shadow_status_on_a_closed_issue_reports_no_banked_observations():
+def test_shadow_status_cli_survives_a_missing_token_without_forcing_a_run(tmp_path):
+    """Constructing GitHubClient raises without a token; that must not fail open.
+
+    Same blast radius as the test above, one layer out: if `main` built a client
+    before answering shadow-status, a missing GITHUB_TOKEN or malformed
+    GITHUB_REPOSITORY would exit non-zero and the workflow would pay for a
+    shadow run because of an unset environment variable.
+    """
     il = ledger()
-    client = FakeClient(issue_state="closed", comments=[])
+    output = tmp_path / "gh_output"
 
-    result = il.shadow_status(client, issue_number=15)
+    def unusable_factory(repository, token):
+        raise AssertionError("no client may be built for shadow-status")
+
+    result = il.main(
+        ["shadow-status", "--issue", "15"],
+        environ={"GITHUB_OUTPUT": str(output)},
+        client_factory=unusable_factory)
+
+    assert result["accepted"] is True
+    written = output.read_text(encoding="utf-8")
+    assert "accepted=true" in written
+    assert "needed=false" in written
+
+
+def test_shadow_status_reports_zeroed_streaks_rather_than_faked_targets():
+    il = ledger()
+
+    result = il.shadow_status()
 
     assert result["accepted"] is True
     assert result["needed"] is False
-    # A closed issue must not fabricate target-sized streaks the way the
-    # retired implementation did.
+    # The retired implementation fabricated target-sized streaks for a closed
+    # issue. Report nothing banked instead of inventing observations.
     assert result["streaks"]["objectivity_shadow"] == 0
     assert result["streaks"]["source_metrics"] == 0
 
 
 def test_accepted_shadow_outcome_freezes_shadow_and_source_gates():
+    """The freeze reason must not claim an acceptance that never happened.
+
+    ADR 0016 retired the acceptance rather than completing it, so the ledger's
+    own reason strings have to say "capped", not "already complete" -- the whole
+    point of the change was to stop surfaces implying the gates were passed.
+    """
     il = ledger()
 
     assert il.evaluate_objectivity_shadow(
         None, shadow_outcome="accepted") == {
             "status": "neutral",
-            "reasons": ["shadow acceptance already complete"],
+            "reasons": ["shadow capped; sample on demand with force"],
         }
     assert il.evaluate_source_metrics(
         None, None, date="2026-07-28",
         shadow_outcome="accepted") == {
             "status": "neutral",
-            "reasons": ["shadow acceptance already complete"],
+            "reasons": ["shadow capped; sample on demand with force"],
         }
 
 

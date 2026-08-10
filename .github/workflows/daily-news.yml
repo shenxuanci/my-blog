@@ -325,18 +325,18 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
-      issues: read
     outputs:
       run_shadow: ${{ steps.decide.outputs.run_shadow }}
       skipped_outcome: ${{ steps.decide.outputs.skipped_outcome }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
+      # Reads no issue state since ADR 0016 -- the verdict is a constant, so this
+      # needs neither `issues: read` nor a token. Keeping them would only let a
+      # rate-limited API call fail the step, which fail-opens into a paid run.
       - name: Read shadow gate status
         id: gate
         continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
         run: python news-pipeline/issue_ledger.py shadow-status --issue 15
 
       - name: Decide shadow policy

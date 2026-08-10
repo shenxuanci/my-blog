@@ -1727,7 +1727,13 @@ def test_workflow_supports_non_publishing_validation_and_explicit_publish():
     assert upload["with"]["retention-days"] == "1"
 
     policy = workflow["jobs"]["shadow-policy"]
-    assert policy["permissions"]["issues"] == "read"
+    # ADR 0016: the gate step reads no issue state, so it must not hold
+    # `issues: read` or a token. Both would only add a way for the step to fail,
+    # and a failed lookup fail-opens into a paid shadow run.
+    assert "issues" not in policy["permissions"]
+    gate = next(step for step in policy["steps"]
+                if step.get("name") == "Read shadow gate status")
+    assert "env" not in gate
     decision = next(step for step in policy["steps"]
                     if step.get("name") == "Decide shadow policy")
     assert "inputs.shadow_mode" in decision["env"]["SHADOW_MODE"]

@@ -53,7 +53,9 @@
 
 2026-07-18 公开路径落地的是 **interim wording hotfix**，不是已验收的完整证据系统。**active mode is not enabled**，**live acceptance has not occurred**，且按 ADR 0016 不再存在通往它的既定路径——`objectivity.mode` 的 `interim` 是终局。
 
-`shadow_mode:auto` 不再运行 shadow：既有累计样本视为已足够，`shadow_status` 恒返回 `accepted`，客观性与信源计数按既有链路冻结为 `neutral`。需要采样时手动触发 `shadow_mode:force`；`skip` 始终跳过，手动 `validate` 下的 `auto` 仍不跑。这一改动与门退役同时生效，因为原先的 7 日／14 日门槛是唯一能关停付费 shadow 的开关——只删门槛不改判定会让 shadow 无限期每天多跑一遭完整管线。
+`shadow_mode:auto` 不再运行 shadow：既有累计样本视为已足够，`shadow_status` 恒返回 `accepted`，客观性与信源计数按既有链路冻结为 `neutral`（冻结原因码写作「shadow capped; sample on demand with force」，不写「已完成验收」——退役不等于通过）。需要采样时手动触发 `shadow_mode:force`；`skip` 始终跳过，手动 `validate` 下的 `auto` 仍不跑。这一改动与门退役同时生效，因为原先的 7 日／14 日门槛是唯一能关停付费 shadow 的开关——只删门槛不改判定会让 shadow 无限期每天多跑一遭完整管线。
+
+**`shadow-status` 必须保持零网络 I/O**（2026-08-10 审查修）：判定已是常量，任何 API 调用只剩下行风险——`shadow-policy` 把该步骤非零退出当作「状态未知」并 fail-open 去跑付费 shadow，所以一次 GitHub 限流或 502 就会为一个毫无疑问的结论买单一遍完整管线。该命令因此不读 Issue、不要 token、job 也不再声明 `issues: read`，且 `main()` 在这条分支上不构造 `GitHubClient`（构造函数在缺 token 或仓库名非法时会抛，同样会 fail-open）。改这块前先看 `test_shadow_status_never_touches_the_network_so_it_cannot_fail_open` 和 `test_shadow_status_cli_survives_a_missing_token_without_forcing_a_run`。
 
 历史夹具证据（都已因运行时变化失效，只作参考）：2026-08-06 从 `main@a135d84` 的 Run #31027819706 三轮最差为红线 0、标签一致率 93.33%、归因 100%、结构 100%，内容调用由父提交基线 406 次降至 292 次，标准化费用由 `$0.05603542` 降至 `$0.04242406`。随后 2026-08-09 的 Run #31294396802（`c9e6874`）质量四门同样全过，但配对成本门失败（300 → 316 次调用）——详见上节记录。此前 Run #31007436430 的 HTTP 402 失败只作历史失败证据。
 
