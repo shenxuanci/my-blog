@@ -804,6 +804,56 @@ test("composing a post rejects a hostile cover URL", () => {
   }, { default: "/fallback.webp" }, null, "source/_posts/2026-08-06-hostile-cover.md"), /Cover URL must/);
 });
 
+test("a category named after a prototype key cannot leak a function into front matter", () => {
+  // `coverForCategory` reads `coverMap[category]` and the category name is
+  // user-controlled (the admin creates categories freely). A post filed under
+  // "toString" used to resolve to the inherited *function*, which yamlString
+  // then wrote out as `index_img: "function toString() { [native code] }"` --
+  // a visibly broken cover on a real page, with no error anywhere.
+  const map = { default: "/images/covers/defaults/fallback.webp" };
+  for (const category of ["toString", "valueOf", "constructor", "hasOwnProperty", "__proto__"]) {
+    const post = github.composePost({
+      title: "Prototype category",
+      date: "2026-08-11",
+      category,
+      content: "Body",
+    }, map, null, "source/_posts/2026-08-11-prototype-category.md");
+    assert.match(post.content, /index_img: "\/images\/covers\/defaults\/fallback\.webp"/, category);
+    assert.doesNotMatch(post.content, /native code|function /, category);
+  }
+});
+
+test("cover map values are validated on read, not only when set", () => {
+  // adminSettings validates a cover URL when it is written, but the map lives in
+  // source/_data/category-covers.json and is also hand-edited. Without a check
+  // on read, a bad value there reached front matter through a path that skipped
+  // validateCoverUrl entirely -- the same sink, one unvalidated bypass.
+  const hostile = {
+    A: "javascript:alert(1)",
+    B: "//evil.example/a.png",
+    C: "/ok.webp\nX-Injected: 1",
+    default: "/images/covers/defaults/fallback.webp",
+  };
+  for (const category of ["A", "B", "C"]) {
+    const post = github.composePost({
+      title: "Poisoned map",
+      date: "2026-08-11",
+      category,
+      content: "Body",
+    }, hostile, null, "source/_posts/2026-08-11-poisoned-map.md");
+    assert.match(post.content, /index_img: "\/images\/covers\/defaults\/fallback\.webp"/, category);
+  }
+  // A legitimate mapping must still win over the fallback.
+  const good = github.composePost({
+    title: "Normal",
+    date: "2026-08-11",
+    category: "技术学习",
+    content: "Body",
+  }, { 技术学习: "/images/covers/defaults/technology-learning.webp" }, null,
+    "source/_posts/2026-08-11-normal.md");
+  assert.match(good.content, /index_img: "\/images\/covers\/defaults\/technology-learning\.webp"/);
+});
+
 test("news frontend no longer reads or sends the bearer token", async () => {
   const app = await readFile(new URL("../../source/news/js/app.js", import.meta.url), "utf8");
   const client = await readFile(new URL("../../source/news/js/api-client.js", import.meta.url), "utf8");

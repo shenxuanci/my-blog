@@ -6,7 +6,16 @@ const STATUS_CLASSES = new Set(["已确认", "发展中", "有争议", "仅传�
 const CONTENT_TYPE_LABELS = { reporting: "报道", analysis: "分析", opinion: "观点" };
 const MISS_REASON_LABELS = { important_event: "重要事件", deep_read: "值得深读", missing_perspective: "缺少视角" };
 export const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
-export const safeUrl = (value) => /^https?:\/\//i.test(value || "") ? escapeHtml(value) : "#";
+// 渲染的 URL 来自 LLM 管线处理过的第三方内容，管线侧 `_is_valid_http_url` 已经拦掉
+// 非 http(s) 和带空白的 URL；这里再独立挡一层，别让前端的正确性依赖上游没出 bug。
+// 控制字符先拒后判协议：escapeHtml 不编码制表符、换行和 NUL。引号编码其实已经
+// 防住属性逃逸（实测 jsdom 解析不出多余属性），但带控制字符的 URL 本就是不该
+// 渲染成链接的脏数据。与后台 `safeMarkdownUrl` 同口径，含拒掉协议相对的 `//`。
+export const safeUrl = (value) => {
+  const url = String(value ?? "");
+  if (/[\u0000-\u001f\u007f]/.test(url) || url.startsWith("//")) return "#";
+  return /^https?:\/\//i.test(url) ? escapeHtml(url) : "#";
+};
 
 function detailParagraphs(value) {
   return String(value ?? "")

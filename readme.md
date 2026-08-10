@@ -93,6 +93,7 @@ npm run test:post
 - 图片统一放入 `source/images/`，文章中使用 `/images/<filename>`；后台上传会校验 PNG、JPEG、GIF、WebP 的文件签名，扩展名与内容不一致时拒绝写入。相同内容的正文图片会在当月上传目录内复用，封面会在自定义封面目录内复用，不跨用途或跨月份扫描。
 - 后台选图后会立即提交图片资产。取消或放弃文章不会自动删除已经上传的文件，以免误删后来被复用的资源；本次草稿上传过图片时，放弃确认会明确提示图片仍保留在仓库中。
 - 默认分类封面配置在 `source/_data/category-covers.json`。
+- **封面取值的两个坑（2026-08-10 审查修，都由 `npm run test:news` 钉住）**：分类名是用户可控的（后台随手就能建新分类），而 `coverForCategory` 从这份 JSON 里按分类名取值。①**原型键**：分类叫 `toString` / `valueOf` 时，裸对象取值取出的是继承来的**函数**，`yamlString` 会把它写成 `index_img: "function toString() { [native code] }"`——封面直接坏掉，而且没有任何报错。现在用 `Object.hasOwn` 判自有键并要求 `typeof === 'string'`。②**未校验的旁路**：单篇 `index_img` 走 `validateCoverUrl`，但映射里的值此前只做过 `typeof` 检查，等于同一个 sink 有一条没校验的路；这份 JSON 也可以手改，不是只有后台会写。现在读取时逐个过 `validateCoverUrl`，非法值回退兜底封面而不是让整次发文章失败。
 - 文章 front matter 中的 `index_img` 是首页卡片封面；如果后台没有上传单篇封面，会自动使用分类默认封面。
 - 首页文章卡片标题允许自然换行，桌面端和移动端都不会再使用 Fluid 默认的单行省略或两行截断；覆盖样式位于 `source/css/aoiblog-home.css`。
 - 文章 URL 默认使用 `/:year/:month/:day/:title/`；后台新建文章时会按所选日期和最终文件 slug 写入显式 `permalink`，避免构建时区改变 URL。主动改日期时只更新永久链接的日期段并保留稳定 slug；普通编辑保留旧文章已有链接，没有显式链接的历史文章不会被批量迁移。
@@ -317,6 +318,7 @@ GITHUB_BRANCH=main
 - `papers_seen.json`：今日论文（HF Daily Papers）推荐去重记录，按 `config.yaml` 的 `papers.seen_keep_days` 保留。
 - `vocab/YYYY-MM-DD.js` / `vocab-book.json`：**单词本功能已于 2026-07-10 停用**（`config.yaml` 的 `vocab.enabled: false`，管线不再每日挑词；前端界面已移除）。历史数据文件与 `api/vocab.js` 接口原地保留，想恢复时把 enabled 改回 true、前端从 git 历史找回单词本界面即可。
 - `feed.xml`：RSS 订阅文件，地址为 `/news/data/feed.xml`，按 `config.yaml` 的 `feed_days` 收录精选，深读推荐带【深读】前缀。来源 URL 的协议校验放在发布闸门 `validate_daily_payload`（必须匹配 `^https?://`），不是放在渲染端：前端 `safeUrl` 挡得住页面，但 feed 的 `<item><link>` 是原样输出给阅读器的，闸门 fail-closed 才不用指望每个消费端各自兜底（2026-07-29 补齐）。
+- 前端 `safeUrl`（`source/news/js/reports.js`）**自己也要判协议和控制字符，不能只依赖管线已经过滤**（2026-08-10 审查补齐）：管线侧 `_is_valid_http_url` 确实拦掉了非 http(s) 和带空白的 URL，但「上游会过滤所以渲染端只看前缀就行」这条规则，管线出一次 bug 或有人直接投毒 `data/*.js` 就破了。现在与后台 `safeMarkdownUrl` 同口径：先拒控制字符（`U+0000-U+001F 与 U+007F`）和协议相对的 `//`，再判 `^https?://`，其余一律渲染成 `#`。实测引号编码本来就防住了属性逃逸（jsdom 解析不出多余属性），所以这条是纵深防御而不是在补一个已知可利用的洞。
 - `search_index.js`：站内搜索紧凑索引，缺失时可由管线从历史 daily 文件重建。
 - `news-seen/YYYY-MM-DD.json`：普通新闻跨日去重账本，按日分片并滚动保留 90 天；同 URL 仅时间戳刷新时会在进入任何当日视图前过滤，标题或摘要变化后才交给模型判断是否有实质新增。只有模型明确判定没有实质新增才过滤；调用或结构失败时 fail-open 保留并记 `update_judge_failures`。账本缺失或损坏时从 `all/` 历史档案恢复，且只在日报通过发布校验后写入当天分片。
 - `all/YYYY-MM-DD.js` + `all/manifest.js`：全量轻档——抓取窗口内通过跨日 URL 去重的全部条目轻字段（标题/链接/来源/类别/时间），滚动保留 90 天。评分阶段结束后 `backfill_all_scores` 按 URL 把完整的 `all_scored_events` 分数回填到匹配条目（被预筛砍掉的无分）；跨源复述虽不再进入读者可见选材，仍有正常分数。payload 带 `min_score`（`config.yaml` 的 `all_view_min_score`，默认 40），前端默认只显示达标条目、可切换显示全部。两步均独立故障域，失败只记日志、不阻断主管线。

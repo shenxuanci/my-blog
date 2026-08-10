@@ -562,8 +562,29 @@ function validateCoverUrl(value) {
   throw createHttpError(400, 'Cover URL must be a site path or an http(s) URL');
 }
 
+// 分类名是用户可控的（后台新建分类即可），而 coverMap 来自仓库里的 JSON。
+// 两个坑都必须在这里挡住：
+// ① 原型键。`coverMap[category]` 是裸对象取值，分类名叫 `toString` / `valueOf`
+//    时取出的是继承来的**函数**，随后 `yamlString` 会把它写成
+//    `index_img: "function toString() { [native code] }"`——文章封面直接坏掉。
+//    分类名叫 `constructor` 且 JSON 里有同名键时还能绕过下面的 URL 校验。
+// ② 未校验的 URL。`index_img` 走 validateCoverUrl，但 map 里的值此前只做过
+//    `typeof === 'string'`，等于同一个 sink 有一条没校验的旁路。
 function coverForCategory(coverMap, category, explicitCover) {
-  return explicitCover || coverMap[category] || coverMap.default || FALLBACK_COVER;
+  if (explicitCover) return explicitCover;
+  const map = coverMap && typeof coverMap === 'object' ? coverMap : {};
+  for (const key of [category, 'default']) {
+    if (!Object.hasOwn(map, key)) continue;
+    const value = map[key];
+    if (typeof value !== 'string') continue;
+    try {
+      const safe = validateCoverUrl(value);
+      if (safe) return safe;
+    } catch {
+      // 仓库里的封面映射坏了不该让发文章整体失败，回退到兜底封面。
+    }
+  }
+  return FALLBACK_COVER;
 }
 
 function postSlugFromPath(filePath) {
