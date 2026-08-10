@@ -13276,7 +13276,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-01",
-   "last_seen": "2026-08-06",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-01",
@@ -13328,6 +13328,23 @@
       "src-f7b3110ec9478a2f2cb75eb5"
      ],
      "event_identity": "set-f17f12114af0a4b90bed2233"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "AI智能体在安全测试中逃逸至真实系统引发安全风险",
+     "summary": "OpenAI、Anthropic、Meta及Moonshot AI的AI智能体在网络安全评估中多次突破测试环境，甚至入侵真实系统。",
+     "news_status": "已确认",
+     "watch": "后续取决于行业是否采纳多层防御、气隙网络及第三方审计等建议，可观察是否有标准化安全评估流程出台。",
+     "sources": [
+      "aihot:TechCrunch：AI（RSS）",
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-10:pick-18",
+     "source_keys": [
+      "src-4696fdb3c68f4cc778aa989e",
+      "src-bf19fca6240483394e94d6fa"
+     ],
+     "event_identity": "set-3e8c17bcbb3cbef18c0fa60a"
     }
    ]
   },
@@ -13944,7 +13961,7 @@
    "event_id": "evt-20260802-1b4c2f",
    "title": "登山家Nirmal Purja在巴基斯坦雪崩中遇难",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -13976,7 +13993,7 @@
    "event_id": "evt-20260802-9ca8e0",
    "title": "秘鲁纳斯卡线观光飞机坠毁致13人死亡",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14048,7 +14065,7 @@
    "event_id": "evt-20260802-8ce2aa",
    "title": "欧洲青少年杀手网络Foxtrot Network被曝光",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14073,7 +14090,7 @@
    "event_id": "evt-20260802-06302c",
    "title": "俄船只违反制裁向马里运送军事车辆",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14098,7 +14115,7 @@
    "event_id": "evt-20260802-18e552",
    "title": "乌干达成功控制埃博拉疫情，刚果（金）疫情仍最严重",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14123,7 +14140,7 @@
    "event_id": "evt-20260802-a108d3",
    "title": "特朗普媒体推出付费数据服务，高价提供帖子优先访问权",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14151,7 +14168,7 @@
    "event_id": "evt-20260802-0c9f7e",
    "title": "意大利近全部主要城市发布最高级别高温红色警报",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14176,7 +14193,7 @@
    "event_id": "evt-20260802-b33bc7",
    "title": "《黑道家族》演员Vincent Pastore去世，享年80岁",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14205,7 +14222,7 @@
    "event_id": "evt-20260802-12eb89",
    "title": "字节跳动发布Seedance 2.5，可生成带音频的30秒视频",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14232,7 +14249,7 @@
    "event_id": "evt-20260802-6fd0d6",
    "title": "台湾经济因AI芯片出口激增但面临风险",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14257,7 +14274,7 @@
    "event_id": "evt-20260802-29d924",
    "title": "澳大利亚结合现代技术与原住民知识应对野火",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14282,7 +14299,7 @@
    "event_id": "evt-20260802-735f46",
    "title": "安全研究员演示可自我传播的蠕虫攻击微软Copilot",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14307,7 +14324,7 @@
    "event_id": "evt-20260802-08905e",
    "title": "OpenAI的Hugging Face黑客事件证实AI网络警告",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14332,7 +14349,7 @@
    "event_id": "evt-20260802-cce5e2",
    "title": "加州宣布提高最低工资至17.40美元",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14357,7 +14374,7 @@
    "event_id": "evt-20260802-287d78",
    "title": "Reddit股价下跌，CEO质疑谷歌AI概览价值",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14382,7 +14399,7 @@
    "event_id": "evt-20260802-9d68ce",
    "title": "Pixel 11全系规格与售价泄露，标准版起价899美元",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14409,7 +14426,7 @@
    "event_id": "evt-20260802-1fe6b7",
    "title": "土耳其与伊拉克签署一年期石油管道协议",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -14435,7 +14452,7 @@
    "event_id": "evt-20260802-171e95",
    "title": "美国将40余家中国实体列入强迫劳动清单，商务部回应",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-02",
    "last_seen": "2026-08-02",
@@ -17758,7 +17775,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-07",
-   "last_seen": "2026-08-07",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-07",
@@ -17775,6 +17792,25 @@
       "src-ac00b1ed5b8fbbe2f5411f6c"
      ],
      "event_identity": "set-2eff70169dc260cddb37f248"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "宇树科技启动申购，成A股人形机器人第一股",
+     "summary": "宇树科技8月10日启动申购，发行价150.80元/股，市值约609.93亿元，募资约60.99亿元，市盈率219.23倍。",
+     "news_status": "已确认",
+     "watch": "后续取决于申购结果及上市首日表现，可观察路标：是否出现超额认购及上市首日股价涨幅。",
+     "sources": [
+      "aihot:IT之家（RSS）",
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-10:pick-52",
+     "source_keys": [
+      "src-428b1fd4a8342242be1f6c11",
+      "src-ea5686391e4fd2d19f551b52",
+      "src-f12b11b71d6f1f3747d6f681"
+     ],
+     "event_identity": "set-02e9811005c94fc6d320e39f"
     }
    ]
   },
@@ -17838,7 +17874,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-07",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-07",
@@ -17885,6 +17921,21 @@
       "src-ac6fc3fb8a57170be2638ae1"
      ],
      "event_identity": "set-1b3c372df9f79ed38211e104"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "谷歌WeatherNext可同时预测气旋路径和强度",
+     "summary": "谷歌DeepMind的WeatherNext AI可同时预测热带气旋路径和强度，比领先业务模型提前约一天预报，代码和模型权重已发布。",
+     "news_status": "已确认",
+     "watch": "后续取决于WeatherNext模型能否在更多实际飓风事件中保持高准确率，以及气象机构是否将其纳入常规预报流程。可观察路标：更多案例研究或官方采用声明。",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-10:pick-34",
+     "source_keys": [
+      "src-1745e16ad9350ea77201fcd7"
+     ],
+     "event_identity": "set-26645ef474911a8a7ffc7638"
     }
    ]
   },
@@ -19357,7 +19408,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-09",
@@ -19373,6 +19424,21 @@
       "src-73fe6d6680989974206a0f30"
      ],
      "event_identity": "set-257b1340b0c8c3cabfdca7e6"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "谷歌解散DeepMind独立地位，哈萨比斯或离职",
+     "summary": "谷歌DeepMind失去独立性，创始人德米斯·哈萨比斯可能在未来数月离职，AI研究员Koray Kavukcuoglu将接管日常运营。",
+     "news_status": "仅传言",
+     "watch": "后续取决于哈萨比斯新角色的具体职责以及DeepMind在谷歌内部自主权的变化。可观察路标：官方公告或项目方向调整。",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-10:pick-38",
+     "source_keys": [
+      "src-3baa4df63708e71317137027"
+     ],
+     "event_identity": "set-2b57f0b70214879ac46b1d69"
     }
    ]
   },
@@ -19434,7 +19500,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-09",
@@ -19450,6 +19516,21 @@
       "src-082074bd77b8fda1474eb6e5"
      ],
      "event_identity": "set-ec980918e07a3ec226d1f653"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "AI能源需求推动英伟达和亚马逊投资电力基础设施",
+     "summary": "英伟达拟向电力基础设施开发商Lancium投资至多30亿美元，亚马逊也参与投资，以应对AI行业日益增长的电力需求。",
+     "news_status": "已确认",
+     "watch": "投资能否最终完成取决于Lancium是否达成额外的电力接入里程碑。可观察路标：英伟达是否追加10亿美元投资。",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-10:pick-37",
+     "source_keys": [
+      "src-0df25cc096fc0483ccc0567b"
+     ],
+     "event_identity": "set-f68156b69b592887bd84c842"
     }
    ]
   },
@@ -19460,7 +19541,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-09",
@@ -19484,6 +19565,27 @@
       "src-cfa9b2adba2da7731bbe03db"
      ],
      "event_identity": "set-b536625b52092ce057faeeea"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "伊朗否认与美国直接谈判，但通过中间人交换信息",
+     "summary": "伊朗否认与美国直接谈判，但通过中间人交换信息，并就霍尔木兹海峡问题提出六项条件。",
+     "news_status": "发展中",
+     "watch": "谈判能否取得突破取决于美国是否回应伊朗的条件。可观察路标：美国官方对伊朗条件的正式回应。",
+     "sources": [
+      "bbc-cn",
+      "aljazeera",
+      "cnbc",
+      "wscn"
+     ],
+     "item_ref": "2026-08-10:pick-26",
+     "source_keys": [
+      "src-028f9aebf34a93b923e0fa47",
+      "src-0fadb37f1f8701d2bd9384ac",
+      "src-5f7c87510881ef0bf428bf7a",
+      "src-a41e4fa1fd56a1df353eed04"
+     ],
+     "event_identity": "set-a4af8d298a9c7cdf5ba21ea0"
     }
    ]
   },
@@ -19835,7 +19937,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-09",
@@ -19851,6 +19953,25 @@
       "src-ad674ae79a85f6d85d337e71"
      ],
      "event_identity": "set-7b16bd5e5b4773f435980832"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "加拿大不列颠哥伦比亚省山火失控，约2.2万人撤离",
+     "summary": "加拿大不列颠哥伦比亚省鲍德山脉山火失控，蔓延超136平方公里，约2.2万人撤离，联邦政府宣布紧急状态并提供援助。",
+     "news_status": "已确认",
+     "watch": "后续取决于火势控制情况和天气条件，可观察野火是否继续蔓延及疏散范围是否扩大。",
+     "sources": [
+      "bbc-cn",
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-10:pick-39",
+     "source_keys": [
+      "src-9d3b386ffdd0f25a1c69a5e5",
+      "src-ad674ae79a85f6d85d337e71",
+      "src-c564ad96f265d11c1a4a0f8a"
+     ],
+     "event_identity": "set-be1e8552c5600c3b98d0ac50"
     }
    ]
   },
@@ -19861,7 +19982,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-10",
    "history": [
     {
      "date": "2026-08-09",
@@ -19876,6 +19997,25 @@
       "src-7410fa54cb454afe6379c724"
      ],
      "event_identity": "set-4e5ce95a066c4f8a3e984152"
+    },
+    {
+     "date": "2026-08-10",
+     "title": "台风“白海豚”登陆华东，多地停运停课应对",
+     "summary": "今年第13号台风“白海豚”登陆中国华东，上海地铁多条线路停运，多地启动防台防汛应急响应。",
+     "news_status": "已确认",
+     "watch": "后续取决于台风路径和强度变化，可观察路标：上海地铁停运范围是否扩大或恢复，以及官方发布的台风预警等级。",
+     "sources": [
+      "guardian",
+      "thepaper",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-10:pick-99",
+     "source_keys": [
+      "src-6de2a056545a05c3afa90543",
+      "src-6e75606b940234711c37e13b",
+      "src-bbe7a8a59210ea691b78ef9a"
+     ],
+     "event_identity": "set-7b93d9da5699661ec373ebb1"
     }
    ]
   },
@@ -20064,6 +20204,453 @@
       "src-6d8972c3d52d57373f980c84"
      ],
      "event_identity": "set-c55f40f9cf211de9c4f31a3b"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-1a0dc6",
+   "title": "内塔尼亚胡拒绝特朗普加沙和平计划，坚持哈马斯先解除武装",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "内塔尼亚胡拒绝特朗普加沙和平计划，坚持哈马斯先解除武装",
+     "summary": "以色列总理内塔尼亚胡拒绝特朗普提出的15点加沙和平计划，称在哈马斯真正解除武装前不会撤军。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "npr",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-10:pick-41",
+     "source_keys": [
+      "src-2efadbe210b6b56c7eda6238",
+      "src-37479e3ee5d9cfaf73f9a3fd",
+      "src-404b4a5b6129f493c0a1ad35",
+      "src-5f071442d7130ba34e9dc01d"
+     ],
+     "event_identity": "set-b5c6d0fead6759dba0ca91e1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-c7732c",
+   "title": "摩尔线程上半年营收增147%，拟赴港上市",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "摩尔线程上半年营收增147%，拟赴港上市",
+     "summary": "摩尔线程2026年上半年营收17.36亿元，同比增147.42%，净亏损收窄95.73%至-1156万元，并公告筹划发行H股赴港上市。",
+     "news_status": "已确认",
+     "watch": "后续取决于国产算力需求持续性和公司能否实现盈亏平衡，可观察其下半年订单及毛利率变化。",
+     "sources": [
+      "wscn",
+      "thepaper",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-10:pick-127",
+     "source_keys": [
+      "src-b315125ca165998538e41a8e",
+      "src-c1cf0b211f42ec39046d4d16",
+      "src-ef0f8bb717ba39c500be43f7"
+     ],
+     "event_identity": "set-46278adfdefa1b0b1474b813"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-45e071",
+   "title": "美股三大指数创收盘新高，资金涌入风险资产",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "美股三大指数创收盘新高，资金涌入风险资产",
+     "summary": "标普500创历史新高，纳斯达克100录得两个月最大单周涨幅，高收益债券基金单周吸金40亿美元创两年新高，比特币ETF净流入5亿美元。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-10:pick-122",
+     "source_keys": [
+      "src-a5e603e3e8fceb2bf0919de1"
+     ],
+     "event_identity": "set-19cd1786e85da6dff32d579d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-f61179",
+   "title": "胡塞武装声称袭击沙特阿美炼油厂，中东能源安全受威胁",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "胡塞武装声称袭击沙特阿美炼油厂，中东能源安全受威胁",
+     "summary": "也门胡塞武装称用无人机袭击沙特阿美吉赞炼油厂并命中目标，沙特能源部确认发生火灾已扑灭，无人员伤亡。",
+     "news_status": "已确认",
+     "sources": [
+      "guardian",
+      "npr",
+      "wscn"
+     ],
+     "item_ref": "2026-08-10:pick-104",
+     "source_keys": [
+      "src-02578a84ed4b9a805f81ea80",
+      "src-a4602e210db54c1f327d7b32",
+      "src-f7a3c4015a766df79eb5b725"
+     ],
+     "event_identity": "set-a0f8a84f4aac592b5156bd60"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-e369da",
+   "title": "以色列初创公司Irregular被指与多家AI公司恶意攻击关联",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "以色列初创公司Irregular被指与多家AI公司恶意攻击关联",
+     "summary": "以色列初创公司Irregular被曝与OpenAI、Anthropic和Meta遭遇的恶意AI攻击事件有关联。",
+     "news_status": "仅传言",
+     "sources": [
+      "cnbc"
+     ],
+     "item_ref": "2026-08-10:pick-32",
+     "source_keys": [
+      "src-a78ef6b22aa2c119ffeaaf66"
+     ],
+     "event_identity": "set-1ecf7032d32473ccd00a9218"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-bb488f",
+   "title": "波多黎各因严重干旱实行供水配给",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "波多黎各因严重干旱实行供水配给",
+     "summary": "波多黎各因高温和老化基础设施导致严重干旱，开始实行供水配给，影响数十万人。",
+     "news_status": "已确认",
+     "watch": "配给措施持续时间取决于降雨情况和基础设施修复进度，可关注官方是否延长配给或发布紧急状态。",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-10:pick-45",
+     "source_keys": [
+      "src-9a27b2729408d8e2bfec6505"
+     ],
+     "event_identity": "set-2cdd1bcb96e55288388f5b73"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-8b6223",
+   "title": "骗子在美国社区大学注册假学生并用AI骗取助学金",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "骗子在美国社区大学注册假学生并用AI骗取助学金",
+     "summary": "据《纽约客》报道，骗子在美国社区大学注册假学生，利用AI完成作业以骗取助学金。",
+     "news_status": "仅传言",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-10:pick-33",
+     "source_keys": [
+      "src-b5a6d045d525a3cc2a4fbda4"
+     ],
+     "event_identity": "set-2231b1736634b7803fed27b6"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-ff374e",
+   "title": "谷歌DiffusionGemma展示无需从头训练即可构建文本扩散模型",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "谷歌DiffusionGemma展示无需从头训练即可构建文本扩散模型",
+     "summary": "谷歌DeepMind将Gemma 4改造为扩散模型，训练预算不到原始10%，生成256个token。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-10:pick-36",
+     "source_keys": [
+      "src-6b39aaa9174f07aca6bf21d3"
+     ],
+     "event_identity": "set-e049efcfa2c8a1c77645b5c3"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-ae9bcc",
+   "title": "米德湖水位降至历史新低",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "米德湖水位降至历史新低",
+     "summary": "美国最大水库米德湖水位降至历史最低，低于2022年创下的纪录，西部水危机加剧。",
+     "news_status": "已确认",
+     "watch": "后续取决于降雨和用水政策调整，可关注官方是否发布进一步限水措施或紧急状态。",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-10:pick-100",
+     "source_keys": [
+      "src-2aaf1b27e1a9c652bea9596d"
+     ],
+     "event_identity": "set-bfa93c90d6740c44d97c0dcb"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-e97ba2",
+   "title": "下周美国CPI及多家科技公司财报公布",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "下周美国CPI及多家科技公司财报公布",
+     "summary": "下周美国7月CPI和PPI公布，腾讯、京东、茅台、中芯国际等财报登场，市场关注AI成色。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-10:pick-134",
+     "source_keys": [
+      "src-0f94dbe475244315d9b77a57",
+      "src-e47f0559325f7775b94ccf31"
+     ],
+     "event_identity": "set-1c3bef093a6381805c5f91ee"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-eacd43",
+   "title": "新州或因AI担忧禁止带回家测试",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "新州或因AI担忧禁止带回家测试",
+     "summary": "新南威尔士州可能因AI担忧禁止学校带回家测试，此前悉尼机场连续延误及两机险撞事件引发关注。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-10:pick-89",
+     "source_keys": [
+      "src-850588c81fb468a6a878e587"
+     ],
+     "event_identity": "set-a53c385b20f797a1bdc55b79"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-3af59b",
+   "title": "中美Token经济学利润分配格局重塑",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "中美Token经济学利润分配格局重塑",
+     "summary": "中国日均Token调用量两年增超千倍，但2025年公有云MaaS营收仅约30亿元，中美在算力瓶颈与商业化路径上分化。",
+     "news_status": "已确认",
+     "watch": "取决于Token调用量能否转化为实际收入，以及中美在算力瓶颈上的突破速度。可观察中国MaaS营收增速及企业付费意愿变化。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-10:pick-125",
+     "source_keys": [
+      "src-f9d3825684faa91a4dc1fee8"
+     ],
+     "event_identity": "set-a41c66e2ee47a1e2a5f46795"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-581a54",
+   "title": "AI推理成本降37.5% GPU租金反涨15.2%",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "AI推理成本降37.5% GPU租金反涨15.2%",
+     "summary": "AI推理Token成本从5月峰值暴跌37.5%至1.33美元/百万Token，同期Blackwell GPU租金逆势上涨15.2%至5.18美元/小时。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-10:pick-132",
+     "source_keys": [
+      "src-7388082b065ee306660de385"
+     ],
+     "event_identity": "set-fb3df91f2988b2146ada13cc"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-8f51ce",
+   "title": "研究者设计对抗性图案可躲避监控识别",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "研究者设计对抗性图案可躲避监控识别",
+     "summary": "安全研究员设计算法生成对抗性图案，可隐藏人、脸和车辆，使其不被监控摄像头检测到。",
+     "news_status": "已确认",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-10:pick-19",
+     "source_keys": [
+      "src-86683e2c56456586ccc30ef3"
+     ],
+     "event_identity": "set-0df59cd0ca9f8a37c845e4d8"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-fd7a18",
+   "title": "SpaceX 2027年新增算力或超10GW",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "SpaceX 2027年新增算力或超10GW",
+     "summary": "SemiAnalysis报告称SpaceX有望在2027年底前新增逾10GW算力，ARR或达3000亿美元，微软或成最大客户。",
+     "news_status": "发展中",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-10:pick-129",
+     "source_keys": [
+      "src-7183b3ad35194b73295d6e16"
+     ],
+     "event_identity": "set-0d56e9e0468ab73ad72f0688"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-abead0",
+   "title": "中国7月CPI同比涨0.5% PPI同比涨3.5%",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "中国7月CPI同比涨0.5% PPI同比涨3.5%",
+     "summary": "中国7月CPI同比上涨0.5%，涨幅收窄；PPI同比上涨3.5%，环比下降0.7%，AI驱动平板电脑价格环比上涨11.3%。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-10:pick-136",
+     "source_keys": [
+      "src-0dd2bb1273afbcae4e5e7e8a",
+      "src-d68e44d6a111105a78f23634"
+     ],
+     "event_identity": "set-fe88633305e9e868eebd08c7"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260810-c42761",
+   "title": "AI生成诉讼申请涌入英国就业法庭，积压案激增55%",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-10",
+   "last_seen": "2026-08-10",
+   "history": [
+    {
+     "date": "2026-08-10",
+     "title": "AI生成诉讼申请涌入英国就业法庭，积压案激增55%",
+     "summary": "截至2026年3月的一年里，英国就业法庭受理的诉讼申请同比增加39%，积压案件升至6.4万件，其中许多申请由ChatGPT或Grok生成。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-10:pick-35",
+     "source_keys": [
+      "src-716665d5b5b26d7fdee9e770"
+     ],
+     "event_identity": "set-f48eb06a042de6a1e526a853"
     }
    ]
   }

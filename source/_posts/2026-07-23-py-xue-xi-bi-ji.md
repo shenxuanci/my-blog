@@ -1,12 +1,620 @@
 ---
 title: "py学习笔记"
 date: "2026-07-23"
-updated: "2026-08-07"
+updated: "2026-08-09"
 categories:
   - "技术学习"
 index_img: "/images/covers/custom/20260723014916-qq-jie-tu-20260723014829.webp"
 ---
-## 一、函数参数：`*args` 与 `**kwargs`
+## 一、基础语法与数据类型
+
+### 1. 变量、赋值与命名
+
+py是动态类型语言，变量本身不固定保存某一种类型，它更像是一个名字，运行时绑定到某个对象。
+
+```py
+name = "Alice"
+age = 20
+pi = 3.14159
+is_student = True
+```
+
+变量名常用命名规则：
+
+- 只能由字母、数字和下划线组成，不能以数字开头
+- 区分大小写，`name`和`Name`是两个不同的变量
+- 变量、函数通常使用`snake_case`
+- 类名通常使用`PascalCase`
+- 常量没有语法层面的强制限制，约定使用`UPPER_CASE`
+
+例如：
+
+```py
+user_name = "Alice"
+MAX_RETRY = 3
+
+class UserProfile:
+    pass
+```
+
+py支持多重赋值和交换变量：
+
+```py
+a, b = 1, 2
+a, b = b, a
+
+print(a, b)  # 2 1
+```
+
+赋值不会自动复制对象。例如：
+
+```py
+a = [1, 2, 3]
+b = a
+
+b.append(4)
+print(a)  # [1, 2, 3, 4]
+```
+
+此时`a`和`b`都绑定到同一个列表对象。
+
+### 2. 常见基本类型
+
+常见内置类型：
+
+| 类型 | 示例 | 说明 |
+|---|---|---|
+| `int` | `10` | 整数 |
+| `float` | `3.14` | 浮点数 |
+| `bool` | `True`、`False` | 布尔值 |
+| `str` | `"hello"` | 字符串 |
+| `NoneType` | `None` | 表示“没有值” |
+| `list` | `[1, 2]` | 可变序列 |
+| `tuple` | `(1, 2)` | 不可变序列 |
+| `dict` | `{"name": "Alice"}` | 键值映射 |
+| `set` | `{1, 2, 3}` | 无重复元素集合 |
+
+可以使用`type()`查看对象类型：
+
+```py
+x = 10
+print(type(x))  # <class 'int'>
+```
+
+需要判断一个对象是否属于某种类型时，工程代码中通常优先使用`isinstance()`：
+
+```py
+value = 10
+
+if isinstance(value, int):
+    print("value是整数")
+```
+
+`isinstance()`还会正确处理继承关系。
+
+### 3. 数值运算
+
+常见运算符：
+
+```py
+a + b   # 加
+
+a - b   # 减
+
+a * b   # 乘
+
+a / b   # 真除法，通常返回float
+
+a // b  # 向下取整除法
+
+a % b   # 取余
+
+a ** b  # 幂
+```
+
+例如：
+
+```py
+print(7 / 2)   # 3.5
+print(7 // 2)  # 3
+print(7 % 2)   # 1
+print(2 ** 3)  # 8
+```
+
+复合赋值：
+
+```py
+x = 10
+x += 1
+x *= 2
+```
+
+### 4. 比较、逻辑与成员运算
+
+比较运算：
+
+```py
+==
+!=
+<
+<=
+>
+>=
+```
+
+逻辑运算：
+
+```py
+and
+or
+not
+```
+
+成员运算：
+
+```py
+in
+not in
+```
+
+例如：
+
+```py
+nums = [1, 2, 3]
+
+print(2 in nums)      # True
+print(5 not in nums)  # True
+```
+
+`is`和`==`不要混淆：
+
+- `==`通常比较两个对象的值是否相等
+- `is`比较两个变量是否指向同一个对象
+
+```py
+a = [1, 2]
+b = [1, 2]
+c = a
+
+print(a == b)  # True
+print(a is b)  # False
+print(a is c)  # True
+```
+
+判断`None`时通常写：
+
+```py
+if value is None:
+    ...
+```
+
+而不是`value == None`。
+
+### 5. 真值判断
+
+在`if`、`while`等条件中，py会把对象转换为布尔意义上的真假。
+
+常见假值包括：
+
+```py
+False
+None
+0
+0.0
+""
+[]
+{}
+set()
+()
+```
+
+例如：
+
+```py
+items = []
+
+if not items:
+    print("列表为空")
+```
+
+因此一般不需要写：
+
+```py
+if len(items) == 0:
+    ...
+```
+
+### 6. 类型转换
+
+常见转换函数：
+
+```py
+int("123")
+float("3.14")
+str(100)
+bool(1)
+list((1, 2, 3))
+tuple([1, 2, 3])
+set([1, 1, 2])
+```
+
+需要注意，类型转换可能失败：
+
+```py
+int("abc")  # ValueError
+```
+
+因此处理外部输入时通常需要进行校验或异常处理。
+
+### 7. 字符串基础与f-string
+
+字符串可以使用单引号、双引号或三引号：
+
+```py
+s1 = 'hello'
+s2 = "world"
+s3 = """这是一个
+多行字符串"""
+```
+
+字符串是不可变对象，对字符串执行“修改”操作通常会产生新字符串。
+
+现代py中推荐使用f-string进行格式化：
+
+```py
+name = "Alice"
+age = 20
+
+message = f"我是{name}，今年{age}岁"
+print(message)
+```
+
+格式控制：
+
+```py
+pi = 3.1415926
+print(f"{pi:.2f}")  # 3.14
+```
+
+### 8. 解包与星号表达式
+
+序列解包：
+
+```py
+point = (10, 20)
+x, y = point
+```
+
+可以使用`*`接收剩余元素：
+
+```py
+first, *middle, last = [1, 2, 3, 4, 5]
+
+print(first)   # 1
+print(middle)  # [2, 3, 4]
+print(last)    # 5
+```
+
+`*`也可以展开可迭代对象：
+
+```py
+a = [1, 2]
+b = [3, 4]
+
+combined = [*a, *b]
+print(combined)  # [1, 2, 3, 4]
+```
+
+`**`可以展开字典：
+
+```py
+base = {"name": "Alice", "age": 20}
+updated = {**base, "age": 21}
+
+print(updated)
+```
+
+后面的键会覆盖前面同名的键。
+
+## 二、常用容器
+
+### 1. `list` 列表
+
+列表是有顺序、可修改的序列：
+
+```py
+nums = [10, 20, 30]
+
+print(nums[0])   # 10
+print(nums[-1])  # 30
+```
+
+常见操作：
+
+```py
+nums.append(40)
+nums.extend([50, 60])
+nums.insert(1, 15)
+nums.remove(20)
+last = nums.pop()
+```
+
+切片：
+
+```py
+nums = [0, 1, 2, 3, 4, 5]
+
+print(nums[1:4])   # [1, 2, 3]
+print(nums[:3])    # [0, 1, 2]
+print(nums[::2])   # [0, 2, 4]
+print(nums[::-1])  # 反转后的新列表
+```
+
+注意：普通切片会创建一个新的列表，但列表中的元素如果本身是可变对象，仍可能共享内部对象引用。
+
+### 2. `tuple` 元组
+
+元组是不可变序列：
+
+```py
+point = (10, 20)
+```
+
+单元素元组必须保留逗号：
+
+```py
+single = (1,)
+```
+
+元组常用于：
+
+- 表示不应该被修改的一组值
+- 多返回值
+- 字典键（前提是其中元素也可哈希）
+
+函数所谓的“返回多个值”，本质上通常是返回一个元组：
+
+```py
+def get_point():
+    return 10, 20
+
+x, y = get_point()
+```
+
+### 3. `dict` 字典
+
+字典保存键值对：
+
+```py
+user = {
+    "name": "Alice",
+    "age": 20,
+}
+```
+
+访问和修改：
+
+```py
+print(user["name"])
+user["age"] = 21
+user["city"] = "Beijing"
+```
+
+若键可能不存在，使用`get()`更安全：
+
+```py
+city = user.get("city", "未知")
+```
+
+遍历：
+
+```py
+for key in user:
+    print(key)
+
+for key, value in user.items():
+    print(key, value)
+```
+
+常用方法：
+
+```py
+user.keys()
+user.values()
+user.items()
+user.pop("age")
+```
+
+### 4. `set` 集合
+
+集合中的元素不会重复，常用于去重和快速成员判断：
+
+```py
+nums = {1, 2, 3}
+nums.add(4)
+nums.discard(2)
+```
+
+空集合必须使用：
+
+```py
+empty = set()
+```
+
+因为：
+
+```py
+{}  # 这是空字典
+```
+
+集合运算：
+
+```py
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a | b)  # 并集
+print(a & b)  # 交集
+print(a - b)  # 差集
+print(a ^ b)  # 对称差集
+```
+
+### 5. 可变对象与不可变对象
+
+常见不可变对象：
+
+- `int`
+- `float`
+- `bool`
+- `str`
+- `tuple`（前提是内部对象本身不被修改）
+- `frozenset`
+
+常见可变对象：
+
+- `list`
+- `dict`
+- `set`
+- 大多数自定义类实例
+
+这个区别会直接影响：
+
+- 函数传参后的修改效果
+- 是否能作为`dict`的键
+- 是否能放入`set`
+- 浅拷贝/深拷贝行为
+
+### 6. 浅拷贝与深拷贝
+
+对于嵌套可变对象，仅复制最外层容器时，内部对象仍然会共享引用：
+
+```py
+original = [[1, 2], [3, 4]]
+shallow = original.copy()
+
+shallow[0].append(99)
+print(original)  # [[1, 2, 99], [3, 4]]
+```
+
+需要递归复制内部对象时，可以使用：
+
+```py
+import copy
+
+deep = copy.deepcopy(original)
+```
+
+但深拷贝并不是任何场景都应该默认使用；工程代码中更重要的是明确对象所有权和是否需要共享状态。
+
+## 三、控制流
+
+### 1. `if / elif / else`
+
+```py
+score = 85
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+else:
+    print("C")
+```
+
+条件表达式（三元表达式）：
+
+```py
+status = "通过" if score >= 60 else "不通过"
+```
+
+### 2. `for` 循环
+
+py中的`for`通常不是“按下标循环”，而是直接从可迭代对象中依次取值：
+
+```py
+for item in [10, 20, 30]:
+    print(item)
+```
+
+需要下标时使用`enumerate()`：
+
+```py
+for index, item in enumerate([10, 20, 30]):
+    print(index, item)
+```
+
+同时遍历多个序列可以使用`zip()`：
+
+```py
+names = ["Alice", "Bob"]
+scores = [90, 80]
+
+for name, score in zip(names, scores):
+    print(name, score)
+```
+
+### 3. `while`、`break`、`continue`
+
+```py
+count = 0
+
+while count < 5:
+    count += 1
+
+    if count == 2:
+        continue
+
+    if count == 4:
+        break
+
+    print(count)
+```
+
+- `break`：立即结束当前循环
+- `continue`：跳过本轮剩余代码，进入下一轮
+
+循环还支持`else`：
+
+```py
+for number in [1, 3, 5]:
+    if number % 2 == 0:
+        print("找到偶数")
+        break
+else:
+    print("没有找到偶数")
+```
+
+这里的`else`只有在循环**没有被break提前结束**时才执行。
+
+### 4. `match / case`（Python 3.10+）
+
+结构化模式匹配适合处理具有明确形状的多分支数据：
+
+```py
+def handle_command(command):
+    match command:
+        case ["quit"]:
+            return "退出"
+        case ["open", filename]:
+            return f"打开文件：{filename}"
+        case ["move", x, y]:
+            return f"移动到：{x}, {y}"
+        case _:
+            return "未知命令"
+```
+
+不要把`match`简单理解成其他语言的`switch`。它不仅能比较固定值，还可以对列表、元组、字典、类等结构进行模式匹配。
+
+### 5. `pass`
+
+`pass`表示什么都不做，常用于暂时占位：
+
+```py
+def todo():
+    pass
+```
+
+## 四、函数参数：`*args` 与 `**kwargs`
 
 ### 1. 可变位置参数 `*args`
 
@@ -74,7 +682,78 @@ mixed(1, 2, 3, 4, 5, default="自定义", name="李四", age=30)
 # **kwargs: {'name': '李四', 'age': 30}
 ```
 
-## 二、函数进阶
+
+### 4. 位置参数、关键字参数与 `/`、`*`
+
+除了`*args`和`**kwargs`，py还可以显式限制参数的传递方式。
+
+#### 位置参数与关键字参数
+
+```py
+def greet(name, message="你好"):
+    print(f"{message}，{name}")
+
+# 位置参数
+greet("Alice", "欢迎")
+
+# 关键字参数
+greet(name="Alice", message="欢迎")
+```
+
+#### 仅限位置参数：`/`
+
+`/`前面的参数只能按位置传入：
+
+```py
+def divide(a, b, /):
+    return a / b
+
+divide(10, 2)        # 正确
+# divide(a=10, b=2)  # TypeError
+```
+
+#### 仅限关键字参数：`*`
+
+单独的`*`之后的参数只能通过关键字传入：
+
+```py
+def connect(host, *, timeout=5, retry=3):
+    print(host, timeout, retry)
+
+connect("example.com", timeout=10, retry=2)
+```
+
+完整参数顺序可以理解为：
+
+```text
+仅限位置参数 / 普通参数 / *args / 仅限关键字参数 / **kwargs
+```
+
+实际代码中不一定需要把所有形式同时用上，但读标准库、FastAPI或第三方SDK时经常会看到`/`和`*`。
+
+### 5. 调用函数时的 `*` 与 `**` 解包
+
+`*args`和`**kwargs`不仅可以出现在函数定义中，也可以用于函数调用时展开参数：
+
+```py
+def add(a, b, c):
+    return a + b + c
+
+nums = [1, 2, 3]
+print(add(*nums))  # 等价于 add(1, 2, 3)
+```
+
+字典可以通过`**`展开成关键字参数：
+
+```py
+def show(name, age):
+    print(name, age)
+
+info = {"name": "Alice", "age": 20}
+show(**info)
+```
+
+## 五、函数进阶
 
 ### 1. 函数也是对象
 
@@ -704,7 +1383,7 @@ outer 结束
 
 >函数装饰器通常利用闭包保存被装饰的原函数。装饰时只创建并返回包装函数，不立即调用原函数；等以后调用包装后的函数时，包装函数才通过闭包中保存的 func 调用原函数。这属于延迟执行。
 
-## 三、迭代器与生成器
+## 六、迭代器与生成器
 
 ### 1. 可迭代对象与迭代器
 
@@ -870,9 +1549,9 @@ numbers = (x * x for x in range(1_000_000))
 
 
 
-## 四、列表推导式
+## 七、推导式
 
-### 1. 基本语法
+### 1. 列表推导式的基本语法
 ```py
 [表达式 for 变量 in 可迭代对象]
 ```
@@ -924,7 +1603,48 @@ print(grid)
 
  [0, 5, 0, 0]]`
 
-## 五、常用内置函数与数学工具
+
+### 5. 集合推导式与字典推导式
+
+集合推导式：
+
+```py
+squares = {x * x for x in range(5)}
+print(squares)
+```
+
+字典推导式：
+
+```py
+squares = {x: x * x for x in range(5)}
+print(squares)
+```
+
+也可以配合条件：
+
+```py
+even_squares = {
+    x: x * x
+    for x in range(10)
+    if x % 2 == 0
+}
+```
+
+列表、集合、字典推导式适合表达简单的“遍历 + 转换/筛选”。如果逻辑已经包含很多层条件、异常处理或副作用，通常改用普通`for`循环会更清晰。
+
+### 6. 推导式中的作用域
+
+Python 3中，推导式内部的循环变量拥有自己的局部作用域，不会直接泄漏到外层：
+
+```py
+x = 100
+nums = [x * 2 for x in range(3)]
+
+print(x)     # 100
+print(nums)  # [0, 2, 4]
+```
+
+## 八、常用内置函数与数学工具
 
 ### 1. `range()`
 生成一个整数范围，常用于for循环，包含范围为**前闭后开**
@@ -1358,7 +2078,7 @@ int(string, base)
 
 - int整数
 
-## 六、常用对象方法
+## 九、常用对象方法
 
 ### 1. `str.strip()`
 删除字符串开头和结尾的空白字符或指定字符，即只删除两端，不删除中间。
@@ -1435,7 +2155,7 @@ dict.get(key, default)
 freq[ch] = freq.get(ch, 0) + 1
 ```
 
-## 七、异常处理
+## 十、异常处理
 
 ### 1. `try / except / else / finally` 完整结构
 
@@ -1526,7 +2246,7 @@ except AgeError as e:
     print(f"年龄错误: {e}")
 ```
 
-## 八、面向对象基础
+## 十一、面向对象基础
 
 面向对象的思路是：
 
@@ -1822,7 +2542,879 @@ def slow_add(a, b):
 
 **注：** 这个例子主要用于理解`__call__()`和类装饰器的基本原理。实际工程中的通用类装饰器还可能需要考虑函数元数据、实例方法绑定等问题。
 
-## 九、`with` 语句与上下文管理器
+
+### 5. `@property`
+
+普通属性可以直接读取和修改：
+
+```py
+class User:
+    def __init__(self, age):
+        self.age = age
+```
+
+如果以后希望在读取或修改属性时加入校验逻辑，可以使用`property`，同时仍然保持`obj.age`这样的访问形式：
+
+```py
+class User:
+    def __init__(self, age):
+        self.age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        if value < 0:
+            raise ValueError("年龄不能为负数")
+        self._age = value
+
+
+user = User(20)
+print(user.age)
+user.age = 21
+```
+
+这里真正保存数据的是`_age`，而`age`对外表现得仍像普通属性。
+
+注意：不要为了“面向对象”就把所有属性都机械地写成property。只有在确实需要校验、计算或兼容旧接口时再使用。
+
+### 6. `dataclass`
+
+当一个类主要用于保存数据时，手写大量`__init__`、`__repr__`、`__eq__`通常很重复，可以使用`@dataclass`。
+
+dataclass不是说这个类只能用来存数据，它仍然是一个正常的py类，只不过`@dataclass`会帮你自动生成一些特别常见的样板代码。
+
+`@dataclass`是一个类装饰器，专门帮“主要用来存数据的类”自动生成`__init__/__repr__、__eq__`等重复代码：
+
+```py
+from dataclasses import dataclass
+
+@dataclass
+class User:
+    name: str
+    age: int
+
+
+user = User("Alice", 20)
+print(user)  # User(name='Alice', age=20)
+```
+
+带默认值：
+
+```py
+@dataclass
+class Config:
+    host: str = "localhost"
+    port: int = 8000
+```
+但注意，**有默认值的字段必须放后面。**
+
+这里的：
+
+```py
+name:str
+age_int
+```
+
+会被`dataclass`看作字段，然后自动生成`__init__(self, name, age)`。
+
+而`name:str`是py的**类型注解**，py的普通类型注解默认不会强制进行运行时类型检查。
+
+类型注解主要用于：
+
+- 阅读代码
+- IDE提示
+- 静态类型检查器
+- `dataclass`判断哪些名称属于字段
+
+#### `__repr__()`
+
+这个魔术方法和`__str__()`坐一桌，用来规定一个对象应该以什么字符串形式表示出来。比如普通类如果没有专门定义对象的字符串表示，通常就会看到类似这样的输出：
+
+```py
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+s = Student("小明", 18)
+
+print(s)
+
+#输出：<__main__.Student object at 0x000001...>
+```
+
+如果此时定义`__repr__()`：
+
+```py
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return f"Student(name={self.name!r}, age={self.age!r})"
+
+#输出：Student(name='小明', age=18)
+```
+
+##### 基本语法
+
+```py
+def __repr__(self):
+    return "表示这个对象的字符串"
+```
+
+`__repr__()`必须返回字符串str。
+
+可以用`print(repr(s))`或者在交互解释器里直接输入`s`来触发，使用`repr`来表示对象。
+
+`!r`表示使用这个值的`repr()`结果，例如：
+
+```py
+name = "小明"
+
+print(f"{name}")
+print(f"{name!r}")
+
+# 输出：
+# 小明
+# '小明'
+```
+
+`__repr__()`通常是给程序员，调试器看的对象表示，所以一般希望它信息明确，能看出对象类型，能看出重要属性，如果方便，尽量长得像创建这个对象的代码。
+
+
+#### `__eq__()`
+
+这个方法用来规定：两个对象使用`==`比较时，什么情况下认为它们相等。
+
+例如：
+
+```py
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+s1 = Student("小明", 18)
+s2 = Student("小明", 18)
+
+print(s1 == s2)
+
+#结果通常都是False
+```
+虽然`s1.name == s2.name s1.age == s2.age`都是True，但是s1和s2指向的仍然是两个不同的Student对象，如果没有自定义适当的`__eq__()`，py不会自动认为属性一样就是相等的。
+
+例如此时我们可以规定，姓名和年龄都相同，就认为两个学生是相等的：
+
+```py
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __eq__(self, other):
+        if not isinstance(other, Student):
+            return NotImplemented
+        
+        return (self.name == other.name
+        and self.age == other.age)
+
+s1 = Student("小明", 18)
+s2 = Student("小明", 18)
+s3 = Student("小红", 18)
+
+print(s1 == s2)
+print(s1 == s3)
+
+# 输出：
+# True
+# False
+```
+
+#####
+
+
+#### 列表默认值不能直接写`[]`
+
+可变默认值不能直接写成`[]`或`{}`，应该使用`default_factory`：
+
+```py
+from dataclasses import dataclass, field
+
+@dataclass
+class Student:
+    name: str
+    scores: list = field(default_factory=list)
+```
+这里的：
+
+```py
+field(default_factory=list)
+```
+
+表示：每创建一个`Student`对象，都重新调用一次`list()`，产生一个新的空列表。
+
+这和普通函数的“可变默认参数”陷阱本质上类似：不应该让多个实例意外共享同一个可变对象。
+
+`field()`用于对某个dataclass字段进行更加详细的配置。
+
+####  `__post_init__`
+
+有时候仅靠自动生成的`__init__`不够，还想再初始化后执行一些额外逻辑时，可以使用`__post_init__`。
+
+```py
+@dataclass
+class Student:
+    name:str
+    age:int
+
+    def __post_init__(self):
+        if self.age < 0:
+            raise ValueError("年龄不能小于0")
+```
+
+执行`Student("小明"， -1)`就会报错，此时的执行顺序可以理解为：
+
+```py
+Student("小明", 18)
+        ↓
+自动生成的 __init__
+        ↓
+self.name = "小明"
+self.age = 18
+        ↓
+自动调用 __post_init__()
+```
+
+在`__post_init__`中是可以创建计算属性的，例如：
+
+```py
+@dataclass
+class Rectangle:
+    width:float
+    height:float
+
+    def __post_init__(self):
+        self.area = self.width * self.height
+
+r = Rectangle(10, 20)
+print(r.area)
+#输出：200
+```
+
+#### `@dataclass`的主要参数
+
+常见写法：
+
+```py
+@dataclass(
+    init=True,
+    repr=True,
+    eq=True,
+    order=False,
+    frozen=False,
+    slots=False
+)
+class Student:
+    ...
+```
+
+##### a.order参数：是否生成大小比较方法
+
+默认dataclass支持`==, !=`，但不自动支持`<, >, <=, >=`，如果把order参数设置为True，那么就可以让对象按照字段定义顺序进行比较。比如：
+
+```py
+@dataclass(order=True)
+class Student:
+    score: int
+    name: str
+
+s1 = Student(80, "小明")
+s2 = Student(90, "小红")
+
+print(s1 < s2)
+#输出：True
+```
+这里就是先比较score，如果相同，就会继续比较name，以此类推。
+
+##### b.frozen参数：是否禁止正常修改字段
+
+这个参数可以创建近似不可变的数据类：
+
+```py
+@dataclass(frozen = True)
+class Point:
+    x:int
+    y:int
+
+p = Point(1, 2)
+print(p.x)
+```
+
+但如果`p.x = 100`的话，就会报错，因此可以理解成创建出来之后，不允许正常地重新修改字段，适合以下字段：
+
+- 坐标
+- 配置
+- 不可变记录
+- 值对象
+
+##### c.slots参数：是否使用slots
+
+现代py中还会经常看到：
+
+```py
+@dataclass(slots=True)
+class Student:
+    name:str
+    age:int
+```
+
+这会使用`__slots__`机制，可以简单理解为**限制对象主要只能拥有预先声明好的字段，并可能减少大量对象的内存开销。**
+
+
+
+### 3. `__slots__`（了解）
+
+普通自定义类实例通常有`__dict__`，因此可以动态添加属性：
+
+```py
+class User:
+    pass
+
+user = User()
+user.name = "Alice"
+```
+
+某些场景可以使用`__slots__`限制实例允许拥有的属性，并减少大量实例的部分内存开销：
+
+```py
+class Point:
+    __slots__ = ("x", "y")
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+```
+
+一般业务代码不用为了“优化”主动到处使用`__slots__`，知道它改变了实例属性存储方式即可。
+
+
+
+## 十二、模块、包与依赖管理
+
+### 1. 模块与 `import`
+
+一个`.py`文件通常就是一个模块。
+
+假设：
+
+```text
+project/
+├── main.py
+└── math_utils.py
+```
+
+`math_utils.py`：
+
+```py
+def add(a, b):
+    return a + b
+```
+
+`main.py`：
+
+```py
+import math_utils
+
+print(math_utils.add(1, 2))
+```
+
+也可以只导入某个名字：
+
+```py
+from math_utils import add
+
+print(add(1, 2))
+```
+
+可以起别名：
+
+```py
+import numpy as np
+```
+
+不推荐：
+
+```py
+from math_utils import *
+```
+
+因为这会让当前命名空间中突然出现很多名字，难以判断一个变量或函数从哪里来。
+
+### 2. `__name__` 与程序入口
+
+每个模块都有`__name__`变量。
+
+当文件被直接运行时：
+
+```py
+__name__ == "__main__"
+```
+
+当它被其他模块导入时，`__name__`通常是模块名。
+
+因此常见写法：
+
+```py
+def main():
+    print("程序开始")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+这样导入这个模块时不会自动执行`main()`中的程序入口逻辑。
+
+### 3. 包与 `__init__.py`
+
+多个模块可以组成一个包：
+
+```text
+project/
+├── main.py
+└── app/
+    ├── __init__.py
+    ├── service.py
+    └── utils.py
+```
+
+例如：
+
+```py
+from app.service import run
+```
+
+现代Python支持namespace package，因此某些场景没有`__init__.py`也能形成包；但普通项目中保留`__init__.py`仍然很常见，而且可以明确表达这个目录是Python包。
+
+### 4. 绝对导入与相对导入
+
+绝对导入：
+
+```py
+from app.utils import parse_data
+```
+
+包内部也可以使用相对导入：
+
+```py
+from .utils import parse_data
+from ..config import settings
+```
+
+`.`表示当前包，`..`表示上一级包。
+
+实际工程中通常更推荐清晰的绝对导入；相对导入适合包内部关系明确的场景。
+
+### 5. 虚拟环境与依赖
+
+不同项目可能依赖不同版本的第三方库，因此一般不要把所有库都装到同一个全局Python环境中。
+
+使用`venv`：
+
+```bash
+python -m venv .venv
+```
+
+Windows PowerShell中激活：
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+安装依赖：
+
+```bash
+python -m pip install fastapi
+```
+
+查看依赖：
+
+```bash
+python -m pip freeze
+```
+
+现代项目还经常使用`pyproject.toml`统一保存项目元数据、构建配置和工具配置，并使用`uv`等工具管理环境和依赖。第一次学习时先理解“项目环境彼此隔离”这个核心概念即可。
+
+## 十三、类型标注 `typing`
+
+类型标注本质上是给程序员、IDE、类型检查器、框架看的“类型说明”，
+
+### 1. 基本类型标注
+
+Python是动态类型语言，类型标注不会把它变成静态类型语言；它主要用于：
+
+- 提高可读性
+- IDE自动补全
+- 静态类型检查
+- 框架根据类型生成校验或Schema
+
+例如：
+
+```py
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+变量也可以标注：
+
+```py
+name: str = "Alice"
+age: int = 20
+```
+
+### 2. 容器类型
+
+Python 3.9+通常可以直接使用内置泛型：
+
+```py
+names: list[str] = ["Alice", "Bob"]
+scores: dict[str, int] = {"Alice": 90}
+point: tuple[int, int] = (10, 20)
+tags: set[str] = {"python", "agent"}
+```
+
+`list[str]`说明这是一个“元素应该是字符串”的列表，其余类型同理。
+
+### 3. 联合类型与可空值
+
+Python 3.10+可以使用`|`表示**联合类型**，比如说此处的value，就是既可以是int，也可以是str：
+
+```py
+def normalize(value: int | str) -> str:
+    return str(value)
+```
+
+可能为`None`：
+
+```py
+def find_user(user_id: int) -> str | None:
+    if user_id == 1:
+        return "Alice"
+
+    return None
+```
+
+所以此处调用`find_user`之后，不能想当然地认为返回就一定是str，还要考虑返回值为None时代码应该如何处理。
+
+旧代码里还会看到：
+
+```py
+from typing import Optional, Union
+
+Optional[str]       # 等价于 str | None
+Union[int, str]     # 等价于 int | str
+```
+
+### 4. `Any` 与 `object`
+
+`Any`基本相当于告诉类型检查器：“这里暂时不要检查”：
+
+```py
+from typing import Any
+
+def handle(value: Any) -> Any:
+    return value.foo.bar()
+```
+
+但不要无脑把所有复杂类型都写成`Any`，否则类型标注的价值会被抵消。
+
+`object`则表示“可以接收任何Python对象”，但读取具体属性前仍然需要缩窄类型，因为`object`并没有告诉类型检查器这个对象具体有哪些能力。
+
+### 5. `Callable` 与 `Awaitable`
+
+函作为参数传递的时候也可以进行类型标注：
+
+```py
+from collections.abc import Callable
+
+def apply_twice(func: Callable[[int], int], value: int) -> int:
+    return func(func(value))
+```
+
+```text
+Callable[
+    [int],   ← 参数列表
+    int      ← 返回值
+]
+```
+意思就是`func`必须是一个接收一个int，返回一个int的可调用对象。
+
+异步回调中还可能看到：
+
+```py
+from collections.abc import Awaitable, Callable
+
+AsyncHandler = Callable[[str], Awaitable[str]]
+```
+
+其中，`Callable[[str], Awaitable[str]]`表示接收一个str，返回一个可以被`await`的对象，并且最终得到`str`。
+
+所以这里的`AsyncHandler`大致描述一个异步处理函数，输入字符串，最终异步得到字符串。
+
+这类类型在Agent工具、回调、Middleware和异步SDK中很常见。
+
+### 6. `TypedDict`：给字典定义Schema
+
+普通字典中不同键可以有不同的值类型，比如说：
+
+```py
+user = {
+    "name": "Alice",
+    "age": 20
+}
+```
+
+类型标注如果只写`dict`，或者`dict[str, object]`的话，信息太少，而`TypedDict`可以描述这种固定结构：
+
+```py
+from typing import TypedDict
+
+class UserData(TypedDict):
+    name: str
+    age: int
+
+
+def greet(user: UserData) -> str:
+    return f"你好，{user['name']}"
+```
+
+注意：运行时它仍然只是普通`dict`，`TypedDict`主要服务于静态类型检查。
+
+### 7. `Protocol`：Python的接口
+
+`Protocol`用于描述“只要拥有这些方法/属性就算满足要求”的结构化接口：
+
+```py
+from typing import Protocol
+
+class Reader(Protocol):
+    def read(self) -> str:
+        ...
+
+
+def load(reader: Reader) -> str:
+    return reader.read()
+```
+
+即：一个对象只要拥有符合要求的`read() ->str`方法，我就可以把它当作`Reader`。
+
+此时我们定义：
+
+```py
+class FileReader:
+    def read(self) -> str:
+        return "文件内容"
+```
+
+注意到并不是`class FileReader(Reader)`，但`load(FileReader())`从静态类型角度照样可以成立。因为`FileReader`刚好满足`Reader`的`def read(self) -> str:`要求，这就是所谓的**结构化类型**。
+
+调用`load()`的对象不一定需要显式继承`Reader`，只要它拥有兼容的`read()`方法，就可以通过静态类型检查。
+
+这种方式和py的“鸭子类型”很契合：我不管你是不是“鸭子类”；你会鸭子叫、会鸭子走，我就把你当鸭子。
+
+### 8. `TypeVar` 与 `Generic`（了解后会用）
+
+当输入和输出之间存在同一种抽象类型关系时，可以使用泛型：
+
+```py
+from typing import TypeVar
+
+T = TypeVar("T")
+
+def first(items: list[T]) -> T:
+    return items[0]
+```
+`T`可以理解为：先不知道具体是什么类型，但同一次使用过程中必须保持一致的“类型占位符”。
+
+这样：
+
+```py
+first([1, 2, 3])      # 推断为int
+first(["a", "b"])    # 推断为str
+```
+所以`T`最核心的意义是：表达不同位置之间的类型关系。
+
+复杂泛型不需要刚开始就钻得很深，能够看懂SDK中常见的`T`、`Generic[T]`即可。
+
+### 9. 类型标注不是运行时校验
+
+例如：
+
+```py
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+直接调用：
+
+```py
+add("a", "b")
+```
+
+Python运行时不会仅因为标注写了`int`就自动拒绝它。
+
+FastAPI/Pydantic之所以能根据类型做运行时校验，是因为框架主动读取了这些类型信息并执行了额外逻辑。
+
+## 十四、文件、路径与 JSON
+
+### 1. 文件读写
+
+最推荐使用`with`自动管理文件关闭：
+
+```py
+with open("data.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+```
+
+写文件：
+
+```py
+with open("result.txt", "w", encoding="utf-8") as file:
+    file.write("hello\n")
+```
+
+常见模式：
+
+- `"r"`：读取
+- `"w"`：覆盖写入
+- `"a"`：追加
+- `"b"`：二进制模式，例如`"rb"`
+
+逐行读取大型文本时，不一定需要一次性`read()`到内存，否则会把整个大文件内容一次性加载到内存：
+
+```py
+with open("data.txt", encoding="utf-8") as file:
+    for line in file:
+        print(line.rstrip("\n"))
+```
+
+文件对象本身可以迭代，这样一次读取一行，处理完再继续读取下一行，内存占用就会小很多。
+
+### 2. `pathlib`
+
+以前很多人写路径：
+
+```py
+base = "data"
+path = base + "/" + "users.json"
+```
+这种字符串拼接容易产生平台和路径细节问题。
+
+相比大量手工拼接路径字符串，现代Python中通常更推荐`pathlib.Path`：
+
+```py
+from pathlib import Path
+
+base = Path("data")
+file_path = base / "users.json"
+
+print(file_path.name)#文件名：users.json
+print(file_path.suffix)#扩展名：.json
+print(file_path.exists())#文件是否存在
+```
+这里的`/`被`Path`重载了，表示路径拼接，即`data/users.json`。
+
+
+创建目录：
+
+```py
+Path("output/logs").mkdir(parents=True, exist_ok=True)
+```
+
+这两个参数表示：如果父目录不存在就一起创建，目录已经存在也不要报错。
+
+读取和写入小型文本文件：
+
+```py
+path = Path("hello.txt")
+path.write_text("你好", encoding="utf-8")
+content = path.read_text(encoding="utf-8")
+```
+
+### 3. JSON
+
+JSON经常用于HTTP API、配置文件和数据交换。
+
+Python对象 → JSON字符串，使用`dumps()`：
+
+```py
+import json
+
+data = {"name": "Alice", "age": 20}
+text = json.dumps(data, ensure_ascii=False)
+```
+
+JSON字符串 → Python对象，使用`loads()`：
+
+```py
+data = json.loads(text)
+```
+
+直接处理文件，使用`dump()`和`load()`：
+
+```py
+import json
+
+with open("user.json", "w", encoding="utf-8") as file:
+    json.dump({"name": "Alice"}, file, ensure_ascii=False, indent=2)
+
+with open("user.json", "r", encoding="utf-8") as file:
+    user = json.load(file)
+```
+
+这里的`ensure_ascii=False`是让中文不要写成`\u4f60\u597d`，而直接保存`你好`，而`indent=2`则是格式化缩进。
+
+常见对应关系：
+
+| JSON | Python |
+|---|---|
+| object | dict |
+| array | list |
+| string | str |
+| number | int/float |
+| true/false | True/False |
+| null | None |
+
+### 4. `os` 与环境变量
+
+很多工程配置、API Key不会直接硬编码进代码，而是通过环境变量传入：
+
+```py
+import os
+
+api_key = os.getenv("API_KEY")
+```
+
+操作系统环境中：`API_KEY=xxxxx`程序读取它，如果不存在，则返回None。
+
+如果变量是必须的，也可以显式检查：
+
+```py
+api_key = os.environ["API_KEY"]
+```
+
+不存在时会抛出`KeyError`，因此能更早暴露配置缺失。
+
+实际项目中常见`.env`文件，但`.env`不是Python标准库功能，一般由`python-dotenv`、Pydantic Settings等工具负责读取；敏感`.env`文件通常不应该提交到Git仓库。
+
+## 十五、`with` 语句与上下文管理器
 
 通常打开一个文件之后需要关闭：
 
@@ -2094,7 +3686,7 @@ contextmanager 装饰的生成器必须正常地只 yield 一次；通常要用 
 
 **注：** py传参时，形参会绑定到实参所指向的同一个对象，不会自动复制对象；更准确地说，是对象引用按值传递，这适用于所有对象。
 
-## 十、算法题常用技巧
+## 十六、算法题常用技巧
 
 ### 1. ACM 模式 I/O 模板
 
@@ -2224,7 +3816,7 @@ print(f"最大拼接数：{result}")
 # 输出：最大拼接数：953430
 ```
 
-## 十一、并发与异步编程基础
+## 十七、并发与异步编程基础
 
 ### 1. 多线程：`threading`
 
@@ -3174,3 +4766,82 @@ elapsed = perf_counter() - start
 为什么必须使用`await`：因为调用异步函数只会创建协程对象，不会等待它执行完成，因此，如果直接写成`return func(*args, **kwargs)`的话，会直接返回协程对象，计时器也无法覆盖原函数真正执行的过程。
 
 写成`return await func(*args, **kwargs)`，就是运行异步函数，并等待它执行完成，再取得它的返回值。
+
+### 7. 异步迭代器与异步生成器
+
+普通`for`循环对应同步迭代协议，而某些数据本身需要“等待之后才能产生下一个值”，例如：
+
+- 流式LLM响应
+- WebSocket消息
+- 异步数据库游标
+- 分页网络数据流
+
+这个时候会使用`async for`。
+
+#### 异步生成器
+
+只要在`async def`中使用`yield`，就会得到异步生成器函数：
+
+```py
+import asyncio
+
+async def count():
+    for i in range(3):
+        await asyncio.sleep(0.5)
+        yield i
+
+
+async def main():
+    async for value in count():
+        print(value)
+
+
+asyncio.run(main())
+```
+
+它可以理解为：
+
+>普通生成器负责“按需产生值”，异步生成器则允许在产生下一个值之前先执行异步等待。
+
+#### 异步迭代协议
+
+异步可迭代对象通常实现：
+
+```py
+__aiter__()
+__anext__()
+```
+
+`async for`会不断等待：
+
+```py
+await iterator.__anext__()
+```
+
+直到抛出`StopAsyncIteration`。
+
+正常开发中一般不需要频繁手写`__aiter__`和`__anext__`，异步生成器通常更加简洁。
+
+### 8. `asyncio.timeout()`（Python 3.11+）
+
+网络请求、Agent工具等操作不能无限等待，可以给一段异步代码设置超时：
+
+```py
+import asyncio
+
+async def slow_work():
+    await asyncio.sleep(10)
+
+
+async def main():
+    try:
+        async with asyncio.timeout(2):
+            await slow_work()
+    except TimeoutError:
+        print("操作超时")
+
+
+asyncio.run(main())
+```
+
+在Agent和后端工程中，“超时”本身就是正常的失败模式之一，不应该默认让一个外部调用永远阻塞整个任务。

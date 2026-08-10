@@ -1,183 +1,6 @@
 {
  "version": 2,
  "days": {
-  "2026-07-27": {
-   "sources": {
-    "simonwillison": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 5,
-     "candidates": 3,
-     "scored": 3,
-     "topic_matched": 3,
-     "above_threshold": 2,
-     "picked": 2
-    },
-    "importai": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 0,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "interconnects": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 0,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "oneusefulthing": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 1,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "latentspace": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 2,
-     "candidates": 2,
-     "scored": 2,
-     "topic_matched": 2,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "anthropic-eng": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 0,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "eugeneyan": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 0,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "stratechery": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 1,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "pragmaticengineer": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 0,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "constructionphysics": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 1,
-     "candidates": 1,
-     "scored": 1,
-     "topic_matched": 1,
-     "above_threshold": 1,
-     "picked": 1
-    },
-    "sspai": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 5,
-     "candidates": 5,
-     "scored": 5,
-     "topic_matched": 5,
-     "above_threshold": 1,
-     "picked": 1
-    },
-    "jiqizhixin": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 0,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "cna-finance": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 5,
-     "candidates": 5,
-     "scored": 5,
-     "topic_matched": 5,
-     "above_threshold": 1,
-     "picked": 0
-    },
-    "ruanyifeng-weekly": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 1,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    },
-    "noahpinion": {
-     "fetch_ok": true,
-     "fetch_error": "",
-     "fetched": 2,
-     "candidates": 0,
-     "scored": 0,
-     "topic_matched": 0,
-     "above_threshold": 0,
-     "picked": 0
-    }
-   },
-   "channels": {
-    "ai_engineering": {
-     "candidates": 5,
-     "scored": 5,
-     "topic_matched": 5,
-     "above_threshold": 2,
-     "picked": 2
-    },
-    "tech_business": {
-     "candidates": 1,
-     "scored": 1,
-     "topic_matched": 1,
-     "above_threshold": 1,
-     "picked": 1
-    },
-    "society_finance": {
-     "candidates": 10,
-     "scored": 10,
-     "topic_matched": 10,
-     "above_threshold": 2,
-     "picked": 1
-    }
-   }
-  },
   "2026-07-28": {
    "sources": {
     "simonwillison": {
@@ -2476,6 +2299,193 @@
      "topic_matched": 0,
      "above_threshold": 0,
      "picked": 0
+    }
+   }
+  },
+  "2026-08-10": {
+   "sources": {
+    "simonwillison": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 5,
+     "candidates": 5,
+     "scored": 5,
+     "topic_matched": 5,
+     "above_threshold": 3,
+     "picked": 1
+    },
+    "importai": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 0,
+     "candidates": 0,
+     "scored": 0,
+     "topic_matched": 0,
+     "above_threshold": 0,
+     "picked": 0
+    },
+    "interconnects": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 1,
+     "candidates": 1,
+     "scored": 1,
+     "topic_matched": 1,
+     "above_threshold": 1,
+     "picked": 1
+    },
+    "oneusefulthing": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 0,
+     "candidates": 0,
+     "scored": 0,
+     "topic_matched": 0,
+     "above_threshold": 0,
+     "picked": 0
+    },
+    "latentspace": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 2,
+     "candidates": 2,
+     "scored": 2,
+     "topic_matched": 2,
+     "above_threshold": 1,
+     "picked": 0
+    },
+    "anthropic-eng": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 0,
+     "candidates": 0,
+     "scored": 0,
+     "topic_matched": 0,
+     "above_threshold": 0,
+     "picked": 0
+    },
+    "eugeneyan": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 0,
+     "candidates": 0,
+     "scored": 0,
+     "topic_matched": 0,
+     "above_threshold": 0,
+     "picked": 0
+    },
+    "stratechery": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 1,
+     "candidates": 1,
+     "scored": 1,
+     "topic_matched": 1,
+     "above_threshold": 1,
+     "picked": 0
+    },
+    "pragmaticengineer": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 0,
+     "candidates": 0,
+     "scored": 0,
+     "topic_matched": 0,
+     "above_threshold": 0,
+     "picked": 0
+    },
+    "constructionphysics": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 1,
+     "candidates": 1,
+     "scored": 1,
+     "topic_matched": 1,
+     "above_threshold": 1,
+     "picked": 0
+    },
+    "sspai": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 5,
+     "candidates": 5,
+     "scored": 5,
+     "topic_matched": 5,
+     "above_threshold": 1,
+     "picked": 0
+    },
+    "jiqizhixin": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 0,
+     "candidates": 0,
+     "scored": 0,
+     "topic_matched": 0,
+     "above_threshold": 0,
+     "picked": 0
+    },
+    "cna-finance": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 5,
+     "candidates": 5,
+     "scored": 5,
+     "topic_matched": 5,
+     "above_threshold": 2,
+     "picked": 1
+    },
+    "ruanyifeng-weekly": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 1,
+     "candidates": 1,
+     "scored": 1,
+     "topic_matched": 1,
+     "above_threshold": 1,
+     "picked": 1
+    },
+    "noahpinion": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 2,
+     "candidates": 2,
+     "scored": 2,
+     "topic_matched": 2,
+     "above_threshold": 2,
+     "picked": 0
+    },
+    "marginal-revolution": {
+     "fetch_ok": true,
+     "fetch_error": "",
+     "fetched": 5,
+     "candidates": 5,
+     "scored": 5,
+     "topic_matched": 5,
+     "above_threshold": 0,
+     "picked": 0
+    }
+   },
+   "channels": {
+    "ai_engineering": {
+     "candidates": 8,
+     "scored": 8,
+     "topic_matched": 8,
+     "above_threshold": 5,
+     "picked": 2
+    },
+    "tech_business": {
+     "candidates": 3,
+     "scored": 3,
+     "topic_matched": 3,
+     "above_threshold": 3,
+     "picked": 1
+    },
+    "society_finance": {
+     "candidates": 17,
+     "scored": 17,
+     "topic_matched": 17,
+     "above_threshold": 5,
+     "picked": 1
     }
    }
   }
