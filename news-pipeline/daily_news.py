@@ -7876,8 +7876,8 @@ def write_output_and_commit_registry(
 
 # ----------------------------------------------------------------
 # 6.1.8 每周综述：趋势连线 + 待验证回收（长期判断力沉淀）
-#   每周一由主管线额外合成上周综述，链式读上周综述 + 本周 daily + events.json。
-#   失败只记日志、不阻断每日产出（与深读频道同等地位）。
+#   公开主管线幂等检查最近闭合周；候选通过自动审修后才写入。
+#   失败写 weekly-health 并跨自然日重试，不阻断每日产出；shadow 不调用周模型。
 # ----------------------------------------------------------------
 
 WEEKLY_DIRECTIONS = {"新增", "推进", "反转", "停滞"}
@@ -7896,20 +7896,30 @@ WEEKLY_SYSTEM = """你是资深主编，把一个完整自然周的日报压缩�
 
 WEEKLY_AUDIT_SYSTEM = """你是周报客观性审计员。输入证据有严格作用域：
 - lead 和 outlook 只能使用明确命名的 whole_week_evidence；
-- 每条 thread 只能使用同 index 的 thread_evidence.items，不得用其他周内条目补证；
-- 每条 watch_recap 只能使用同 index 的 watch_recap_evidence.items。
+- 每条 thread 只能使用同 index 的 thread_evidence.refs 在 whole_week_evidence 中指向的条目，
+  不得用其他周内条目补证；
+- 每条 watch_recap 只能使用同 index 的 watch_recap_evidence.refs 指向的条目。
 检查各字段是否受对应作用域证据支撑、归因正确，且没有无依据的动机、因果、幅度语言或
 虚构平衡说法。只输出：
 {"lead":true,"threads":[true],"watch_recap":[true],"outlook":[true]}。
 各布尔数组必须与候选内容等长。"""
 
 WEEKLY_REPAIR_SYSTEM = """只修复 failed 指定的周报文字：
-lead/outlook 严格依据 whole_week_evidence，threads 严格依据同 index 的
-thread_evidence，watch_recap 严格依据同 index 的 watch_recap_evidence；不得改变任何引用。
+lead/outlook 严格依据 whole_week_evidence；threads 只能使用同 index 的
+thread_evidence.refs，watch_recap 只能使用同 index 的 watch_recap_evidence.refs，
+并在 whole_week_evidence 中按引用取证；不得改变任何引用。
 只输出 {"lead":{"title":"...","summary":"..."},
 "threads":[{"index":0,"title":"...","one_liner":"...","detail":"..."}],
 "watch_recap":[{"index":0,"prior":"...","status":"...","note":"..."}],
 "outlook":[{"index":0,"text":"..."}]}。未失败的部分不要返回。"""
+
+WEEKLY_REAUDIT_SYSTEM = """你是周报客观性复审员。只复审 candidate 中列出的修复字段：
+lead/outlook 严格依据 whole_week_evidence；threads 和 watch_recap 只能使用各自同 index
+的 refs 在 whole_week_evidence 中指向的条目。不得用其他周内条目补证。
+只输出实际收到的失败部分，格式为：
+{"lead":true,"threads":[{"index":0,"ok":true}],
+ "watch_recap":[{"index":0,"ok":true}],"outlook":[{"index":0,"ok":true}]}。
+没有收到的部分不要返回；所有 index 必须原样返回且恰好一次。"""
 
 
 def _validated_weekly_audit(raw, payload):
@@ -7980,23 +7990,91 @@ def _apply_weekly_repair(payload, repair, failed):
             payload["outlook"][index] = str(row.get("text") or "")[:50]
 
 
-def _audit_weekly(audit_llm, payload, refs):
-    cited = {ref: item for ref, (kind, item) in refs.items() if kind == "item"}
+def _weekly_failure_request(request, payload, failed):
+    thread_indexes = set(failed["threads"])
+    watch_indexes = set(failed["watch_recap"])
+    thread_evidence = [
+        row for row in request["thread_evidence"]
+        if row["index"] in thread_indexes
+    ]
+    watch_evidence = [
+        row for row in request["watch_recap_evidence"]
+        if row["index"] in watch_indexes
+    ]
+    if failed["lead"] or failed["outlook"]:
+        evidence = request["whole_week_evidence"]
+    else:
+        local_refs = {
+            ref for row in (*thread_evidence, *watch_evidence)
+            for ref in row.get("refs") or []
+        }
+        evidence = {
+            ref: item for ref, item in request["whole_week_evidence"].items()
+            if ref in local_refs
+        }
+    candidate = {}
+    if failed["lead"]:
+        candidate["lead"] = payload.get("lead")
+    if thread_indexes:
+        candidate["threads"] = [
+            {"index": index, **payload["threads"][index]}
+            for index in failed["threads"]
+        ]
+    if watch_indexes:
+        candidate["watch_recap"] = [
+            {"index": index, **payload["watch_recap"][index]}
+            for index in failed["watch_recap"]
+        ]
+    if failed["outlook"]:
+        candidate["outlook"] = [
+            {"index": index, "text": payload["outlook"][index]}
+            for index in failed["outlook"]
+        ]
+    return {
+        "whole_week_evidence": evidence,
+        "thread_evidence": thread_evidence,
+        "watch_recap_evidence": watch_evidence,
+        "candidate": candidate,
+        "failed": failed,
+    }
 
+
+def _validated_weekly_reaudit(raw, failed):
+    if not isinstance(raw, dict):
+        return False
+    if failed["lead"] and raw.get("lead") is not True:
+        return False
+    for key in ("threads", "watch_recap", "outlook"):
+        expected = list(failed[key])
+        rows = raw.get(key, [])
+        if not isinstance(rows, list) or len(rows) != len(expected):
+            return False
+        by_index = {}
+        for row in rows:
+            if (not isinstance(row, dict) or type(row.get("index")) is not int
+                    or type(row.get("ok")) is not bool
+                    or row["index"] in by_index):
+                return False
+            by_index[row["index"]] = row["ok"]
+        if set(by_index) != set(expected) or not all(by_index.values()):
+            return False
+    return True
+
+
+def _audit_weekly_result(audit_llm, payload, evidence):
     def scoped_evidence(rows, ref_fields):
         scoped = []
         for index, row in enumerate(rows or []):
             local_refs = []
             for field in ref_fields:
                 for ref in row.get(field) or []:
-                    if ref in cited and ref not in local_refs:
+                    if ref in evidence and ref not in local_refs:
                         local_refs.append(ref)
-            scoped.append({"index": index, "refs": local_refs,
-                           "items": {ref: cited[ref] for ref in local_refs}})
+            scoped.append({"index": index, "refs": local_refs})
         return scoped
 
     request = {
-        "whole_week_evidence": cited,
+        "whole_week_evidence": evidence,
         "thread_evidence": scoped_evidence(
             payload.get("threads"), ("member_refs", "representative_refs")),
         "watch_recap_evidence": scoped_evidence(
@@ -8004,33 +8082,54 @@ def _audit_weekly(audit_llm, payload, refs):
         "candidate": {
             key: payload.get(key) for key in ("lead", "threads", "watch_recap", "outlook")},
     }
+    failure_stages = []
     try:
         checked = _validated_weekly_audit(
             audit_llm.json_call(WEEKLY_AUDIT_SYSTEM,
                                 json.dumps(request, ensure_ascii=False)), payload)
     except Exception as exc:
-        log(f"  周综述客观性初审失败，进入修复: {exc}")
+        log(f"  周综述客观性初审失败，进入修复: {redact(exc)}")
         checked = None
+    if checked is None:
+        failure_stages.append("initial_audit_failed")
+        log("  周综述客观性初审结果无效，进入定向修复")
     failed = _weekly_failures(checked, payload)
     if not _weekly_has_failures(failed):
-        return True
-    request["failed"] = failed
+        return True, ""
+    if "initial_audit_failed" not in failure_stages:
+        failure_stages.append("initial_audit_failed")
+    repair_request = _weekly_failure_request(request, payload, failed)
     try:
         repair = audit_llm.json_call(
-            WEEKLY_REPAIR_SYSTEM, json.dumps(request, ensure_ascii=False))
-        _apply_weekly_repair(payload, repair, failed)
+            WEEKLY_REPAIR_SYSTEM,
+            json.dumps(repair_request, ensure_ascii=False))
+        if not isinstance(repair, dict):
+            failure_stages.append("repair_failed")
+            log("  周综述客观性修复结果无效，继续复审")
+        else:
+            _apply_weekly_repair(payload, repair, failed)
     except Exception as exc:
-        log(f"  周综述客观性修复失败，继续复审: {exc}")
-    request["candidate"] = {
-        key: payload.get(key) for key in ("lead", "threads", "watch_recap", "outlook")}
+        failure_stages.append("repair_failed")
+        log(f"  周综述客观性修复失败，继续复审: {redact(exc)}")
+    reaudit_request = _weekly_failure_request(request, payload, failed)
     try:
-        checked = _validated_weekly_audit(
-            audit_llm.json_call(WEEKLY_AUDIT_SYSTEM,
-                                json.dumps(request, ensure_ascii=False)), payload)
+        checked = _validated_weekly_reaudit(
+            audit_llm.json_call(
+                WEEKLY_REAUDIT_SYSTEM,
+                json.dumps(reaudit_request, ensure_ascii=False)), failed)
     except Exception as exc:
-        log(f"  周综述客观性复审失败: {exc}")
-        checked = None
-    return not _weekly_has_failures(_weekly_failures(checked, payload))
+        log(f"  周综述客观性复审失败: {redact(exc)}")
+        checked = False
+    if checked is True:
+        return True, ""
+    failure_stages.append("reaudit_failed")
+    log("  周综述客观性复审未通过")
+    return False, "+".join(dict.fromkeys(failure_stages))
+
+
+def _audit_weekly(audit_llm, payload, evidence):
+    """Compatibility wrapper returning only the publish decision."""
+    return _audit_weekly_result(audit_llm, payload, evidence)[0]
 
 
 def iso_week_key(d):
@@ -8174,25 +8273,33 @@ def write_weekly_manifest(data_dir, keep=26):
     return weeks
 
 
-def weekly_pick_material(days, max_total=100):
-    """Build date-balanced prompt lines so a busy early day cannot starve later days."""
+def weekly_pick_evidence(days, max_total=100):
+    """Return the bounded evidence that both weekly generation and audit may use."""
     buckets = []
     for dp in sorted(days, key=lambda value: str(value.get("date") or "")):
         date = str(dp.get("date") or "")
-        lines = []
+        rows = []
         for it in dp.get("items") or []:
             if it.get("tier") != "pick" or not it.get("id"):
                 continue
             ref = f"{date}:{it.get('id')}"
-            history = " → ".join(f"{h.get('date', '')}:{h.get('summary', '')}"
-                                 for h in (it.get("history") or [])[-3:])
-            lines.append(
-                f"[{ref}] [{CAT_NAMES.get(it.get('category', ''), it.get('category', ''))}] "
-                f"{it.get('title', '')}：{it.get('summary', '')}"
-                + (f"｜事件延续:{history}" if history else "")
-                + (f"｜关注:{it.get('watch')}" if it.get("watch") else ""))
-        if lines:
-            buckets.append(lines)
+            evidence = {
+                "category": CAT_NAMES.get(
+                    it.get("category", ""), it.get("category", "")),
+                "title": str(it.get("title") or ""),
+                "summary": str(it.get("summary") or ""),
+            }
+            history = [{
+                "date": str(row.get("date") or ""),
+                "summary": str(row.get("summary") or ""),
+            } for row in (it.get("history") or [])[-3:] if isinstance(row, dict)]
+            if history:
+                evidence["history"] = history
+            if it.get("watch"):
+                evidence["watch"] = str(it.get("watch"))
+            rows.append((ref, evidence))
+        if rows:
+            buckets.append(rows)
 
     selected = []
     row = 0
@@ -8207,7 +8314,166 @@ def weekly_pick_material(days, max_total=100):
         if not added:
             break
         row += 1
-    return selected
+    return dict(selected)
+
+
+def render_weekly_pick_material(evidence):
+    """Render an existing canonical evidence map for the generation prompt."""
+    lines = []
+    for ref, item in evidence.items():
+        history = " → ".join(
+            f"{row.get('date', '')}:{row.get('summary', '')}"
+            for row in item.get("history") or [])
+        lines.append(
+            f"[{ref}] [{item.get('category', '')}] "
+            f"{item.get('title', '')}：{item.get('summary', '')}"
+            + (f"｜事件延续:{history}" if history else "")
+            + (f"｜关注:{item.get('watch')}" if item.get("watch") else ""))
+    return lines
+
+
+def weekly_pick_material(days, max_total=100):
+    """Build and render canonical date-balanced weekly evidence."""
+    return render_weekly_pick_material(
+        weekly_pick_evidence(days, max_total=max_total))
+
+
+WEEKLY_HEALTH_VERSION = 1
+WEEKLY_AUDIT_MAX_ATTEMPTS = 3
+WEEKLY_EVIDENCE_LIMIT = 100
+WEEKLY_EVIDENCE_PROJECTION_VERSION = 1
+WEEKLY_EVIDENCE_FIELDS = ("category", "title", "summary", "history", "watch")
+
+
+def weekly_audit_contract_fingerprint():
+    raw = json.dumps({
+        "version": 1,
+        "evidence_projection_version": WEEKLY_EVIDENCE_PROJECTION_VERSION,
+        "evidence_limit": WEEKLY_EVIDENCE_LIMIT,
+        "evidence_fields": WEEKLY_EVIDENCE_FIELDS,
+        "generation_prompt": WEEKLY_SYSTEM,
+        "audit_prompt": WEEKLY_AUDIT_SYSTEM,
+        "repair_prompt": WEEKLY_REPAIR_SYSTEM,
+        "reaudit_prompt": WEEKLY_REAUDIT_SYSTEM,
+    }, ensure_ascii=False, sort_keys=True)
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:24]
+
+
+def load_weekly_health(data_dir):
+    path = Path(data_dir) / "weekly-health.json"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError):
+        payload = {}
+    weeks = payload.get("weeks") if isinstance(payload, dict) else None
+    return {"version": WEEKLY_HEALTH_VERSION,
+            "weeks": weeks if isinstance(weeks, dict) else {}}
+
+
+def _render_weekly_health(health, keep=26):
+    weeks = health.get("weeks") if isinstance(health, dict) else {}
+    safe_weeks = {}
+    for week in sorted(weeks or {}, reverse=True)[:max(1, int(keep))]:
+        row = weeks.get(week)
+        if isinstance(row, dict):
+            safe_weeks[str(week)] = {
+                key: row[key] for key in (
+                    "status", "attempts", "last_attempt_date", "reason",
+                    "contract_fingerprint") if key in row
+            }
+    return json.dumps({
+        "version": WEEKLY_HEALTH_VERSION, "weeks": safe_weeks,
+    }, ensure_ascii=False, indent=2) + "\n"
+
+
+def save_weekly_health(data_dir, health, keep=26):
+    path = Path(data_dir) / "weekly-health.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    _atomic_replace_texts({path: _render_weekly_health(health, keep=keep)})
+
+
+def _weekly_attempt_context(data_dir, week_key, fingerprint):
+    health = load_weekly_health(data_dir)
+    current = health["weeks"].get(week_key)
+    valid = (
+        isinstance(current, dict)
+        and current.get("status") in {"pending", "passed", "failed", "exhausted"}
+        and type(current.get("attempts")) is int
+        and 0 <= current["attempts"] <= WEEKLY_AUDIT_MAX_ATTEMPTS
+        and isinstance(current.get("last_attempt_date"), str)
+        and isinstance(current.get("reason"), str)
+        and current.get("contract_fingerprint") == fingerprint
+    )
+    if valid:
+        attempts = current["attempts"]
+        valid = (
+            (current["status"] == "pending" and attempts == 0)
+            or (current["status"] == "failed"
+                and 1 <= attempts < WEEKLY_AUDIT_MAX_ATTEMPTS)
+            or (current["status"] == "exhausted"
+                and attempts == WEEKLY_AUDIT_MAX_ATTEMPTS)
+            or (current["status"] == "passed" and 1 <= attempts)
+        )
+    if not valid:
+        current = {
+            "status": "pending", "attempts": 0, "last_attempt_date": "",
+            "reason": "", "contract_fingerprint": fingerprint,
+        }
+        health["weeks"][week_key] = current
+    return health, current
+
+
+def _record_weekly_health(data_dir, health, week_key, *, date_str, attempts,
+                          fingerprint, status, reason, keep):
+    health["weeks"][week_key] = {
+        "status": status,
+        "attempts": int(attempts),
+        "last_attempt_date": str(date_str),
+        "reason": str(reason),
+        "contract_fingerprint": fingerprint,
+    }
+    save_weekly_health(data_dir, health, keep=keep)
+
+
+def _valid_weekly_generation_shape(result):
+    """Validate containers before normalizing paid weekly model output."""
+    if not isinstance(result, dict):
+        return False
+    lead = result.get("lead")
+    if lead is not None:
+        if not isinstance(lead, dict):
+            return False
+        if any(value is not None and not isinstance(value, str)
+               for value in (lead.get("title"), lead.get("summary"))):
+            return False
+    for key in ("threads", "watch_recap", "outlook"):
+        if not isinstance(result.get(key), list):
+            return False
+    if any(not isinstance(value, str) for value in result["outlook"]):
+        return False
+    for row in result["threads"]:
+        if not isinstance(row, dict):
+            return False
+        for field in ("member_refs", "representative_refs"):
+            refs = row.get(field)
+            if refs is not None and (not isinstance(refs, list)
+                                     or any(not isinstance(ref, str) for ref in refs)):
+                return False
+        if any(value is not None and not isinstance(value, str) for value in (
+                row.get("title"), row.get("one_liner"), row.get("direction"),
+                row.get("detail"))):
+            return False
+    for row in result["watch_recap"]:
+        if not isinstance(row, dict):
+            return False
+        refs = row.get("evidence_refs")
+        if refs is not None and (not isinstance(refs, list)
+                                 or any(not isinstance(ref, str) for ref in refs)):
+            return False
+        if any(value is not None and not isinstance(value, str) for value in (
+                row.get("prior"), row.get("status"), row.get("note"))):
+            return False
+    return True
 
 
 def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
@@ -8224,6 +8490,36 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
         log(f"  周综述：{week_key} 已存在，跳过（幂等）")
         return read_weekly_payload(target)
 
+    # Public weekly persistence is fail-closed: without an auditor there must
+    # be no generation call and no report write.
+    if audit_llm is None:
+        log(f"  周综述：{week_key} 缺少发布前审计器，跳过生成与写入")
+        return None
+
+    fingerprint = weekly_audit_contract_fingerprint()
+    health, health_row = _weekly_attempt_context(data_dir, week_key, fingerprint)
+    if force:
+        health_row.update({
+            "status": "pending", "attempts": 0, "last_attempt_date": "",
+            "reason": "", "contract_fingerprint": fingerprint,
+        })
+    elif health_row.get("status") == "passed":
+        # A passed marker without its report is inconsistent (for example a
+        # partial manual restore). Rebuild instead of spending a retry day.
+        health_row.update({
+            "status": "pending", "attempts": 0, "last_attempt_date": "",
+            "reason": "", "contract_fingerprint": fingerprint,
+        })
+    attempts = int(health_row.get("attempts") or 0)
+    if (attempts >= WEEKLY_AUDIT_MAX_ATTEMPTS
+            and health_row.get("status") == "exhausted"):
+        log(f"  周综述：{week_key} 自动审修已耗尽 {attempts} 次，停止重试")
+        return None
+    if (health_row.get("status") == "failed"
+            and health_row.get("last_attempt_date") == date_str):
+        log(f"  周综述：{week_key} 今日已自动审修失败，等待下一自然日重试")
+        return None
+
     daily_dir = data_dir / "daily"
     days = []
     missing_dates = []
@@ -8238,6 +8534,11 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
             missing_dates.append(day_str)
         cursor += timedelta(days=1)
     if len(days) < minimum:
+        if audit_llm is not None:
+            _record_weekly_health(
+                data_dir, health, week_key, date_str=date_str,
+                attempts=attempts, fingerprint=fingerprint, status="pending",
+                reason="insufficient_coverage", keep=keep)
         log(f"  周综述：{week_key} 仅覆盖 {len(days)}/7 天（门槛 {minimum}/7），跳过")
         return None
 
@@ -8251,9 +8552,16 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
             pick_refs.append(ref)
     pick_refs = list(dict.fromkeys(ref for ref in pick_refs if ref in refs))
     if len(pick_refs) < 3:
+        if audit_llm is not None:
+            _record_weekly_health(
+                data_dir, health, week_key, date_str=date_str,
+                attempts=attempts, fingerprint=fingerprint, status="pending",
+                reason="insufficient_material", keep=keep)
         log(f"  周综述：{week_key} 仅有 {len(pick_refs)} 条可引用精选，不足 3 条主题合同，跳过")
         return None
-    pick_lines = weekly_pick_material(days, max_total=100)
+    evidence = weekly_pick_evidence(days, max_total=WEEKLY_EVIDENCE_LIMIT)
+    visible_refs = set(evidence)
+    pick_lines = render_weekly_pick_material(evidence)
 
     prev_key = iso_week_key(start - timedelta(days=1))
     prev = read_weekly_payload(data_dir / "weekly" / f"{prev_key}.js")
@@ -8269,18 +8577,42 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
     user = (prof_block + prev_block
             + "【本周新闻精选与事件线】\n" + "\n".join(pick_lines))
 
-    result = llm.json_call(WEEKLY_SYSTEM, user)
-    if not isinstance(result, dict):
+    attempt_number = attempts
+    if (audit_llm is not None
+            and (health_row.get("status") == "pending"
+                 or str(health_row.get("last_attempt_date") or "") != date_str)):
+        attempt_number += 1
+    try:
+        result = llm.json_call(WEEKLY_SYSTEM, user)
+    except Exception as exc:
+        if audit_llm is not None:
+            status = ("exhausted" if attempt_number >= WEEKLY_AUDIT_MAX_ATTEMPTS
+                      else "failed")
+            _record_weekly_health(
+                data_dir, health, week_key, date_str=date_str,
+                attempts=attempt_number, fingerprint=fingerprint, status=status,
+                reason="generation_error", keep=keep)
+        log(f"  周综述：LLM 调用失败，跳过（{redact(exc)}）")
+        return None
+    if not _valid_weekly_generation_shape(result):
+        if audit_llm is not None:
+            status = ("exhausted" if attempt_number >= WEEKLY_AUDIT_MAX_ATTEMPTS
+                      else "failed")
+            _record_weekly_health(
+                data_dir, health, week_key, date_str=date_str,
+                attempts=attempt_number, fingerprint=fingerprint, status=status,
+                reason="generation_invalid", keep=keep)
         log("  周综述：LLM 输出异常，跳过")
         return None
 
     def _clip(s, n):
         return str(s or "")[:n]
 
-    def _valid_refs(values, kinds={"item"}):
+    def _valid_refs(values, kinds={"item"}, allowed=None):
         out = []
         for ref in values or []:
-            if ref in refs and refs[ref][0] in kinds and ref not in out:
+            if (ref in refs and refs[ref][0] in kinds and ref not in out
+                    and (allowed is None or ref in allowed)):
                 out.append(ref)
         return out
 
@@ -8289,8 +8621,9 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
     for t in (result.get("threads") or [])[:6]:
         if not isinstance(t, dict):
             continue
-        member_refs = _valid_refs(t.get("member_refs"))
-        representative_refs = _valid_refs(t.get("representative_refs"))[:3]
+        member_refs = _valid_refs(t.get("member_refs"), allowed=visible_refs)
+        representative_refs = _valid_refs(
+            t.get("representative_refs"), allowed=visible_refs)[:3]
         member_refs = member_refs or representative_refs
         representative_refs = representative_refs or member_refs[:1]
         if not member_refs:
@@ -8317,12 +8650,12 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
     # Theme representatives must be distinct. A broad model theme may list all
     # members; those members are still available for deterministic split themes.
     used = set(claimed_representatives)
-    for ref in pick_refs:
+    for ref in evidence:
         if len(threads) >= 3:
             break
         if ref in used or ref not in refs:
             continue
-        item = refs[ref][1]
+        item = evidence[ref]
         threads.append({
             "title": _clip(item.get("title"), 16),
             "one_liner": _clip(item.get("summary"), 60),
@@ -8335,13 +8668,19 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
         claimed_representatives.add(ref)
 
     if len(threads) < 3:
+        status = ("exhausted" if attempt_number >= WEEKLY_AUDIT_MAX_ATTEMPTS
+                  else "failed")
+        _record_weekly_health(
+            data_dir, health, week_key, date_str=date_str,
+            attempts=attempt_number, fingerprint=fingerprint, status=status,
+            reason="generation_invalid", keep=keep)
         log(f"  周综述：仅形成 {len(threads)} 条有效主题，不满足 3-6 条合同，跳过")
         return None
     recap = []
     for r in (result.get("watch_recap") or [])[:6]:
         if not isinstance(r, dict):
             continue
-        evidence_refs = _valid_refs(r.get("evidence_refs"))
+        evidence_refs = _valid_refs(r.get("evidence_refs"), allowed=visible_refs)
         if not evidence_refs:
             continue
         recap.append({
@@ -8388,9 +8727,24 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
     }
     errors = validate_weekly_references(payload, days)
     if errors:
+        if audit_llm is not None:
+            status = ("exhausted" if attempt_number >= WEEKLY_AUDIT_MAX_ATTEMPTS
+                      else "failed")
+            _record_weekly_health(
+                data_dir, health, week_key, date_str=date_str,
+                attempts=attempt_number, fingerprint=fingerprint, status=status,
+                reason="reference_invalid", keep=keep)
         log("  周综述：引用校验失败，跳过写文件：" + "; ".join(errors))
         return None
-    if audit_llm is not None and not _audit_weekly(audit_llm, payload, refs):
+    audit_passed, audit_reason = _audit_weekly_result(
+        audit_llm, payload, evidence)
+    if not audit_passed:
+        status = ("exhausted" if attempt_number >= WEEKLY_AUDIT_MAX_ATTEMPTS
+                  else "failed")
+        _record_weekly_health(
+            data_dir, health, week_key, date_str=date_str,
+            attempts=attempt_number, fingerprint=fingerprint, status=status,
+            reason=audit_reason or "reaudit_failed", keep=keep)
         log("  周综述：客观性复审未通过，跳过写文件")
         return None
     wdir = data_dir / "weekly"
@@ -8398,11 +8752,37 @@ def write_weekly(llm, date_str, cfg, data_dir, profile_text="", audit_llm=None,
     js = ("window.WEEKLY_DATA = window.WEEKLY_DATA || {};\n"
           f"window.WEEKLY_DATA[{json.dumps(week_key)}] = "
           f"{json.dumps(payload, ensure_ascii=False, indent=1)};\n")
-    (wdir / f"{week_key}.js").write_text(js, encoding="utf-8")
+    health["weeks"][week_key] = {
+        "status": "passed", "attempts": int(attempt_number),
+        "last_attempt_date": str(date_str), "reason": "",
+        "contract_fingerprint": fingerprint,
+    }
+    _atomic_replace_texts({
+        wdir / f"{week_key}.js": js,
+        data_dir / "weekly-health.json": _render_weekly_health(health, keep=keep),
+    })
 
     write_weekly_manifest(data_dir, keep)
     log(f"  周综述已写入 data/weekly/{week_key}.js（主线 {len(threads)} · 回收 {len(recap)}）")
     return payload
+
+
+def run_weekly_stage(llm, audit_llm, date_str, cfg, data_dir, profile_text,
+                     policy):
+    """Run publish-time weekly generation; shadow never duplicates this work."""
+    if not (cfg.get("weekly") or {}).get("enabled"):
+        return None
+    if policy.get("mode") == "shadow":
+        log("周综述：shadow 复用公开生成结果，跳过生成与审计")
+        return None
+    log("周综述：趋势连线 + 发布前自动审修 ...")
+    try:
+        return write_weekly(
+            llm, date_str, cfg, data_dir, profile_text,
+            audit_llm=audit_llm)
+    except Exception as exc:
+        log(f"  周综述失败（不影响每日产出）: {redact(exc)}")
+        return None
 
 
 # ----------------------------------------------------------------
@@ -8944,17 +9324,9 @@ def _run_pipeline(started_at, args, cfg, policy):
     log("英语单词本：挑词 + 补全手动词 ...")
     build_vocab(llm, picked, items, date_str, cfg)
 
-    # 每次日报运行都幂等检查最近一个已结束自然周；失败不阻断每日产出。
-    wk = cfg.get("weekly") or {}
-    if wk.get("enabled"):
-        log("周综述：趋势连线 + 待验证回收 ...")
-        try:
-            write_weekly(
-                llm, date_str, cfg, _data_dir, profile,
-                audit_llm=audit_llm if policy["full_objectivity"] else None,
-                force=policy["mode"] == "shadow")
-        except Exception as e:
-            log(f"  周综述失败（不影响每日产出）: {e}")
+    # 公开生成在写入周综述前自动审修；shadow 不重复生成或审计同一周。
+    run_weekly_stage(
+        llm, audit_llm, date_str, cfg, _data_dir, profile, policy)
 
     update_source_health(fetch_stats, date_str, events=events, picked=picked, items=items)
     write_feed(_data_dir, date_str, cfg)

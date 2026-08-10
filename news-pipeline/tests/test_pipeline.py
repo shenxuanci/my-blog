@@ -1480,6 +1480,13 @@ try:
                     "watch_recap": [{"prior": "p", "status": "未兑现", "note": "n",
                                       "evidence_refs": ["2026-07-06:pick-0"]}],
                     "outlook": ["x"]}
+    class _PassWeeklyAudit:
+        def json_call(self, system, user):
+            candidate = json.loads(user)["candidate"]
+            return {"lead": True,
+                    "threads": [True] * len(candidate.get("threads") or []),
+                    "watch_recap": [True] * len(candidate.get("watch_recap") or []),
+                    "outlook": [True] * len(candidate.get("outlook") or [])}
     wtmp = tmp / "wk"
     (wtmp / "daily").mkdir(parents=True, exist_ok=True)
     for k in (6, 7, 8, 10, 12):
@@ -1496,7 +1503,8 @@ try:
             encoding="utf-8")
     wcfg = {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}}
     fake = _FakeLLM()
-    dn.write_weekly(fake, "2026-07-15", wcfg, wtmp)   # 任意日运行，目标最近已结束自然周
+    dn.write_weekly(fake, "2026-07-15", wcfg, wtmp,
+                    audit_llm=_PassWeeklyAudit())   # 任意日运行，目标最近已结束自然周
     wkey = dn.iso_week_key(dn.datetime(2026, 7, 12))
     check("周综述键为 ISO 周", wkey == "2026-W28")
     check("周综述输入使用稳定复合引用", "[2026-07-06:pick-0]" in fake.last_user)
@@ -1534,7 +1542,8 @@ try:
 
     dtmp = tmp / "wk_empty"
     (dtmp / "daily").mkdir(parents=True, exist_ok=True)
-    dn.write_weekly(_FakeLLM(), "2026-07-13", wcfg, dtmp)
+    dn.write_weekly(_FakeLLM(), "2026-07-13", wcfg, dtmp,
+                    audit_llm=_PassWeeklyAudit())
     check("周综述门槛：低于 5/7 不产文件", not (dtmp / "weekly").exists())
 
     # ISO 年边界：2027-01-06 最近闭合周是 2026-W53（12/28-01/03）。
@@ -1602,7 +1611,8 @@ try:
                                                 "category": "ai", "title": "x", "summary": "s"}]}
         (mismatch / "daily" / f"{ds}.js").write_text(
             f'window.NEWS_DATA["{ds}"] = {json.dumps(mp, ensure_ascii=False)};\n', encoding="utf-8")
-    dn.write_weekly(_FakeLLM(), "2026-07-15", wcfg, mismatch)
+    dn.write_weekly(_FakeLLM(), "2026-07-15", wcfg, mismatch,
+                    audit_llm=_PassWeeklyAudit())
     check("周综述 payload 日期错配不计覆盖", not (mismatch / "weekly").exists())
 
     # 有 5/7 日但总精选不足 3 条时拒绝生成，维持 3-6 主题合同。
@@ -1615,7 +1625,8 @@ try:
                                      if k in (6, 7) else [])}
         (sparse / "daily" / f"{ds}.js").write_text(
             f'window.NEWS_DATA["{ds}"] = {json.dumps(sp, ensure_ascii=False)};\n', encoding="utf-8")
-    dn.write_weekly(_FakeLLM(), "2026-07-15", wcfg, sparse)
+    dn.write_weekly(_FakeLLM(), "2026-07-15", wcfg, sparse,
+                    audit_llm=_PassWeeklyAudit())
     check("周综述不足三条事实引用拒绝生成", not (sparse / "weekly").exists())
 
     # 跨年不只验日期计算，也验 5/7 收集、写入和引用范围。
@@ -1634,7 +1645,8 @@ try:
                                       "title": ds, "summary": "s"}]}
         (cross / "daily" / f"{ds}.js").write_text(
             f'window.NEWS_DATA["{ds}"] = {json.dumps(cp, ensure_ascii=False)};\n', encoding="utf-8")
-    dn.write_weekly(_CrossYearLLM(), "2027-01-06", wcfg, cross)
+    dn.write_weekly(_CrossYearLLM(), "2027-01-06", wcfg, cross,
+                    audit_llm=_PassWeeklyAudit())
     cross_payload = dn.read_weekly_payload(cross / "weekly" / "2026-W53.js")
     check("跨年自然周完整生成", cross_payload is not None
           and cross_payload["coverage"]["missing_dates"] == ["2026-12-30", "2027-01-02"]

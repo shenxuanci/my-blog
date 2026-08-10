@@ -1059,6 +1059,275 @@ def test_weekly_reaudit_failure_skips_writing_report(tmp_path):
     assert len(audit.calls) == 3
 
 
+def test_weekly_health_distinguishes_repair_and_reaudit_failures(tmp_path):
+    _write_week_days(tmp_path)
+    generator = QueueLLM([_weekly_generator_reply()])
+    audit = QueueLLM([
+        {"lead": False, "threads": [True, True, True],
+         "watch_recap": [], "outlook": []},
+        RuntimeError("repair unavailable"),
+        {"lead": False, "threads": [], "watch_recap": [], "outlook": []},
+    ])
+
+    assert dn.write_weekly(
+        generator, "2026-07-15",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path, audit_llm=audit) is None
+
+    row = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert row["reason"] == (
+        "initial_audit_failed+repair_failed+reaudit_failed")
+
+
+def _weekly_generator_reply():
+    refs = [f"2026-07-{day:02d}:pick-0" for day in (6, 7, 8)]
+    return {
+        "lead": {"title": "本周主线", "summary": "来源支持的总述"},
+        "threads": [{
+            "title": f"主题 {index}", "one_liner": "事实", "direction": "推进",
+            "detail": "事实", "member_refs": [ref], "representative_refs": [ref],
+        } for index, ref in enumerate(refs)],
+        "watch_recap": [], "outlook": [],
+    }
+
+
+def _always_failing_weekly_audit():
+    failed = {"lead": False, "threads": [True, True, True],
+              "watch_recap": [], "outlook": []}
+    return QueueLLM([failed, {"lead": {"summary": "修复稿"}}, failed])
+
+
+def test_weekly_failure_retries_three_dates_then_stops(tmp_path):
+    _write_week_days(tmp_path)
+    cfg = {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}}
+
+    for date in ("2026-07-15", "2026-07-16", "2026-07-17"):
+        generator = QueueLLM([_weekly_generator_reply()])
+        audit = _always_failing_weekly_audit()
+        assert dn.write_weekly(generator, date, cfg, tmp_path, audit_llm=audit) is None
+        assert len(generator.calls) == 1
+        assert len(audit.calls) == 3
+
+    stopped_generator = QueueLLM([_weekly_generator_reply()])
+    stopped_audit = _always_failing_weekly_audit()
+    assert dn.write_weekly(
+        stopped_generator, "2026-07-18", cfg, tmp_path,
+        audit_llm=stopped_audit) is None
+    assert stopped_generator.calls == []
+    assert stopped_audit.calls == []
+
+    health = json.loads((tmp_path / "weekly-health.json").read_text(encoding="utf-8"))
+    row = health["weeks"]["2026-W28"]
+    assert row["status"] == "exhausted"
+    assert row["attempts"] == 3
+    assert row["last_attempt_date"] == "2026-07-17"
+    assert row["reason"] == "initial_audit_failed+reaudit_failed"
+    assert set(row) == {
+        "status", "attempts", "last_attempt_date", "reason", "contract_fingerprint"}
+
+
+def test_weekly_same_date_rerun_does_not_consume_another_retry_day(tmp_path):
+    _write_week_days(tmp_path)
+    cfg = {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}}
+
+    first_generator = QueueLLM([_weekly_generator_reply()])
+    first_audit = _always_failing_weekly_audit()
+    assert dn.write_weekly(
+        first_generator, "2026-07-15", cfg, tmp_path,
+        audit_llm=first_audit) is None
+
+    rerun_generator = QueueLLM([_weekly_generator_reply()])
+    rerun_audit = _always_failing_weekly_audit()
+    assert dn.write_weekly(
+        rerun_generator, "2026-07-15", cfg, tmp_path,
+        audit_llm=rerun_audit) is None
+    assert rerun_generator.calls == []
+    assert rerun_audit.calls == []
+
+    row = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert row["status"] == "failed"
+    assert row["attempts"] == 1
+    assert row["last_attempt_date"] == "2026-07-15"
+
+
+@pytest.mark.parametrize("malformed", [
+    {"threads": {}, "watch_recap": [], "outlook": []},
+    {"threads": [], "watch_recap": [], "outlook": {}},
+    {"threads": [{"member_refs": 1, "representative_refs": []}],
+     "watch_recap": [], "outlook": []},
+    {"threads": [], "watch_recap": [{"evidence_refs": 1}], "outlook": []},
+])
+def test_weekly_malformed_generator_shape_is_recorded_as_failure(
+        tmp_path, malformed):
+    _write_week_days(tmp_path)
+    cfg = {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}}
+    generator = QueueLLM([malformed])
+    audit = QueueLLM([])
+
+    assert dn.write_weekly(
+        generator, "2026-07-15", cfg, tmp_path, audit_llm=audit) is None
+
+    row = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert row["status"] == "failed"
+    assert row["attempts"] == 1
+    assert row["reason"] == "generation_invalid"
+    assert audit.calls == []
+    assert not (tmp_path / "weekly" / "2026-W28.js").exists()
+
+
+def test_weekly_underfilled_normalization_is_recorded_as_failure(tmp_path):
+    _write_week_days(tmp_path)
+    refs = [f"2026-07-{day:02d}:pick-0" for day in (6, 7, 8, 9, 10)]
+    generator = QueueLLM([{
+        "lead": {},
+        "threads": [{
+            "title": f"宽泛主题 {index}", "one_liner": "事实", "direction": "推进",
+            "detail": "事实", "member_refs": group,
+            "representative_refs": group,
+        } for index, group in enumerate((refs[:3], refs[3:]))],
+        "watch_recap": [], "outlook": [],
+    }])
+
+    assert dn.write_weekly(
+        generator, "2026-07-15",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path, audit_llm=QueueLLM([])) is None
+
+    row = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert row["status"] == "failed"
+    assert row["attempts"] == 1
+    assert row["reason"] == "generation_invalid"
+
+
+def test_weekly_persistence_requires_an_auditor(tmp_path):
+    _write_week_days(tmp_path)
+    generator = QueueLLM([_weekly_generator_reply()])
+
+    result = dn.write_weekly(
+        generator, "2026-07-15",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path)
+
+    assert result is None
+    assert generator.calls == []
+    assert not (tmp_path / "weekly" / "2026-W28.js").exists()
+
+
+def test_weekly_pending_then_material_arrives_counts_first_paid_attempt(tmp_path):
+    daily = tmp_path / "daily"
+    daily.mkdir()
+    for day in (6, 7, 8, 9):
+        date = f"2026-07-{day:02d}"
+        payload = {"date": date, "items": [{
+            "id": "pick-0", "tier": "pick", "category": "ai",
+            "title": f"事件 {day}", "summary": "事实",
+        }]}
+        (daily / f"{date}.js").write_text(
+            f'window.NEWS_DATA["{date}"] = {json.dumps(payload)};\n',
+            encoding="utf-8")
+    cfg = {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}}
+    assert dn.write_weekly(
+        QueueLLM([_weekly_generator_reply()]), "2026-07-15", cfg, tmp_path,
+        audit_llm=_always_failing_weekly_audit()) is None
+    pending = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert pending["status"] == "pending" and pending["attempts"] == 0
+
+    date = "2026-07-10"
+    payload = {"date": date, "items": [{
+        "id": "pick-0", "tier": "pick", "category": "ai",
+        "title": "事件 10", "summary": "事实",
+    }]}
+    (daily / f"{date}.js").write_text(
+        f'window.NEWS_DATA["{date}"] = {json.dumps(payload)};\n', encoding="utf-8")
+    assert dn.write_weekly(
+        QueueLLM([_weekly_generator_reply()]), "2026-07-15", cfg, tmp_path,
+        audit_llm=_always_failing_weekly_audit()) is None
+
+    failed = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert failed["status"] == "failed"
+    assert failed["attempts"] == 1
+
+
+def test_weekly_contract_change_resets_exhausted_retry_budget(tmp_path, monkeypatch):
+    health = {
+        "version": 1,
+        "weeks": {"2026-W28": {
+            "status": "exhausted", "attempts": 3,
+            "last_attempt_date": "2026-07-17", "reason": "audit_failed",
+            "contract_fingerprint": "old-contract",
+        }},
+    }
+    (tmp_path / "weekly-health.json").write_text(
+        json.dumps(health), encoding="utf-8")
+    _write_week_days(tmp_path)
+    monkeypatch.setattr(dn, "weekly_audit_contract_fingerprint", lambda: "new-contract")
+    generator = QueueLLM([_weekly_generator_reply()])
+    audit = QueueLLM([{
+        "lead": True, "threads": [True, True, True],
+        "watch_recap": [], "outlook": [],
+    }])
+
+    result = dn.write_weekly(
+        generator, "2026-07-18",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path, audit_llm=audit)
+
+    assert result is not None
+    row = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert row["status"] == "passed"
+    assert row["attempts"] == 1
+    assert row["contract_fingerprint"] == "new-contract"
+
+
+def test_weekly_malformed_health_row_recovers_as_fresh_contract(tmp_path):
+    (tmp_path / "weekly-health.json").write_text(json.dumps({
+        "version": 1,
+        "weeks": {"2026-W28": {
+            "status": "exhausted", "attempts": "not-a-number",
+            "last_attempt_date": [], "reason": {"unsafe": "shape"},
+            "contract_fingerprint": dn.weekly_audit_contract_fingerprint(),
+        }},
+    }), encoding="utf-8")
+    _write_week_days(tmp_path)
+    generator = QueueLLM([_weekly_generator_reply()])
+    audit = QueueLLM([{
+        "lead": True, "threads": [True, True, True],
+        "watch_recap": [], "outlook": [],
+    }])
+
+    result = dn.write_weekly(
+        generator, "2026-07-18",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path, audit_llm=audit)
+
+    assert result is not None
+    row = json.loads((tmp_path / "weekly-health.json").read_text(
+        encoding="utf-8"))["weeks"]["2026-W28"]
+    assert row["status"] == "passed"
+    assert row["attempts"] == 1
+
+
+def test_shadow_weekly_stage_never_calls_generation_or_audit(tmp_path):
+    generator = QueueLLM([_weekly_generator_reply()])
+    audit = QueueLLM([{"lead": True, "threads": [], "watch_recap": [], "outlook": []}])
+
+    result = dn.run_weekly_stage(
+        generator, audit, "2026-07-15",
+        {"weekly": {"enabled": True}}, tmp_path, "",
+        {"mode": "shadow", "writes_public_data": False})
+
+    assert result is None
+    assert generator.calls == []
+    assert audit.calls == []
+
+
 def test_quality_counters_and_structural_evidence_validation_are_json_safe():
     quality = dn.new_quality_stats()
     for name in ("objectivity_audited", "objectivity_repaired",
@@ -1162,10 +1431,10 @@ def weekly_payload_for_audit():
 
 def weekly_refs_for_audit():
     return {
-        "2026-07-06:pick-a": ("item", {"title": "A", "summary": "A 事实"}),
-        "2026-07-07:pick-b": ("item", {"title": "B", "summary": "B 事实"}),
-        "2026-07-08:pick-unrelated": (
-            "item", {"title": "无关事件", "summary": "不得支撑 A 或 B"}),
+        "2026-07-06:pick-a": {"category": "AI", "title": "A", "summary": "A 事实"},
+        "2026-07-07:pick-b": {"category": "AI", "title": "B", "summary": "B 事实"},
+        "2026-07-08:pick-unrelated": {
+            "category": "AI", "title": "无关事件", "summary": "不得支撑 A 或 B"},
     }
 
 
@@ -1182,15 +1451,145 @@ def test_weekly_audit_maps_local_evidence_by_explicit_refs_only():
     assert set(request["whole_week_evidence"]) == {
         "2026-07-06:pick-a", "2026-07-07:pick-b", "2026-07-08:pick-unrelated"}
     assert request["thread_evidence"] == [
-        {"index": 0, "refs": ["2026-07-06:pick-a"],
-         "items": {"2026-07-06:pick-a": {"title": "A", "summary": "A 事实"}}},
-        {"index": 1, "refs": ["2026-07-07:pick-b"],
-         "items": {"2026-07-07:pick-b": {"title": "B", "summary": "B 事实"}}},
+        {"index": 0, "refs": ["2026-07-06:pick-a"]},
+        {"index": 1, "refs": ["2026-07-07:pick-b"]},
     ]
     assert request["watch_recap_evidence"] == [
-        {"index": 0, "refs": ["2026-07-06:pick-a"],
-         "items": {"2026-07-06:pick-a": {"title": "A", "summary": "A 事实"}}},
+        {"index": 0, "refs": ["2026-07-06:pick-a"]},
     ]
+    assert '"items"' not in audit.calls[0][1]
+
+
+def test_weekly_evidence_is_balanced_bounded_and_excludes_unseen_fields():
+    days = []
+    for day in (6, 7):
+        items = []
+        for index in range(60):
+            items.append({
+                "id": f"pick-{index}", "tier": "pick", "category": "ai",
+                "title": f"事件 {day}-{index}", "summary": f"事实 {day}-{index}",
+                "history": [{"date": "2026-07-01", "summary": "历史"}] * 4,
+                "watch": "观察后续",
+                "detail": "DETAIL_SENTINEL" * 200,
+                "sources": [{"name": "Wire", "url": "URL_SENTINEL"}],
+            })
+        days.append({"date": f"2026-07-{day:02d}", "items": items})
+
+    evidence = dn.weekly_pick_evidence(days, max_total=100)
+    material = dn.weekly_pick_material(days, max_total=100)
+
+    assert len(evidence) == len(material) == 100
+    assert sum(ref.startswith("2026-07-06:") for ref in evidence) == 50
+    assert sum(ref.startswith("2026-07-07:") for ref in evidence) == 50
+    assert all(set(row) <= {"category", "title", "summary", "history", "watch"}
+               for row in evidence.values())
+    serialized = json.dumps(evidence, ensure_ascii=False)
+    assert "DETAIL_SENTINEL" not in serialized
+    assert "URL_SENTINEL" not in serialized
+    assert all(len(row.get("history", [])) <= 3 for row in evidence.values())
+    assert [line.split("]", 1)[0][1:] for line in material] == list(evidence)
+
+
+def test_weekly_model_refs_are_bounded_without_truncating_full_week_stats(tmp_path):
+    daily = tmp_path / "daily"
+    daily.mkdir()
+    days = []
+    for day in (6, 7, 8, 9, 10):
+        date = f"2026-07-{day:02d}"
+        payload = {
+            "date": date,
+            "items": [{
+                "id": f"pick-{index}", "tier": "pick", "category": "ai",
+                "title": f"事件 {day}-{index}", "summary": "事实",
+                "sources": [{"name": f"Wire-{day}"}],
+            } for index in range(21)],
+            "deep": [{"id": "deep-0", "read_minutes": 3}],
+            "papers": [{"id": "paper-0", "read_minutes": 4}],
+        }
+        days.append(payload)
+        (daily / f"{date}.js").write_text(
+            f'window.NEWS_DATA["{date}"] = '
+            f'{json.dumps(payload, ensure_ascii=False)};\n', encoding="utf-8")
+    hidden_ref = "2026-07-10:pick-20"
+    generator = QueueLLM([{
+        "lead": {"title": "周主线", "summary": "总述"},
+        "threads": [{
+            "title": "不可见主题", "one_liner": "事实", "direction": "推进",
+            "detail": "事实", "member_refs": [hidden_ref],
+            "representative_refs": [hidden_ref],
+        }],
+        "watch_recap": [{
+            "prior": "不可见", "status": "兑现", "note": "事实",
+            "evidence_refs": [hidden_ref],
+        }],
+        "outlook": [],
+    }])
+
+    result = dn.write_weekly(
+        generator, "2026-07-15",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path, audit_llm=QueueLLM([{
+            "lead": True, "threads": [True, True, True],
+            "watch_recap": [], "outlook": [],
+        }]))
+
+    visible_refs = set(dn.weekly_pick_evidence(days))
+    assert hidden_ref not in visible_refs
+    assert len(result["threads"]) == 3
+    assert all(set(row["member_refs"]) <= visible_refs for row in result["threads"])
+    assert result["watch_recap"] == []
+    assert result["stats"]["pick_count"] == 105
+    assert len(result["reading"]["deep_refs"]) == 5
+    assert len(result["reading"]["paper_refs"]) == 5
+
+
+def test_weekly_deterministic_backfill_never_uses_hidden_detail(tmp_path):
+    _write_week_days(tmp_path)
+    sentinel = "PRIVATE-DETAIL-MUST-NOT-LEAK"
+    for path in (tmp_path / "daily").glob("*.js"):
+        payload = dn.read_daily_payload(path)
+        payload["items"][0]["detail"] = sentinel
+        path.write_text(
+            f'window.NEWS_DATA["{payload["date"]}"] = '
+            f'{json.dumps(payload, ensure_ascii=False)};\n', encoding="utf-8")
+    generator = QueueLLM([{
+        "lead": {}, "threads": [], "watch_recap": [], "outlook": [],
+    }])
+    audit = QueueLLM([{
+        "lead": True, "threads": [True, True, True],
+        "watch_recap": [], "outlook": [],
+    }])
+
+    result = dn.write_weekly(
+        generator, "2026-07-15",
+        {"weekly": {"enabled": True, "min_daily_count": 5, "keep_weeks": 26}},
+        tmp_path, audit_llm=audit)
+
+    assert result is not None
+    assert sentinel not in json.dumps(result, ensure_ascii=False)
+
+
+def test_weekly_report_and_passed_health_are_one_atomic_write(tmp_path, monkeypatch):
+    _write_week_days(tmp_path)
+    generator = QueueLLM([_weekly_generator_reply()])
+    audit = QueueLLM([{
+        "lead": True, "threads": [True, True, True],
+        "watch_recap": [], "outlook": [],
+    }])
+
+    def fail_atomic_write(_replacements):
+        raise OSError("simulated atomic write failure")
+
+    monkeypatch.setattr(dn, "_atomic_replace_texts", fail_atomic_write)
+    with pytest.raises(OSError, match="simulated atomic write failure"):
+        dn.write_weekly(
+            generator, "2026-07-15",
+            {"weekly": {"enabled": True, "min_daily_count": 5,
+                        "keep_weeks": 26}},
+            tmp_path, audit_llm=audit)
+
+    assert not (tmp_path / "weekly" / "2026-W28.js").exists()
+    assert not (tmp_path / "weekly-health.json").exists()
 
 
 def test_weekly_targeted_repair_succeeds_without_changing_refs_or_valid_rows():
@@ -1209,8 +1608,8 @@ def test_weekly_targeted_repair_succeeds_without_changing_refs_or_valid_rows():
                        "representative_refs": ["2026-07-08:pick-unrelated"]}],
          "watch_recap": [{"index": 0, "note": "A 来源确认",
                            "evidence_refs": ["2026-07-08:pick-unrelated"]}]},
-        {"lead": True, "threads": [True, True],
-         "watch_recap": [True], "outlook": [True]},
+        {"threads": [{"index": 0, "ok": True}],
+         "watch_recap": [{"index": 0, "ok": True}]},
     ])
 
     assert dn._audit_weekly(audit, payload, weekly_refs_for_audit()) is True
@@ -1227,6 +1626,18 @@ def test_weekly_targeted_repair_succeeds_without_changing_refs_or_valid_rows():
     repair_request = json.loads(audit.calls[1][1])
     assert repair_request["failed"] == {
         "lead": False, "threads": [0], "watch_recap": [0], "outlook": []}
+    assert set(repair_request["whole_week_evidence"]) == {"2026-07-06:pick-a"}
+    assert repair_request["thread_evidence"] == [
+        {"index": 0, "refs": ["2026-07-06:pick-a"]}]
+    assert repair_request["watch_recap_evidence"] == [
+        {"index": 0, "refs": ["2026-07-06:pick-a"]}]
+    assert [row["index"] for row in repair_request["candidate"]["threads"]] == [0]
+    assert "lead" not in repair_request["candidate"]
+    reaudit_request = json.loads(audit.calls[2][1])
+    for key in ("whole_week_evidence", "thread_evidence",
+                "watch_recap_evidence", "failed"):
+        assert reaudit_request[key] == repair_request[key]
+    assert reaudit_request["candidate"]["threads"][0]["title"] == "修复 A"
 
 
 def test_weekly_clean_audit_succeeds_with_one_call():
