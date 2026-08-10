@@ -32,7 +32,7 @@
 
 ## 4. 验证与提交流程
 - **改完必验**：修改后必须执行 `npm run build` 或 `npm run dev`，确保页面正常、`/admin/` 兼容、API连通。无验证不交工。
-- **必跑回归**：`build` 绿灯只证明构建没断，不证明改动正确——改前端或 API 后跑 `npm run test:post` 与 `npm run test:news`，改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。测试范围与"什么改动必跑哪一组"以 `readme.md` 为准。
+- **必跑回归**：`build` 绿灯只证明构建没断，不证明改动正确——改前端后跑 `npm run test:post` 与 `npm run test:news`，**改 `api/` 后必跑 `npm run test:news`**（`test_admin_api.mjs` 是这条信任边界唯一的自动化守卫；`test:post` 不加载 `api/`，跑它挡不住鉴权回归），改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。测试范围与"什么改动必跑哪一组"以 `readme.md` 为准。
 - **清理收尾**：验证结束后必须检查工作区，确认没有遗留测试文件、临时文件或临时调试代码。
 - **文档同步**：架构变动、运行方式变动或有复用价值的踩坑经验，必须更新至 `readme.md`。
 - **文档收口**：功能落地后把现行事实并入 `readme.md`，删除已完成计划和一次性报告。

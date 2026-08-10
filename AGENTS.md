@@ -59,7 +59,7 @@
 ## 验证规则
 
 - 修改代码后，按需运行 `npm run build` 或 `npm run dev`。
-- 构建通过只说明构建没断，不说明改动正确。改前端或 API 后跑 `npm run test:post` 与 `npm run test:news`；改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。
+- 构建通过只说明构建没断，不说明改动正确。改前端后跑 `npm run test:post` 与 `npm run test:news`；**改 `api/` 后必跑 `npm run test:news`**（`test_admin_api.mjs` 是这条信任边界唯一的自动化守卫，`test:post` 不加载 `api/`）；改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。
 - 验证页面仍能正常加载、`source/admin/index.html` 仍兼容、API 改动已正确接通。
 - 验证结束后检查工作区，确认没有遗留测试文件、临时文件或临时调试代码。
 - 没有说明执行过哪些验证前，不要声称工作已完成。

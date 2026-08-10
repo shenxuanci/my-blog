@@ -18,7 +18,7 @@
 
 - 台账保留每日记录、指纹重置、失败清零和缺口冻结等全部机制，但不再计算解锁判定，也不再输出「待人工最终确认」。逐门进度不显示分母，避免读成「还差几天」。
 - `objectivity.mode` 永久保持 `interim`。完整取证、独立证据链和定向修复的代码继续只在 shadow 下运行。
-- 客观性 shadow 按累计样本封顶：既有样本视为已足够，`shadow_mode:auto` 不再运行 shadow，需要采样时手动 `force`。这一条必须与门语义同时改——`shadow_status` 原先是唯一能关停付费 shadow 的开关，若只删门槛而不改判定，shadow 会无限期每天多跑一遭完整管线。
+- 客观性 shadow 按累计样本封顶：既有样本视为已足够，`shadow_mode:auto` 不再运行 shadow，需要采样时手动 `force`。这一条必须与门语义同时改——`shadow_status` 原先是唯一能关停付费 shadow 的开关，若只删门槛而不改判定，shadow 会无限期每天多跑一遭完整管线。**`shadow_status` 因此必须保持零网络 I/O**：判定成了常量之后，读 Issue 只可能让这一步失败，而 `shadow-policy` 把非零退出当作「状态未知」并 fail-open 去跑付费 shadow，一次限流就会为一个毫无疑问的结论买单十分钟管线；同理 `main()` 在这条分支上不构造 `GitHubClient`（构造函数缺 token 即抛），job 也不再声明 `issues: read`。
 - enrich 文字质量改为人工随时抽查，不再计入连续日。台账继续自动记录 `removed_fields / enrichment_audited_events` 安全指标。
 - 45 条夹具三轮门与配对成本门随之退役，降为可手动触发的质量探针。`Objectivity Acceptance` workflow 保留，仍只读、仍只允许从 `main` 触发。
 
