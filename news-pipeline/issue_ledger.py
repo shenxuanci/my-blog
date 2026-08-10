@@ -21,20 +21,19 @@ GATES = ("selection", "trajectory", "enrich", "objectivity_shadow",
          "source_metrics")
 # Consecutive gates reset to zero on a failed day; cumulative gates only count
 # valid days, so a day without usable data never erases banked observations.
+# That exemption covers missing data only -- a runtime-fingerprint change still
+# zeroes both kinds (see RUNTIME_RESET_GATES below).
 CONSECUTIVE_GATES = ("selection", "trajectory", "objectivity_shadow")
-GATE_TARGETS = {
-    "selection": 7,
-    "trajectory": 5,
-    "objectivity_shadow": 7,
-    "enrich": 5,
-    "source_metrics": 14,
-}
+# ADR 0016 retired the unlock semantics: these streaks are a quality dashboard,
+# not a countdown toward enabling `objectivity active` or authorizing new
+# sources. There are deliberately no per-gate targets to reach -- the former
+# targets were unreachable in practice, because the reset below fires on any
+# change to the four fingerprinted pipeline files.
 # A shared runtime change restarts every clock: the sample composition moved, so
 # pre-change and post-change evidence must never be mixed. A trajectory-UI-only
 # change restarts trajectory alone.
 RUNTIME_RESET_GATES = GATES
 TRAJECTORY_UI_RESET_GATES = ("trajectory",)
-ENRICH_CONTENT_TARGET = 0.80
 ENRICH_SAFETY_MULTIPLIER = 1.2
 ENRICH_BASELINE_DAYS = 3
 
@@ -267,15 +266,6 @@ def enrich_content_ratio(states):
     if total <= 0:
         return None, 0, 0
     return round(passed / total, 4), passed, total
-
-
-def gates_met(streaks, content_ratio):
-    """Report which acceptance gates have reached their documented target."""
-    met = {gate: int(streaks.get(gate) or 0) >= GATE_TARGETS[gate]
-           for gate in GATES}
-    met["enrich"] = met["enrich"] and (
-        content_ratio is not None and content_ratio >= ENRICH_CONTENT_TARGET)
-    return met
 
 
 def marker_for_date(date):
@@ -732,8 +722,8 @@ def render_comment(state, *, content_ratio=None, content_counts=(0, 0)):
          f"watch_ratio={judge.get('watch_ratio') if judge.get('watch_ratio') is not None else 'n/a'}"),
         (f"- Fingerprints: runtime=`{str(fingerprints.get('runtime') or '')[:12]}`, "
          f"trajectory_ui=`{str(fingerprints.get('trajectory_ui') or '')[:12]}`"),
-        "- Current progress: " + ", ".join(
-            f"{GATE_LABELS[gate]} {int(streaks.get(gate) or 0)}/{GATE_TARGETS[gate]}"
+        "- Observed days: " + ", ".join(
+            f"{GATE_LABELS[gate]} {int(streaks.get(gate) or 0)}"
             for gate in GATES),
     ])
     sample = state.get("enrich_sample")
@@ -745,19 +735,13 @@ def render_comment(state, *, content_ratio=None, content_counts=(0, 0)):
     if total:
         lines.append(
             f"- Enrich content samples: {passed}/{total} passed "
-            f"({content_ratio:.1%}; target {ENRICH_CONTENT_TARGET:.0%})")
+            f"({content_ratio:.1%})")
     for gate in GATES:
         review = manual_reviews.get(gate)
         if isinstance(review, dict):
             lines.append(
                 f"- Manual {gate} review: **{review.get('status')}** — "
                 "reviewed against the retained rollout artifact")
-    met = gates_met(streaks, content_ratio)
-    if all(met.values()):
-        lines.append("- 状态：待人工最终确认")
-    else:
-        pending = [GATE_LABELS[gate] for gate in GATES if not met[gate]]
-        lines.append("- 未达标门：" + ", ".join(pending))
     return "\n".join(lines) + "\n"
 
 
@@ -811,26 +795,24 @@ def _finalize(states_by_date, date, updated):
 
 
 def shadow_status(client, *, issue_number):
-    """Return whether full shadow still has unfinished dependent gates."""
+    """Report shadow as capped: auto runs stop, manual `force` still works.
+
+    Retired with ADR 0016. The accumulated sample is treated as sufficient, so
+    this no longer compares streaks against unlock targets -- under the former
+    rule a runtime-fingerprint change zeroed every clock, the targets were
+    therefore unreachable, and `shadow_mode:auto` would have run a second full
+    pipeline every single day with no terminating condition.
+    """
     issue = client.get_issue(issue_number)
-    if str(issue.get("state") or "").lower() != "open":
-        return {
-            "status": "closed",
-            "needed": False,
-            "accepted": True,
-            "streaks": {gate: GATE_TARGETS[gate] for gate in GATES},
-        }
-    states = list(_states_by_date(client.list_comments(issue_number)).values())
-    current = compute_streaks(states)
-    accepted = (
-        current["objectivity_shadow"] >= GATE_TARGETS["objectivity_shadow"]
-        and current["source_metrics"] >= GATE_TARGETS["source_metrics"]
-    )
+    streaks = (
+        {gate: 0 for gate in GATES} if str(issue.get("state") or "").lower() != "open"
+        else compute_streaks(
+            list(_states_by_date(client.list_comments(issue_number)).values())))
     return {
-        "status": "accepted" if accepted else "pending",
-        "needed": not accepted,
-        "accepted": accepted,
-        "streaks": current,
+        "status": "accepted",
+        "needed": False,
+        "accepted": True,
+        "streaks": streaks,
     }
 
 
@@ -894,10 +876,8 @@ def heartbeat_issue(client, *, issue_number, date):
     states_by_date = _states_by_date(comments)
     if existing is not None:
         streaks = compute_streaks(list(states_by_date.values()))
-        ratio, _passed, _total = enrich_content_ratio(
-            _window_states(list(states_by_date.values()), date))
         return {"status": "present", "comment_id": existing.get("id"),
-                "streaks": streaks, "gates_met": gates_met(streaks, ratio)}
+                "streaks": streaks}
 
     updated = build_gap_state(date)
     body = _finalize(states_by_date, date, updated)

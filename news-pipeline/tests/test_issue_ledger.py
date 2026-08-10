@@ -264,24 +264,31 @@ def test_rendered_comment_has_stable_marker_compact_state_and_human_summary():
     body = il.render_comment(daily, content_ratio=0.9, content_counts=(18, 20))
 
     assert body.count(il.marker_for_date("2026-07-22")) == 1
-    assert "待人工最终确认" in body
     assert "2026-07-22" in body
     assert "10 / attempt 2" in body
     assert "0123456" in body
-    assert "Selection 7/7" in body
-    assert "Source metrics 14/14" in body
+    assert "Selection 7" in body
+    assert "Source metrics 14" in body
     assert "18/20 passed" in body
     assert il.parse_machine_state({
         "user": {"login": "github-actions[bot]", "type": "Bot"}, "body": body,
     }) == daily
 
 
-def test_final_confirmation_waits_for_every_gate_including_content_ratio():
+def test_rendered_comment_reports_observed_days_without_unlock_language():
+    """ADR 0016 retired the unlock semantics; the comment is a dashboard.
+
+    Reaching what used to be every target must not produce a final-confirmation
+    verdict, an unmet-gate list, or an "N/target" ratio -- those would read as a
+    countdown toward enabling `objectivity active`, which no longer exists.
+    """
     il = ledger()
     daily = state("2026-07-22", [attempt(10, 2)])
     daily["streaks"] = streaks(selection=7, trajectory=5, enrich=5,
                                objectivity_shadow=7, source_metrics=14)
 
+    at_former_targets = il.render_comment(
+        daily, content_ratio=0.9, content_counts=(18, 20))
     short_source = il.render_comment(
         daily | {"streaks": {**daily["streaks"], "source_metrics": 13}},
         content_ratio=0.9, content_counts=(18, 20))
@@ -289,11 +296,17 @@ def test_final_confirmation_waits_for_every_gate_including_content_ratio():
         daily, content_ratio=0.5, content_counts=(10, 20))
     unreviewed = il.render_comment(daily)
 
-    assert "待人工最终确认" not in short_source
-    assert "Source metrics" in short_source.split("未达标门：")[1]
-    assert "待人工最终确认" not in weak_content
-    assert "Enrich" in weak_content.split("未达标门：")[1]
-    assert "待人工最终确认" not in unreviewed
+    for body in (at_former_targets, short_source, weak_content, unreviewed):
+        assert "待人工最终确认" not in body
+        assert "未达标门" not in body
+        assert "Current progress" not in body
+        assert "/7" not in body and "/14" not in body
+        assert "Observed days: " in body
+
+    assert "Source metrics 13" in short_source
+    # The safety ratio is still reported, just no longer judged against a target.
+    assert "10/20 passed" in weak_content
+    assert "target" not in weak_content
 
 
 def test_attempt_projection_does_not_copy_evidence_or_credentials():
@@ -697,7 +710,15 @@ def test_closed_issue_is_clean_no_op_before_comment_access():
     assert client.calls == [("get_issue", 15)]
 
 
-def test_shadow_status_stops_only_after_objectivity_and_source_gates_are_met():
+def test_shadow_status_is_capped_so_auto_runs_never_pay_for_shadow_again():
+    """ADR 0016: shadow is capped, so `auto` must always resolve to accepted.
+
+    The retired rule compared streaks against a 7/14-day target. Because a
+    runtime-fingerprint change zeroes every clock, those targets were
+    unreachable and `auto` would have run a second full pipeline every day
+    forever. Capping it keeps the streaks visible for diagnostics while the
+    workflow stops paying; `shadow_mode:force` remains the way to sample.
+    """
     il = ledger()
     comments = []
     for day in range(1, 15):
@@ -712,14 +733,15 @@ def test_shadow_status_stops_only_after_objectivity_and_source_gates_are_met():
 
     assert result["needed"] is False
     assert result["accepted"] is True
+    assert result["status"] == "accepted"
     assert result["streaks"]["objectivity_shadow"] == 14
     assert result["streaks"]["source_metrics"] == 14
 
 
-def test_shadow_status_keeps_running_until_source_gate_reaches_fourteen_days():
+def test_shadow_status_stays_accepted_far_short_of_the_retired_targets():
     il = ledger()
     comments = []
-    for day in range(1, 14):
+    for day in range(1, 4):
         daily = state(
             f"2026-07-{day:02d}",
             [attempt(day, 1, runtime="a", trajectory_ui="b")],
@@ -729,10 +751,25 @@ def test_shadow_status_keeps_running_until_source_gate_reaches_fourteen_days():
 
     result = il.shadow_status(client, issue_number=15)
 
-    assert result["needed"] is True
-    assert result["accepted"] is False
-    assert result["streaks"]["objectivity_shadow"] == 13
-    assert result["streaks"]["source_metrics"] == 13
+    assert result["needed"] is False
+    assert result["accepted"] is True
+    # Streaks are still reported for the dashboard, they just gate nothing.
+    assert result["streaks"]["objectivity_shadow"] == 3
+    assert result["streaks"]["source_metrics"] == 3
+
+
+def test_shadow_status_on_a_closed_issue_reports_no_banked_observations():
+    il = ledger()
+    client = FakeClient(issue_state="closed", comments=[])
+
+    result = il.shadow_status(client, issue_number=15)
+
+    assert result["accepted"] is True
+    assert result["needed"] is False
+    # A closed issue must not fabricate target-sized streaks the way the
+    # retired implementation did.
+    assert result["streaks"]["objectivity_shadow"] == 0
+    assert result["streaks"]["source_metrics"] == 0
 
 
 def test_accepted_shadow_outcome_freezes_shadow_and_source_gates():

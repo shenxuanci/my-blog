@@ -23,7 +23,7 @@
 | **`/tests`** | 文章页与后台的 Node 回归 | 只放 `npm run test:post` 的套件（当前为 `test_post_reading.mjs`、`test_admin_editor.mjs`），命名 `test_<范围>.mjs`。日报相关测试一律归 `/news-pipeline/tests`；这里不放临时调试脚本，用完即删。 |
 | **`/scripts`** | Hexo 构建期扩展 | Hexo 启动时自动加载的脚本，如 `twikoo-path.js` 覆盖主题注入点。只放构建期逻辑，前端资源仍归 `/source/js` 与 `/source/css`。 |
 | **`/news-pipeline`** | 每日日报生成管线 | Python 管线、新闻源、评分配置和测试。改日报生成逻辑只在这里动手。 |
-| **`/.github/workflows`** | GitHub Actions | 仅存放仓库自动化工作流：每日生成与云端五门验收台账 `daily-news.yml`、手动只读夹具验收 `objectivity-acceptance.yml`、人工复核回填 `rollout-manual-review.yml`、台账缺口检测 `rollout-heartbeat.yml`。只有 `daily-news.yml` 允许自动 push，且仅限 `main` 分支上的 `source/news/data/`（commit 步骤同时判 `github.ref`，并显式 `git push origin HEAD:main`）。 |
+| **`/.github/workflows`** | GitHub Actions | 仅存放仓库自动化工作流：每日生成与云端五项质量台账 `daily-news.yml`、手动只读夹具质量探针 `objectivity-acceptance.yml`、人工复核回填 `rollout-manual-review.yml`、台账缺口检测 `rollout-heartbeat.yml`。只有 `daily-news.yml` 允许自动 push，且仅限 `main` 分支上的 `source/news/data/`（commit 步骤同时判 `github.ref`，并显式 `git push origin HEAD:main`）。 |
 | **`/docs`** | 项目维护文档 | 根层存现行维护规范；`adr/` 存架构决策记录（顺序编号，只增不改）；`agents/` 存工程 Skill 的仓库级读写约定；`archive/` 只存仍有兼容、迁移或排障价值的历史记录；`visual-baselines/` 存页面回归基准图。完成的实施计划和一次性分析报告在结论并入 `readme.md` 后删除。 |
 
 ---
@@ -73,7 +73,7 @@
 👉 **动作**：修改 `news-pipeline/sources.yaml`；不要直接编辑 `source/news/data/` 下的生成数据。
 
 **场景 5：我要调整每日日报评分、阈值、分类偏好或成本护栏**
-👉 **动作**：修改 `news-pipeline/config.yaml`，运行 `py -3.12 -m pytest news-pipeline/tests -q` 做完整回归；历史独立脚本 `news-pipeline/tests/test_pipeline.py` 不作为交付验收入口。会改变候选样本的归并调用上限和候选阈值属于共享运行时指纹，首次有效 publish 会重置五门；只调整生成或 shadow 成本告警线不会重置。
+👉 **动作**：修改 `news-pipeline/config.yaml`，运行 `py -3.12 -m pytest news-pipeline/tests -q` 做完整回归；历史独立脚本 `news-pipeline/tests/test_pipeline.py` 不作为交付验收入口。会改变候选样本的归并调用上限和候选阈值属于共享运行时指纹，首次有效 publish 会重置台账的五项计数（不再阻塞任何上线动作，见 `docs/adr/0016-retire-five-gate-rollout-acceptance.md`）；只调整生成或 shadow 成本告警线不会重置。
 
 **场景 6：我要人工修正每日日报兴趣画像**
 👉 **动作**：修改 `source/news/data/interest_profile.md`，只编辑以 `- ` 开头的偏好要点；不要手工改 `daily/*.js`、`events.json`、`source_health.json`、`score_history.json`、`feed.xml` 或 `search_index.js`，这些由管线产出或重建。`score_history.json` 是动态精选线的内部账本，损坏时应让管线按静态线回退并重建，不要人工补历史分数。`vocab/*.js` 是已停用单词本的历史数据，也不要手工维护。
