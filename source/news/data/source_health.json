@@ -1,193 +1,5 @@
 {
  "days": {
-  "2026-07-29": {
-   "github-blog": {
-    "count": 1,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 1
-   },
-   "mit-tr": {
-    "count": 2,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 0
-   },
-   "huggingface": {
-    "count": 2,
-    "error": false,
-    "scored_events": 2,
-    "selected_events": 0
-   },
-   "deepmind": {
-    "count": 0,
-    "error": false,
-    "scored_events": 0,
-    "selected_events": 0
-   },
-   "github-changelog": {
-    "count": 4,
-    "error": false,
-    "scored_events": 2,
-    "selected_events": 2
-   },
-   "openai": {
-    "count": 1,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 0
-   },
-   "techcrunch": {
-    "count": 18,
-    "error": false,
-    "scored_events": 18,
-    "selected_events": 5
-   },
-   "cloudflare": {
-    "count": 1,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 0
-   },
-   "verge": {
-    "count": 10,
-    "error": false,
-    "scored_events": 10,
-    "selected_events": 5
-   },
-   "ars": {
-    "count": 12,
-    "error": false,
-    "scored_events": 11,
-    "selected_events": 4
-   },
-   "thedecoder": {
-    "count": 5,
-    "error": false,
-    "scored_events": 5,
-    "selected_events": 1
-   },
-   "aihot": {
-    "count": 19,
-    "error": false,
-    "scored_events": 0,
-    "selected_events": 0
-   },
-   "cnbc": {
-    "count": 18,
-    "error": false,
-    "scored_events": 17,
-    "selected_events": 4
-   },
-   "hn": {
-    "count": 18,
-    "error": false,
-    "scored_events": 15,
-    "selected_events": 3
-   },
-   "36kr": {
-    "count": 18,
-    "error": false,
-    "scored_events": 16,
-    "selected_events": 2
-   },
-   "bbc-cn": {
-    "count": 8,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 1
-   },
-   "bbc-world": {
-    "count": 18,
-    "error": false,
-    "scored_events": 11,
-    "selected_events": 8
-   },
-   "aljazeera": {
-    "count": 18,
-    "error": false,
-    "scored_events": 17,
-    "selected_events": 3
-   },
-   "nyt-cn": {
-    "count": 8,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 1
-   },
-   "guardian": {
-    "count": 18,
-    "error": false,
-    "scored_events": 8,
-    "selected_events": 7
-   },
-   "ithome": {
-    "count": 18,
-    "error": false,
-    "scored_events": 17,
-    "selected_events": 1
-   },
-   "npr": {
-    "count": 10,
-    "error": false,
-    "scored_events": 9,
-    "selected_events": 5
-   },
-   "vercel": {
-    "count": 2,
-    "error": false,
-    "scored_events": 2,
-    "selected_events": 0
-   },
-   "wscn": {
-    "count": 18,
-    "error": false,
-    "scored_events": 15,
-    "selected_events": 4
-   },
-   "atlantic": {
-    "count": 12,
-    "error": false,
-    "scored_events": 0,
-    "selected_events": 0
-   },
-   "thepaper-edu": {
-    "count": 9,
-    "error": false,
-    "scored_events": 0,
-    "selected_events": 0
-   },
-   "anthropic": {
-    "count": 0,
-    "error": false,
-    "scored_events": 0,
-    "selected_events": 0
-   },
-   "guokr": {
-    "count": 4,
-    "error": false,
-    "scored_events": 1,
-    "selected_events": 0
-   },
-   "thepaper": {
-    "count": 16,
-    "error": false,
-    "scored_events": 3,
-    "selected_events": 1
-   },
-   "cls-depth": {
-    "count": 18,
-    "error": false,
-    "scored_events": 15,
-    "selected_events": 4
-   },
-   "sciencenet": {
-    "count": 16,
-    "error": false,
-    "scored_events": 0,
-    "selected_events": 0
-   }
-  },
   "2026-07-30": {
    "github-blog": {
     "count": 1,
@@ -2630,6 +2442,194 @@
     "error": false,
     "scored_events": 9,
     "selected_events": 0
+   }
+  },
+  "2026-08-12": {
+   "mit-tr": {
+    "count": 2,
+    "error": false,
+    "scored_events": 0,
+    "selected_events": 0
+   },
+   "huggingface": {
+    "count": 1,
+    "error": false,
+    "scored_events": 1,
+    "selected_events": 0
+   },
+   "github-blog": {
+    "count": 1,
+    "error": false,
+    "scored_events": 1,
+    "selected_events": 0
+   },
+   "github-changelog": {
+    "count": 6,
+    "error": false,
+    "scored_events": 5,
+    "selected_events": 2
+   },
+   "deepmind": {
+    "count": 0,
+    "error": false,
+    "scored_events": 0,
+    "selected_events": 0
+   },
+   "techcrunch": {
+    "count": 18,
+    "error": false,
+    "scored_events": 18,
+    "selected_events": 3
+   },
+   "openai": {
+    "count": 2,
+    "error": false,
+    "scored_events": 2,
+    "selected_events": 2
+   },
+   "verge": {
+    "count": 10,
+    "error": false,
+    "scored_events": 9,
+    "selected_events": 1
+   },
+   "cloudflare": {
+    "count": 1,
+    "error": false,
+    "scored_events": 1,
+    "selected_events": 1
+   },
+   "hn": {
+    "count": 18,
+    "error": false,
+    "scored_events": 18,
+    "selected_events": 0
+   },
+   "ars": {
+    "count": 14,
+    "error": false,
+    "scored_events": 11,
+    "selected_events": 2
+   },
+   "aihot": {
+    "count": 24,
+    "error": false,
+    "scored_events": 0,
+    "selected_events": 0
+   },
+   "thedecoder": {
+    "count": 8,
+    "error": false,
+    "scored_events": 8,
+    "selected_events": 6
+   },
+   "cnbc": {
+    "count": 18,
+    "error": false,
+    "scored_events": 17,
+    "selected_events": 5
+   },
+   "bbc-world": {
+    "count": 18,
+    "error": false,
+    "scored_events": 16,
+    "selected_events": 6
+   },
+   "36kr": {
+    "count": 0,
+    "error": false,
+    "scored_events": 0,
+    "selected_events": 0
+   },
+   "bbc-cn": {
+    "count": 8,
+    "error": false,
+    "scored_events": 8,
+    "selected_events": 3
+   },
+   "aljazeera": {
+    "count": 18,
+    "error": false,
+    "scored_events": 18,
+    "selected_events": 3
+   },
+   "guardian": {
+    "count": 18,
+    "error": false,
+    "scored_events": 13,
+    "selected_events": 2
+   },
+   "npr": {
+    "count": 10,
+    "error": false,
+    "scored_events": 7,
+    "selected_events": 2
+   },
+   "ithome": {
+    "count": 18,
+    "error": false,
+    "scored_events": 17,
+    "selected_events": 4
+   },
+   "nyt-cn": {
+    "count": 6,
+    "error": false,
+    "scored_events": 6,
+    "selected_events": 2
+   },
+   "vercel": {
+    "count": 7,
+    "error": false,
+    "scored_events": 4,
+    "selected_events": 2
+   },
+   "atlantic": {
+    "count": 12,
+    "error": false,
+    "scored_events": 7,
+    "selected_events": 1
+   },
+   "thepaper-edu": {
+    "count": 3,
+    "error": false,
+    "scored_events": 2,
+    "selected_events": 0
+   },
+   "anthropic": {
+    "count": 0,
+    "error": false,
+    "scored_events": 0,
+    "selected_events": 0
+   },
+   "wscn": {
+    "count": 18,
+    "error": false,
+    "scored_events": 14,
+    "selected_events": 8
+   },
+   "guokr": {
+    "count": 6,
+    "error": false,
+    "scored_events": 6,
+    "selected_events": 2
+   },
+   "thepaper": {
+    "count": 15,
+    "error": false,
+    "scored_events": 13,
+    "selected_events": 1
+   },
+   "sciencenet": {
+    "count": 17,
+    "error": false,
+    "scored_events": 0,
+    "selected_events": 0
+   },
+   "cls-depth": {
+    "count": 18,
+    "error": false,
+    "scored_events": 17,
+    "selected_events": 5
    }
   }
  }
