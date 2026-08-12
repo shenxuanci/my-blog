@@ -27,7 +27,10 @@
   "article_vibe_coding_reflection": "/2026/03/22/vibe-coding-shi-dai-wen-ke-sheng-gong-ke-sheng-yu-ai-hong-liu-zhong-de-ge-ti-zun-yan/",
   "article_1774022033700": "/2026/03/20/ce-shi/"
 };
-    const id = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    let id = '';
+    try {
+      id = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    } catch (_) {}
     const target = articleMap[id];
     window.location.replace(target || '/archives/');
   </script>

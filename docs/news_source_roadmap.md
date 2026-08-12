@@ -2,7 +2,7 @@
 
 > 日报信源扩展的活跃待办清单。信源终局定案写在 `news-pipeline/sources.yaml` 尾部注释，现行机制写在 `readme.md` 日报章节；本文件只记**还没做完的事**，全部完成后删除。
 >
-> 最后更新：2026-08-10
+> 最后更新：2026-08-12
 
 ## 当前生产基线（以 Issue #15 为准）
 
@@ -115,7 +115,7 @@
 ## 阶段三：英文财经深读（`society_finance` 栏串行）
 
 1. **Noahpinion（#31，保留）**：URL 用自有域名 `https://www.noahpinion.blog/feed`（非 `noahpinion.substack.com`，见上条出口封锁）。2026-08-09 抽查产业政策综述、韩国股市与 AI 内存周期、零售自动化政策三篇，均有独立机制分析，匹配 `society_finance`；14 日 `deep_health.json` 为 14/14 抓取成功、4 篇主题匹配过线且全部入选，说明 `topic_filter: finance` 能筛出财经与公共经济政策内容，保留并关闭 #31。
-2. ~~Marginal Revolution~~（#32，2026-08-12 停用）：Actions 出口验证已通过；截至 `main@eb2d578`，`deep_health.json` 的 08-10~08-12 为 3/3 抓取成功、fetched 15 / candidates 15 / scored 12 / topic matched 12 / 过线 2 / 入选 1。分层抽查了移民收入同化论文摘要、链接汇总与 AI 同行评审实验三类边界样本：前者有独特数据价值，但链接汇总把多个异质主题拼在一起；更关键的是，不含宏观、商业、市场、劳动或公共经济机制的 AI 同行评审文被 `topic_filter: finance` 放行，以 8 分实际进入 `society_finance`。这是读者可见的栏目越界，不是「最终没入选」的无害噪声，因此在 finance 过滤器修复并经回归前停用。
+2. ~~Marginal Revolution~~（#32，2026-08-12 停用）：Actions 出口验证已通过；截至 `main@eb2d578`，`deep_health.json` 的 08-10~08-12 为 3/3 抓取成功、fetched 15 / candidates 15 / scored 12 / topic matched 12 / 过线 2 / 入选 1。分层抽查了移民收入同化论文摘要、链接汇总与 AI 同行评审实验三类边界样本：前者有独特数据价值，但链接汇总把多个异质主题拼在一起；更关键的是，不含宏观、商业、市场、劳动或公共经济机制的 AI 同行评审文被 `topic_filter: finance` 放行，以 8 分实际进入 `society_finance`。这是读者可见的栏目越界，不是「最终没入选」的无害噪声，因此在 finance 过滤器修复并经回归前停用。后续修复由开放的 Issue #43 承接；在其变更进入 `main` 且 Actions 验证通过前，不重新启用该源。
 3. ~~Apricitas Economics~~（#33 判死）：feed 可达可解析，但最新一篇停在 2026-05-03、近三个月未更，78 小时窗口恒为 0 篇。
 4. ~~Kyla's Newsletter~~（#34 判死）：`*.substack.com` 被封且 `kylascanlon.com/feed` 返回 404 无自有域名可换；源本身最新一篇停在 2026-05-28。
 

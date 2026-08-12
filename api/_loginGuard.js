@@ -23,9 +23,6 @@ function pruneLoginAttempts(now) {
   for (const [key, row] of loginAttempts) {
     if (now - row.startedAt >= LOGIN_WINDOW_MS) loginAttempts.delete(key);
   }
-  while (loginAttempts.size >= MAX_TRACKED_CLIENTS) {
-    loginAttempts.delete(loginAttempts.keys().next().value);
-  }
 }
 
 function retryAfterSeconds(req, now = Date.now()) {
@@ -42,6 +39,9 @@ function recordFailedLogin(req, now = Date.now()) {
   if (row) {
     row.failures += 1;
   } else {
+    while (loginAttempts.size >= MAX_TRACKED_CLIENTS) {
+      loginAttempts.delete(loginAttempts.keys().next().value);
+    }
     loginAttempts.set(key, { failures: 1, startedAt: now });
   }
 }

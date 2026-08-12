@@ -36,6 +36,15 @@ function entriesKey(type) {
   return type === 'feedback' || type === 'misses' ? 'entries' : 'items';
 }
 
+function isStoredState(value, type) {
+  if (!value || typeof value !== 'object' || Array.isArray(value) || value.version !== 1) {
+    return false;
+  }
+  const list = value[entriesKey(type)];
+  return Array.isArray(list)
+    && list.every((entry) => entry && typeof entry === 'object' && !Array.isArray(entry));
+}
+
 function clip(value, max) {
   return String(value ?? '').slice(0, max);
 }
@@ -234,8 +243,10 @@ async function readState(type) {
   try {
     const { content, sha } = await readTextFile(STATE_FILES[type]);
     const parsed = JSON.parse(content);
-    if (parsed && typeof parsed === 'object') return { state: parsed, sha };
-    return { state: emptyState(type), sha };
+    if (!isStoredState(parsed, type)) {
+      throw createHttpError(500, `${STATE_FILES[type]} is corrupted`);
+    }
+    return { state: parsed, sha };
   } catch (error) {
     if (error.status === 404) {
       // 文件还不存在：冷启动，PUT 时不带 sha 即创建新文件

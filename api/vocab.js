@@ -39,6 +39,17 @@ function normalizeBook(parsed) {
   };
 }
 
+function isStoredBook(value) {
+  return Boolean(value)
+    && typeof value === 'object'
+    && !Array.isArray(value)
+    && value.version === 1
+    && Array.isArray(value.words)
+    && value.words.every((entry) => entry && typeof entry === 'object' && !Array.isArray(entry))
+    && Array.isArray(value.pending)
+    && value.pending.every((entry) => entry && typeof entry === 'object' && !Array.isArray(entry));
+}
+
 function validate(op, payload) {
   if (!OPS.includes(op)) {
     throw createHttpError(400, `Invalid op: ${op}`);
@@ -124,7 +135,11 @@ function applyOp(book, op, payload, key, now) {
 async function readBook() {
   try {
     const { content, sha } = await readTextFile(BOOK_FILE);
-    return { book: normalizeBook(JSON.parse(content)), sha };
+    const parsed = JSON.parse(content);
+    if (!isStoredBook(parsed)) {
+      throw createHttpError(500, `${BOOK_FILE} is corrupted`);
+    }
+    return { book: normalizeBook(parsed), sha };
   } catch (error) {
     if (error.status === 404) return { book: emptyBook(), sha: undefined };
     if (error instanceof SyntaxError) {

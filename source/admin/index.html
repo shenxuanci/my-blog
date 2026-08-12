@@ -269,6 +269,14 @@
       gap: 0.65rem;
     }
 
+    .inline-actions.spaced-above {
+      margin-top: 0.75rem;
+    }
+
+    .inline-actions.spaced-below {
+      margin-bottom: 0.75rem;
+    }
+
     .editor-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -437,7 +445,7 @@
               <div class="cover-preview"><img id="coverPreview" alt=""></div>
               <div>
                 <input id="coverUrl" type="text" placeholder="/images/covers/defaults/fallback.webp">
-                <div class="inline-actions" style="margin-top: 0.75rem;">
+                <div class="inline-actions spaced-above">
                   <button id="uploadCoverBtn" class="secondary" type="button">上传封面</button>
                   <button id="useDefaultCoverBtn" class="secondary" type="button">使用分类默认</button>
                 </div>
@@ -447,7 +455,7 @@
 
           <div class="field">
             <label for="content">正文</label>
-            <div class="inline-actions" style="margin-bottom: 0.75rem;">
+            <div class="inline-actions spaced-below">
               <button id="uploadContentImageBtn" class="secondary" type="button">插入图片</button>
               <button id="importMarkdownBtn" class="secondary" type="button">导入 Markdown</button>
             </div>

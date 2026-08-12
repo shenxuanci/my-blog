@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import vm from "node:vm";
+import ejs from "ejs";
 import { marked } from "marked";
 import { JSDOM } from "jsdom";
 
@@ -24,6 +26,14 @@ const vercelConfig = JSON.parse(await readFile(
   new URL("../vercel.json", import.meta.url),
   "utf8",
 ));
+const legacyArticlesHtml = await readFile(
+  new URL("../source/articles.html", import.meta.url),
+  "utf8",
+);
+const twikooPathScript = await readFile(
+  new URL("../scripts/twikoo-path.js", import.meta.url),
+  "utf8",
+);
 
 function createPostDom(body, { desktop = false, height = 500 } = {}) {
   const dom = new JSDOM(
@@ -438,6 +448,23 @@ test("the deleted essay URL permanently redirects to the current essay URL", () 
   });
 });
 
+test("legacy article redirect falls back when the URL hash is malformed", () => {
+  const script = /<script>([\s\S]*?)<\/script>/.exec(legacyArticlesHtml)?.[1];
+  assert.ok(script);
+  let target = "";
+  const context = vm.createContext({
+    decodeURIComponent,
+    window: {
+      location: {
+        hash: "#%E0%A4%A",
+        replace(value) { target = value; },
+      },
+    },
+  });
+  assert.doesNotThrow(() => vm.runInContext(script, context));
+  assert.equal(target, "/archives/");
+});
+
 function createHighlightDom(themeCss) {
   return new JSDOM(`
     <!doctype html>
@@ -628,6 +655,45 @@ test("the dark highlight stylesheet ships disabled so the runtime toggle stays c
   ]) {
     assert.equal(applyFilter(tag), tag);
   }
+});
+
+test("Twikoo path serialization keeps front matter from breaking the inline script", () => {
+  const templateMatch = twikooPathScript.match(
+    /const TWIKOO_VIEW = `([\s\S]*?)`;\s*\n\s*hexo\.extend/,
+  );
+  assert.ok(templateMatch, "Twikoo injection template should remain discoverable");
+
+  const hostilePath = "line-one\nline-two'\\</script>";
+  const html = ejs.render(templateMatch[1], {
+    is_post: () => true,
+    is_page: () => false,
+    page: { comments: true, path: "fallback/", twikooPath: hostilePath },
+    theme: {
+      post: { comments: { enable: true } },
+      static_prefix: { twikoo: "https://cdn.example/" },
+      twikoo: { envId: "test-env", lang: "zh-CN" },
+    },
+    url_for: (value) => `/${value}`,
+    url_join: (base, file) => `${base}${file}`,
+  });
+  const dom = new JSDOM(html);
+  const inlineScript = dom.window.document.querySelector("script")?.textContent;
+  assert.ok(inlineScript, "Twikoo inline script should be rendered");
+
+  let receivedPath;
+  vm.runInNewContext(inlineScript, {
+    Fluid: {
+      plugins: { fancyBox() {}, imageCaption() {} },
+      utils: {
+        createScript: (_url, callback) => callback(),
+        listenDOMLoaded: (callback) => callback(),
+        loadComments: (_selector, callback) => callback(),
+      },
+    },
+    twikoo: { init: ({ path }) => { receivedPath = path; } },
+  });
+  assert.equal(receivedPath, hostilePath);
+  dom.window.close();
 });
 
 

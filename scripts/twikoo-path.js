@@ -23,7 +23,7 @@ const TWIKOO_VIEW = `<% if ((!is_post() && !is_page()) || (is_post() && theme.po
             envId: '<%= theme.twikoo.envId %>',
             <% if (theme.twikoo.region) { %>region: '<%= theme.twikoo.region %>',<% } %>
             el: '#twikoo',
-            path: '<%= page.twikooPath || url_for(page.path) %>',
+            path: JSON.parse(decodeURIComponent("<%- encodeURIComponent(JSON.stringify(String(page.twikooPath || url_for(page.path)))) %>")),
             lang: '<%= theme.twikoo.lang || "zh-CN" %>',
             onCommentLoaded: function() {
               Fluid.utils.listenDOMLoaded(function() {

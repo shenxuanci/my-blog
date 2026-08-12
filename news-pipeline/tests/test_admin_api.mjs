@@ -12,6 +12,7 @@ const adminSession = require("../../api/adminSession.js");
 const adminSettings = require("../../api/adminSettings.js");
 const adminUpload = require("../../api/adminUpload.js");
 const newsState = require("../../api/newsState.js");
+const vocab = require("../../api/vocab.js");
 
 function jsonResponse(data, status = 200) {
   return {
@@ -200,6 +201,24 @@ test("admin session rate limits repeated failed logins from one client", async (
   });
 });
 
+test("checking a full login-guard map does not evict an already blocked client", () => {
+  loginGuard.resetLoginAttempts();
+  const blocked = { headers: { "x-vercel-forwarded-for": "203.0.113.1" } };
+  try {
+    for (let attempt = 0; attempt < loginGuard.MAX_FAILED_ATTEMPTS; attempt += 1) {
+      loginGuard.recordFailedLogin(blocked, 1_000);
+    }
+    for (let index = 2; index <= loginGuard.MAX_TRACKED_CLIENTS; index += 1) {
+      loginGuard.recordFailedLogin({
+        headers: { "x-vercel-forwarded-for": `198.51.${Math.floor(index / 256)}.${index % 256}` },
+      }, 1_000);
+    }
+    assert.ok(loginGuard.retryAfterSeconds(blocked, 2_000) > 0);
+  } finally {
+    loginGuard.resetLoginAttempts();
+  }
+});
+
 test("misses state requires an authenticated personal session", async () => {
   await withRepoEnv(async () => {
     const req = { method: "GET", headers: {}, query: { type: "misses" } };
@@ -207,6 +226,71 @@ test("misses state requires an authenticated personal session", async () => {
     await newsState(req, res);
     assert.equal(res.statusCode, 401);
     assert.equal(res.body.success, false);
+  });
+});
+
+test("personal state rejects an invalid stored shape without overwriting it", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    let writes = 0;
+    globalThis.fetch = async (url, options = {}) => {
+      if ((options.method || "GET") === "PUT") {
+        writes += 1;
+        return jsonResponse({ content: { sha: "next-sha" } });
+      }
+      return jsonResponse({
+        content: Buffer.from('{"version":1,"items":"corrupted"}\n', "utf8").toString("base64"),
+        sha: "state-sha",
+      });
+    };
+    try {
+      const session = github.createAdminSession("admin-secret", Date.now());
+      const res = mockResponse();
+      await newsState({
+        method: "POST",
+        headers: { cookie: `aoiblog_admin_session=${session}` },
+        body: {
+          type: "favorites",
+          payload: { date: "2026-08-12", item_id: "pick-1", op: "add" },
+        },
+      }, res);
+      assert.equal(res.statusCode, 500);
+      assert.match(res.body.error, /corrupted/i);
+      assert.equal(writes, 0);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("disabled vocab API rejects an invalid stored shape without overwriting it", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    let writes = 0;
+    globalThis.fetch = async (url, options = {}) => {
+      if ((options.method || "GET") === "PUT") {
+        writes += 1;
+        return jsonResponse({ content: { sha: "next-sha" } });
+      }
+      return jsonResponse({
+        content: Buffer.from('{"version":1,"words":"corrupted","pending":[]}\n', "utf8").toString("base64"),
+        sha: "book-sha",
+      });
+    };
+    try {
+      const session = github.createAdminSession("admin-secret", Date.now());
+      const res = mockResponse();
+      await vocab({
+        method: "POST",
+        headers: { cookie: `aoiblog_admin_session=${session}` },
+        body: { op: "add", payload: { word: "boundary" } },
+      }, res);
+      assert.equal(res.statusCode, 500);
+      assert.match(res.body.error, /corrupted/i);
+      assert.equal(writes, 0);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
   });
 });
 
@@ -764,7 +848,7 @@ test("post paths are restricted to a single flat .md file under source/_posts", 
     "source/_posts/%2e%2e/evil.md",
     "source/_posts/.md",
     "source/_posts/..md",
-    "source/_posts/a .md",
+    "source/_posts/a\0.md",
     "source/_postsevil.md",
     "",
   ];
@@ -915,6 +999,26 @@ test("deployment headers prevent MIME sniffing and admin clickjacking", async ()
 
   assert.equal(headersFor("/(.*)")["x-content-type-options"], "nosniff");
   assert.equal(headersFor("/admin/(.*)")["x-frame-options"], "DENY");
+  const adminPolicy = headersFor("/admin/(.*)")["content-security-policy"];
+  assert.match(adminPolicy, /(?:^|; )script-src 'self' 'sha256-[A-Za-z0-9+/=]+'(?:;|$)/);
+  assert.doesNotMatch(adminPolicy, /'unsafe-inline'|'unsafe-eval'/);
+  assert.match(adminPolicy, /(?:^|; )object-src 'none'(?:;|$)/);
+  assert.match(adminPolicy, /(?:^|; )base-uri 'none'(?:;|$)/);
+  assert.match(adminPolicy, /(?:^|; )frame-ancestors 'none'(?:;|$)/);
+  assert.equal(headersFor("/admin")["content-security-policy"], adminPolicy);
+  const adminHtml = await readFile(new URL("../../source/admin/index.html", import.meta.url), "utf8");
+  assert.doesNotMatch(adminHtml, /\s(?:style|on[a-z]+)\s*=/i);
+  const inlineScript = /<script>([\s\S]*?)<\/script>\s*<\/body>/.exec(adminHtml)?.[1];
+  const inlineStyle = /<style>([\s\S]*?)<\/style>/.exec(adminHtml)?.[1];
+  assert.ok(inlineScript && inlineStyle);
+  // Git stores this text as LF and the HTML parser normalizes source newlines
+  // before CSP hashes inline blocks. A hash of a Windows CRLF checkout works
+  // only in the local file and blocks the deployed admin page.
+  const cspHash = (value) => createHash("sha256")
+    .update(value.replace(/\r\n?/g, "\n"))
+    .digest("base64");
+  assert.ok(adminPolicy.includes(`script-src 'self' 'sha256-${cspHash(inlineScript)}'`));
+  assert.ok(adminPolicy.includes(`style-src 'self' 'sha256-${cspHash(inlineStyle)}'`));
   const newsPolicy = headersFor("/news/(.*)")["content-security-policy"];
   assert.match(newsPolicy, /(?:^|; )script-src 'self'(?:;|$)/);
   assert.match(newsPolicy, /(?:^|; )object-src 'none'(?:;|$)/);
