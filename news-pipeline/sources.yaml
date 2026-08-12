@@ -543,10 +543,10 @@ sources:
   #    与 Noahpinion(society_finance) 同时进观察期，每栏观察期新源 ≤1。
   #  - 不新开 voices/观点栏。深读仍使用既有三栏，条目可带 reporting /
   #    analysis / opinion 内容类型标签；非法或历史缺失值不展示。
-  #  - 镜像候选调研排在阮一峰、晚点和英文财经源完整队列复盘之后，不与
-  #    当前观察队列并行，避免继续扩大未验收范围。
-  #  - 主管线：数据驱动不预点名，14 天源指标（约 08-05）攒满后做一次
-  #    「缺什么补源」评估（预期 finance）；涉华对冲源仍排客观性验收后。
+  #  - 镜像候选不再因旧观察队列收口而自动启动；只有主管线证据形成
+  #    具体供给缺口假设时才定向调研，避免扩大未验证范围。
+  #  - 主管线的固定 14 日解锁条件已随 ADR 0016 退役。评估按运行时指纹
+  #    分开读合格供给、入选贡献和漏读证据；假设成立后才按需跑 shadow。
 
   # ---------- 舆论源（默认关闭，需要再开） ----------
   - id: reddit-worldnews
@@ -714,9 +714,10 @@ deep_sources:
     channel: society_finance
     topic_filter: finance
     enabled: true
-  # 2026-08-09 启用：自有域名不受 *.substack.com 的封锁影响；仍须先通过
-  # GitHub Actions 出口验证，再从首个有效生产产出日起算 7 个有效日观察。
-  # 复核重点是短文密度与 AI 主题偏移（topic_filter: finance 是否拦得住）。
+  # 2026-08-12 停用：Actions 出口和抓取链路正常，但 finance 过滤将不含
+  # 宏观、商业、市场、劳动或公共经济机制的 AI 同行评审文判为匹配，并以
+  # 8 分实际进入 society_finance。源本身有偶发的财经数据价值，但在过滤器
+  # 修复前不能安全作为综合评论源启用。
   - id: marginal-revolution
     name: Marginal Revolution
     type: rss
@@ -724,7 +725,7 @@ deep_sources:
     lang: en
     channel: society_finance
     topic_filter: finance
-    enabled: true
+    enabled: false
   # 2026-07-26 判死，退出候选队列：feed 可达且可解析，但最新一篇停在
   # 2026-05-03，近三个月未更新；78 小时生产窗口下恒为 0 篇，不构成深读供给。
   - id: apricitas
