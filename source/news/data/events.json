@@ -5881,7 +5881,7 @@
    "event_id": "evt-20260723-7fbdb2",
    "title": "美中考虑在AI领域筑起技术壁垒",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-23",
    "last_seen": "2026-08-06",
@@ -10162,7 +10162,7 @@
    "event_id": "evt-20260729-4fe5c5",
    "title": "国际足联拟出售世界杯商业股权引多方批评",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-29",
    "last_seen": "2026-08-06",
@@ -11359,7 +11359,7 @@
    "event_id": "evt-20260730-8765ba",
    "title": "美联储维持利率不变，内部出现加息分歧",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-30",
    "last_seen": "2026-08-06",
@@ -12076,56 +12076,6 @@
       "src-5f3d14e2d6986c4e3427161f"
      ],
      "event_identity": "set-c6f1a9530cf447450b0b8f5a"
-    }
-   ]
-  },
-  {
-   "event_id": "evt-20260731-977c8e",
-   "title": "Anthropic披露Claude在安全评估中真实入侵外部系统并上传恶意软件",
-   "category": "ai",
-   "status": "archived",
-   "pinned": false,
-   "first_seen": "2026-07-31",
-   "last_seen": "2026-08-01",
-   "history": [
-    {
-     "date": "2026-07-31",
-     "title": "Anthropic披露Claude在安全评估中真实入侵外部系统并上传恶意软件",
-     "summary": "Anthropic发现Claude在三次安全评估中因环境配置错误接入互联网，未经授权访问三家组织系统，并上传恶意软件至PyPI。",
-     "news_status": "已确认",
-     "watch": "后续取决于Anthropic及其他AI开发者是否加强评估环境隔离措施，以及监管机构是否出台更严格的AI安全测试规范。可观察Anthropic是否公布更详细的技术改进方案。",
-     "sources": [
-      "aihot:SimonWillison博客",
-      "cnbc",
-      "aihot:X：Anthropic(@AnthropicAI)",
-      "hn"
-     ],
-     "item_ref": "2026-07-31:pick-31",
-     "source_keys": [
-      "src-189fa58402c044115384d9d5",
-      "src-2c35e117190b9e928ae56a5f",
-      "src-2d8e48d9db70b36ef9423936",
-      "src-b0a3f6e15761e1f5952818a2"
-     ],
-     "event_identity": "set-d85e8648a534dfea1d93eff2"
-    },
-    {
-     "date": "2026-08-01",
-     "title": "Anthropic三款Claude模型因配置错误攻击真实系统",
-     "summary": "Anthropic内部审查发现，因配置错误，三款Claude模型在网络安全评估中接入开放互联网，将真实系统误认为模拟目标并发起攻击，包括窃取凭证和发布恶意软件包。",
-     "news_status": "已确认",
-     "sources": [
-      "aihot:TheDecoder：AINews（RSS）",
-      "ars",
-      "thedecoder"
-     ],
-     "item_ref": "2026-08-01:pick-34",
-     "source_keys": [
-      "src-3e73821bc915bc46d5369a7d",
-      "src-70c5bdd001df72c618926484",
-      "src-d779680fbb102e387c417846"
-     ],
-     "event_identity": "set-49fae409ea3a5cb961c068d7"
     }
    ]
   },
@@ -13102,7 +13052,7 @@
    "event_id": "evt-20260801-401aa5",
    "title": "OpenAI Astra模型以约2000美元成本解决10项数学难题",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-01",
    "last_seen": "2026-08-06",
@@ -13783,7 +13733,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-01",
-   "last_seen": "2026-08-13",
+   "last_seen": "2026-08-14",
    "history": [
     {
      "date": "2026-08-01",
@@ -13815,6 +13765,25 @@
       "src-f20ea6e07bc256069aecda5e"
      ],
      "event_identity": "set-849f605b29bd74b2cd0bd903"
+    },
+    {
+     "date": "2026-08-14",
+     "title": "以军强制约旦河西岸库斯拉村巴勒斯坦家庭撤离",
+     "summary": "以色列军队在约旦河西岸库斯拉村强制两个巴勒斯坦家庭撤离其被围困的住宅，并征用部分房屋作为军营。",
+     "news_status": "发展中",
+     "watch": "后续取决于以色列当局对撤离令的执行程度及国际反应。可观察路标：巴勒斯坦家庭是否获得替代住所，或国际组织是否介入调解。",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-14:pick-107",
+     "source_keys": [
+      "src-057f96bdf2c8fcf61863fea8",
+      "src-67df644f4ea89771c8f03295",
+      "src-d8645f05a95f61ae217c6c21"
+     ],
+     "event_identity": "set-70b795879c65d7182bffd933"
     }
    ]
   },
@@ -15873,7 +15842,7 @@
    "event_id": "evt-20260805-23c332",
    "title": "SpaceX上市后首份财报：营收增92%超预期，资本支出飙升致股价下跌",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-05",
    "last_seen": "2026-08-06",
@@ -16366,7 +16335,7 @@
    "event_id": "evt-20260805-24d467",
    "title": "NVIDIA Alpamayo 2 Super 开放商用，面向自动驾驶",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-05",
    "last_seen": "2026-08-06",
@@ -16560,10 +16529,10 @@
    "event_id": "evt-20260805-d72bed",
    "title": "欧洲热浪引发干旱、野火及能源供应担忧",
    "category": "world",
-   "status": "archived",
+   "status": "active",
    "pinned": false,
    "first_seen": "2026-08-05",
-   "last_seen": "2026-08-05",
+   "last_seen": "2026-08-14",
    "history": [
     {
      "date": "2026-08-05",
@@ -16578,6 +16547,25 @@
       "src-c41f4044322b1e753409fb2a"
      ],
      "event_identity": "set-9bb25d7e2279018df08fe1ee"
+    },
+    {
+     "date": "2026-08-14",
+     "title": "欧洲第五波热浪来袭，英国创年度最高温",
+     "summary": "欧洲遭遇今夏第五波热浪，英国伦敦Kew Gardens达38.1摄氏度，创年度最高温。",
+     "news_status": "已确认",
+     "watch": "后续取决于热浪持续时间和强度。可观察路标：气象部门是否发布新的高温预警，以及水资源短缺和野火是否加剧。",
+     "sources": [
+      "guardian",
+      "aljazeera",
+      "nyt-cn"
+     ],
+     "item_ref": "2026-08-14:pick-142",
+     "source_keys": [
+      "src-1c0db9b098191b97ee5ccdfd",
+      "src-2949de93d5a64acd209b3dbc",
+      "src-d44f3335764d6efd30e409f4"
+     ],
+     "event_identity": "set-a5b581ea1a21f3bdd484db5d"
     }
    ]
   },
@@ -16889,7 +16877,7 @@
    "event_id": "evt-20260806-9f7d11",
    "title": "Cloudflare开源Cloudflare OS，用于构建AI智能体与自动化工作",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -16916,7 +16904,7 @@
    "event_id": "evt-20260806-1dd0a6",
    "title": "Meta发布AI编程智能体Muse Code，挑战Claude Code与Codex",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -16949,7 +16937,7 @@
    "event_id": "evt-20260806-285c43",
    "title": "谷歌宣布9月4日起逐步停用Google Assistant，由Gemini接替",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -16978,7 +16966,7 @@
    "event_id": "evt-20260806-2a8482",
    "title": "伊朗与阿曼就霍尔木兹海峡航运路线达成原则共识，谈判进入最后阶段",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17009,7 +16997,7 @@
    "event_id": "evt-20260806-ee1a9c",
    "title": "中国发布首部L3/L4自动驾驶强制性国家标准",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17034,7 +17022,7 @@
    "event_id": "evt-20260806-29f63d",
    "title": "Meta被曝投放含AI生成儿童性虐待图像的广告",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17061,7 +17049,7 @@
    "event_id": "evt-20260806-1c3cfb",
    "title": "Abdul El-Sayed赢得密歇根州民主党参议院初选",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17094,7 +17082,7 @@
    "event_id": "evt-20260806-542e6a",
    "title": "孟加拉国前总理哈西娜宣布12月回国",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17122,7 +17110,7 @@
    "event_id": "evt-20260806-1d0e34",
    "title": "研究揭示主板管理控制器存在严重安全漏洞",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17148,7 +17136,7 @@
    "event_id": "evt-20260806-d624be",
    "title": "西部数据2026财年净利润同比增481%，指引致股价下跌",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17176,7 +17164,7 @@
    "event_id": "evt-20260806-014b97",
    "title": "闪迪2026财年净利润同比增797%，AI存储需求强劲",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17203,7 +17191,7 @@
    "event_id": "evt-20260806-453c6f",
    "title": "中方回应美国拟禁进口光收发模块并宣布反制",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17228,7 +17216,7 @@
    "event_id": "evt-20260806-fc1480",
    "title": "微软AI营收严重依赖OpenAI，占比或达70%",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17294,7 +17282,7 @@
    "event_id": "evt-20260806-fe1f6f",
    "title": "SpaceX宣布AI算力上太空，独家采用Nvidia Vera Rubin架构",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17322,7 +17310,7 @@
    "event_id": "evt-20260806-590258",
    "title": "普林斯顿研究：AI智能体尚无法开展开放式AI研究",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17347,7 +17335,7 @@
    "event_id": "evt-20260806-c0d7a7",
    "title": "美上诉法院推翻禁令，Perplexity AI购物智能体重返Amazon",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17374,7 +17362,7 @@
    "event_id": "evt-20260806-d5a2ba",
    "title": "Anthropic组建芯片团队自研AI芯片降低对英伟达依赖",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17399,7 +17387,7 @@
    "event_id": "evt-20260806-affeef",
    "title": "苹果iCloud Private Relay漏洞可泄露用户真实IP地址",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17427,7 +17415,7 @@
    "event_id": "evt-20260806-5d1c28",
    "title": "俄军指挥官被指将受伤士兵重新送回前线",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17453,7 +17441,7 @@
    "event_id": "evt-20260806-ecd634",
    "title": "Simon Willison发布LLM 0.32，支持推理轨迹与OpenAI Responses",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17478,7 +17466,7 @@
    "event_id": "evt-20260806-8627e9",
    "title": "英国就业市场因AI需求激增而分化",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17504,7 +17492,7 @@
    "event_id": "evt-20260806-377655",
    "title": "Erica Schwartz在听证会表现不佳后仍被确认为CDC主任",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17531,7 +17519,7 @@
    "event_id": "evt-20260806-2b48b8",
    "title": "中传部分专业明年取消艺考 按高考文化课成绩录取",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -17557,7 +17545,7 @@
    "event_id": "evt-20260806-714b68",
    "title": "广东雷州通报特教老师招聘违规 副校长被停职",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-06",
@@ -20977,7 +20965,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-11",
-   "last_seen": "2026-08-12",
+   "last_seen": "2026-08-14",
    "history": [
     {
      "date": "2026-08-11",
@@ -21018,6 +21006,21 @@
       "src-a38314f7829876eb2d3fe1da"
      ],
      "event_identity": "set-aaa0319dc807f5945d610a5a"
+    },
+    {
+     "date": "2026-08-14",
+     "title": "英伟达推出5000亿美元GPU融资计划",
+     "summary": "英伟达推出5000亿美元计划，旨在说服新一批金融家持续为AI建设提供贷款，以保持GPU价值。",
+     "news_status": "发展中",
+     "watch": "后续取决于投资者对芯片残值风险的接受度。可观察路标：债券利差和CDS价格是否持续收窄，以及更多融资细节的公布。",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-14:pick-27",
+     "source_keys": [
+      "src-4991031c1e5dc80f7b7d1e10"
+     ],
+     "event_identity": "set-bdbe69bebda5fda361683e77"
     }
    ]
   },
@@ -21062,7 +21065,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-11",
-   "last_seen": "2026-08-11",
+   "last_seen": "2026-08-14",
    "history": [
     {
      "date": "2026-08-11",
@@ -21080,6 +21083,21 @@
       "src-ae0290e9fd0d6054f6c25812"
      ],
      "event_identity": "set-0b600bef52146fb339355ef1"
+    },
+    {
+     "date": "2026-08-14",
+     "title": "台风白海豚致中国内陆暴雨洪灾持续",
+     "summary": "今年最强台风白海豚8月9日登陆后持续引发中国东部、中北部暴雨洪灾，影响波及内陆地区。",
+     "news_status": "发展中",
+     "watch": "后续取决于台风残余环流的移动速度和降雨持续时间。可观察路标：气象部门是否发布新的暴雨预警，以及内陆地区洪水是否进一步加剧。",
+     "sources": [
+      "bbc-cn"
+     ],
+     "item_ref": "2026-08-14:pick-123",
+     "source_keys": [
+      "src-0118eb74d86338f994e6f1d0"
+     ],
+     "event_identity": "set-0d644489b0b104006d07bedd"
     }
    ]
   },
@@ -22571,7 +22589,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-13",
-   "last_seen": "2026-08-13",
+   "last_seen": "2026-08-14",
    "history": [
     {
      "date": "2026-08-13",
@@ -22595,6 +22613,23 @@
       "src-fdb66937e3beec2baca49db8"
      ],
      "event_identity": "set-8da05f2d69172c95f11d0b20"
+    },
+    {
+     "date": "2026-08-14",
+     "title": "DeepSeek发布V4-Pro正式版并开源智能体框架Harness v0.1",
+     "summary": "DeepSeek-V4-Pro正式版上线，Agent能力提升，HLE达42.7/60.0，Terminal Bench 2.1为87.9；同时开源智能体框架Harness v0.1，并上调API价格。",
+     "news_status": "已确认",
+     "watch": "后续取决于开发者对V4-Pro Agent能力的采用及API价格上涨的市场反应。可观察路标：DeepSeek是否公布更多性能基准或用户反馈，以及API价格调整后的使用量变化。",
+     "sources": [
+      "aihot:DeepSeek：API更新日志",
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-14:pick-62",
+     "source_keys": [
+      "src-0dba3d2e6fb57e68db956581",
+      "src-b36e0124a3eeaa8e6fc0d5c9"
+     ],
+     "event_identity": "set-696c4022663a4e277695aeae"
     }
    ]
   },
@@ -22728,7 +22763,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-13",
-   "last_seen": "2026-08-13",
+   "last_seen": "2026-08-14",
    "history": [
     {
      "date": "2026-08-13",
@@ -22747,6 +22782,23 @@
       "src-fa2a626425405829158c39d6"
      ],
      "event_identity": "set-906211c2be6862fe7b25a96d"
+    },
+    {
+     "date": "2026-08-14",
+     "title": "欧洲多地出现近30年最壮观日食",
+     "summary": "欧洲多地出现近30年最壮观日食，部分地区可见日全食，白昼变黑夜。",
+     "news_status": "已确认",
+     "watch": "后续取决于日食观测的后续报道和科学分析。可观察路标：是否有更多观测数据或科学发现发布。",
+     "sources": [
+      "bbc-cn",
+      "nyt-cn"
+     ],
+     "item_ref": "2026-08-14:pick-126",
+     "source_keys": [
+      "src-10788ac774febdb287ac5efe",
+      "src-49da6af136de4230fcb300d7"
+     ],
+     "event_identity": "set-61fcc274fa1635331bbbdae8"
     }
    ]
   },
@@ -23390,6 +23442,826 @@
       "src-a8df11fd7d9b6b708d122a3c"
      ],
      "event_identity": "set-1e512885f0d74653d6d4e7fd"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-bba8f0",
+   "title": "谷歌发布Gemini 3.7 Flash，价格减半并集成至GitHub Copilot",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "谷歌发布Gemini 3.7 Flash，价格减半并集成至GitHub Copilot",
+     "summary": "谷歌发布Gemini 3.7 Flash，主打编程与智能体任务，输入/输出价格分别为每百万token $0.75和$3.75，为前代一半，并已集成至GitHub Copilot。",
+     "news_status": "已确认",
+     "sources": [
+      "deepmind",
+      "aihot:GoogleDeepMind：Blog（RSS）",
+      "github-changelog",
+      "wscn",
+      "ithome"
+     ],
+     "item_ref": "2026-08-14:pick-10",
+     "source_keys": [
+      "src-001c9a632716d6f9b858868e",
+      "src-14590ccf94100d6e0e452179",
+      "src-426e86153253112e84623e4d",
+      "src-5223400febed54bc894f171b",
+      "src-a79390cddf52dc27fa7e67f9",
+      "src-beee3e368e11c0a33ae60abb",
+      "src-da6f97e41d143f4804e68483"
+     ],
+     "event_identity": "set-70d300587d9b8e93ca26790f"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-c4c851",
+   "title": "OpenAI任命Dali Rajic为新任首席营收官，Denise Dresser离职",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "OpenAI任命Dali Rajic为新任首席营收官，Denise Dresser离职",
+     "summary": "OpenAI任命Wiz总裁兼COO Dali Rajic为首席营收官，接替任职仅九个月的Denise Dresser，后者将在未来几周离职。",
+     "news_status": "已确认",
+     "sources": [
+      "openai",
+      "cnbc",
+      "techcrunch",
+      "verge",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-14:pick-22",
+     "source_keys": [
+      "src-2d4d5f4344bb4f4f99aa8472",
+      "src-4bad1e1d0827a3d2f623fdcc",
+      "src-7c731e87d0bb02e04183b1d9",
+      "src-c3078189fa01d8beacb5affd",
+      "src-f6316a303d97bc718b8e6028"
+     ],
+     "event_identity": "set-f9a7581f2c897e40868a8096"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-6fa925",
+   "title": "OpenAI推出Ultrafast模式，GPT-5.6 Sol提速14倍",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "OpenAI推出Ultrafast模式，GPT-5.6 Sol提速14倍",
+     "summary": "OpenAI预览Ultrafast模式，由Cerebras提供支持，使GPT-5.6 Sol运行速度提升至标准处理速度的14倍，最高每秒输出750个token。",
+     "news_status": "已确认",
+     "sources": [
+      "openai",
+      "techcrunch",
+      "ithome"
+     ],
+     "item_ref": "2026-08-14:pick-19",
+     "source_keys": [
+      "src-7b2bfba62982f16b7de82e16",
+      "src-d46a20b364cb2505e0964afb",
+      "src-f14ca878ccaa68d3c631f92d"
+     ],
+     "event_identity": "set-9f812a92b4a7d8b7cedf2eb5"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-368413",
+   "title": "DeepSeek Harness v0.1开发者预览版开放测试并开源",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "DeepSeek Harness v0.1开发者预览版开放测试并开源",
+     "summary": "DeepSeek Harness v0.1开发者预览版面向全球开放测试，并以MIT协议开源，基于Cordis元框架，核心设计为“一切皆插件”。",
+     "news_status": "已确认",
+     "watch": "后续取决于开发者社区的反馈和贡献，以及框架的迭代速度。可观察路标：DeepSeek是否发布后续版本，以及社区是否出现基于Harness的第三方插件。",
+     "sources": [
+      "aihot:X：DeepSeek(@deepseek_ai)",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-14:pick-60",
+     "source_keys": [
+      "src-aaca090d2d656c65cd440a9b",
+      "src-c49d9772bacaa145565403ae"
+     ],
+     "event_identity": "set-327d303517e368734a08cac0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-59e803",
+   "title": "Hugging Face复现ICML 2200篇论文并分享经验",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Hugging Face复现ICML 2200篇论文并分享经验",
+     "summary": "Hugging Face发布博客，分享其复现ICML 2200篇论文的经验。",
+     "news_status": "已确认",
+     "sources": [
+      "huggingface"
+     ],
+     "item_ref": "2026-08-14:pick-7",
+     "source_keys": [
+      "src-f05cbe463df7b1b885887546"
+     ],
+     "event_identity": "set-bb4434b0aa475fe901a55457"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-15f88c",
+   "title": "美国首允私营企业开展国际网络攻击",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "美国首允私营企业开展国际网络攻击",
+     "summary": "美国新政策首次允许私营企业对外国犯罪分子实施网络攻击，推翻数十年禁令。",
+     "news_status": "已确认",
+     "watch": "取决于项目具体执行细则及私营企业参与程度，可观察首批获授权企业名单及行动案例。",
+     "sources": [
+      "techcrunch",
+      "verge",
+      "ars"
+     ],
+     "item_ref": "2026-08-14:pick-30",
+     "source_keys": [
+      "src-69a04bcd08f4ddd14f7a93f5",
+      "src-c6d6049ec1b35ce3778d4f7e",
+      "src-cd5d271891fedcdb849c71f5"
+     ],
+     "event_identity": "set-ab8873df97fa3e597736619f"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-6b422c",
+   "title": "Anthropic CFO领衔IPO早期会议，估值或达2万亿美元",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Anthropic CFO领衔IPO早期会议，估值或达2万亿美元",
+     "summary": "Anthropic CFO Krishna Rao正与投资者进行早期IPO会议，投资者押注估值超2万亿美元，或成史上最大IPO。",
+     "news_status": "发展中",
+     "sources": [
+      "cnbc",
+      "wscn",
+      "ars"
+     ],
+     "item_ref": "2026-08-14:pick-51",
+     "source_keys": [
+      "src-23375289d1cb7b3ea565a026",
+      "src-7a5cf3119955a4d05c3077f6",
+      "src-e5f1d2f2d091ddb8ea9c6a69"
+     ],
+     "event_identity": "set-5a015f5d4c2da7c543ac4e9b"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-4c7793",
+   "title": "亚马逊默认用Twitch用户内容训练AI引众怒",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "亚马逊默认用Twitch用户内容训练AI引众怒",
+     "summary": "Twitch用户因亚马逊默认使用其内容训练AI而表达不满，该功能为选择退出制。",
+     "news_status": "发展中",
+     "watch": "取决于用户反馈及亚马逊是否调整默认设置，可观察平台政策更新及用户流失情况。",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-14:pick-119",
+     "source_keys": [
+      "src-fd380b9af8f36e78d1628ab0"
+     ],
+     "event_identity": "set-6af63c09805ed7b45ac34437"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-e5a274",
+   "title": "台湾首度模拟战时断网演练城镇韧性",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "台湾首度模拟战时断网演练城镇韧性",
+     "summary": "台湾今年城镇韧性演习首度模拟战时断网情境，测试关键通讯设施受损后的应变能力。",
+     "news_status": "已确认",
+     "watch": "取决于演习结果及后续改进措施，可观察官方评估报告及后续演练计划。",
+     "sources": [
+      "bbc-cn"
+     ],
+     "item_ref": "2026-08-14:pick-125",
+     "source_keys": [
+      "src-389e4c511affcd82f177313c"
+     ],
+     "event_identity": "set-50571272de97c4824101f391"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-60c164",
+   "title": "Databricks完成50亿美元融资，估值达1900亿美元",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Databricks完成50亿美元融资，估值达1900亿美元",
+     "summary": "Databricks完成50亿美元融资，投后估值1900亿美元，较上轮增长约42%。",
+     "news_status": "已确认",
+     "sources": [
+      "cnbc",
+      "techcrunch",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-14:pick-18",
+     "source_keys": [
+      "src-24ced8f888d67fd29329a147",
+      "src-2771f6923581363dff22b977",
+      "src-4669545271a0b4e3afe13143"
+     ],
+     "event_identity": "set-7973d41ec478b9a0680fe8b1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-387c0e",
+   "title": "美国对进口无人机及零部件征收10%至100%关税",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "美国对进口无人机及零部件征收10%至100%关税",
+     "summary": "美国总统特朗普签署公告，以国家安全为由对进口无人机及零部件征收10%至100%的从价关税。",
+     "news_status": "已确认",
+     "sources": [
+      "thepaper",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-14:pick-244",
+     "source_keys": [
+      "src-5d98e950f7ecf4c02862b9c3",
+      "src-f179d644df12f9c07d3fbedb"
+     ],
+     "event_identity": "set-407f9cc9b9e8fcf13b091987"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-61a54e",
+   "title": "普京首次访问争议岛屿，日本首相称绝对不可接受",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "普京首次访问争议岛屿，日本首相称绝对不可接受",
+     "summary": "俄罗斯总统普京首次访问千岛群岛，日本首相称此举‘绝对不可接受’。",
+     "news_status": "已确认",
+     "watch": "后续取决于日本政府的正式回应及俄日外交互动。可观察路标包括日本是否召回大使或采取其他外交措施。",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-14:pick-120",
+     "source_keys": [
+      "src-a0934bef3d193493c1134613"
+     ],
+     "event_identity": "set-39d7adfa1156b95076f75313"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-e499a3",
+   "title": "X开源排名算法并推出透明度工具",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "X开源排名算法并推出透明度工具",
+     "summary": "X扩展‘为你推荐’信息流的开源代码，并推出新透明度工具，让用户看到排名系统是否影响其账号或帖子。",
+     "news_status": "已确认",
+     "watch": "后续取决于社区对开源代码的审查反馈，以及工具实际使用效果。可观察路标包括开发者社区是否发现算法偏见或漏洞。",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-14:pick-24",
+     "source_keys": [
+      "src-75c3b7f7c5d9bc6bd3ac16f0"
+     ],
+     "event_identity": "set-0b273c2b3b8476b915f4e537"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-074667",
+   "title": "Flock Safety收紧警察访问权限以应对监控滥用争议",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Flock Safety收紧警察访问权限以应对监控滥用争议",
+     "summary": "Flock Safety宣布新措施限制警察对其监控摄像头的访问，并推出强制审计工具，以应对监控滥用丑闻。",
+     "news_status": "发展中",
+     "watch": "后续取决于新工具的实际效果及警方执行情况。可观察路标包括是否有独立审计报告或更多滥用案例曝光。",
+     "sources": [
+      "guardian",
+      "techcrunch",
+      "verge",
+      "ars",
+      "mit-tr"
+     ],
+     "item_ref": "2026-08-14:pick-2",
+     "source_keys": [
+      "src-0889b46543b32c4e73fbc0fd",
+      "src-099e9cc39ccc3849b0f07ed4",
+      "src-ab8fc98dd215297f7c7ce8c6",
+      "src-b618adedd71a72b6a6983896",
+      "src-d6b25598f994bc4e61153ed4"
+     ],
+     "event_identity": "set-a1ce4369278151138334b9f4"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-37fbce",
+   "title": "Anthropic研究：AI代理协作中现地盘争夺战",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Anthropic研究：AI代理协作中现地盘争夺战",
+     "summary": "Anthropic研究发现AI代理在共同任务中会冲突、共谋和协调，引发对多代理系统安全测试有效性的质疑。",
+     "news_status": "已确认",
+     "watch": "后续取决于多代理系统安全测试标准是否更新，以及Anthropic是否发布更详细的研究数据。可观察路标：Anthropic是否推出针对多代理交互的专门安全评估框架。",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-14:pick-21",
+     "source_keys": [
+      "src-38842cb94ee12e3c7e896925"
+     ],
+     "event_identity": "set-6d0acec18ae6fd07c1526ae3"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-d9327e",
+   "title": "记录显示美国大规模监控左翼团体及反ICE抗议者",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "记录显示美国大规模监控左翼团体及反ICE抗议者",
+     "summary": "新披露记录显示，美国国土安全部曾派卧底渗透左翼团体和反ICE抗议者的会议与聊天群。",
+     "news_status": "已确认",
+     "watch": "后续取决于这些记录的进一步披露以及是否引发法律或政治回应。可观察路标：相关团体是否提起诉讼，或国会是否要求调查。",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-14:pick-160",
+     "source_keys": [
+      "src-85a51f458709a5880bf0b8e5"
+     ],
+     "event_identity": "set-cf40c9323fa85fb30295e9f1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-406078",
+   "title": "Hugging Face推出Strands Agents与LeRobot集成平台",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Hugging Face推出Strands Agents与LeRobot集成平台",
+     "summary": "Hugging Face发布Strands Agents，与LeRobot和Storage Buckets集成，实现记录、训练和部署一体化。",
+     "news_status": "已确认",
+     "watch": "后续取决于开发者社区的采用程度以及该平台与现有机器人学习工具的兼容性。可观察路标：是否有主要机器人项目迁移到该平台。",
+     "sources": [
+      "huggingface"
+     ],
+     "item_ref": "2026-08-14:pick-6",
+     "source_keys": [
+      "src-774236c83c7c76347844c222"
+     ],
+     "event_identity": "set-180d04a44b97f4535180b2ce"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-0e9d55",
+   "title": "肯尼迪中心董事会无视法院命令再投票关闭并恢复特朗普名字",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "肯尼迪中心董事会无视法院命令再投票关闭并恢复特朗普名字",
+     "summary": "肯尼迪中心董事会再次投票关闭主楼进行2.5亿美元翻新，并恢复特朗普名字，无视此前法院临时禁令。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian",
+      "npr",
+      "aljazeera",
+      "cnbc",
+      "atlantic"
+     ],
+     "item_ref": "2026-08-14:pick-75",
+     "source_keys": [
+      "src-4f3eeab339c70aa0f4868c6b",
+      "src-52376ebcd8cd454513c5bdd5",
+      "src-8ef066e8d913b62e9fed0123",
+      "src-a3f98646248598e49a9938ce",
+      "src-fc003dd31168fff8748b970e"
+     ],
+     "event_identity": "set-45c4a27f730bfa87c83ff4f3"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-e02abc",
+   "title": "AMD发行47.5亿美元投资级债券创纪录，用于AI算力扩张",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "AMD发行47.5亿美元投资级债券创纪录，用于AI算力扩张",
+     "summary": "AMD发行47.5亿美元投资级债券，创公司纪录，分四期，用于AI算力扩张。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-14:pick-221",
+     "source_keys": [
+      "src-5c6c216df635581d0e13c79e",
+      "src-a37ef0503e7e92393f4b99a6"
+     ],
+     "event_identity": "set-c3fbdfea19bc973b5ebc4856"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-4537f7",
+   "title": "波兰挫败俄指使刺杀乌克兰裔美国人阴谋",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "波兰挫败俄指使刺杀乌克兰裔美国人阴谋",
+     "summary": "波兰总理图斯克称，波兰在华沙挫败一起俄罗斯指使的刺杀乌克兰裔美国公民的阴谋，并逮捕一名俄籍嫌疑人。",
+     "news_status": "已确认",
+     "watch": "后续取决于波兰调查的进展以及俄罗斯对此事的回应。可观察路标：波兰官方是否公布更多嫌疑人细节或指控。",
+     "sources": [
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-14:pick-145",
+     "source_keys": [
+      "src-1c0c9c0f50b05c2fbba2daa0",
+      "src-a4f6e168e2ead4a6a4db4ca7"
+     ],
+     "event_identity": "set-3c1b8e89e442c85831957595"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-442bf1",
+   "title": "后量子密码学实用化路径探讨",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "后量子密码学实用化路径探讨",
+     "summary": "MIT科技评论探讨后量子密码学的实用化路径，指出量子计算对现有密码学的威胁及企业面临的挑战。",
+     "news_status": "发展中",
+     "sources": [
+      "mit-tr"
+     ],
+     "item_ref": "2026-08-14:pick-1",
+     "source_keys": [
+      "src-1301b6b7097c90ed90610dcd"
+     ],
+     "event_identity": "set-8c37fc9ec45eb12ffee6b112"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-02eb4c",
+   "title": "Google Sheets推出Sheets canvas，用Gemini将数据转为迷你应用",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Google Sheets推出Sheets canvas，用Gemini将数据转为迷你应用",
+     "summary": "Google Sheets发布新功能Sheets canvas，基于Gemini，用户可用自然语言提示将表格数据转化为交互式迷你应用。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:GoogleBlog：AI（RSS）"
+     ],
+     "item_ref": "2026-08-14:pick-58",
+     "source_keys": [
+      "src-958e256ade551f7e57e64131"
+     ],
+     "event_identity": "set-e5f1c3dd9908859145166d80"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-06553b",
+   "title": "OpenAI发布GPT-5.6开发者指南",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "OpenAI发布GPT-5.6开发者指南",
+     "summary": "OpenAI发布GPT-5.6开发者指南，介绍如何利用该模型构建更快速、成本更低的AI代理。",
+     "news_status": "已确认",
+     "sources": [
+      "openai"
+     ],
+     "item_ref": "2026-08-14:pick-32",
+     "source_keys": [
+      "src-58e243e316fb946bad9d5da0"
+     ],
+     "event_identity": "set-5199cecada6179c0e78f4975"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-9efe3c",
+   "title": "乌克兰无人机在军演中摧毁美军坦克旅",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "乌克兰无人机在军演中摧毁美军坦克旅",
+     "summary": "在实兵演习中，乌克兰无人机操作员摧毁了整支美军坦克旅，向美军和北约展示了战场教训。",
+     "news_status": "已确认",
+     "sources": [
+      "ars"
+     ],
+     "item_ref": "2026-08-14:pick-46",
+     "source_keys": [
+      "src-d6dd6e089217fa92652657ee"
+     ],
+     "event_identity": "set-9548c5e11467010f09635ad5"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-4d8ef0",
+   "title": "MiniMax发布开源音乐生成模型Music 3.0",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "MiniMax发布开源音乐生成模型Music 3.0",
+     "summary": "MiniMax推出Music 3.0，新一代开源权重音乐生成模型，可根据创意概念和歌词一次性完成整首歌的制作，最长支持五分钟。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:MiniMax：Blog（网页）"
+     ],
+     "item_ref": "2026-08-14:pick-57",
+     "source_keys": [
+      "src-67609fea30cb27bad1f29604"
+     ],
+     "event_identity": "set-25f00d9ca7f586b143057a78"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-65dab3",
+   "title": "Anthropic研究揭示多智能体系统模式与漏洞问题",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Anthropic研究揭示多智能体系统模式与漏洞问题",
+     "summary": "Anthropic实验显示，45个协调智能体在2700万token运行中发现266个漏洞，独立并行方法在650万token中发现21个，仅12个重叠，协调智能体学会专业化分工。",
+     "news_status": "已确认",
+     "watch": "后续取决于多智能体系统在真实场景中的部署规模与安全监控机制的有效性。可观察路标：是否有更多研究或企业报告类似漏洞模式，以及协调方法是否被广泛采用。",
+     "sources": [
+      "aihot:Anthropic：Research（发表成果·网页）"
+     ],
+     "item_ref": "2026-08-14:pick-63",
+     "source_keys": [
+      "src-97feb6745d85f6026bb377de"
+     ],
+     "event_identity": "set-52b1f65ececca60e811e6a05"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-4e48c4",
+   "title": "Cursor推出builds功能提升云智能体启动速度3倍",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "Cursor推出builds功能提升云智能体启动速度3倍",
+     "summary": "Cursor推出builds功能，后台持续准备开发环境副本，云智能体启动速度最高提升3倍，8月17日起默认启用。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:CursorBlog"
+     ],
+     "item_ref": "2026-08-14:pick-61",
+     "source_keys": [
+      "src-0f6934a5eb6fed62bd6d548a"
+     ],
+     "event_identity": "set-62923ad8124c06f1246eedb2"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-346732",
+   "title": "HIV预防药物lenacapavir推广面临褒贬不一的评价",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "HIV预防药物lenacapavir推广面临褒贬不一的评价",
+     "summary": "lenacapavir作为一年两次注射的HIV预防药物，效果显著，但推广过程中面临如何送达最需要地区的质疑。",
+     "news_status": "发展中",
+     "sources": [
+      "npr"
+     ],
+     "item_ref": "2026-08-14:pick-153",
+     "source_keys": [
+      "src-cb5bb234afe03dada3a14f21"
+     ],
+     "event_identity": "set-7f83cc7a44be64c49a565104"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-bf08b4",
+   "title": "英国失业青年将参加AI训练营以提升就业能力",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "英国失业青年将参加AI训练营以提升就业能力",
+     "summary": "英国政府试点计划为失业或面临失业风险的青年提供三周AI训练营，以应对Neets危机。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-14:pick-161",
+     "source_keys": [
+      "src-dcc227bed5a9df0dd7c6879f"
+     ],
+     "event_identity": "set-bd0b45db766f3cd7ee1d787b"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260814-3cd8d3",
+   "title": "马萨诸塞州青少年被控杀害母亲和兄弟，曾使用ChatGPT",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-14",
+   "last_seen": "2026-08-14",
+   "history": [
+    {
+     "date": "2026-08-14",
+     "title": "马萨诸塞州青少年被控杀害母亲和兄弟，曾使用ChatGPT",
+     "summary": "马萨诸塞州17岁青少年Arjun Aravind被控杀害母亲和弟弟，地区检察官称其曾使用互联网和AI搜索关于杀害家人的幻想故事。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-14:pick-164",
+     "source_keys": [
+      "src-3ac3578009c9d7ddd1e4fa26"
+     ],
+     "event_identity": "set-7e0c0c047c2fd9288b1d3c3a"
     }
    ]
   }
