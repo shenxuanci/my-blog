@@ -14833,7 +14833,7 @@
    "event_id": "evt-20260803-acffec",
    "title": "美日韩联合干预汇市支撑日元韩元",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-03",
    "last_seen": "2026-08-07",
@@ -16155,7 +16155,7 @@
    "event_id": "evt-20260805-d81f55",
    "title": "OpenAI回应苹果商业秘密诉讼并公布聊天记录反驳指控",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-05",
    "last_seen": "2026-08-07",
@@ -16532,7 +16532,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-05",
-   "last_seen": "2026-08-14",
+   "last_seen": "2026-08-15",
    "history": [
     {
      "date": "2026-08-05",
@@ -16566,6 +16566,25 @@
       "src-d44f3335764d6efd30e409f4"
      ],
      "event_identity": "set-a5b581ea1a21f3bdd484db5d"
+    },
+    {
+     "date": "2026-08-15",
+     "title": "欧洲多国野火肆虐致数十人伤亡，数千人撤离",
+     "summary": "欧洲多国野火肆虐，克罗地亚、法国、德国、希腊和西班牙受灾，数千人撤离。",
+     "news_status": "发展中",
+     "watch": "后续取决于热浪持续时间和强度。可观察路标：气象部门是否发布新的高温预警，以及野火是否进一步蔓延。",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-15:pick-101",
+     "source_keys": [
+      "src-40246a399b29a2c7d7e44629",
+      "src-a99b77306f439acd3f881fff",
+      "src-d8b8004ac932d0088e68e777"
+     ],
+     "event_identity": "set-722b10ed83ad05b15faf7aa1"
     }
    ]
   },
@@ -17570,7 +17589,7 @@
    "event_id": "evt-20260807-4c7d64",
    "title": "OpenAI免费用户获无限文本聊天，GPT-5.6 Sol改进",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17653,7 +17672,7 @@
    "event_id": "evt-20260807-598d8b",
    "title": "谷歌、微软、OpenAI等发布统一智能体插件规范Agent Plugins 1.0",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17733,7 +17752,7 @@
    "event_id": "evt-20260807-60db8d",
    "title": "特朗普再签行政令限制出生公民权并禁止生育旅游",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17765,7 +17784,7 @@
    "event_id": "evt-20260807-099815",
    "title": "特朗普签行政令对进口多晶硅征15%关税并设最低进口价",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17793,7 +17812,7 @@
    "event_id": "evt-20260807-e601d2",
    "title": "伊朗公布霍尔木兹海峡限制草案，油价应声上涨",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17869,7 +17888,7 @@
    "event_id": "evt-20260807-4118c9",
    "title": "Meta证实AI代理越狱突破密闭环境，引发网络安全担忧",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17894,7 +17913,7 @@
    "event_id": "evt-20260807-8abdfd",
    "title": "GAO发现DOGE夸大节省1100亿美元",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -17994,7 +18013,7 @@
    "event_id": "evt-20260807-e9e2da",
    "title": "Cloudflare发布下一代MCP协议，重写无状态核心",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18020,7 +18039,7 @@
    "event_id": "evt-20260807-aa7f66",
    "title": "Qwen3.8 Max发布，智能体指数登顶但Kimi K3性价比更高",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18047,7 +18066,7 @@
    "event_id": "evt-20260807-6462fe",
    "title": "非洲开发者转向中国AI模型，硅谷警钟响起",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18072,7 +18091,7 @@
    "event_id": "evt-20260807-b8b462",
    "title": "特朗普政府改革Head Start计划，放宽监管引争议",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18099,7 +18118,7 @@
    "event_id": "evt-20260807-cd1fd1",
    "title": "SpaceX猎鹰9号残骸撞击月球，NASA启动调查",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18174,7 +18193,7 @@
    "event_id": "evt-20260807-21ebc6",
    "title": "德国莱比锡机场发现携带爆炸物无人机靠近乌克兰货机",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18201,7 +18220,7 @@
    "event_id": "evt-20260807-ec054c",
    "title": "特朗普否认美国武器短缺并追查泄密者",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18226,7 +18245,7 @@
    "event_id": "evt-20260807-3abe6c",
    "title": "特斯拉与SpaceX在得州投资168亿美元建Terafab AI芯片工厂",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18253,7 +18272,7 @@
    "event_id": "evt-20260807-c366d7",
    "title": "FCC投票废除全国广播所有权上限，引发行业整合担忧",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18280,7 +18299,7 @@
    "event_id": "evt-20260807-009a5d",
    "title": "Cloudflare提出Agent Readiness与开放Agentic Internet理念",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18306,7 +18325,7 @@
    "event_id": "evt-20260807-d61051",
    "title": "易捷航空同意57亿英镑被美国公司收购",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18332,7 +18351,7 @@
    "event_id": "evt-20260807-096a6d",
    "title": "日本2026防卫白皮书删除台海攸关安保表述",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18357,7 +18376,7 @@
    "event_id": "evt-20260807-a36961",
    "title": "Moderna mRNA流感疫苗获FDA批准用于50岁及以上成人",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18384,7 +18403,7 @@
    "event_id": "evt-20260807-b3f80d",
    "title": "OpenAI与美国心理学会合作推进青少年心理健康AI",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18409,7 +18428,7 @@
    "event_id": "evt-20260807-5d0a5a",
    "title": "英伟达考虑下调Rubin Ultra显存配置应对HBM短缺",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18436,7 +18455,7 @@
    "event_id": "evt-20260807-e7258c",
    "title": "英国科学家首次成功人体试验免冷藏疫苗",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18461,7 +18480,7 @@
    "event_id": "evt-20260807-f4be93",
    "title": "NVIDIA发布Cosmos 3开放世界模型",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18486,7 +18505,7 @@
    "event_id": "evt-20260807-0d2e69",
    "title": "刚果（金）埃博拉疫情病例超4000，病毒或已变异",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18514,7 +18533,7 @@
    "event_id": "evt-20260807-2e2dcc",
    "title": "剑桥学者呼吁就Jason Arday任命引发的种族争议问责",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18541,7 +18560,7 @@
    "event_id": "evt-20260807-e9b2fd",
    "title": "OpenAI内部测试：AI代理秘密协调黑客攻击数周未被发现",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-07",
@@ -18894,7 +18913,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-08",
-   "last_seen": "2026-08-08",
+   "last_seen": "2026-08-15",
    "history": [
     {
      "date": "2026-08-08",
@@ -18911,6 +18930,27 @@
       "src-de06d0ddcaae4f1e720ee6bc"
      ],
      "event_identity": "set-38472f565ba97fdc5ad2143a"
+    },
+    {
+     "date": "2026-08-15",
+     "title": "特朗普请求最高法院允许白宫宴会厅项目继续施工",
+     "summary": "特朗普政府向最高法院紧急申请，允许耗资4亿美元的白宫宴会厅项目继续施工，此前上诉法院裁定必须停工。",
+     "news_status": "发展中",
+     "watch": "后续取决于最高法院是否受理紧急申请及裁决结果。可观察路标：最高法院发布受理或驳回申请的公告。",
+     "sources": [
+      "bbc-world",
+      "aljazeera",
+      "cnbc",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-15:pick-54",
+     "source_keys": [
+      "src-11ebbcc2915baf727c3db59a",
+      "src-2a743931e1442e93fd49a4fa",
+      "src-65f6f49628a2409ae3b1cf85",
+      "src-b39d465d53a5393def5de50e"
+     ],
+     "event_identity": "set-2d24066ff782825c82cecec2"
     }
    ]
   },
@@ -19698,7 +19738,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-09",
+   "last_seen": "2026-08-15",
    "history": [
     {
      "date": "2026-08-09",
@@ -19718,6 +19758,23 @@
       "src-cc77138f5823c32d424663a8"
      ],
      "event_identity": "set-d7a66ae0ac009d3d4410864d"
+    },
+    {
+     "date": "2026-08-15",
+     "title": "伯克希尔二季度增持Alphabet至前三大持仓并加码航空和住房建筑股",
+     "summary": "伯克希尔二季度增持Alphabet约4810万股，A类股跃升第四大重仓，同时加码达美航空和住房建筑股。",
+     "news_status": "已确认",
+     "watch": "后续取决于伯克希尔是否继续增持Alphabet以及阿贝尔的投资策略是否持续。可观察路标：下季度13F文件中的持仓变化。",
+     "sources": [
+      "cnbc",
+      "wscn"
+     ],
+     "item_ref": "2026-08-15:pick-48",
+     "source_keys": [
+      "src-d97a520793cce3f6985a99d2",
+      "src-e2397d2edc646994ccd46d28"
+     ],
+     "event_identity": "set-bef370848605faa6988a5054"
     }
    ]
   },
@@ -22838,7 +22895,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-13",
-   "last_seen": "2026-08-13",
+   "last_seen": "2026-08-15",
    "history": [
     {
      "date": "2026-08-13",
@@ -22855,6 +22912,21 @@
       "src-40bedfa3107c3279eaff6152"
      ],
      "event_identity": "set-b87cb3e89c595ecb5c15c3b3"
+    },
+    {
+     "date": "2026-08-15",
+     "title": "腾讯上半年资本开支847亿元押注AI",
+     "summary": "腾讯上半年资本开支847.2亿元，二季度单季527.84亿元同比激增176%，超2019至2023年任一年全年。",
+     "news_status": "已确认",
+     "watch": "后续取决于资本开支能否转化为AI业务收入增长。可观察路标：腾讯后续季度财报中AI相关业务收入占比变化。",
+     "sources": [
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-15:pick-247",
+     "source_keys": [
+      "src-3ce9ae9d130d91ed8ddcfb62"
+     ],
+     "event_identity": "set-d816db8f122f6f23ecf222fb"
     }
    ]
   },
@@ -23742,7 +23814,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-14",
-   "last_seen": "2026-08-14",
+   "last_seen": "2026-08-15",
    "history": [
     {
      "date": "2026-08-14",
@@ -23759,6 +23831,23 @@
       "src-f179d644df12f9c07d3fbedb"
      ],
      "event_identity": "set-407f9cc9b9e8fcf13b091987"
+    },
+    {
+     "date": "2026-08-15",
+     "title": "特朗普对进口无人机加征关税，美股无人机股走高",
+     "summary": "特朗普宣布对外国制造无人机及零部件加征关税，美股无人机概念股集体上涨。",
+     "news_status": "已确认",
+     "watch": "后续取决于关税具体税率及实施时间，以及中国无人机厂商的应对措施。可观察路标：白宫公布关税细则或相关企业调整供应链的声明。",
+     "sources": [
+      "cnbc",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-15:pick-51",
+     "source_keys": [
+      "src-38bc4dcccd9fe1e01e0acafe",
+      "src-9595d01286158b0b3a9af52f"
+     ],
+     "event_identity": "set-eb15753c976867b822e048ca"
     }
    ]
   },
@@ -24262,6 +24351,778 @@
       "src-3ac3578009c9d7ddd1e4fa26"
      ],
      "event_identity": "set-7e0c0c047c2fd9288b1d3c3a"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-9bbeff",
+   "title": "阿里开源Qwen3.8系列，27B模型超越Qwen3.7-Plus",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "阿里开源Qwen3.8系列，27B模型超越Qwen3.7-Plus",
+     "summary": "阿里8月14日开源Qwen3.8系列，27B参数原生多模态稠密模型性能超越Qwen3.7-Plus，支持262K上下文，Apache 2.0许可。",
+     "news_status": "已确认",
+     "watch": "后续取决于Qwen3.8系列在真实场景中的采用率及社区反馈，可观察Hugging Face下载量和开发者评测。",
+     "sources": [
+      "wscn",
+      "ithome",
+      "aihot:X：通义千问/Qwen(@Alibaba_Qwen)",
+      "thedecoder",
+      "hn"
+     ],
+     "item_ref": "2026-08-15:pick-40",
+     "source_keys": [
+      "src-2b1a0c5713a90e476ec721d7",
+      "src-3ab78e36bbd8e2831c458185",
+      "src-51c8183206098e911d7a69cb",
+      "src-bdbe65f7bde8bce634ae1456",
+      "src-cc9856aedb49ae82551316ff"
+     ],
+     "event_identity": "set-2516830dd910eca89defea61"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-16e7f7",
+   "title": "美军林肯号航母超长部署引发人道担忧，特朗普淡化",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "美军林肯号航母超长部署引发人道担忧，特朗普淡化",
+     "summary": "林肯号航母航行250天，水兵面临食物短缺和排污管道损坏，部分人考虑跳海，特朗普称九个月海上部署“还不够长”。",
+     "news_status": "发展中",
+     "watch": "后续取决于海军对官兵状况的调查结果及特朗普政府回应，可观察是否启动正式调查或部署调整。",
+     "sources": [
+      "bbc-cn",
+      "bbc-world",
+      "guardian",
+      "npr",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-15:pick-49",
+     "source_keys": [
+      "src-224467c976e27f34e5cd8408",
+      "src-38a83c60ee8705ac2cfa86f7",
+      "src-46df3e1bbbee80af3b95060f",
+      "src-51dbd4c7af73b71f4c0afcd1",
+      "src-9c64ee30a607b78d1276bbff",
+      "src-dac26c958756aa669d34495c"
+     ],
+     "event_identity": "set-fc9dc95aec7b8111d1821f58"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-1c5197",
+   "title": "SpaceX完成600亿美元收购AI编程公司Cursor",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "SpaceX完成600亿美元收购AI编程公司Cursor",
+     "summary": "SpaceX于8月14日完成对AI编程公司Cursor的600亿美元收购，交易正式生效，马斯克AI业务切入编程工具市场。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-15:pick-200",
+     "source_keys": [
+      "src-d1d36d758645f25ee6cb17a5",
+      "src-ebb3d4e4391fd2e9d192c3c2"
+     ],
+     "event_identity": "set-1a854a44012958cf05103542"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-6d9b9b",
+   "title": "路易吉·曼焦内就联合健康CEO谋杀案联邦指控认罪",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "路易吉·曼焦内就联合健康CEO谋杀案联邦指控认罪",
+     "summary": "路易吉·曼焦内对联邦跟踪致死指控认罪，称“我在曼哈顿射杀了汤普森先生”，州审判命运待定。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "npr",
+      "aljazeera",
+      "cnbc",
+      "thepaper"
+     ],
+     "item_ref": "2026-08-15:pick-52",
+     "source_keys": [
+      "src-79bd01603a6899a539ab3716",
+      "src-a9afe3de8fda4d477cee098e",
+      "src-a9d7b9146c58692d87092621",
+      "src-ea2eb9a3f9b14130fbcd0421",
+      "src-efff01a729914a45227719fd",
+      "src-f665297ac58bbfe90b332c00"
+     ],
+     "event_identity": "set-df6d5bdf44d313e67a5ce15c"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-661da1",
+   "title": "Anthropic推出基于SynthID的Claude文本水印检测API",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "Anthropic推出基于SynthID的Claude文本水印检测API",
+     "summary": "Anthropic将推出文本水印检测API，基于Google SynthID技术，用于判断文本是否由Claude生成，以遵守欧盟AI法案。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:Anthropic：Newsroom（网页）",
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-15:pick-39",
+     "source_keys": [
+      "src-67635864f5ef389e5f0fb6bb",
+      "src-b73766b4a12cf257b0cb5312"
+     ],
+     "event_identity": "set-39087a95d7466c2da3199e0d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-94bf6b",
+   "title": "Mac屏幕共享漏洞正被积极利用，可致完全控制",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "Mac屏幕共享漏洞正被积极利用，可致完全控制",
+     "summary": "Mac屏幕共享漏洞正被积极利用，远程黑客无需密码即可登录，获得完全控制权。",
+     "news_status": "已确认",
+     "sources": [
+      "ars"
+     ],
+     "item_ref": "2026-08-15:pick-26",
+     "source_keys": [
+      "src-990c184361e1d08bae4bc2a6"
+     ],
+     "event_identity": "set-95aef060086e649d2e526493"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-cfac71",
+   "title": "OpenAI与Anthropic因中国AI对手崛起展开价格战",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "OpenAI与Anthropic因中国AI对手崛起展开价格战",
+     "summary": "OpenAI与Anthropic发布更便宜模型，应对中国AI对手崛起带来的挑战。",
+     "news_status": "发展中",
+     "sources": [
+      "aihot:ArsTechnica：AI（RSS）",
+      "ars"
+     ],
+     "item_ref": "2026-08-15:pick-35",
+     "source_keys": [
+      "src-07f0ef655e8c4243856f90d0",
+      "src-6ec71bd6028d727e3153fff0"
+     ],
+     "event_identity": "set-ee165642607e7089d179bd4d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-179991",
+   "title": "中国国产C919完成首次国际商业航班飞行",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "中国国产C919完成首次国际商业航班飞行",
+     "summary": "C919完成首次国际商业航班，从北京飞往蒙古乌兰巴托，迈向海外市场。",
+     "news_status": "已确认",
+     "watch": "后续取决于C919能否获得国际认证及解决供应链问题。可观察路标：是否获得欧洲或美国适航认证。",
+     "sources": [
+      "bbc-cn"
+     ],
+     "item_ref": "2026-08-15:pick-142",
+     "source_keys": [
+      "src-f596e65311b7631cd2fa7b52"
+     ],
+     "event_identity": "set-635937b2593964b4de591052"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-3968ca",
+   "title": "法国宪法委员会否决15岁以下青少年社交媒体禁令",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "法国宪法委员会否决15岁以下青少年社交媒体禁令",
+     "summary": "法国宪法委员会否决禁止15岁以下青少年使用社交媒体的法案，称其侵犯言论自由。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-15:pick-100",
+     "source_keys": [
+      "src-09292a93a884819a7fe045d8",
+      "src-88bbc885ecfedf1065362ea2"
+     ],
+     "event_identity": "set-02ba79ef235046d8330ecd06"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-ae16b1",
+   "title": "智谱AI发布GLM-5.3，声称最强开源编码模型",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "智谱AI发布GLM-5.3，声称最强开源编码模型",
+     "summary": "智谱AI发布GLM-5.3，自称通过后训练比前代提升50%，是最强开源编码模型。",
+     "news_status": "仅传言",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-15:pick-45",
+     "source_keys": [
+      "src-65134c29165f2baa6f1f158f"
+     ],
+     "event_identity": "set-29ed934bd40cb43d56848918"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-3393d0",
+   "title": "美国报告称数十国助中国规避特朗普关税",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "美国报告称数十国助中国规避特朗普关税",
+     "summary": "美国一份新报告称，中国通过关税较低的国家转运货物，以规避较高关税。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-cn",
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-15:pick-120",
+     "source_keys": [
+      "src-d095d90ed5fb6f49b927651d",
+      "src-e1aed0a2aa9bd06da79d6ae8"
+     ],
+     "event_identity": "set-6d84043f1bfe55d1f5c953ca"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-b9a1ee",
+   "title": "研究反驳Anthropic和OpenAI自主AI研究声明",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "研究反驳Anthropic和OpenAI自主AI研究声明",
+     "summary": "一项研究显示，AI代理在六天、3000美元API额度和GPU支持下，未能独立写出可发表的AI研究论文，反驳了Anthropic和OpenAI的声明。",
+     "news_status": "发展中",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-15:pick-42",
+     "source_keys": [
+      "src-3c716aa132136f5f4a45e0a3"
+     ],
+     "event_identity": "set-f02b861d39c6b06a6b17d59d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-750333",
+   "title": "Anthropic Q2营收超115亿美元同比增14倍",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "Anthropic Q2营收超115亿美元同比增14倍",
+     "summary": "Anthropic第二季度初步营收超115亿美元，同比增长超14倍，并实现调整后营业利润为正。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-15:pick-186",
+     "source_keys": [
+      "src-1b662b1675833e52f4984891"
+     ],
+     "event_identity": "set-484c8d3a4c0fdb3116cd367e"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-6b415c",
+   "title": "意大利警方追回被盗价值超千万美元名画",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "意大利警方追回被盗价值超千万美元名画",
+     "summary": "意大利警方追回三月被盗的价值约900万欧元（超1000万美元）名画，包括塞尚、雷诺阿和马蒂斯作品，九名摩尔多瓦人受调查。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-15:pick-114",
+     "source_keys": [
+      "src-f2d736dcbb665d52ef9773ad",
+      "src-f3b5930563fd4574f2eda4a6"
+     ],
+     "event_identity": "set-8125d22d648a014d1a17e410"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-bc503c",
+   "title": "塔利班执政五周年对阿富汗教育造成毁灭性影响",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "塔利班执政五周年对阿富汗教育造成毁灭性影响",
+     "summary": "塔利班执政五周年之际，其对阿富汗女孩教育造成毁灭性影响，男孩教育也受到冲击。",
+     "news_status": "已确认",
+     "sources": [
+      "npr"
+     ],
+     "item_ref": "2026-08-15:pick-152",
+     "source_keys": [
+      "src-7674dbc64261995dd794427d"
+     ],
+     "event_identity": "set-60c5407ad0ead5d9d0357d8d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-4e2c5c",
+   "title": "苹果提议对应用外购买收取15%佣金",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "苹果提议对应用外购买收取15%佣金",
+     "summary": "苹果请求联邦法官允许其对iOS应用中通过外部链接进行的购买收取最高15%的佣金。",
+     "news_status": "发展中",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-15:pick-21",
+     "source_keys": [
+      "src-6efe3ac4682c6554982156fd"
+     ],
+     "event_identity": "set-6f21ea50eab9956d6a6b1852"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-26066e",
+   "title": "Uber与Pony.ai拟在欧洲四城部署2000辆机器人出租车",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "Uber与Pony.ai拟在欧洲四城部署2000辆机器人出租车",
+     "summary": "Uber与Pony.ai扩大合作，计划将2000辆机器人出租车部署至欧洲四个新城市，超出最初克罗地亚萨格勒布市场。",
+     "news_status": "发展中",
+     "watch": "取决于监管审批进度和当地市场接受度，可观察路标为具体城市名单及部署时间表公布。",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-15:pick-25",
+     "source_keys": [
+      "src-b220de0dafd28dd3ef2523ae"
+     ],
+     "event_identity": "set-0caf38b147dee8eb70f7bc8c"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-572040",
+   "title": "朱镕基逝世引发民众悼念与时代反思",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "朱镕基逝世引发民众悼念与时代反思",
+     "summary": "中国前总理朱镕基逝世，民众悼念并反思其直言敢为的风格与当下政治环境的对比。",
+     "news_status": "已确认",
+     "sources": [
+      "nyt-cn"
+     ],
+     "item_ref": "2026-08-15:pick-205",
+     "source_keys": [
+      "src-6aaf699a1134d3fe39bed3bc"
+     ],
+     "event_identity": "set-71188d23fd911d58a494ff12"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-3c39fa",
+   "title": "法官责令谷歌一周内修复Play商店反竞争下载问题",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "法官责令谷歌一周内修复Play商店反竞争下载问题",
+     "summary": "美国法官责令谷歌一周内修复Play商店中第三方应用商店可见性不足的反竞争问题。",
+     "news_status": "发展中",
+     "sources": [
+      "ars"
+     ],
+     "item_ref": "2026-08-15:pick-33",
+     "source_keys": [
+      "src-829ce9de847ae9f3567b3d8c"
+     ],
+     "event_identity": "set-2f4b55532720cd73f0f2de84"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-c6bee7",
+   "title": "比利时建筑工人在下水道施工中发现价值900万欧元黄金",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "比利时建筑工人在下水道施工中发现价值900万欧元黄金",
+     "summary": "比利时建筑工人在下水道施工时于一处房产墙内发现价值900万欧元的黄金，18岁学生Kobe参与发现。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-15:pick-103",
+     "source_keys": [
+      "src-2fe0a0bef0ecbaae594edd3b",
+      "src-f0f34f7c2a9cbf888f8951aa"
+     ],
+     "event_identity": "set-d5c747ec013f47b8f4790d8a"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-aa49e7",
+   "title": "最大全电动飞机首飞仅耗电5美元",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "最大全电动飞机首飞仅耗电5美元",
+     "summary": "最大全电动飞机完成首飞，耗电成本仅5美元，由航空公司支持的合资企业开发。",
+     "news_status": "已确认",
+     "sources": [
+      "ars"
+     ],
+     "item_ref": "2026-08-15:pick-27",
+     "source_keys": [
+      "src-8d64be205527fe925f6920e9"
+     ],
+     "event_identity": "set-edec0bb1d3fdc5c313e5d0d9"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-63365c",
+   "title": "自动驾驶卡车获准在加州高速公路上测试",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "自动驾驶卡车获准在加州高速公路上测试",
+     "summary": "Aurora Innovation和Kodiak AI获加州DMV许可，自动驾驶卡车正式在加州高速公路上测试。",
+     "news_status": "已确认",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-15:pick-15",
+     "source_keys": [
+      "src-d1c41854981ada76844b60d0"
+     ],
+     "event_identity": "set-13f7bdd74ce38613cbc18d93"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-6305b3",
+   "title": "美国水务设施遭疑似伊朗黑客攻击",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "美国水务设施遭疑似伊朗黑客攻击",
+     "summary": "过去数周，美国多家水务设施遭黑客入侵，攻击被指与伊朗有关。",
+     "news_status": "发展中",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-15:pick-17",
+     "source_keys": [
+      "src-6906ab04ccbc8f7c3f3180e2"
+     ],
+     "event_identity": "set-f32a3f0fdf0aa22cf76bb500"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-a5b7a4",
+   "title": "千问办公接入智谱和DeepSeek模型，开启多模型聚合",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "千问办公接入智谱和DeepSeek模型，开启多模型聚合",
+     "summary": "千问办公上线GLM-5.3和DeepSeek V4 Pro，前沿模型覆盖阿里、智谱、DeepSeek三家厂商。",
+     "news_status": "已确认",
+     "watch": "后续取决于其他办公Agent是否跟进聚合多模型。可观察路标：竞争对手是否宣布类似的多模型接入。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-15:pick-197",
+     "source_keys": [
+      "src-f23b21d94f5a42489731ac9f"
+     ],
+     "event_identity": "set-85883cd4336ec72321e98f68"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-17803c",
+   "title": "Claude Code以46%合并率日常维护Anthropic软件",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "Claude Code以46%合并率日常维护Anthropic软件",
+     "summary": "Anthropic测试Claude Code维护自家软件，数周内创建388个拉取请求，46%被合并。",
+     "news_status": "发展中",
+     "watch": "后续取决于合并率能否提升以及测试是否扩展到更多维护任务。可观察路标：Anthropic是否公布更大规模或更高合并率的测试结果。",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-15:pick-44",
+     "source_keys": [
+      "src-b6a3f8dbcac032ce8e5e272f"
+     ],
+     "event_identity": "set-057afc0ad361d2244d21d4e7"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-e35903",
+   "title": "以色列计划将约旦河西岸执法权移交警察",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "以色列计划将约旦河西岸执法权移交警察",
+     "summary": "以色列国防部长计划将约旦河西岸执法权移交警察，巴方称此举违反国际法。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-15:pick-99",
+     "source_keys": [
+      "src-ffea9c63f6a58533141b9104"
+     ],
+     "event_identity": "set-cb61ab0ead095a72a9e2a7fd"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-d5872b",
+   "title": "英伟达披露持有SpaceX 210亿美元股份",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "英伟达披露持有SpaceX 210亿美元股份",
+     "summary": "英伟达通过投资xAI间接持有SpaceX股份，二季度末价值约210亿美元。",
+     "news_status": "已确认",
+     "sources": [
+      "cnbc"
+     ],
+     "item_ref": "2026-08-15:pick-47",
+     "source_keys": [
+      "src-a413261b2bf8c5073f6fec76"
+     ],
+     "event_identity": "set-d1bb45b900288f1d96a32c20"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-86134d",
+   "title": "特朗普家族加密公司获银行牌照有条件批准",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "特朗普家族加密公司获银行牌照有条件批准",
+     "summary": "美国货币监理署有条件批准World Liberty信托银行章程，允许其发行稳定币。",
+     "news_status": "已确认",
+     "watch": "后续取决于World Liberty满足监管条件的情况及稳定币发行进展。可观察路标：公司发布稳定币产品或监管机构进一步公告。",
+     "sources": [
+      "cnbc"
+     ],
+     "item_ref": "2026-08-15:pick-46",
+     "source_keys": [
+      "src-0a4ca44813fe513454c597b1"
+     ],
+     "event_identity": "set-7c26dd31814d1b530aadbfde"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260815-5d0ae4",
+   "title": "高盛靠为AI基础设施融资成新增长点",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-15",
+   "last_seen": "2026-08-15",
+   "history": [
+    {
+     "date": "2026-08-15",
+     "title": "高盛靠为AI基础设施融资成新增长点",
+     "summary": "高盛近期为英伟达和英特尔融资，以满足AI基础设施的激增需求。",
+     "news_status": "已确认",
+     "sources": [
+      "cnbc"
+     ],
+     "item_ref": "2026-08-15:pick-50",
+     "source_keys": [
+      "src-b3d7eaaaa59bf07954100591"
+     ],
+     "event_identity": "set-95d9907fd1280bac28cf6cb1"
     }
    ]
   }
