@@ -8992,10 +8992,10 @@
    "event_id": "evt-20260727-9e2018",
    "title": "英伟达洽谈为OpenAI数据中心提供2500亿美元担保",
    "category": "ai",
-   "status": "archived",
+   "status": "active",
    "pinned": false,
    "first_seen": "2026-07-27",
-   "last_seen": "2026-07-27",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-07-27",
@@ -9010,6 +9010,23 @@
       "src-734f68b7214e33015c556e62"
      ],
      "event_identity": "set-1ee03a5f63dc2c8daad26fde"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "英伟达削减对OpenAI数据中心担保规模过半",
+     "summary": "英伟达将OpenAI俄亥俄数据中心担保从2500亿美元降至不超1200亿美元，降幅超50%。",
+     "news_status": "发展中",
+     "watch": "后续发展取决于英伟达与OpenAI能否最终签署协议，以及投资者对调整后方案的反应。可观察路标：协议是否在本周末正式签署。",
+     "sources": [
+      "cls-depth",
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-16:pick-51",
+     "source_keys": [
+      "src-3e6ed325782af62925a44f7f",
+      "src-d3f51a85d178512d4bb6efbe"
+     ],
+     "event_identity": "set-f5f948d529b5caa00fa29df3"
     }
    ]
   },
@@ -9470,7 +9487,7 @@
    "event_id": "evt-20260728-b15ea1",
    "title": "中国6岁女童接受实验性基因编辑治疗后死亡",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-28",
    "last_seen": "2026-08-08",
@@ -9510,7 +9527,7 @@
    "event_id": "evt-20260728-fcd31c",
    "title": "GitHub Copilot app新增企业级托管设置",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-07-28",
    "last_seen": "2026-08-08",
@@ -12879,10 +12896,10 @@
    "event_id": "evt-20260731-d92eae",
    "title": "数百名移民从摩洛哥游泳进入西班牙飞地休达",
    "category": "world",
-   "status": "archived",
+   "status": "active",
    "pinned": false,
    "first_seen": "2026-07-31",
-   "last_seen": "2026-08-04",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-07-31",
@@ -12968,6 +12985,25 @@
       "src-a9d576f9d76338b9c204a030"
      ],
      "event_identity": "set-0f496e6d04fc9ead3cc8f542"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "摩洛哥警方拦截逾百名试图进入休达的移民",
+     "summary": "摩洛哥警方逮捕111名试图进入西班牙飞地休达的移民，社交媒体呼吁引发新一轮越境潮。",
+     "news_status": "已确认",
+     "watch": "后续发展取决于社交媒体上是否继续出现新的越境呼吁，以及摩洛哥与西班牙的边境管控力度是否持续加强。可观察路标：未来一周内是否再有大规模聚集或逮捕报道。",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-16:pick-61",
+     "source_keys": [
+      "src-154c5a1eedffa59f0d0e7d4d",
+      "src-36b2902dd726cdedc3f1b9b6",
+      "src-5aa2085dd7cacdb905320d9f"
+     ],
+     "event_identity": "set-645cb8d2b30af1fe4eb5fe0f"
     }
    ],
    "line_reconciled": true
@@ -16823,7 +16859,7 @@
    "event_id": "evt-20260806-29896c",
    "title": "Jeff Dean等四位顶尖AI研究员离开谷歌，创办DiscoLoop AI",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-06",
    "last_seen": "2026-08-08",
@@ -17623,7 +17659,7 @@
    "event_id": "evt-20260807-6b8aec",
    "title": "斯坦福团队首次用AI设计完整基因组，造出16种噬菌体",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-08",
@@ -17701,7 +17737,7 @@
    "event_id": "evt-20260807-f1497a",
    "title": "新墨西哥州法院判Meta支付5.67亿美元儿童伤害案赔偿",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-08",
@@ -18147,7 +18183,7 @@
    "event_id": "evt-20260807-accb71",
    "title": "OpenAI与Jony Ive合作AI智能音箱，定价300-400美元",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-08",
@@ -18585,7 +18621,7 @@
    "event_id": "evt-20260807-c68a1f",
    "title": "Airbnb二季度财报超预期，股价大涨9%并上调全年指引",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-07",
    "last_seen": "2026-08-08",
@@ -18682,7 +18718,7 @@
    "event_id": "evt-20260808-554c08",
    "title": "泰国暖武里府校园枪击案致8人死亡，14岁枪手自杀",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18713,7 +18749,7 @@
    "event_id": "evt-20260808-8fd5bb",
    "title": "字节跳动训练万亿参数级AI模型以对标Anthropic",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18741,7 +18777,7 @@
    "event_id": "evt-20260808-6d341e",
    "title": "Cloudflare推出面向AI代理的浏览器Kitesurf",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18768,7 +18804,7 @@
    "event_id": "evt-20260808-a4d069",
    "title": "美国参议院通过制裁俄罗斯石油购买者法案",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18798,7 +18834,7 @@
    "event_id": "evt-20260808-44b534",
    "title": "美国7月非农就业意外减少2.3万，加息预期降温",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18831,7 +18867,7 @@
    "event_id": "evt-20260808-80f034",
    "title": "西班牙因休达移民危机对意大利实施边境管制",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18860,7 +18896,7 @@
    "event_id": "evt-20260808-96d777",
    "title": "Cloudflare发布代理互联网行为评估新系统",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18885,7 +18921,7 @@
    "event_id": "evt-20260808-4620e5",
    "title": "Cloudflare推出AI工具Radar Researcher",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -18958,7 +18994,7 @@
    "event_id": "evt-20260808-80c091",
    "title": "特朗普重启罢免美联储理事库克程序",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19075,7 +19111,7 @@
    "event_id": "evt-20260808-62e578",
    "title": "新疫苗有望对抗致命腹泻病",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19100,7 +19136,7 @@
    "event_id": "evt-20260808-2a7c17",
    "title": "特朗普政府斥资近40亿美元取消海上风电项目",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19127,7 +19163,7 @@
    "event_id": "evt-20260808-0c4999",
    "title": "专家呼吁AI公司公开安全数据以改善危机应对",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19152,7 +19188,7 @@
    "event_id": "evt-20260808-89844d",
    "title": "沙特、土耳其、巴基斯坦签署三方防务协议",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19180,7 +19216,7 @@
    "event_id": "evt-20260808-69cf2a",
    "title": "西班牙警方破获地中海大型走私网络，逮捕78人",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19208,7 +19244,7 @@
    "event_id": "evt-20260808-4f6fdf",
    "title": "SK海力士批准54万亿韩元扩产，新建两座晶圆厂",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19234,7 +19270,7 @@
    "event_id": "evt-20260808-d9ef98",
    "title": "国际金价三天涨300美元，瑞银看多至5000美元",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19262,7 +19298,7 @@
    "event_id": "evt-20260808-2dbc8d",
    "title": "中国AI模型Kimi在测试中逃逸安全沙箱",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19288,7 +19324,7 @@
    "event_id": "evt-20260808-477c5d",
    "title": "GitHub企业版现可安装第三方应用",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19313,7 +19349,7 @@
    "event_id": "evt-20260808-4d43dd",
    "title": "GitHub秘密扫描覆盖范围更新",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19380,7 +19416,7 @@
    "event_id": "evt-20260808-95377a",
    "title": "审查工业综合体叙事如何从网络边缘进入特朗普政策",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19405,7 +19441,7 @@
    "event_id": "evt-20260808-b1263d",
    "title": "英格兰数百万人面临心理健康护理等待时间延长",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19430,7 +19466,7 @@
    "event_id": "evt-20260808-3f2e31",
    "title": "北京下调非京籍家庭购房社保个税缴纳年限至一年",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-08",
    "last_seen": "2026-08-08",
@@ -19738,7 +19774,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-09",
-   "last_seen": "2026-08-15",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-08-09",
@@ -19775,6 +19811,23 @@
       "src-e2397d2edc646994ccd46d28"
      ],
      "event_identity": "set-bef370848605faa6988a5054"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "伯克希尔二季度增持Alphabet至第三大持仓",
+     "summary": "伯克希尔二季度买入235亿美元股票，结束连续14个季度净卖出，Alphabet成第三大持仓。",
+     "news_status": "已确认",
+     "watch": "后续发展取决于阿贝尔是否延续增持策略，以及伯克希尔现金储备变化。可观察路标：下一季度13F报表中的持仓变化。",
+     "sources": [
+      "cnbc",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-16:pick-44",
+     "source_keys": [
+      "src-239637aede5123a8a4b19ba9",
+      "src-6d832bb3ba0ace1620c90ddd"
+     ],
+     "event_identity": "set-3f9d92340c10ca8a589df2b9"
     }
    ]
   },
@@ -23343,7 +23396,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-13",
-   "last_seen": "2026-08-13",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-08-13",
@@ -23358,6 +23411,23 @@
       "src-6a68284664a44c3024961617"
      ],
      "event_identity": "set-4280c5bf08bace69bb9d2463"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "津巴布韦卡里巴湖渡轮倾覆死亡人数升至72",
+     "summary": "津巴布韦卡里巴湖渡轮倾覆事故死亡人数升至72人，警方又发现26具遗体。",
+     "news_status": "已确认",
+     "watch": "后续发展取决于救援和遗体打捞工作的进展，以及调查结果是否公布。可观察路标：官方是否发布最终死亡人数或调查报告。",
+     "sources": [
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-16:pick-83",
+     "source_keys": [
+      "src-0ac5d311289ceb85bc4b8ecb",
+      "src-67098f752048c8ce8e500c37"
+     ],
+     "event_identity": "set-41d2848b002aee0864707d4f"
     }
    ]
   },
@@ -23674,7 +23744,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-14",
-   "last_seen": "2026-08-14",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-08-14",
@@ -23694,6 +23764,21 @@
       "src-cd5d271891fedcdb849c71f5"
      ],
      "event_identity": "set-ab8873df97fa3e597736619f"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "特朗普政府拟允许企业黑客攻击外国网络罪犯",
+     "summary": "白宫备忘录拟允许私营企业对外国网络罪犯进行黑客攻击或间谍活动，但细节不足。",
+     "news_status": "仅传言",
+     "watch": "后续发展取决于备忘录的具体执行细则及私营企业的参与程度。可观察路标：首批获授权企业名单及行动案例。",
+     "sources": [
+      "npr"
+     ],
+     "item_ref": "2026-08-16:pick-113",
+     "source_keys": [
+      "src-4d48cd8cbafda32e6bb3a4f4"
+     ],
+     "event_identity": "set-80114af02f0a57994b1d4ec0"
     }
    ]
   },
@@ -24491,7 +24576,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-15",
-   "last_seen": "2026-08-15",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-08-15",
@@ -24508,6 +24593,21 @@
       "src-b73766b4a12cf257b0cb5312"
      ],
      "event_identity": "set-39087a95d7466c2da3199e0d"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "Anthropic公布Claude水印技术细节",
+     "summary": "Anthropic披露Claude新水印技术的工作原理、隐藏方式及对代码的影响。",
+     "news_status": "已确认",
+     "watch": "后续发展取决于该水印技术的实际应用效果及市场接受度。可观察路标：是否有第三方采用该技术或出现绕过方法。",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-16:pick-2",
+     "source_keys": [
+      "src-3f8ff4a476060ae981fef0f6"
+     ],
+     "event_identity": "set-ef7680d9a2582447d2abf2a7"
     }
    ]
   },
@@ -25057,7 +25157,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-15",
-   "last_seen": "2026-08-15",
+   "last_seen": "2026-08-16",
    "history": [
     {
      "date": "2026-08-15",
@@ -25072,6 +25172,21 @@
       "src-a413261b2bf8c5073f6fec76"
      ],
      "event_identity": "set-d1bb45b900288f1d96a32c20"
+    },
+    {
+     "date": "2026-08-16",
+     "title": "英伟达首度披露持有SpaceX约210亿美元股份",
+     "summary": "英伟达通过股权转换持有SpaceX A类股1.228亿股，市值约210亿美元，为第六大股东。",
+     "news_status": "已确认",
+     "watch": "后续发展取决于英伟达与SpaceX合作的具体进展，以及该持仓的市值变化。可观察路标：英伟达是否进一步增持或披露更多合作细节。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-16:pick-152",
+     "source_keys": [
+      "src-cf0cc8c3e90201b49ced9f75"
+     ],
+     "event_identity": "set-dc6516af90ae4a4c4b64e78b"
     }
    ]
   },
@@ -25123,6 +25238,663 @@
       "src-b3d7eaaaa59bf07954100591"
      ],
      "event_identity": "set-95d9907fd1280bac28cf6cb1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-f095c4",
+   "title": "印尼弗洛勒斯海7.7级强震致47人死亡，救援受阻",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "印尼弗洛勒斯海7.7级强震致47人死亡，救援受阻",
+     "summary": "印尼弗洛勒斯海发生7.7级地震，已致至少47人死亡，数千人因海啸恐慌撤离，救援工作正在进行。",
+     "news_status": "发展中",
+     "watch": "救援进展取决于余震和天气条件，可观察路标是官方发布的伤亡人数和救援行动更新。",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "npr"
+     ],
+     "item_ref": "2026-08-16:pick-58",
+     "source_keys": [
+      "src-965760157e88fe9477f9642a",
+      "src-df2671c5a474b599173999b7",
+      "src-f8e76c2a4f0116ed85c164e3"
+     ],
+     "event_identity": "set-e40d08409fff1df0b60d81ee"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-3b0ecd",
+   "title": "韩国提议举行正式结束朝鲜战争的会谈",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "韩国提议举行正式结束朝鲜战争的会谈",
+     "summary": "韩国提议与朝鲜举行会谈，以正式结束自1953年停战以来冻结的战争状态。",
+     "news_status": "发展中",
+     "watch": "会谈能否成行取决于朝鲜的回应，可观察路标是朝鲜官方表态或后续外交接触。",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-16:pick-67",
+     "source_keys": [
+      "src-4c331b14edea6a9fc4e12a51"
+     ],
+     "event_identity": "set-fdae2465babbbbb98e0e2576"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-46e558",
+   "title": "剑桥教授杰森·阿代因抄袭指控辞职后被发现死亡",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "剑桥教授杰森·阿代因抄袭指控辞职后被发现死亡",
+     "summary": "剑桥大学最年轻黑人教授杰森·阿代因抄袭指控辞职后，被发现死于伦敦西南部家中。",
+     "news_status": "发展中",
+     "sources": [
+      "npr",
+      "aljazeera",
+      "atlantic"
+     ],
+     "item_ref": "2026-08-16:pick-89",
+     "source_keys": [
+      "src-08247f7c141be15325e141db",
+      "src-0d4425e762b26c32fefbbfcd",
+      "src-c24108c2c61f0601e7a224ed"
+     ],
+     "event_identity": "set-886f482fbbd471a75345cc1a"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-1621e8",
+   "title": "以色列空袭黎巴嫩南部致11人死亡",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "以色列空袭黎巴嫩南部致11人死亡",
+     "summary": "以色列空袭黎巴嫩南部，造成11人死亡，包括3名儿童，为6月停火以来最严重伤亡。",
+     "news_status": "发展中",
+     "sources": [
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-16:pick-62",
+     "source_keys": [
+      "src-be0bfbe414cfec7a05e99069",
+      "src-e23335be3e622c83d10b86fa"
+     ],
+     "event_identity": "set-888a5bc24dfdb658ebce79fb"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-887ac9",
+   "title": "全球二手书市场现神秘大宗订单，疑为AI训练数据采购",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "全球二手书市场现神秘大宗订单，疑为AI训练数据采购",
+     "summary": "多国二手书店收到神秘大宗订单，外界猜测买家为AI公司，用于获取训练数据。",
+     "news_status": "仅传言",
+     "sources": [
+      "bbc-world",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-16:pick-70",
+     "source_keys": [
+      "src-287012769375cadda8344a3c",
+      "src-6d7fea621eb2e9d63c122cc1"
+     ],
+     "event_identity": "set-d126016472bccfdf152457d5"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-06c3aa",
+   "title": "AI生成书籍占亚马逊自出版目录两成但收入占比低",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "AI生成书籍占亚马逊自出版目录两成但收入占比低",
+     "summary": "研究显示AI生成书籍占亚马逊自出版目录20%，但仅带来12%销售额，且拉低人类作者单书收入。",
+     "news_status": "已确认",
+     "sources": [
+      "aihot:TheDecoder：AINews（RSS）",
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-16:pick-52",
+     "source_keys": [
+      "src-44309e71b671d2ab40a29fd9",
+      "src-81a5ef258b0e120df5f9731e"
+     ],
+     "event_identity": "set-39a2af30cf9d502621a4f06f"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-08e8f0",
+   "title": "澳大利亚新南威尔士州启动枪支回购计划",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "澳大利亚新南威尔士州启动枪支回购计划",
+     "summary": "新南威尔士州在邦迪袭击后启动枪支回购计划，立法已通过，将于11月开始实施。",
+     "news_status": "已确认",
+     "watch": "取决于回购计划的实际执行效果和公众响应，以及是否引发政治争议。可观察路标：回购计划启动后的参与人数和枪支回收数量。",
+     "sources": [
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-16:pick-59",
+     "source_keys": [
+      "src-71db03087af29ab47f61dc97",
+      "src-933d669dd655c8fa0d369520"
+     ],
+     "event_identity": "set-2b9034739a576938d137835f"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-7e7040",
+   "title": "河南周口洪灾溃口合龙，进入紧急防汛期",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "河南周口洪灾溃口合龙，进入紧急防汛期",
+     "summary": "沙颍河支流贾鲁河周口段溃口成功合龙，周口市宣布进入紧急防汛期，水位仍超保。",
+     "news_status": "已确认",
+     "sources": [
+      "thepaper",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-16:pick-166",
+     "source_keys": [
+      "src-0bb0fae753711b4cb0b99362",
+      "src-f0a3d1ce59427a3ed2fd5820"
+     ],
+     "event_identity": "set-37e51d3aedc1426b0fe48114"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-ab7296",
+   "title": "市场对美联储9月加息预期降温，美股涨跌不一",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "市场对美联储9月加息预期降温，美股涨跌不一",
+     "summary": "美股三大指数本周涨跌不一，道指累跌0.56%，标普500累涨0.36%，纳指累涨0.14%。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-16:pick-150",
+     "source_keys": [
+      "src-18edb7c0657a1cbcf769a51a",
+      "src-9cd0929fa5be1f99430eb93b"
+     ],
+     "event_identity": "set-3c771190eaff7292c03326d0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-89dec7",
+   "title": "Jane Street因AI基金爆仓7月巨亏150亿美元",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "Jane Street因AI基金爆仓7月巨亏150亿美元",
+     "summary": "Jane Street今年7月因投资AI对冲基金Situational Awareness爆仓及科技股震荡，录得约150亿美元亏损，为约十年来首次单月亏损。",
+     "news_status": "发展中",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-16:pick-154",
+     "source_keys": [
+      "src-7030c792ed9083137d458132",
+      "src-c956b3b92a94839886935fb9"
+     ],
+     "event_identity": "set-b9dc44acd22a4adfb9e2a9b0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-ff0334",
+   "title": "World Labs发布模拟引擎生成数千种机器人训练场景",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "World Labs发布模拟引擎生成数千种机器人训练场景",
+     "summary": "World Labs推出模拟引擎，从单一真实任务生成数千种虚拟变体，用于训练机器人控制器。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-16:pick-54",
+     "source_keys": [
+      "src-6497e9e815fc6b8661eecaf3"
+     ],
+     "event_identity": "set-bb394d780b0030845ad5a464"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-5672c9",
+   "title": "新基准测试显示AI模型视觉感知能力仍差",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "新基准测试显示AI模型视觉感知能力仍差",
+     "summary": "Moonshot AI的PerceptionBench测试显示，前沿模型视觉感知准确率均未达60%。",
+     "news_status": "已确认",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-16:pick-56",
+     "source_keys": [
+      "src-b7f647d497c117704cec9bd7"
+     ],
+     "event_identity": "set-2c68e261f9881dc5cfa24588"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-f15dac",
+   "title": "弗吉尼亚州立大学枪击致5伤，多名嫌疑人仍在逃",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "弗吉尼亚州立大学枪击致5伤，多名嫌疑人仍在逃",
+     "summary": "弗吉尼亚州立大学宿舍楼外发生枪击，致5人受伤，多名嫌疑人仍在逃。",
+     "news_status": "发展中",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-16:pick-64",
+     "source_keys": [
+      "src-9c5b0504ad224f1737eb98d3"
+     ],
+     "event_identity": "set-9edaf7f3a0f3d4f2b2f12fd2"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-5cc28d",
+   "title": "美国南部大规模召回鸡蛋，涉沙门氏菌爆发",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "美国南部大规模召回鸡蛋，涉沙门氏菌爆发",
+     "summary": "美国南部及西南部召回近160万打鸡蛋，因沙门氏菌爆发，为美国史上最大食源性疾病爆发之一。",
+     "news_status": "已确认",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-16:pick-101",
+     "source_keys": [
+      "src-349f23eb0f76ce72e3e9f42e"
+     ],
+     "event_identity": "set-9ae05970d74b77ac2171c623"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-ca020f",
+   "title": "乌克兰用巡航导弹袭击俄罗斯主要火箭工厂",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "乌克兰用巡航导弹袭击俄罗斯主要火箭工厂",
+     "summary": "乌克兰使用巡航导弹袭击俄罗斯主要火箭工厂，据称使用了Flamingo导弹。",
+     "news_status": "发展中",
+     "sources": [
+      "ars"
+     ],
+     "item_ref": "2026-08-16:pick-17",
+     "source_keys": [
+      "src-028d08030ea58bc18d76cb06"
+     ],
+     "event_identity": "set-6645a7087a3d74e3d88523af"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-c0c0bb",
+   "title": "飓风Lala增强为一级并逼近夏威夷",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "飓风Lala增强为一级并逼近夏威夷",
+     "summary": "飓风Lala增强为一级飓风，逼近夏威夷，可能带来强降雨和强风。",
+     "news_status": "发展中",
+     "sources": [
+      "bbc-world",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-16:pick-57",
+     "source_keys": [
+      "src-0aad35e4179920f63d750f2f",
+      "src-1789a0d3fda229aa27d65cb3"
+     ],
+     "event_identity": "set-c6198b0c6b5f3b0c1416010f"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-f5df2a",
+   "title": "列支敦士登修改继承规则允许女性继位",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "列支敦士登修改继承规则允许女性继位",
+     "summary": "列支敦士登在国庆日宣布修改继承规则，允许女性继承王位。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-16:pick-63",
+     "source_keys": [
+      "src-d1c96422b4c122ddd2538e18"
+     ],
+     "event_identity": "set-f9dce5cb785cfdb0a399468e"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-0c5eec",
+   "title": "BBC寻求传唤特朗普家人参与诉讼",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "BBC寻求传唤特朗普家人参与诉讼",
+     "summary": "BBC律师称特朗普家人对2021年1月6日演讲意图有个人了解，寻求传唤其参与Panorama诉讼。",
+     "news_status": "发展中",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-16:pick-74",
+     "source_keys": [
+      "src-6150bb2430cd43d1e0130a5f"
+     ],
+     "event_identity": "set-39a284771b8ffe3c8c6c372f"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-f82088",
+   "title": "博通大跌6%市值蒸发千亿，AI融资模式受质疑",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "博通大跌6%市值蒸发千亿，AI融资模式受质疑",
+     "summary": "博通股价8月14日收盘跌逾5.9%，因投资者审视其AI XPV融资平台“卖方担保”模式的信用风险。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-16:pick-142",
+     "source_keys": [
+      "src-65bb181238e99aa8f268f9f4"
+     ],
+     "event_identity": "set-80af692ca24615b8ff4d4f82"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-ba6f7c",
+   "title": "国产算力产业链迎扩张浪潮，大厂加码投资",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "国产算力产业链迎扩张浪潮，大厂加码投资",
+     "summary": "中芯国际称中国互联网公司大幅提高硬件投资，数据中心配套芯片供不应求，腾讯阿里已有相关动作。",
+     "news_status": "已确认",
+     "sources": [
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-16:pick-181",
+     "source_keys": [
+      "src-198d3611c910b61e5e02a53e"
+     ],
+     "event_identity": "set-ede889db8bf1cbad7417e6b5"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-e8c3d5",
+   "title": "a16z史上最大投资押注Uber创始人新公司Atoms",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "a16z史上最大投资押注Uber创始人新公司Atoms",
+     "summary": "Uber联合创始人Kalanick携工业AI公司Atoms亮相，获a16z联合创始人Ben Horowitz迄今最大一笔投资。",
+     "news_status": "已确认",
+     "watch": "取决于Atoms能否在食品、矿业、制造业等传统产业落地工业AI应用。可观察路标：Atoms发布首批客户或产品原型。",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-16:pick-143",
+     "source_keys": [
+      "src-50a420c3c1cafb828cf2e165"
+     ],
+     "event_identity": "set-4cdccf3f32f5ed6f709cde62"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-2add7b",
+   "title": "中国队在第38届国际信息学奥赛斩获3金1银",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "中国队在第38届国际信息学奥赛斩获3金1银",
+     "summary": "第38届IOI在塔什干落幕，中国队获3金1银团体第一，许淇文以498.27分排名全球第一。",
+     "news_status": "已确认",
+     "sources": [
+      "thepaper-edu",
+      "thepaper"
+     ],
+     "item_ref": "2026-08-16:pick-155",
+     "source_keys": [
+      "src-750f11c5acbc550929d9267f",
+      "src-f5e344167613f4618a9e6eca"
+     ],
+     "event_identity": "set-0e43e8d131665f53601a1d9b"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-c37c46",
+   "title": "SpaceX正式完成对AI编程公司Cursor的收购",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "SpaceX正式完成对AI编程公司Cursor的收购",
+     "summary": "AI编程公司Cursor正式成为SpaceX的一部分，收购已完成。",
+     "news_status": "已确认",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-16:pick-3",
+     "source_keys": [
+      "src-7c706e3117010a55874e305e"
+     ],
+     "event_identity": "set-f60df0e424aeaf935f160600"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-fb2804",
+   "title": "原告在法庭文件中隐藏AI提示词以影响自动审查",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "原告在法庭文件中隐藏AI提示词以影响自动审查",
+     "summary": "康涅狄格州一名原告在法庭文件中嵌入白色文字提示注入，试图影响潜在的AI审查系统，法官已介入处理。",
+     "news_status": "发展中",
+     "sources": [
+      "thedecoder"
+     ],
+     "item_ref": "2026-08-16:pick-53",
+     "source_keys": [
+      "src-66acd5c41f52da7c692d60b5"
+     ],
+     "event_identity": "set-465fbde9cee1240af2500018"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260816-2e5d6a",
+   "title": "新网站让真人扮演AI聊天机器人以取乐",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-16",
+   "last_seen": "2026-08-16",
+   "history": [
+    {
+     "date": "2026-08-16",
+     "title": "新网站让真人扮演AI聊天机器人以取乐",
+     "summary": "网页项目Your AI Slop Bores Me上线，用户可真人扮演AI回答提问，限时150秒。",
+     "news_status": "已确认",
+     "sources": [
+      "verge",
+      "ithome"
+     ],
+     "item_ref": "2026-08-16:pick-7",
+     "source_keys": [
+      "src-13f986a8e2063c1044a8f05a",
+      "src-8a492f59eebca3d299708552"
+     ],
+     "event_identity": "set-b31a51a6553006b815a1b2d2"
     }
    ]
   }

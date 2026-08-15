@@ -1059,12 +1059,65 @@
       "llm_output_tokens": 35583,
       "llm_cost_usd": 0.0604,
       "llm_cost_known": true
+    },
+    {
+      "date": "2026-08-16",
+      "audited_events": 26,
+      "split_events": 4,
+      "removed_fields": 39,
+      "triage_invalid_rows": 0,
+      "triage_fallback_batches": 0,
+      "model_unusable_responses": 0,
+      "enrichment_audited_events": 32,
+      "duplicate_audited_events": 213,
+      "same_day_duplicates_merged": 15,
+      "duplicate_audit_failures": 0,
+      "same_day_candidate_pairs": 528,
+      "same_day_bridge_batches": 12,
+      "same_day_reconcile_calls": 18,
+      "same_day_deferred_batches": 0,
+      "same_day_budget_exhausted": false,
+      "event_lines_audited": 9,
+      "event_lines_merged": 0,
+      "event_line_audit_failures": 0,
+      "cross_day_duplicates": 13,
+      "material_updates": 0,
+      "update_judge_failures": 0,
+      "enrich_out_of_batch_idx": 0,
+      "removed_field_counts_version": 3,
+      "removed_field_counts": {
+        "context": 12,
+        "watch": 25,
+        "watch_detail": 0,
+        "detail": 0,
+        "claims": 2
+      },
+      "removed_field_reasons": {
+        "evidence_copy": 0,
+        "audit_unsupported": 37,
+        "claim_unsupported": 2,
+        "generation_invalid": 0
+      },
+      "degraded": false,
+      "cross_source_novelty_candidates": 40,
+      "cross_source_material_additions": 14,
+      "cross_source_restatements": 0,
+      "cross_source_novelty_failures": 0,
+      "cross_source_novelty_calls": 3,
+      "cross_source_novelty_deferred": 0,
+      "cross_source_novelty_budget_exhausted": false,
+      "llm_calls": 104,
+      "llm_input_tokens": 341509,
+      "llm_cached_input_tokens": 14720,
+      "llm_output_tokens": 33039,
+      "llm_cost_usd": 0.055,
+      "llm_cost_known": true
     }
   ],
   "summary": {
-    "days": 31,
-    "audited_events": 981,
-    "split_events": 366,
-    "split_rate": 0.3731
+    "days": 32,
+    "audited_events": 1007,
+    "split_events": 370,
+    "split_rate": 0.3674
   }
 }
