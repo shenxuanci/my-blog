@@ -82,7 +82,7 @@ npm run test:post
 
 ## 内容维护
 
-- 在线后台地址是 `/admin/`。登录后可以发布、编辑、删除文章，也可以上传文章封面和正文图片。
+- 在线后台地址是 `/admin/`。登录后可以发布、编辑、删除文章，上传文章封面和正文图片，以及管理 Twikoo 评论。
 - 文章编辑器和站点设置的操作栏（`.form-actions`）是 `position: sticky` 的常驻底栏，长文章不必翻到文末才能发布；「删除」与「取消」同侧，靠与「发布」的距离防误点。**它依赖 `.workspace` 使用 `overflow: clip` 而非 `hidden`**——`hidden` 同样能裁圆角，但会创建滚动容器，让 sticky 以一个自身不滚动的祖先为参照系，底栏**静默失效、不报错也不告警**，现场没有任何线索指向元凶。顶部 `#status` 的提示同时镜像进底栏，否则按钮移近后反馈反而落在视口外。
 - 底栏里的状态位用 `flex: 1 0 100%` 独占整行并限高两行，**不能给它 `flex-grow` 去和按钮抢同一行**：GitHub 超时那类上百字符的报错会把底栏撑到视口四分之一高、按钮换行三排（实测 1280px 和 375px 都会）。完整信息仍在顶部 `#status`。以上不变量（`clip`/`sticky`/实心背景/状态位不挤压按钮/两组按钮 + `space-between` 的间距）都由 `npm run test:post` 的静态断言锁定。
 - 从 Microsoft Word 粘贴到后台正文框时，只导入纯文本并把 Word 段落转换成 Markdown 空行分段；Word 的加粗、标题等格式不保留。导入 Markdown 时，后台使用本地 Marked 分词，只把顶层普通正文的单换行转为空行，标题、列表、引用、表格、代码、原始 HTML、图片和引用/脚注定义保持原结构；本地解析器未加载或解析失败时会中止导入，不改动编辑器现有内容。普通正文中按 `Enter` 新建段落，按 `Shift+Enter` 写入两个行尾空格加换行的 Markdown 硬换行；列表、引用、表格、标题与代码块内继续使用 Markdown 的单换行。后台预览会按独立段落显示两格首行缩进，包含图片的段落不缩进。
@@ -118,7 +118,7 @@ GITHUB_BRANCH=main
 
 - 失败锁定由 `api/_loginGuard.js` 统一持有，**Cookie 登录和 `Authorization: Bearer` 共用同一份计数**。这一点是必须的：两条路验的是同一个 `ADMIN_TOKEN`，只给其中一条接限流等于没限流——攻击者换打 `/api/adminArticles` 就能无限次猜口令（2026-07-29 修复）。缺失凭证不计入锁定，只有「带了 `Authorization` 但值不对」才记账，否则未认证探测就能把管理员自己锁在门外。
 - `POST /api/adminSession` 校验后台口令并建立个人会话；同一客户端在 15 分钟内连续失败 5 次后，该 Serverless 实例会返回 `429` 与 `Retry-After`，成功登录会清除失败记录。客户端地址优先取 Vercel 提供的 `x-vercel-forwarded-for` 首地址，缺失时回落到通用转发头或 socket 地址。失败记录最多保留 1000 个客户端且只存在当前实例内存中，因此这只是应用层兜底，不替代 Vercel Firewall 等跨实例限流。`GET` 用于探测会话（后台页刷新后据此直接恢复，不再要求重新输入口令），`DELETE` 用于退出。会话 Cookie 仅作用于 `/api`，接口不开放跨域凭据读取；畸形 Cookie 按未登录处理，不产生 500。
-- `api/newsState.js` 只接受个人会话，用于日报反馈、收藏、稍后读和漏读；读取使用 `GET /api/newsState?type=feedback|read_later|favorites|misses`，写入使用 `POST /api/newsState` 与 `{ "type": "...", "payload": { ... } }`。单次 payload 上限 4096 字节，各状态最多保留 1000 条；并发写入撞到 GitHub blob SHA 时重读后重试一次。状态文件读入时必须是 `version: 1` 的普通对象，且对应 `entries` / `items` 必须是对象数组；无效 JSON 或错误结构一律报损坏并禁止覆盖，不能把异常状态静默当空列表。所有状态的 `date` 都必须是真实的 `YYYY-MM-DD` 日历日期，稍后读链接必须是带主机名的有效 HTTP(S) URL。漏读新增 payload 为 `date/title?/url?/reason`，撤销为 `op: "remove"` 加记录 `id`；标题或有效 HTTP(S) URL 至少一个，`reason` 只允许 `important_event`（重要事件）、`deep_read`（值得深读）、`missing_perspective`（缺少视角）。`adminArticles.js`、`adminSettings.js`、`adminUpload.js`、`vocab.js` 这些高权限接口走 `requireAdminWrite`：带 `Authorization` 头时用受限流的 `Bearer <ADMIN_TOKEN>`（留给脚本/CLI），否则认 `scope=admin` 的会话 Cookie（浏览器后台用）。
+- `api/newsState.js` 只接受个人会话，用于日报反馈、收藏、稍后读和漏读；读取使用 `GET /api/newsState?type=feedback|read_later|favorites|misses`，写入使用 `POST /api/newsState` 与 `{ "type": "...", "payload": { ... } }`。单次 payload 上限 4096 字节，各状态最多保留 1000 条；并发写入撞到 GitHub blob SHA 时重读后重试一次。状态文件读入时必须是 `version: 1` 的普通对象，且对应 `entries` / `items` 必须是对象数组；无效 JSON 或错误结构一律报损坏并禁止覆盖，不能把异常状态静默当空列表。所有状态的 `date` 都必须是真实的 `YYYY-MM-DD` 日历日期，稍后读链接必须是带主机名的有效 HTTP(S) URL。漏读新增 payload 为 `date/title?/url?/reason`，撤销为 `op: "remove"` 加记录 `id`；标题或有效 HTTP(S) URL 至少一个，`reason` 只允许 `important_event`（重要事件）、`deep_read`（值得深读）、`missing_perspective`（缺少视角）。`adminArticles.js`、`adminSettings.js`、`adminUpload.js`、`adminComments.js`、`vocab.js` 这些高权限接口走 `requireAdminWrite`：带 `Authorization` 头时用受限流的 `Bearer <ADMIN_TOKEN>`（留给脚本/CLI），否则认 `scope=admin` 的会话 Cookie（浏览器后台用）。
 - 所有 JSON 接口在业务处理前先做请求体体积检查：默认上限 1 MiB，图片上传因 8 MiB 二进制转为 data URL 后会膨胀而单独放宽到 12 MiB；超过上限返回 `413`，畸形 JSON 返回 `400`。这层应用检查不替代 Vercel 自身更低的请求体硬上限，后台仍需在浏览器端压缩图片。
 - 踩坑：用查表取值判真做白名单（`if (!STATE_FILES[type])`）挡不住 `__proto__`、`constructor`、`toString`、`hasOwnProperty`、`valueOf`——这些原型键取出来都是真值，会绕过校验并把 `Object.prototype` 当成写入路径送进 GitHub 文件接口。**接口里凡是用对象做白名单，一律用 `Object.hasOwn(map, key)` 判断**（2026-07-26 修复）。
 - 编辑或删除文章时必须提交打开文章时返回的 GitHub blob SHA；文件已被其他操作修改时接口返回 `409`，应刷新后重新编辑，不能覆盖较新的内容。
@@ -145,6 +145,23 @@ GITHUB_BRANCH=main
 - 踩坑（2026-07-28 修复）：`_config.fluid.yml` 里曾配置 `twikoo.path: window.location.pathname`，但 Fluid 模板写的是 `path: '<%= theme.twikoo.path %>'`——带引号且转义，线上输出的是**字面量字符串** `'window.location.pathname'`。结果所有文章的文末评论区共用同一个 path 桶，任何人在这里发的评论都会出现在全部文章下。因此 **`twikoo` 段不要再配置 `path`**，交给上面的注入脚本处理。
 - 踩坑（2026-07-28 修复）：迁移工具曾给每篇文章正文尾部注入 `<section class="legacy-comments">` 挂载块，与 Fluid 自己的评论区同页并存，导致每篇文章渲染**两个评论区**、两个元素抢用 `id="twikoo"`、两个 Twikoo 版本（CDN 1.6.32 与主题内置 1.6.8）竞争。这些块已随正文清洗一并删除；`source/js/twikoo-legacy-path.js` 只在页面存在 `[data-twikoo-path]` 时才动作，正文清空后它在文章页自然不再生效。
 - 踩坑：Hexo Fluid 迁移时 `post.comments.enable` 被置为 `false`，文章页评论一度整体消失；后端始终在线，恢复只需开上述三处配置，无需重建后端。
+
+### 后台评论管理
+
+- `/admin/` 的「评论管理」复用现有 `admin` 会话，通过 `/api/adminComments` 在服务端代理 Twikoo；浏览器不保存 Twikoo 管理令牌，也不会收到评论邮箱、IP、IP 属地、UA、内部 uid、原始 `href` 或 HTML。列表正文由服务端转为纯文本，完整排版仍去公开页面查看。
+- 普通列表与显隐筛选直接使用 Twikoo 分页。关键词搜索不能透传给 Twikoo——它会同时匹配邮箱和 IP——而是在最多 2000 条评论的服务端脱敏结果中只搜索昵称、正文、公开网站和评论 path；当前浏览器的未读筛选走同一条受限扫描路径。超过上限、8 秒总超时、分页总数漂移、缺页或重复记录都会明确失败，不返回不完整结果。
+- 支持隐藏／恢复、顶层置顶／取消置顶和单条永久删除。删除顶层评论前会扫描回复并在发现回复时返回 `409`；Twikoo 没有把检查和删除合成事务，仍存在极小并发竞态，因此有讨论内容时优先隐藏。已读状态只存在当前浏览器的 `aoiblog_admin_comment_reads_v1`，查看详情或原文即标记，不能当作已审核或已处理。
+- 评论所在页面只由后台已读取的文章 `twikooPath` / `permalink` 构造，不信任评论提交时携带的 `href`。旧文章通过 `twikooPath` 回到现有永久链接，`/` 指向留言板，无法映射的 path 仍可管理但不生成跳转。
+- 评论代理固定连接 `https://twikoo.aoiblog.top`，不接受客户端覆盖地址且禁止跟随 HTTP 重定向，避免管理令牌离开固定主机。8 秒总超时覆盖响应头和正文读取；非 2xx、非法 JSON、缺失业务码以及没有实际更新／删除记录都会安全失败。服务端用 `MD5(ADMIN_TOKEN)` 作为 Twikoo access token；这与 Twikoo 非腾讯云前端「先 MD5 明文密码、服务端再保存其 MD5」的协议一致。不要把该摘要误当成无敏感性的普通哈希，它可以直接换取评论管理权限。
+
+#### 首次启用与口令轮换
+
+1. 先备份 Twikoo 数据，再调用 `GET_PASSWORD_STATUS`。只有明确返回尚未初始化时才继续；如果已经设置密码，立即停止，不能覆盖未知管理员。
+2. 在受控本地 shell 中从环境变量读取 `ADMIN_TOKEN`，计算 UTF-8 字节的 MD5，小写十六进制结果作为 `SET_PASSWORD.password` 提交。不得把明文或摘要写进命令参数、仓库、日志、浏览器存储或文档。
+3. 用同一摘要调用 `LOGIN`，确认返回成功后清除本地变量。运行时代码只使用已经存在的密码，绝不自动注册或重置。
+4. 以后轮换 `ADMIN_TOKEN` 时，先备份并按 Twikoo 官方重置流程同步设置相同的新密码，再部署新后台口令；不同步会导致文章后台登录成功但评论管理返回配置错误。
+
+2026-08-15 实测线上 Twikoo 为 1.7.4 且当时尚未设置管理密码。该状态会变化，操作前必须重新查询，不能把这条记录当作当前授权。
 
 ## 文章阅读页
 
@@ -356,10 +373,10 @@ GITHUB_BRANCH=main
 
 ### 验证与移除
 
-- 文章页与后台回归：`npm run test:post`（`tests/test_post_reading.mjs` + `tests/test_admin_editor.mjs`，同样用 Node 内置测试器与 jsdom）。前者覆盖阅读进度与桌面阅读态、移动 TOC 的幂等/inert/焦点陷阱、代码换行与高亮表格、首行缩进、首页标题不被截断、旧随笔 URL 永久重定向，以及代码块配色、行号对齐和暗色高亮表默认禁用这几条踩坑断言；后者覆盖 Word 剪贴板转 Markdown、Enter/Shift+Enter 的换行语义、预览 URL 拒绝伪装的脚本 scheme、会话草稿形状校验与冲突区分、Markdown 导入的 BOM/CRLF 与引用定义边界，以及底栏 sticky/裁剪/状态位不挤压按钮的布局不变量。改 `source/js/`、`source/css/`、`source/admin/` 或 `scripts/` 后必跑。
+- 文章页与后台回归：`npm run test:post`（`tests/test_post_reading.mjs` + `tests/test_admin_editor.mjs` + `tests/test_admin_comments.mjs`，同样用 Node 内置测试器与 jsdom）。三者分别覆盖文章阅读交互与样式不变量、后台编辑器与草稿恢复，以及评论 path 映射、本地已读状态、有效页码回退和安全 DOM 编排。改 `source/js/`、`source/css/`、`source/admin/` 或 `scripts/` 后必跑。
 - 完整 Python 回归：`py -3.12 -m pytest news-pipeline/tests -q`，其中包含跨批同日归并、发布事务、轨迹夹具和全部历史日报引用完整性检查。测试不调 LLM、不联网；改评分、聚类、可信度审计、健康度、事件登记、偏好学习、深读、周综述、RSS 或搜索索引逻辑后必跑完整回归。`news-pipeline/tests/test_pipeline.py` 是历史独立脚本，不再作为交付验收入口。
 - 客观性回归：`py -3.12 news-pipeline/tests/test_objectivity_audit.py`（证据合同、审计/修复/降级、夹具完整性、删除字段分项守恒、次级回退摘要判定与序列化/审计投影一致性）与 `py -3.12 news-pipeline/tests/test_shadow_rollout.py`（shadow 快照隔离与环境还原）。两者同样不调 LLM、不联网，静默通过、失败非零退出；改客观性审计、证据结构或 shadow 流程后必跑。
-- API 与鉴权回归（`npm run test:news` 内的 `news-pipeline/tests/test_admin_api.mjs`，62 条）：**改 `api/` 下任何文件后必跑，它是这条信任边界唯一的自动化守卫**。覆盖会话签名与过期、scope 参与签名（personal 会话到不了 admin 写接口）、Bearer 与 cookie 共用同一份失败锁定、缺失凭证不烧锁定预算、请求体体积与畸形 JSON、个人状态文件形状与写入字段校验、状态类型白名单拒继承键（`__proto__` 那类）、文章路径限定为 `source/_posts/` 下的单层 `.md`、封面 URL 与分类映射校验、上传的图片签名校验与同月 blob 复用、后台 CSP 哈希一致性，以及后台前端不把主口令留在浏览器存储里。另含两条与依赖/工作流相关的断言（见下条与 `daily-news.yml` 的 action 固定）。
+- API 与鉴权回归（`npm run test:news` 内的 `news-pipeline/tests/test_admin_api.mjs` 与 `test_admin_comments_api.mjs`）：**改 `api/` 下任何文件后必跑，两份测试共同守住后台信任边界**。除会话、Bearer、请求体、GitHub 写入、上传与 CSP 外，评论测试覆盖字段脱敏、只搜公开字段、Twikoo 总超时与业务码、重定向禁用、全量分页一致性、操作白名单、回复置顶限制和带回复顶层评论的删除保护。
 - 新闻页回归：`npm run test:news`。测试使用 Node 内置测试器与 jsdom，覆盖新旧路由、DOM 渲染、个人操作 API 合同、无障碍状态和空数据降级；修改 `source/news/index.html`、`source/news/news.css`、`source/news/js/` 或 `source/news/fonts/`（含 `tools/font-subsets/` 的字符清单）后必跑。该套件还含衬线字体的覆盖断言与三条冷传输界，字体资产和清单的改动只有这里能拦住。渲染层的两条安全不变式也在这里：进入 HTML 的插值一律过 `escapeHtml`（判据是解析后的 DOM，不是原始字符串），以及 `safeUrl` 自己拒控制字符和协议相对 `//`、不依赖管线上游已过滤。
 - Node 依赖或 `package-lock.json` 变更后运行 `npm ci` 和 `npm audit --omit=dev`，确认锁文件可重建且生产依赖没有已知漏洞；安全升级仍需执行受影响的功能回归，审计归零不能替代测试与构建。
 - 依赖安全 override 回归（`npm run test:news` 内，`test_admin_api.mjs`）：`package.json` 的 `overrides` 把 `brace-expansion` 钉到 `5.0.9` 修 GHSA-rgw5-rvv9-x895，但 `minimatch@^3` 必须单独钉 `1.1.18`。**原因是 5.x 改了导出形状而不是能不能 require**：`1.1.18` 直接 `module.exports = expand`（`require()` 拿到函数），`5.0.9` 虽然仍带 CommonJS 构建，导出的却是 `{ expand, EXPANSION_MAX, ... }` 对象；而 `minimatch@3`（`glob@7` → `hexo-renderer-stylus` 那条链）写的是 `var expand = require('brace-expansion')` 后直接 `expand(pattern)`，拿到对象就会在运行时报 `expand is not a function`。**只比对锁文件版本号抓不到这种导出形状误配**，所以除版本断言外还有一条真实调用路径断言，跑 `stylus → glob → minimatch → brace-expansion` 展开 `{main,highlight}` 并要求解析出两个分支。**该测试用 `require.resolve("stylus")` 定位依赖，不要"简化"成 `new URL("../../node_modules/...")` 或 cwd 相对的 glob 模式**：git worktree 没有自己的 `node_modules`，只有 `require()` 解析会向上找到主仓库，改回相对路径会让它在每个 worktree 里都误报失败（2026-08-07 修）。

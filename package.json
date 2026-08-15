@@ -6,8 +6,8 @@
     "dev": "hexo server",
     "build": "hexo clean && hexo generate",
     "preview": "hexo server",
-    "test:post": "node --test tests/test_post_reading.mjs tests/test_admin_editor.mjs",
-    "test:news": "node --test news-pipeline/tests/test_news_timeline.js news-pipeline/tests/test_news_frontend.mjs news-pipeline/tests/test_news_app.mjs news-pipeline/tests/test_admin_api.mjs"
+    "test:post": "node --test tests/test_post_reading.mjs tests/test_admin_editor.mjs tests/test_admin_comments.mjs",
+    "test:news": "node --test news-pipeline/tests/test_news_timeline.js news-pipeline/tests/test_news_frontend.mjs news-pipeline/tests/test_news_app.mjs news-pipeline/tests/test_admin_api.mjs news-pipeline/tests/test_admin_comments_api.mjs"
   },
   "keywords": [],
   "author": "",

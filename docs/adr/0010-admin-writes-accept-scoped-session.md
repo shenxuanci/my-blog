@@ -21,4 +21,4 @@
 - **升级会踢掉所有在途会话**。旧的两段格式 `expires.signature` 解出的 scope 不在白名单里，一律判无效。会话本来就只有 8 小时寿命，重登一次即可，没有做兼容期。
 - **Bearer 这条路必须一直留着**。它是脚本、CLI 和排障时唯一不依赖浏览器 cookie 的入口；删掉它等于把后台锁死在浏览器里。它现在受同一份失败锁定保护。
 - **`requireAdminWrite` 用「有没有 Authorization 头」来选路，不是「先试 cookie 再试 Bearer」**。这是刻意的：串行回退会让一次没带凭据的请求在两条路上各记一次失败，未认证的探测就能把管理员自己锁在门外。同理，`requireAdmin` 对完全缺失的 `Authorization` 头直接返回 401 而不计入锁定——缺失凭证不是猜测。
-- **新增 scope 时要同时想清楚两件事**：它能过 `requireAdminSession`（任意 scope 即可）吗，能过 `requireAdminScope`（只认 admin）吗。两个判定分别对应「日报个人状态」和「仓库写操作」，不要合并成一个。
+- **新增 scope 时要同时想清楚两件事**：它能过 `requireAdminSession`（任意 scope 即可）吗，能过 `requireAdminScope`（只认 admin）吗。两个判定分别对应「日报个人状态」和「后台高权限写操作（包括 GitHub 与 Twikoo）」，不要合并成一个。

@@ -6,7 +6,7 @@
 
 - 这是一个 Hexo + Fluid + Vercel 静态博客项目。
 - 文章 Markdown 位于 `source/_posts/`。
-- Vercel API 路由位于 `api/`，用于在线后台发布与设置，以及日报反馈、收藏、稍后读与漏读写回；单词本接口仅为停用功能保留。
+- Vercel API 路由位于 `api/`，用于在线后台发布、设置与评论管理，以及日报反馈、收藏、稍后读与漏读写回；单词本接口仅为停用功能保留。
 - 在线后台页面位于 `source/admin/index.html`。
 - 每日日报静态页位于 `source/news/`，数据由 `news-pipeline/` 生成。
 - 维护规范放在 `docs/`，历史重构记录放在 `docs/archive/`。
@@ -59,7 +59,7 @@
 ## 验证规则
 
 - 修改代码后，按需运行 `npm run build` 或 `npm run dev`。
-- 构建通过只说明构建没断，不说明改动正确。改前端后跑 `npm run test:post` 与 `npm run test:news`；**改 `api/` 后必跑 `npm run test:news`**（`test_admin_api.mjs` 是这条信任边界唯一的自动化守卫，`test:post` 不加载 `api/`）；改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。
+- 构建通过只说明构建没断，不说明改动正确。改前端后跑 `npm run test:post` 与 `npm run test:news`；**改 `api/` 后必跑 `npm run test:news`**（`test_admin_api.mjs` 与 `test_admin_comments_api.mjs` 共同守住后台信任边界，`test:post` 不加载 `api/`）；改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。
 - 验证页面仍能正常加载、`source/admin/index.html` 仍兼容、API 改动已正确接通。
 - 验证结束后检查工作区，确认没有遗留测试文件、临时文件或临时调试代码。
 - 没有说明执行过哪些验证前，不要声称工作已完成。

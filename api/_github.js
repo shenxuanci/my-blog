@@ -19,7 +19,7 @@ const DEFAULT_JSON_BODY_BYTES = 1024 * 1024;
 
 function setCors(res) {
   // 管理接口仅允许同源调用；不返回 Allow-Origin，避免第三方站点探测认证状态。
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,PATCH,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   // 这些接口会返回后台文章、站点设置或个人状态。即使 Vercel 当前默认不缓存
   // Serverless 响应，也要把浏览器和未来代理的行为钉死，避免认证响应落入缓存。

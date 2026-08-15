@@ -365,6 +365,144 @@
       border-bottom: 0;
     }
 
+    .comments-panel {
+      padding: 1.2rem;
+    }
+
+    .comments-filters,
+    .comments-pager,
+    .comment-header,
+    .comment-meta,
+    .comment-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .comments-filters {
+      margin-bottom: 1rem;
+    }
+
+    .comments-filters input {
+      flex: 1 1 260px;
+    }
+
+    .comments-filters select {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0.45rem 0.65rem;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .comments-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .comment-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1rem;
+      background: var(--surface);
+    }
+
+    .comment-card.is-unread {
+      border-left: 4px solid var(--primary);
+    }
+
+    .comment-header {
+      justify-content: space-between;
+    }
+
+    .comment-author {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .comment-avatar,
+    .comment-initials {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      border-radius: 50%;
+    }
+
+    .comment-avatar {
+      object-fit: cover;
+    }
+
+    .comment-initials {
+      display: grid;
+      place-items: center;
+      background: #e7f3f6;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .comment-nick {
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .comment-meta {
+      margin-top: 0.65rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .comment-badge {
+      border-radius: 999px;
+      padding: 0.08rem 0.5rem;
+      background: #edf2f7;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .comment-badge.hidden-badge {
+      background: #fbe9e8;
+      color: var(--danger);
+    }
+
+    .comment-details {
+      margin: 0.85rem 0;
+    }
+
+    .comment-details summary {
+      color: var(--primary-dark);
+      cursor: pointer;
+    }
+
+    .comment-text {
+      margin: 0.65rem 0 0;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .comment-actions {
+      margin-top: 0.85rem;
+    }
+
+    .comment-actions button,
+    .comment-actions .link-button {
+      min-height: 34px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.88rem;
+    }
+
+    .comments-pager {
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
+    .comments-empty {
+      min-height: 260px;
+    }
+
     @media (max-width: 960px) {
       .workspace,
       .editor-grid,
@@ -405,6 +543,7 @@
     <div class="toolbar">
       <button id="postsViewBtn" class="secondary view-button active" type="button">文章管理</button>
       <button id="settingsViewBtn" class="secondary view-button" type="button">站点设置</button>
+      <button id="commentsViewBtn" class="secondary view-button" type="button">评论管理</button>
       <button id="newPostBtn" type="button">新文章</button>
       <button id="refreshBtn" class="secondary" type="button">刷新</button>
       <button id="restoreDraftBtn" class="secondary hidden" type="button">恢复会话草稿</button>
@@ -559,6 +698,34 @@
         </div>
       </form>
     </section>
+
+    <section id="commentsView" class="panel comments-panel hidden">
+      <form id="commentsFilterForm" class="comments-filters">
+        <input id="commentsKeyword" type="search" maxlength="100" placeholder="搜索昵称、正文、网站或页面路径">
+        <select id="commentsVisibility" aria-label="评论可见状态">
+          <option value="all">全部状态</option>
+          <option value="visible">公开</option>
+          <option value="hidden">隐藏</option>
+        </select>
+        <select id="commentsRead" aria-label="评论阅读状态">
+          <option value="all">全部评论</option>
+          <option value="unread">仅未读</option>
+        </select>
+        <select id="commentsPageSize" aria-label="每页评论数">
+          <option value="10">10 条/页</option>
+          <option value="20" selected>20 条/页</option>
+          <option value="50">50 条/页</option>
+        </select>
+        <button type="submit">筛选</button>
+      </form>
+      <div id="commentsStatus" class="status" aria-live="polite"></div>
+      <div id="commentsList" class="comments-list"></div>
+      <div class="comments-pager">
+        <button id="commentsPrevBtn" class="secondary" type="button">上一页</button>
+        <span id="commentsPageSummary" class="status"></span>
+        <button id="commentsNextBtn" class="secondary" type="button">下一页</button>
+      </div>
+    </section>
   </main>
 
   <input id="coverFile" class="hidden" type="file" accept="image/*">
@@ -567,6 +734,7 @@
 
   <script src="/admin/marked.min.js"></script>
   <script src="/admin/editor-tools.js"></script>
+  <script src="/admin/comment-tools.js"></script>
   <script>
     try { localStorage.removeItem('aoiblog_admin_token'); } catch (_) {}
     // 登录后只保留 HttpOnly 的 admin 会话 cookie（JS 读不到、8 小时过期），
@@ -582,10 +750,29 @@
       settingsBaseline: '',
       uploadedDuringDraft: false,
       pendingDraft: null,
-      draftTimer: null
+      draftTimer: null,
+      comments: {
+        items: [],
+        page: 1,
+        pageSize: 20,
+        total: 0,
+        keyword: '',
+        visibility: 'all',
+        read: 'all',
+        loaded: false,
+        loading: false,
+        requestId: 0
+      }
     };
     const editorTools = window.AoiAdminEditorTools;
+    const commentTools = window.AoiAdminCommentTools;
     const DRAFT_KEY = 'aoiblog_admin_article_draft_v1';
+    const COMMENT_READ_KEY = 'aoiblog_admin_comment_reads_v1';
+    let commentReadState = (() => {
+      try { return commentTools.parseReadState(localStorage.getItem(COMMENT_READ_KEY)); }
+      catch (_) { return commentTools.parseReadState(null); }
+    })();
+    let articleCommentIndex = commentTools.buildArticleIndex([]);
 
     const $ = (id) => document.getElementById(id);
 
@@ -653,6 +840,7 @@
       state.coverMap = categoriesData.coverMap || {};
       renderCategoryOptions();
       state.articles = await api('/api/adminArticles');
+      articleCommentIndex = commentTools.buildArticleIndex(state.articles);
       renderArticles();
       setStatus(`已加载 ${state.articles.length} 篇文章`);
     }
@@ -718,8 +906,10 @@
       if (!confirmSettingsDiscard()) return;
       $('postsView').classList.remove('hidden');
       $('settingsView').classList.add('hidden');
+      $('commentsView').classList.add('hidden');
       $('postsViewBtn').classList.add('active');
       $('settingsViewBtn').classList.remove('active');
+      $('commentsViewBtn').classList.remove('active');
       $('newPostBtn').classList.remove('hidden');
     }
 
@@ -728,14 +918,283 @@
       closeEditor();
       $('postsView').classList.add('hidden');
       $('settingsView').classList.remove('hidden');
+      $('commentsView').classList.add('hidden');
       $('postsViewBtn').classList.remove('active');
       $('settingsViewBtn').classList.add('active');
+      $('commentsViewBtn').classList.remove('active');
       $('newPostBtn').classList.add('hidden');
 
       if (!state.settings) {
         state.settingsBaseline = JSON.stringify(settingsFormValues());
         await loadSettings();
       }
+    }
+
+    function persistCommentReads() {
+      try { localStorage.setItem(COMMENT_READ_KEY, JSON.stringify(commentReadState)); } catch (_) {}
+    }
+
+    function isCommentRead(id) {
+      return Object.hasOwn(commentReadState.items, id);
+    }
+
+    async function setCommentRead(id, read) {
+      commentReadState = read
+        ? commentTools.markRead(commentReadState, id)
+        : commentTools.markUnread(commentReadState, id);
+      persistCommentReads();
+      if (state.comments.read === 'unread' && read) {
+        await loadComments();
+      } else {
+        renderComments();
+      }
+    }
+
+    function commentButton(label, action, className = 'secondary') {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = className;
+      button.textContent = label;
+      button.addEventListener('click', action);
+      return button;
+    }
+
+    function formatCommentTime(value) {
+      const date = new Date(Number(value));
+      return Number.isNaN(date.getTime()) ? '时间未知' : date.toLocaleString('zh-CN', { hour12: false });
+    }
+
+    async function moderateComment(comment, action) {
+      const labels = { hide: '隐藏', show: '恢复', pin: '置顶', unpin: '取消置顶' };
+      $('commentsStatus').textContent = `正在${labels[action]}评论...`;
+      try {
+        await api('/api/adminComments', {
+          method: 'PATCH',
+          body: JSON.stringify({ id: comment.id, action })
+        });
+        await loadComments();
+      } catch (error) {
+        $('commentsStatus').textContent = error.message;
+      }
+    }
+
+    async function deleteComment(comment) {
+      const excerpt = comment.text.replace(/\s+/g, ' ').slice(0, 60);
+      if (!confirm(`永久删除 ${comment.nick} 的这条评论吗？此操作不可恢复。\n\n${excerpt}`)) return;
+      $('commentsStatus').textContent = '正在删除评论...';
+      try {
+        await api('/api/adminComments', {
+          method: 'DELETE',
+          body: JSON.stringify({ id: comment.id })
+        });
+        commentReadState = commentTools.markUnread(commentReadState, comment.id);
+        persistCommentReads();
+        await loadComments();
+      } catch (error) {
+        $('commentsStatus').textContent = error.status === 409
+          ? '这条顶层评论仍有回复。请先逐条删除回复，或改用隐藏整个评论线程。'
+          : error.message;
+      }
+    }
+
+    function renderComments() {
+      const list = $('commentsList');
+      list.replaceChildren();
+      if (!state.comments.items.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty comments-empty';
+        empty.textContent = state.comments.loading ? '正在加载评论...' : '没有符合条件的评论';
+        list.append(empty);
+      }
+
+      for (const comment of state.comments.items) {
+        const card = document.createElement('article');
+        card.className = `comment-card${isCommentRead(comment.id) ? '' : ' is-unread'}`;
+
+        const header = document.createElement('div');
+        header.className = 'comment-header';
+        const author = document.createElement('div');
+        author.className = 'comment-author';
+        if (comment.avatarUrl) {
+          const avatar = document.createElement('img');
+          avatar.className = 'comment-avatar';
+          avatar.src = comment.avatarUrl;
+          avatar.alt = '';
+          avatar.loading = 'lazy';
+          avatar.referrerPolicy = 'no-referrer';
+          author.append(avatar);
+        } else {
+          const initials = document.createElement('span');
+          initials.className = 'comment-initials';
+          initials.textContent = commentTools.initials(comment.nick);
+          author.append(initials);
+        }
+        const nick = document.createElement(comment.websiteUrl ? 'a' : 'span');
+        nick.className = 'comment-nick';
+        nick.textContent = comment.nick;
+        if (comment.websiteUrl) {
+          nick.href = comment.websiteUrl;
+          nick.target = '_blank';
+          nick.rel = 'noopener noreferrer';
+        }
+        author.append(nick);
+        header.append(author);
+
+        const badges = document.createElement('div');
+        if (comment.kind === 'reply') {
+          const badge = document.createElement('span');
+          badge.className = 'comment-badge';
+          badge.textContent = '回复';
+          badges.append(badge);
+        }
+        if (comment.hidden) {
+          const badge = document.createElement('span');
+          badge.className = 'comment-badge hidden-badge';
+          badge.textContent = '已隐藏';
+          badges.append(badge);
+        }
+        if (comment.pinned) {
+          const badge = document.createElement('span');
+          badge.className = 'comment-badge';
+          badge.textContent = '已置顶';
+          badges.append(badge);
+        }
+        header.append(badges);
+        card.append(header);
+
+        const meta = document.createElement('div');
+        meta.className = 'comment-meta';
+        const target = commentTools.resolveCommentTarget(comment, articleCommentIndex);
+        const pageLabel = document.createElement('span');
+        pageLabel.textContent = target.label;
+        const time = document.createElement('time');
+        time.dateTime = new Date(Number(comment.created) || 0).toISOString();
+        time.textContent = formatCommentTime(comment.created);
+        meta.append(pageLabel, time);
+        card.append(meta);
+
+        const details = document.createElement('details');
+        details.className = 'comment-details';
+        const summary = document.createElement('summary');
+        summary.textContent = '查看详情';
+        const commentText = document.createElement('p');
+        commentText.className = 'comment-text';
+        commentText.textContent = comment.text;
+        details.append(summary, commentText);
+        details.addEventListener('toggle', () => {
+          if (details.open && !isCommentRead(comment.id)) {
+            setCommentRead(comment.id, true).catch((error) => {
+              $('commentsStatus').textContent = error.message;
+            });
+          }
+        });
+        card.append(details);
+
+        const actions = document.createElement('div');
+        actions.className = 'comment-actions';
+        if (target.url) {
+          const link = document.createElement('a');
+          link.className = 'link-button secondary';
+          link.href = target.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = '查看原文';
+          link.addEventListener('click', () => {
+            let newlyRead = false;
+            if (!isCommentRead(comment.id)) {
+              commentReadState = commentTools.markRead(commentReadState, comment.id);
+              persistCommentReads();
+              newlyRead = true;
+            }
+            if (newlyRead && state.comments.read === 'unread') {
+              setTimeout(() => {
+                loadComments().catch((error) => { $('commentsStatus').textContent = error.message; });
+              }, 0);
+            }
+          });
+          actions.append(link);
+        }
+        actions.append(commentButton(
+          isCommentRead(comment.id) ? '标为未读' : '标为已读',
+          () => setCommentRead(comment.id, !isCommentRead(comment.id)).catch((error) => {
+            $('commentsStatus').textContent = error.message;
+          })
+        ));
+        actions.append(commentButton(comment.hidden ? '恢复' : '隐藏', () => {
+          moderateComment(comment, comment.hidden ? 'show' : 'hide');
+        }));
+        if (comment.kind === 'root') {
+          actions.append(commentButton(comment.pinned ? '取消置顶' : '置顶', () => {
+            moderateComment(comment, comment.pinned ? 'unpin' : 'pin');
+          }));
+        }
+        actions.append(commentButton('永久删除', () => deleteComment(comment), 'danger'));
+        card.append(actions);
+        list.append(card);
+      }
+
+      const pages = Math.max(1, Math.ceil(state.comments.total / state.comments.pageSize));
+      $('commentsPrevBtn').disabled = state.comments.loading || state.comments.page <= 1;
+      $('commentsNextBtn').disabled = state.comments.loading || state.comments.page >= pages;
+      $('commentsPageSummary').textContent = `第 ${state.comments.page} / ${pages} 页，共 ${state.comments.total} 条`;
+    }
+
+    async function loadComments() {
+      const requestId = ++state.comments.requestId;
+      state.comments.loading = true;
+      $('commentsStatus').textContent = '正在加载评论...';
+      renderComments();
+      try {
+        for (let attempt = 0; attempt < 2; attempt += 1) {
+          const requestedPage = state.comments.page;
+          const result = await api('/api/adminComments', {
+            method: 'POST',
+            body: JSON.stringify({
+              page: requestedPage,
+              pageSize: state.comments.pageSize,
+              keyword: state.comments.keyword,
+              visibility: state.comments.visibility,
+              read: state.comments.read,
+              readIds: state.comments.read === 'unread' ? commentTools.readIds(commentReadState) : []
+            })
+          });
+          if (requestId !== state.comments.requestId) return;
+          const total = Number(result.total) || 0;
+          const availablePage = commentTools.commentPageForTotal(requestedPage, state.comments.pageSize, total);
+          if (availablePage !== requestedPage) {
+            state.comments.page = availablePage;
+            continue;
+          }
+          state.comments.items = result.items || [];
+          state.comments.total = total;
+          state.comments.loaded = true;
+          $('commentsStatus').textContent = `已加载 ${state.comments.total} 条评论`;
+          return;
+        }
+        throw new Error('评论页码持续变化，请刷新后重试');
+      } catch (error) {
+        if (requestId !== state.comments.requestId) return;
+        state.comments.items = [];
+        state.comments.total = 0;
+        $('commentsStatus').textContent = error.message;
+      } finally {
+        if (requestId !== state.comments.requestId) return;
+        state.comments.loading = false;
+        renderComments();
+      }
+    }
+
+    async function showCommentsView() {
+      if (!confirmArticleDiscard() || !confirmSettingsDiscard()) return;
+      closeEditor();
+      $('postsView').classList.add('hidden');
+      $('settingsView').classList.add('hidden');
+      $('commentsView').classList.remove('hidden');
+      $('postsViewBtn').classList.remove('active');
+      $('settingsViewBtn').classList.remove('active');
+      $('commentsViewBtn').classList.add('active');
+      $('newPostBtn').classList.add('hidden');
+      if (!state.comments.loaded) await loadComments();
     }
 
     async function saveSettings(event) {
@@ -1264,11 +1723,42 @@
     });
 
     $('refreshBtn').addEventListener('click', () => {
+      if (!$('commentsView').classList.contains('hidden')) {
+        loadComments().catch((error) => { $('commentsStatus').textContent = error.message; });
+        return;
+      }
+      if (!$('settingsView').classList.contains('hidden')) {
+        loadSettings().catch((error) => setStatus(`加载失败：${error.message}。请重试。`));
+        return;
+      }
       loadAll().catch((error) => setStatus(`加载失败：${error.message}。请重试。`));
     });
     $('postsViewBtn').addEventListener('click', showPostsView);
     $('settingsViewBtn').addEventListener('click', () => {
       showSettingsView().catch((error) => setStatus(`站点设置加载失败：${error.message}。请重试。`));
+    });
+    $('commentsViewBtn').addEventListener('click', () => {
+      showCommentsView().catch((error) => { $('commentsStatus').textContent = error.message; });
+    });
+    $('commentsFilterForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      state.comments.page = 1;
+      state.comments.keyword = $('commentsKeyword').value.trim();
+      state.comments.visibility = $('commentsVisibility').value;
+      state.comments.read = $('commentsRead').value;
+      state.comments.pageSize = Number($('commentsPageSize').value);
+      loadComments().catch((error) => { $('commentsStatus').textContent = error.message; });
+    });
+    $('commentsPrevBtn').addEventListener('click', () => {
+      if (state.comments.page <= 1) return;
+      state.comments.page -= 1;
+      loadComments().catch((error) => { $('commentsStatus').textContent = error.message; });
+    });
+    $('commentsNextBtn').addEventListener('click', () => {
+      const pages = Math.max(1, Math.ceil(state.comments.total / state.comments.pageSize));
+      if (state.comments.page >= pages) return;
+      state.comments.page += 1;
+      loadComments().catch((error) => { $('commentsStatus').textContent = error.message; });
     });
     $('settingsForm').addEventListener('submit', saveSettings);
     $('reloadSettingsBtn').addEventListener('click', () => {
