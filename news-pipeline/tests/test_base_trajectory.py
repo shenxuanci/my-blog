@@ -194,7 +194,7 @@ def test_interim_event_with_fetched_fulltext_earns_the_depth_contract():
     """材料等级决定合同，发布模式不决定。
 
     ADR 0016 把 `objectivity.mode` 永久钉在 interim，此前这让 ADR 0015 的证据分级
-    成为永不执行的死代码。分层之后，interim 里抓到正文的条目照样拿厚档合同。
+    成为永不执行的死代码。分层之后，interim 里抓到正文的条目照样拿全文材料档合同。
     """
     llm = EnrichLLM(_enrich_response())
 
@@ -229,26 +229,82 @@ def test_material_tier_is_per_event_within_one_interim_run():
               [_source_item(), _snippet_source_item()], _interim_cfg())
 
     assert len(systems) == 2
-    thick_system, thick_user = systems[0]
+    rich_system, rich_user = systems[0]
     snippet_system, snippet_user = systems[1]
-    assert "利益相关方变化和未决事实" in thick_system
+    assert "利益相关方变化和未决事实" in rich_system
     assert "现状短叙述" in snippet_system
-    assert "事件[0]" in thick_user
+    assert "事件[0]" in rich_user
     assert "事件[1]" in snippet_user
 
 
-def test_fulltext_tier_picks_takes_the_highest_scores_and_honours_the_knob():
+def test_fulltext_tier_still_asks_for_and_keeps_a_watch():
+    """停走向只针对摘要材料档；抓到正文的条目仍然要给出可观察路标（ADR 0020）。"""
+    llm = EnrichLLM(_enrich_response())
+    event = _event()
+
+    dn.enrich(llm, [event], [_source_item()], _interim_cfg())
+
+    assert "- watch: 走向" in llm.system
+    assert event["watch"] == "Watch the next yield report."
+
+
+class _ArticleResponse:
+    def __init__(self, body=b"<html>ok</html>"):
+        self.body = body
+        self.status_code = 200
+        self.headers = {"Content-Type": "text/html; charset=utf-8",
+                        "Content-Length": str(len(body))}
+
+    def iter_content(self, chunk_size=65536):
+        for pos in range(0, len(self.body), chunk_size):
+            yield self.body[pos:pos + chunk_size]
+
+    def close(self):
+        pass
+
+
+def _public_dns(_host, *_args, **_kwargs):
+    return [(2, 1, 6, "", ("93.184.216.34", 0))]
+
+
+def test_only_the_nominated_picks_reach_the_fulltext_tier():
+    """接线测试：候选 → 抓取 → 档位判定这条链，而不只是候选函数本身。
+
+    只有被提名的那几条应该拿到 evidence_text；其余即使分数不低也必须留在摘要材料档。
+    """
+    items = [{**_snippet_source_item(),
+              "source_id": f"src-{index}", "source": f"Src {index}",
+              "url": f"https://example.test/{index}"}
+             for index in range(3)]
+    picked = [{**_event(), "ids": [index], "title": f"E{index}",
+               "score": score}
+              for index, score in enumerate((60, 99, 80))]
+
+    targets = dn.fulltext_fetch_candidates(picked, {"detail": {"fulltext_top_n": 1}})
+    assert [event["title"] for event in targets] == ["E1"]
+
+    dn.acquire_event_evidence(
+        targets, items, dn.new_quality_stats(),
+        request_get=lambda *_a, **_k: _ArticleResponse(),
+        extractor=lambda _html: "抓来的正文。" * 60,
+        resolver=_public_dns)
+
+    tiers = [dn.event_has_fulltext_evidence(event, items) for event in picked]
+    assert tiers == [False, True, False]
+
+
+def test_fulltext_fetch_candidates_take_the_highest_scores_and_honour_the_knob():
     picked = [{**_event(), "title": f"E{index}", "score": score}
               for index, score in enumerate((70, 95, 80, 95))]
 
-    chosen = dn.fulltext_tier_picks(picked, {"detail": {"fulltext_top_n": 2}})
+    chosen = dn.fulltext_fetch_candidates(picked, {"detail": {"fulltext_top_n": 2}})
 
     assert [event["score"] for event in chosen] == [95, 95]
     # 同分按标题定序：同一批输入必须产生同一个抓取集合，否则成本和产出都不可复现。
     assert [event["title"] for event in chosen] == ["E1", "E3"]
-    # 0 表示一条正文都不抓、全部落摘要档；这不等于回到分层之前，摘要档仍不生成走向。
-    assert dn.fulltext_tier_picks(picked, {"detail": {"fulltext_top_n": 0}}) == []
-    assert dn.fulltext_tier_picks(picked, {}) == []
+    # 0 表示一条正文都不抓、全部落摘要材料档；这不等于回到分层之前，摘要材料档仍不生成走向。
+    assert dn.fulltext_fetch_candidates(picked, {"detail": {"fulltext_top_n": 0}}) == []
+    assert dn.fulltext_fetch_candidates(picked, {}) == []
 
 
 def test_failed_fetch_leaves_the_event_in_the_snippet_tier():

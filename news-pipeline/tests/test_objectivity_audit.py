@@ -1943,8 +1943,8 @@ def test_interim_support_audit_keeps_legacy_reply_compatibility():
 def test_interim_audit_sees_the_same_material_the_generator_saw():
     """审计材料必须与生成材料同源（ADR 0020）。
 
-    厚档条目是照抓来的正文写的；若审计只拿到 RSS 摘要，凡引自正文的内容都会被判成
-    「无来源支撑」并整段删除——那才是结构性误杀。摘要档两边都只有 desc，本来对齐。
+    全文材料档条目是照抓来的正文写的；若审计只拿到 RSS 摘要，凡引自正文的内容都会被判成
+    「无来源支撑」并整段删除——那才是结构性误杀。摘要材料档两边都只有 desc，本来对齐。
     """
     reply = {
         "fields": {"context": True, "watch": True, "detail": True},
@@ -1962,7 +1962,7 @@ def test_interim_audit_sees_the_same_material_the_generator_saw():
 
     # 抓取失败或未入选的条目：evidence_text 再长也不该进审计输入。
     snippet_item = source_item()
-    snippet_item["evidence_text"] = "FULLTEXT_ONLY_MARKER 摘要档不该拿到正文"
+    snippet_item["evidence_text"] = "FULLTEXT_ONLY_MARKER 摘要材料档不该拿到正文"
     snippet_audit = QueueLLM([dict(reply)])
     dn.audit_enrichment_support_interim(
         snippet_audit, [enriched_event()], [snippet_item], dn.new_quality_stats())
@@ -2378,7 +2378,7 @@ def test_modes_share_reader_field_caps_while_full_mode_uses_fulltext_evidence():
 
     assert "FULLTEXT_ONLY_MARKER" not in interim_llm.calls[0][1]
     assert "watch_detail" not in interim_event
-    # 摘要档不生成走向（ADR 0020）；其余读者字段的上限仍然两档共用。
+    # 摘要材料档不生成走向（ADR 0020）；其余读者字段的上限仍然两档共用。
     assert "watch" not in interim_event
     assert {field: len(interim_event[field]) for field in
             ("title", "summary", "context", "detail")} == {
