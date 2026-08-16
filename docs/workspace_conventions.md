@@ -18,7 +18,7 @@
 | ├── `/source/friends` | 友情链接页面 | 存放 `index.md`。 |
 | ├── `/source/guestbook` | 留言板页面 | 存放 `index.md`。 |
 | ├── `/source/news` | 每日日报静态页 | `index.html` 只保留语义页面骨架，`news.css` 存放独立样式，`js/` 存放原生 ES Modules，`fonts/` 只存上线所需的 WOFF2、生成 CSS 和字体许可证，`data/` 主要由管线和页面 API 产出。个人状态文件虽由 Hexo `exclude` 与 `.vercelignore` 排除出静态部署，仍以公开 Git 仓库为后端，不得写入秘密或可识别个人身份的信息。可人工维护 `source/news/data/interest_profile.md` 的兴趣画像要点，其余数据优先通过管线或页面操作生成。 |
-| **`/api`** | Vercel Serverless 接口 | 后端业务逻辑。**一个文件对应一个明确的接口职责**。包括后台文章/设置接口，以及日报反馈、收藏、稍后读和漏读写回接口；`vocab.js` 仅为停用功能保留，非接口逻辑不要放进这里。 |
+| **`/api`** | Vercel Serverless 接口 | 后端业务逻辑。**一个文件对应一个明确的接口职责**。包括后台文章/设置接口，以及日报反馈、收藏、稍后读和漏读写回接口；非接口逻辑不要放进这里。 |
 | **`/tools`** | 迁移和维护工具 | 存放如 `clean-post-inline-styles.mjs`、字体字符清单与生成脚本等一次性或维护工具；字体源 OTF 和工具中间产物不得入库。 |
 | **`/tests`** | 文章页与后台的 Node 回归 | 只放 `npm run test:post` 的套件（当前为 `test_post_reading.mjs`、`test_admin_editor.mjs`），命名 `test_<范围>.mjs`。日报相关测试一律归 `/news-pipeline/tests`；这里不放临时调试脚本，用完即删。 |
 | **`/scripts`** | Hexo 构建期扩展 | Hexo 启动时自动加载的脚本，如 `twikoo-path.js` 覆盖主题注入点。只放构建期逻辑，前端资源仍归 `/source/js` 与 `/source/css`。 |
@@ -46,7 +46,7 @@
 ### 2.3 后端接口文件 (camelCase)
 - **规则**：小驼峰命名法，清晰表达接口意图。
 - **适用范围**：`/api/` 目录下的 Serverless 函数。
-- **示例**：`adminArticles.js`、`adminSettings.js`、`adminUpload.js`、`adminSession.js`、`newsState.js`、`vocab.js`。
+- **示例**：`adminArticles.js`、`adminSettings.js`、`adminUpload.js`、`adminSession.js`、`newsState.js`。
 - **特殊约定**：内部共享的工具模块，使用下划线前缀以区分对外接口，如 `_github.js`。
 
 ### 2.4 文档与配置文件
@@ -79,7 +79,7 @@
 👉 **动作**：修改 `source/news/data/interest_profile.md`，只编辑以 `- ` 开头的偏好要点；不要手工改 `daily/*.js`、`events.json`、`source_health.json`、`score_history.json`、`feed.xml` 或 `search_index.js`，这些由管线产出或重建。`score_history.json` 是动态精选线的内部账本，损坏时应让管线按静态线回退并重建，不要人工补历史分数。`vocab/*.js` 是已停用单词本的历史数据，也不要手工维护。
 
 **场景 7：我要维护日报个人状态**
-👉 **动作**：优先通过 `/news/` 页面操作，由 `api/newsState.js` 写 `feedback.json`、`read_later.json`、`favorites.json` 或 `misses.json`；不要绕过 API 直接编辑这些状态文件，除非是在排障时做最小修复。新增或调整状态文件时，还要同步检查 `_config.yml` 的 `exclude` 与 `.vercelignore`。这两层只阻止静态发布，不会把 Git 后端变成私有存储；漏读记录不能写自由备注或类别，任何状态文件都不得保存敏感内容。单词本已停用，`api/vocab.js` 与 `vocab-book.json` 仅为恢复能力保留。
+👉 **动作**：优先通过 `/news/` 页面操作，由 `api/newsState.js` 写 `feedback.json`、`read_later.json`、`favorites.json` 或 `misses.json`；不要绕过 API 直接编辑这些状态文件，除非是在排障时做最小修复。新增或调整状态文件时，还要同步检查 `_config.yml` 的 `exclude` 与 `.vercelignore`。这两层只阻止静态发布，不会把 Git 后端变成私有存储；漏读记录不能写自由备注或类别，任何状态文件都不得保存敏感内容。单词本已停用，`api/vocab.js` 已于 2026-08-16 删除，`vocab-book.json` 与 `vocab/*.js` 仅为恢复能力保留。
 
 **场景 8：我要记录一个 Vercel 部署相关的深坑经验**
 👉 **动作**：不要新建文档，直接修改根目录的 `readme.md`；如果是规则边界，再同步 `AGENTS.md` / `CLAUDE.md`。

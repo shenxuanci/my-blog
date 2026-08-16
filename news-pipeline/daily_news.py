@@ -7154,8 +7154,12 @@ def build_tracking(registry, picked, date_str):
 
 # ----------------------------------------------------------------
 # 6.1.5 英语单词本：从精选英文原文挑高价值词 + 补全手动加的裸词
-#   数据流与 feedback/read_later 一致：用户在页面收藏/加词 -> api/vocab.js
-#   写回 vocab-book.json；管线次日读它做全量去重、并把 pending 裸词补全成完整卡。
+#   功能自 2026-07-10 停用（config.yaml 的 vocab.enabled: false），build_vocab
+#   直接 return，本节代码不再运行。写端点 api/vocab.js 已于 2026-08-16 删除，
+#   见 docs/adr/0018-delete-dead-vocab-write-endpoint.md；恢复时需从 git 历史
+#   一并找回接口、前端界面和接口里的 vocab-book.json 损坏校验。
+#   原数据流：用户在页面收藏/加词 -> api/vocab.js 写回 vocab-book.json；
+#   管线次日读它做全量去重、并把 pending 裸词补全成完整卡。
 #   每日候选写 data/vocab/<date>.js（前端按日懒加载，无需 manifest）。
 # ----------------------------------------------------------------
 

@@ -199,8 +199,9 @@ detail:
 # ---------- 英语单词本 ----------
 # 每天从精选新闻的英文标题+摘要里挑高价值单词，写 data/vocab/<date>.js（前端按日懒加载）。
 # 用户收藏/手动加词写回 data/vocab-book.json，管线次日读它做全量去重 + 补全手动裸词。
-# 2026-07-10 用户决定停用：不再每日挑词（省 token）。历史数据与 api/vocab.js 保留，
-# 想恢复时把 enabled 改回 true、前端从 git 历史找回单词本界面。
+# 2026-07-10 用户决定停用：不再每日挑词（省 token）。历史数据原地保留。
+# 2026-08-16 删除 api/vocab.js 写端点：死功能不保留可写接口，见 docs/adr/0018。
+# 想恢复时把 enabled 改回 true，并从 git 历史找回 api/vocab.js 与前端单词本界面。
 vocab:
   enabled: false
   daily_min: 6    # 每天至少挑几个（够挑的前提下）

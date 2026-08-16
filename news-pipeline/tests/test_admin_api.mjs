@@ -12,7 +12,6 @@ const adminSession = require("../../api/adminSession.js");
 const adminSettings = require("../../api/adminSettings.js");
 const adminUpload = require("../../api/adminUpload.js");
 const newsState = require("../../api/newsState.js");
-const vocab = require("../../api/vocab.js");
 
 function jsonResponse(data, status = 200) {
   return {
@@ -253,37 +252,6 @@ test("personal state rejects an invalid stored shape without overwriting it", as
           type: "favorites",
           payload: { date: "2026-08-12", item_id: "pick-1", op: "add" },
         },
-      }, res);
-      assert.equal(res.statusCode, 500);
-      assert.match(res.body.error, /corrupted/i);
-      assert.equal(writes, 0);
-    } finally {
-      globalThis.fetch = originalFetch;
-    }
-  });
-});
-
-test("disabled vocab API rejects an invalid stored shape without overwriting it", async () => {
-  await withRepoEnv(async () => {
-    const originalFetch = globalThis.fetch;
-    let writes = 0;
-    globalThis.fetch = async (url, options = {}) => {
-      if ((options.method || "GET") === "PUT") {
-        writes += 1;
-        return jsonResponse({ content: { sha: "next-sha" } });
-      }
-      return jsonResponse({
-        content: Buffer.from('{"version":1,"words":"corrupted","pending":[]}\n', "utf8").toString("base64"),
-        sha: "book-sha",
-      });
-    };
-    try {
-      const session = github.createAdminSession("admin-secret", Date.now());
-      const res = mockResponse();
-      await vocab({
-        method: "POST",
-        headers: { cookie: `aoiblog_admin_session=${session}` },
-        body: { op: "add", payload: { word: "boundary" } },
       }, res);
       assert.equal(res.statusCode, 500);
       assert.match(res.body.error, /corrupted/i);
