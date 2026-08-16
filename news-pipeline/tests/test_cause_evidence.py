@@ -43,7 +43,7 @@ def test_verbatim_span_keeps_the_cause():
         [{"source_index": 0, "quote": "白宫随即改用第301条重新加征，并选在旧关税到期当天生效。"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is True
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is True
     assert event["context"].startswith("最高法院裁定")
     assert quality["cause_evidence_rejected"] == 0
     # 内部字段不得泄漏到后续阶段
@@ -56,7 +56,7 @@ def test_span_absent_from_sources_drops_the_cause():
         [{"source_index": 0, "quote": "白宫官员表示此举意在向北京施压。"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is False
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is False
     assert "context" not in event
     assert "context_evidence" not in event
     assert quality["cause_evidence_rejected"] == 1
@@ -69,7 +69,7 @@ def test_paraphrased_span_is_rejected():
         [{"source_index": 0, "quote": "由于最高法院作出了不利裁决，白宫方面决定更换加征关税所依据的法律条文。"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is False
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is False
     assert "context" not in event
     assert quality["cause_evidence_rejected"] == 1
 
@@ -78,7 +78,7 @@ def test_trivially_short_span_cannot_vouch_for_a_cause():
     event = _event("白宫改用第301条。", [{"source_index": 0, "quote": "白宫"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is False
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is False
     assert quality["cause_evidence_rejected"] == 1
 
 
@@ -86,7 +86,7 @@ def test_empty_cause_needs_no_span_and_is_not_counted_as_rejected():
     event = _event("", [])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is False
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is False
     # 空起因保持 enrich 的空串约定，不是被闸门拒绝
     assert event["context"] == ""
     assert "context_evidence" not in event
@@ -99,7 +99,7 @@ def test_punctuation_and_width_differences_still_match():
         [{"source_index": 0, "quote": "白宫随即改用第３０１条重新加征，并选在旧关税到期当天生效"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is True
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is True
     assert quality["cause_evidence_rejected"] == 0
 
 
@@ -183,7 +183,7 @@ def test_unattributed_speculation_is_dropped_even_with_a_real_span():
         [{"source_index": 0, "quote": "ARC-AGI-3的格式和任务类型在Opus 5开发前已公开。"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _speculation_items(), quality, full_objectivity=True) is False
+    assert dn.verify_cause_evidence(event, _speculation_items(), quality, rich=True) is False
     assert "context" not in event
     assert quality["cause_speculation_rejected"] == 1
     # 片段本身是能对上的，拦下它的是未归因推测这一条
@@ -196,7 +196,7 @@ def test_attributed_speculation_survives():
         [{"source_index": 0, "quote": "Anthropic发言人称公司未针对该基准做专门训练。"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _speculation_items(), quality, full_objectivity=True) is True
+    assert dn.verify_cause_evidence(event, _speculation_items(), quality, rich=True) is True
     assert quality["cause_speculation_rejected"] == 0
 
 
@@ -228,7 +228,7 @@ def test_plain_factual_cause_is_untouched_by_the_speculation_guard():
         [{"source_index": 0, "quote": "白宫随即改用第301条重新加征，并选在旧关税到期当天生效。"}])
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, _items(), quality, full_objectivity=True) is True
+    assert dn.verify_cause_evidence(event, _items(), quality, rich=True) is True
     assert quality["cause_speculation_rejected"] == 0
 
 
@@ -268,13 +268,13 @@ def test_multiple_spans_must_each_match_the_declared_source():
     }
     quality = dn.new_quality_stats()
 
-    assert dn.verify_cause_evidence(event, items, quality, full_objectivity=True) is True
+    assert dn.verify_cause_evidence(event, items, quality, rich=True) is True
     assert "context_evidence" not in event
 
     event["context_evidence"] = [
         {"source_index": 0, "quote": "监管机构宣布将同步复核相关许可。"},
     ]
-    assert dn.verify_cause_evidence(event, items, quality, full_objectivity=True) is False
+    assert dn.verify_cause_evidence(event, items, quality, rich=True) is False
     assert quality["cause_evidence_rejected"] == 1
 
 
@@ -300,4 +300,4 @@ def test_empty_source_keeps_later_declared_source_index_stable():
     }
 
     assert dn.verify_cause_evidence(
-        event, items, dn.new_quality_stats(), full_objectivity=True) is True
+        event, items, dn.new_quality_stats(), rich=True) is True

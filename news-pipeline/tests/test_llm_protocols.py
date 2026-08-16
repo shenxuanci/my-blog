@@ -247,8 +247,9 @@ def test_anthropic_timeout_and_truncation_share_attempt_budget_and_record_usage(
 
 def test_stage_classifier_handles_formatted_prompts_without_prefix_false_positive():
     formatted = dn.ENRICH_SYSTEM.format(
-        tag_list="AI", detail_field="", detail_json="", watch_limit=90,
+        tag_list="AI", detail_field="", detail_json="",
         context_limit=80, context_depth="证据不足可留空",
+        watch_field="", watch_json="",
         watch_detail_field="", watch_detail_json="")
 
     assert dn.stage_of_prompt(dn.TRIAGE_SYSTEM) == "TRIAGE_SYSTEM"

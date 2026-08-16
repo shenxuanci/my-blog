@@ -1940,6 +1940,36 @@ def test_interim_support_audit_keeps_legacy_reply_compatibility():
         "text": "OpenAI 公布评测", "kind": "fact", "sources": ["OpenAI"]}]
 
 
+def test_interim_audit_sees_the_same_material_the_generator_saw():
+    """审计材料必须与生成材料同源（ADR 0020）。
+
+    厚档条目是照抓来的正文写的；若审计只拿到 RSS 摘要，凡引自正文的内容都会被判成
+    「无来源支撑」并整段删除——那才是结构性误杀。摘要档两边都只有 desc，本来对齐。
+    """
+    reply = {
+        "fields": {"context": True, "watch": True, "detail": True},
+        "supported_claim_indexes": [0],
+    }
+
+    thick_item = source_item()
+    thick_item["evidence_basis"] = "fulltext"
+    thick_item["evidence_text"] = "FULLTEXT_ONLY_MARKER " + "正文证据" * 50
+    thick_audit = QueueLLM([dict(reply)])
+    dn.audit_enrichment_support_interim(
+        thick_audit, [enriched_event()], [thick_item], dn.new_quality_stats())
+
+    assert "FULLTEXT_ONLY_MARKER" in thick_audit.calls[0][1]
+
+    # 抓取失败或未入选的条目：evidence_text 再长也不该进审计输入。
+    snippet_item = source_item()
+    snippet_item["evidence_text"] = "FULLTEXT_ONLY_MARKER 摘要档不该拿到正文"
+    snippet_audit = QueueLLM([dict(reply)])
+    dn.audit_enrichment_support_interim(
+        snippet_audit, [enriched_event()], [snippet_item], dn.new_quality_stats())
+
+    assert "FULLTEXT_ONLY_MARKER" not in snippet_audit.calls[0][1]
+
+
 def test_full_audit_counts_selected_and_secondary_reader_events():
     items = [
         source_item(),
@@ -2348,10 +2378,12 @@ def test_modes_share_reader_field_caps_while_full_mode_uses_fulltext_evidence():
 
     assert "FULLTEXT_ONLY_MARKER" not in interim_llm.calls[0][1]
     assert "watch_detail" not in interim_event
+    # 摘要档不生成走向（ADR 0020）；其余读者字段的上限仍然两档共用。
+    assert "watch" not in interim_event
     assert {field: len(interim_event[field]) for field in
-            ("title", "summary", "context", "watch", "detail")} == {
+            ("title", "summary", "context", "detail")} == {
         "title": len(long_values["title"]), "summary": 100,
-        "context": 80, "watch": 80, "detail": 800,
+        "context": 80, "detail": 800,
     }
     interim_output_item = dict(item)
     interim_output_item.pop("evidence_text", None)
@@ -2361,7 +2393,7 @@ def test_modes_share_reader_field_caps_while_full_mode_uses_fulltext_evidence():
     assert serialized_interim["title"] == long_values["title"]
     assert len(serialized_interim["summary"]) == 100
     assert "why" not in serialized_interim
-    assert len(serialized_interim["watch"]) == 80
+    assert not serialized_interim.get("watch")
 
     active_event = {
         "ids": [0], "category": "ai", "title": "原题",

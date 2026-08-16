@@ -68,7 +68,9 @@ cost_guard:
   same_day_min_shared_keys: 4
   cross_source_novelty_batch_size: 20
   cross_source_novelty_max_calls: 8
-  generate_warn_usd: 0.06
+  # 预算口径 ¥1/天 ≈ $0.14；告警设在其下，先报警后超支。
+  # 2026-08-16 从 0.06 提到 0.12：分层材料等级把日成本从 $0.055 抬到约 $0.079（ADR 0020）。
+  generate_warn_usd: 0.12
   shadow_warn_usd: 0.09
 
 # ---------- 自建 RSSHub 实例 ----------
@@ -195,6 +197,13 @@ topic_tags:
 detail:
   enabled: true
   max_chars: 1000  # 全文模式材料丰富时的软目标；interim 仍封顶 600，代码硬上限 1200
+  # 分层材料等级（ADR 0020）：interim 下按分数给前 N 条精选抓正文，走厚档合同
+  # （context 240 字、detail 1200 字、生成 watch）；其余走摘要档（context 80 字、
+  # 不生成 watch）。抓取失败自动退回摘要档，不产生额外 token，所以成本是上界。
+  # 0 = 一条正文都不抓，全部落摘要档。注意这不等于回到分层之前：摘要档不生成走向，
+  # 而分层之前是所有条目都生成走向（然后大半被审计删掉）。
+  # 涨价后重算：厚档每条约多 15k 字输入 ≈ 10k token，按供应商 input_miss 单价折算。
+  fulltext_top_n: 8
 
 # ---------- 英语单词本 ----------
 # 每天从精选新闻的英文标题+摘要里挑高价值单词，写 data/vocab/<date>.js（前端按日懒加载）。

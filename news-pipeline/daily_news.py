@@ -4063,15 +4063,13 @@ ENRICH_SYSTEM = """你是资深新闻主编，为个人读者的"每日信息驾
   留空是正常输出，宁可留空也不要凑。以下四种一律不写，写了就是错：
   （1）任何推测性归因——出现"可能/或许/大概/据信"加动机或目的的表述；来源没明说动机就不写动机
   （2）复述 title/summary 已有的当日事实，或给它加"首个/最大/最强"之类的定性
-  （3）后续走向、市场预期、风险提示——那是 watch 的职责
+  （3）后续走向、市场预期、风险提示——context 一律不写
   （4）与本事件无因果关系的并列背景或同类事件罗列
 - context_evidence: 最多 3 条依据片段，每条形如 {{"source_index":来源编号,"quote":"逐字原文"}}。
   quote 必须从对应来源正文中**逐字复制**（12-160字，不要改写、拼接或翻译）。
   context 留空时输出空数组。每条都会由程序按来源编号精确比对，任一条对不上，context 会被整条丢弃；
   找不到足够证据时应留空，而不是编造
-- watch: 走向（≤{watch_limit}字）：说明接下来取决于哪 1-2 个关键变量，并给出至少一个可观察路标。
-  仅在当前来源明确提供既有趋势或可比历史时使用类比；禁止具体概率数字、无条件断言和来源外类比
-{watch_detail_field}
+{watch_field}{watch_detail_field}
 - claims: 0-4 条需要显式归因的分析或不确定判断，每条包含 text、kind 和 source_indexes。kind 只用 analysis 或 uncertain；source_indexes 对应输入来源前的编号。没有此类判断时允许空数组，不要把正文事实改写成 claim
 {detail_field}- status: 事件状态，只能是这四个之一：
     已确认（官方发布或多个独立可信来源证实）
@@ -4090,7 +4088,7 @@ ENRICH_SYSTEM = """你是资深新闻主编，为个人读者的"每日信息驾
 - 立场性判断优先归入 claims（kind 用 analysis）并标 source_indexes，不要写进正文的叙述语气里。
 
 只输出 JSON 对象：{{"items":[条目...]}}，每个条目：
-{{"idx": 事件编号, "title": "...", "summary": "...", "context": "...", "context_evidence": [{{"source_index":0,"quote":"..."}}], "watch": "..."{watch_detail_json}, "claims": [{{"text":"...","kind":"analysis","source_indexes":[0]}}]{detail_json}, "status": "...", "tags": ["..."]}}
+{{"idx": 事件编号, "title": "...", "summary": "...", "context": "...", "context_evidence": [{{"source_index":0,"quote":"..."}}]{watch_json}{watch_detail_json}, "claims": [{{"text":"...","kind":"analysis","source_indexes":[0]}}]{detail_json}, "status": "...", "tags": ["..."]}}
 只有一个条目时也必须放在 items 数组里。不要输出任何其他文字。"""
 
 
@@ -4135,19 +4133,21 @@ CAUSE_ATTRIBUTION_RE = re.compile(
     r"|表示|指出|认为|报道|披露|声明|通报|发言人|回应")
 
 
-def _event_evidence_texts(event, items, full_objectivity=False):
+def _event_evidence_texts(event, items, rich=False):
     """Return exactly the source texts enrich was shown, for verbatim checking.
 
-    The slicing has to match the prompt in `enrich`: the interim prompt shows
-    only the first 200 characters of the RSS summary, so verifying against the
-    whole summary would accept a span the model could never have read.
+    The slicing has to match the prompt in `enrich`: the snippet-tier prompt
+    shows only the first 200 characters of the RSS summary, so verifying against
+    the whole summary would accept a span the model could never have read.
+    `rich` is therefore per event, not per run — a thick event quoting the
+    fetched article body must be checked against that body.
     """
     texts = []
     for index in _serialized_source_ids(event, items, limit=4):
         source = items[index]
         raw = (
             (source.get("evidence_text") or source.get("desc", ""))[:ARTICLE_MAX_CHARS]
-            if full_objectivity else str(source.get("desc") or "")[:200]
+            if rich else str(source.get("desc") or "")[:200]
         )
         # Preserve empty entries: source_index is the ordinal shown in the
         # enrich prompt, so dropping an empty source would shift every later
@@ -4156,7 +4156,7 @@ def _event_evidence_texts(event, items, full_objectivity=False):
     return texts
 
 
-def verify_cause_evidence(event, items, quality=None, full_objectivity=False):
+def verify_cause_evidence(event, items, quality=None, rich=False):
     """Blank a cause unless every declared source quote matches verbatim.
 
     Quotes are indexed against the source order shown to enrich. Exact provenance
@@ -4168,7 +4168,7 @@ def verify_cause_evidence(event, items, quality=None, full_objectivity=False):
     if not cause:
         # 空起因沿用 enrich 的既有约定留作空串，由后续清理阶段统一移除
         return False
-    evidence_texts = _event_evidence_texts(event, items, full_objectivity)
+    evidence_texts = _event_evidence_texts(event, items, rich)
     valid = isinstance(spans, list) and 1 <= len(spans) <= 3
     if valid:
         for span in spans:
@@ -4206,9 +4206,15 @@ def verify_cause_evidence(event, items, quality=None, full_objectivity=False):
     return True
 
 
-def _field_limits(full_objectivity=False):
+def _field_limits(rich=False):
+    """Pick the field-length table.
+
+    `rich` is about the *material* behind the text, not the rollout mode: an
+    interim event whose article text was fetched earns the same budget as a
+    full-objectivity one, because the words are backed by the same evidence.
+    """
     return (FULLTEXT_OBJECTIVITY_FIELD_LIMITS
-            if full_objectivity else OBJECTIVITY_FIELD_LIMITS)
+            if rich else OBJECTIVITY_FIELD_LIMITS)
 
 
 def _shorten_long_field(value, limit):
@@ -4228,12 +4234,12 @@ def _shorten_long_field(value, limit):
     return prefix[:boundary + 1].rstrip()
 
 
-def _clip_objectivity_field(field, value, full_objectivity=False):
+def _clip_objectivity_field(field, value, rich=False):
     normalized = str(value or "").strip()
     if field == "title":
         return normalized
-    limit = _field_limits(full_objectivity)[field]
-    if full_objectivity and field in {"context", "watch", "watch_detail", "detail"}:
+    limit = _field_limits(rich)[field]
+    if rich and field in {"context", "watch", "watch_detail", "detail"}:
         return _shorten_long_field(normalized, limit)
     return normalized[:limit]
 
@@ -4456,32 +4462,67 @@ def finalize_detail_quality_metrics(picked, items, quality):
     return quality
 
 
-def _enrich_batch_ranges(picked, items, full_objectivity):
-    if not full_objectivity:
-        return [(start, min(start + 6, len(picked)))
-                for start in range(0, len(picked), 6)]
-    ranges = []
+def fulltext_tier_picks(picked, cfg):
+    """The highest-scoring picks that earn fetched article text (ADR 0020).
+
+    Selection has to happen here, before enrich: `track_events` and the daily
+    brief both run later, so 可信延续 and 今日主线 are not known yet and cannot
+    serve as criteria.  Score is the ordering the reader already reads by.
+    """
+    top_n = int((cfg.get("detail") or {}).get("fulltext_top_n") or 0)
+    if top_n <= 0:
+        return []
+    ranked = sorted(picked, key=lambda event: (
+        -(event.get("score") or 0), str(event.get("title") or "")))
+    return ranked[:top_n]
+
+
+def event_has_fulltext_evidence(event, items):
+    """True when this event's own sources carry fetched article text.
+
+    The material tier is derived, never stored: a failed fetch leaves
+    `evidence_basis` at snippet, so the event falls back to the snippet contract
+    on its own and costs no extra tokens.  That is what makes the tiered budget
+    an upper bound rather than an estimate.
+    """
+    return detail_evidence_tier(event, items) != "snippet"
+
+
+def _enrich_batches(picked, items, indexes, fulltext):
+    """Group indexes into prompt batches, thickest contract first.
+
+    Batches carry explicit `picked` indexes rather than a (start, end) range:
+    the two material tiers interleave inside `picked`, so a batch is no longer
+    contiguous.  The index shown in the prompt stays the true `picked` index, so
+    the out-of-batch guard in `enrich` still compares against real identities.
+    """
+    indexes = list(indexes)
+    if not fulltext:
+        return [indexes[start:start + 6] for start in range(0, len(indexes), 6)]
+    batches = []
     start = 0
-    while start < len(picked):
+    while start < len(indexes):
         end = start
         evidence_chars = 0
-        while end < len(picked) and end - start < 3:
+        while end < len(indexes) and end - start < 3:
             event_chars = sum(
                 len(str(items[index].get("evidence_text")
                         or items[index].get("desc") or "")[:ARTICLE_MAX_CHARS])
-                for index in _serialized_source_ids(picked[end], items, limit=4)
+                for index in _serialized_source_ids(
+                    picked[indexes[end]], items, limit=4)
             )
             if end > start and evidence_chars + event_chars > 48_000:
                 break
             evidence_chars += event_chars
             end += 1
-        ranges.append((start, max(start + 1, end)))
-        start = max(start + 1, end)
-    return ranges
+        end = max(start + 1, end)
+        batches.append(indexes[start:end])
+        start = end
+    return batches
 
 
-def _assign_generated_field(event, field, raw, full_objectivity, quality):
-    value = _clip_objectivity_field(field, raw, full_objectivity)
+def _assign_generated_field(event, field, raw, rich, quality):
+    value = _clip_objectivity_field(field, raw, rich)
     if str(raw or "").strip() and not value:
         event.pop(field, None)
         if quality is not None:
@@ -4499,16 +4540,17 @@ def _remove_orphan_watch_detail(
             count_removed_field(quality, "watch_detail", reason)
 
 
-def enrich(llm, picked, items, cfg, quality=None):
-    tag_vocab = [str(t) for t in (cfg.get("topic_tags") or [])]
-    tag_set = set(tag_vocab)
-    dcfg = cfg.get("detail") or {}
-    detail_on = dcfg.get("enabled", True)
-    full_objectivity = _rollout_output_enabled(cfg)
-    configured_detail_chars = int(dcfg.get("max_chars", 600) or 600)
-    detail_chars = (min(configured_detail_chars, 1000)
-                    if full_objectivity else min(configured_detail_chars, 600))
-    if detail_on and full_objectivity:
+def _enrich_system_prompt(tag_vocab, detail_on, detail_chars, thick,
+                          full_objectivity):
+    """Build one system prompt per material tier.
+
+    `thick` is the *material* contract — how much the model was shown, and
+    therefore how much it may write.  `full_objectivity` stays the *rollout*
+    contract and only decides whether `watch_detail` exists.  Keeping them apart
+    is the point: one boolean standing for both is what left ADR 0015's evidence
+    tiers unreachable for as long as `objectivity.mode` was `interim`.
+    """
+    if detail_on and thick:
         detail_field = (
             f"- detail: 现状叙述（软上限仍为 {detail_chars} 字，程序硬上限仍为 1200 字；严格服从每个事件标注的材料等级与目标；"
             "丰富材料目标 350-600 字、2-4 段，有限全文目标 180-350 字、1-3 段，摘要材料安全短写且不设最低字数；"
@@ -4521,124 +4563,168 @@ def enrich(llm, picked, items, cfg, quality=None):
     elif detail_on:
         detail_field = (
             f"- detail: 现状短叙述（约 {detail_chars} 字以内，需要分段时使用自然段和空行，不用小标题；"
-            "摘要材料安全短写且不设最低字数；串联摘要材料已有的事件过程和关键细节，不复述 summary/context/watch；"
+            "摘要材料安全短写且不设最低字数；串联摘要材料已有的事件过程和关键细节，不复述 summary/context；"
             "不写公共影响或为何重要的判断；"
             "只写输入明确提供的内容，不得凭摘要补全机制、数字、引语或未决事实；素材不足就短写）\n"
         )
     else:
         detail_field = ""
-    detail_json = ', "detail": "..."' if detail_on else ""
+    # 摘要档不生成走向：`CONTEXT.md` 说「没有路标的走向不成立」，而 200 字 RSS 摘要
+    # 里几乎不可能有可观察路标，模型只能靠「取决于X／可观察Y／路标Z」的骨架把结构
+    # 显式写出来换取审计放行——那是通过审计的形状，不是读者要的内容（ADR 0020）。
+    watch_field = (
+        f"- watch: 走向（≤{OBJECTIVITY_FIELD_LIMITS['watch']}字）：说明接下来取决于哪 1-2 个关键变量，并给出至少一个可观察路标。\n"
+        "  仅在当前来源明确提供既有趋势或可比历史时使用类比；禁止具体概率数字、无条件断言和来源外类比\n"
+        if thick else "")
+    watch_json = ', "watch": "..."' if thick else ""
     watch_detail_field = (
         "- watch_detail: 详情走向（建议 120-220 字，最多 260 字）：完整包含 watch 的变量和路标语义，"
         "可补充第二个关键变量、判断依据和更多可观察路标；不得与 watch 矛盾，不得增加来源外判断\n"
         if full_objectivity else "")
-    watch_detail_json = ', "watch_detail": "..."' if full_objectivity else ""
-    system = ENRICH_SYSTEM.format(
+    return ENRICH_SYSTEM.format(
         tag_list="、".join(tag_vocab) if tag_vocab else "（词表为空，tags 输出空数组）",
-        detail_field=detail_field, detail_json=detail_json,
-        context_limit=(240 if full_objectivity else 60),
-        context_depth=("材料丰富时可写 80-180 字；" if full_objectivity else ""),
-        watch_limit=OBJECTIVITY_FIELD_LIMITS["watch"],
+        detail_field=detail_field,
+        detail_json=', "detail": "..."' if detail_on else "",
+        context_limit=(240 if thick else 60),
+        context_depth=("材料丰富时可写 80-180 字；" if thick else ""),
+        watch_field=watch_field,
+        watch_json=watch_json,
         watch_detail_field=watch_detail_field,
-        watch_detail_json=watch_detail_json)
-    for batch_number, (bi, batch_end) in enumerate(
-            _enrich_batch_ranges(picked, items, full_objectivity), start=1):
-        batch = picked[bi:batch_end]
-        blocks = []
-        for j, ev in enumerate(batch):
-            ev.pop("why", None)
-            srcs = []
-            source_ids = _serialized_source_ids(ev, items, limit=4)
-            for source_index, i in enumerate(source_ids):
-                it = items[i]
-                evidence_text = (
-                    (it.get("evidence_text") or it.get("desc", ""))[:ARTICLE_MAX_CHARS]
-                    if full_objectivity else str(it.get("desc") or "")[:200]
-                )
-                srcs.append(f"  - [{source_index}] [{it['source']}|{TYPE_NAMES[it['source_type']]}] "
-                            f"{it['title']}：{evidence_text}")
-            hints = list(dict.fromkeys(items[i].get("tag_hint") for i in ev["ids"]
-                                       if items[i].get("tag_hint") in tag_set))
-            hint_line = ("\n  （来源分类提示，若贴切请优先选为标签："
-                         + "、".join(hints) + "）") if hints else ""
-            detail_hint = (
-                f"\n  （现状材料等级：{_detail_tier_prompt(detail_evidence_tier(ev, items))}）"
-                if detail_on else "")
-            blocks.append(
-                f"事件[{bi + j}]（类目：{ev.get('category', 'world')}） {ev['title']}\n"
-                + "\n".join(srcs) + hint_line + detail_hint)
-        log(f"  阶段B 批次 {batch_number}: {len(batch)} 个事件")
-        result = _model_rows(
-            llm.json_call(system, "【今日事件】\n" + "\n\n".join(blocks)), "items")
-        if result is None:
-            log("  阶段B 返回结构非法，本批保留基础内容")
-            if quality is not None:
-                quality["model_unusable_responses"] += 1
-                quality["degraded"] = True
+        watch_detail_json=', "watch_detail": "..."' if full_objectivity else "")
+
+
+def enrich(llm, picked, items, cfg, quality=None):
+    tag_vocab = [str(t) for t in (cfg.get("topic_tags") or [])]
+    tag_set = set(tag_vocab)
+    dcfg = cfg.get("detail") or {}
+    detail_on = dcfg.get("enabled", True)
+    full_objectivity = _rollout_output_enabled(cfg)
+    configured_detail_chars = int(dcfg.get("max_chars", 600) or 600)
+    # Full objectivity keeps its run-wide contract; in interim the tier is
+    # per-event, so both prompts have to exist within one run.
+    thick_flags = [full_objectivity or event_has_fulltext_evidence(event, items)
+                   for event in picked]
+    groups = [(True, [i for i, thick in enumerate(thick_flags) if thick]),
+              (False, [i for i, thick in enumerate(thick_flags) if not thick])]
+    prompts = {
+        thick: _enrich_system_prompt(
+            tag_vocab, detail_on,
+            min(configured_detail_chars, 1000 if thick else 600),
+            thick, full_objectivity)
+        for thick in (True, False)
+    }
+    batch_number = 0
+    for thick, group_indexes in groups:
+        if not group_indexes:
             continue
-        invalid_rows = sum(not isinstance(row, dict) for row in result)
-        if invalid_rows:
-            log(f"  阶段B 忽略 {invalid_rows} 条非法返回，本批其余条目继续")
-        out_of_batch = 0
-        for r in result:
-            if not isinstance(r, dict):
+        system = prompts[thick]
+        for batch_indexes in _enrich_batches(picked, items, group_indexes, thick):
+            batch_number += 1
+            batch = [picked[index] for index in batch_indexes]
+            allowed_indexes = set(batch_indexes)
+            blocks = []
+            for index, ev in zip(batch_indexes, batch):
+                ev.pop("why", None)
+                srcs = []
+                source_ids = _serialized_source_ids(ev, items, limit=4)
+                for source_index, i in enumerate(source_ids):
+                    it = items[i]
+                    evidence_text = (
+                        (it.get("evidence_text") or it.get("desc", ""))[:ARTICLE_MAX_CHARS]
+                        if thick else str(it.get("desc") or "")[:200]
+                    )
+                    srcs.append(f"  - [{source_index}] [{it['source']}|{TYPE_NAMES[it['source_type']]}] "
+                                f"{it['title']}：{evidence_text}")
+                hints = list(dict.fromkeys(items[i].get("tag_hint") for i in ev["ids"]
+                                           if items[i].get("tag_hint") in tag_set))
+                hint_line = ("\n  （来源分类提示，若贴切请优先选为标签："
+                             + "、".join(hints) + "）") if hints else ""
+                detail_hint = (
+                    f"\n  （现状材料等级：{_detail_tier_prompt(detail_evidence_tier(ev, items))}）"
+                    if detail_on else "")
+                blocks.append(
+                    f"事件[{index}]（类目：{ev.get('category', 'world')}） {ev['title']}\n"
+                    + "\n".join(srcs) + hint_line + detail_hint)
+            log(f"  阶段B 批次 {batch_number}"
+                f"（{'厚档' if thick else '摘要档'}）: {len(batch)} 个事件")
+            result = _model_rows(
+                llm.json_call(system, "【今日事件】\n" + "\n\n".join(blocks)), "items")
+            if result is None:
+                log("  阶段B 返回结构非法，本批保留基础内容")
+                if quality is not None:
+                    quality["model_unusable_responses"] += 1
+                    quality["degraded"] = True
                 continue
-            k = r.get("idx")
-            if not isinstance(k, int) or isinstance(k, bool):
-                continue
-            # 提示词里只展示了本批的全局下标，所以合法回填只可能落在本批窗口内。
-            # 放行窗口外的 idx 意味着一条新闻的返回可以覆盖另一条已经算好的全部
-            # 读者字段——模型写错下标是这样，抓来的正文用提示注入诱导它写错下标也是
-            # 这样。下游 support 审计按事件自己的来源复核，覆盖的后果只会表现为
-            # removed_fields 无故上涨，查不到源头，所以必须在这里挡住。
-            if not (bi <= k < bi + len(batch)):
-                out_of_batch += 1
-                continue
-            ev = picked[k]
-            source_ids = _serialized_source_ids(ev, items, limit=1)
-            source_title = items[source_ids[0]].get("title", "") if source_ids else ""
-            ev["title"] = select_reader_title(r.get("title"), source_title)
-            ev["summary"] = _clip_objectivity_field("summary", r.get("summary", ""))
-            ev.pop("why", None)
-            _assign_generated_field(
-                ev, "context", r.get("context", ""), full_objectivity, quality)
-            ev["context_evidence"] = r.get("context_evidence", [])
-            verify_cause_evidence(ev, items, quality, full_objectivity)
-            _assign_generated_field(
-                ev, "watch", r.get("watch", ""), full_objectivity, quality)
-            if full_objectivity:
+            invalid_rows = sum(not isinstance(row, dict) for row in result)
+            if invalid_rows:
+                log(f"  阶段B 忽略 {invalid_rows} 条非法返回，本批其余条目继续")
+            out_of_batch = 0
+            for r in result:
+                if not isinstance(r, dict):
+                    continue
+                k = r.get("idx")
+                if not isinstance(k, int) or isinstance(k, bool):
+                    continue
+                # 提示词里只展示了本批事件的 picked 下标，所以合法回填只可能落在本批
+                # 这几个下标上。放行本批以外的 idx 意味着一条新闻的返回可以覆盖另一条
+                # 已经算好的全部读者字段——模型写错下标是这样，抓来的正文用提示注入
+                # 诱导它写错下标也是这样。下游 support 审计按事件自己的来源复核，
+                # 覆盖的后果只会表现为 removed_fields 无故上涨，查不到源头，
+                # 所以必须在这里挡住。批次不再连续，判据是集合成员而不是区间。
+                if k not in allowed_indexes:
+                    out_of_batch += 1
+                    continue
+                ev = picked[k]
+                source_ids = _serialized_source_ids(ev, items, limit=1)
+                source_title = items[source_ids[0]].get("title", "") if source_ids else ""
+                ev["title"] = select_reader_title(r.get("title"), source_title)
+                ev["summary"] = _clip_objectivity_field("summary", r.get("summary", ""))
+                ev.pop("why", None)
                 _assign_generated_field(
-                    ev, "watch_detail", r.get("watch_detail", ""),
-                    True, quality)
-                _remove_orphan_watch_detail(ev, quality)
-            ev["claims"] = sanitize_claims(
-                r.get("claims"), [
-                    items[i]["source"]
-                    for i in _serialized_source_ids(ev, items, limit=4)
-                ])
-            if detail_on:
+                    ev, "context", r.get("context", ""), thick, quality)
+                ev["context_evidence"] = r.get("context_evidence", [])
+                # 引文核对必须按本事件实际展示过的材料来，否则厚档引自正文的逐字片段
+                # 会因为只比对 200 字摘要而全数判假，context 被整条丢掉。
+                verify_cause_evidence(ev, items, quality, thick)
+                if thick:
+                    _assign_generated_field(
+                        ev, "watch", r.get("watch", ""), thick, quality)
                 if full_objectivity:
                     _assign_generated_field(
-                        ev, "detail", r.get("detail", ""), True, quality)
-                else:
-                    ev["detail"] = str(r.get("detail", "")).strip()[:detail_chars + 200]
-            ev["status"] = r.get("status") if r.get("status") in STATUS_SET else "发展中"
-            raw_tags = r.get("tags") or []
-            if not isinstance(raw_tags, list):
-                raw_tags = []
-            tags = [t for t in raw_tags if t in tag_set]
-            # 兜底：AI HOT 携带的分类提示（研究论文/技巧观点等）优先入选，防止被淹没
-            for h in (items[i].get("tag_hint") for i in ev["ids"]):
-                if h in tag_set and h not in tags:
-                    tags.insert(0, h)
-            ev["tags"] = tags[:2]
-            if full_objectivity:
-                sanitize_objectivity_event(ev, items)
-        if out_of_batch:
-            log(f"  阶段B 丢弃 {out_of_batch} 条越批次 idx（本批 [{bi}, {bi + len(batch)})）")
-            if quality is not None:
-                quality["enrich_out_of_batch_idx"] = int(
-                    quality.get("enrich_out_of_batch_idx", 0)) + out_of_batch
+                        ev, "watch_detail", r.get("watch_detail", ""),
+                        True, quality)
+                    _remove_orphan_watch_detail(ev, quality)
+                ev["claims"] = sanitize_claims(
+                    r.get("claims"), [
+                        items[i]["source"]
+                        for i in _serialized_source_ids(ev, items, limit=4)
+                    ])
+                if detail_on:
+                    if thick:
+                        _assign_generated_field(
+                            ev, "detail", r.get("detail", ""), True, quality)
+                    else:
+                        ev["detail"] = str(
+                            r.get("detail", "")).strip()[
+                                :min(configured_detail_chars, 600) + 200]
+                ev["status"] = r.get("status") if r.get("status") in STATUS_SET else "发展中"
+                raw_tags = r.get("tags") or []
+                if not isinstance(raw_tags, list):
+                    raw_tags = []
+                tags = [t for t in raw_tags if t in tag_set]
+                # 兜底：AI HOT 携带的分类提示（研究论文/技巧观点等）优先入选，防止被淹没
+                for h in (items[i].get("tag_hint") for i in ev["ids"]):
+                    if h in tag_set and h not in tags:
+                        tags.insert(0, h)
+                ev["tags"] = tags[:2]
+                if full_objectivity:
+                    sanitize_objectivity_event(ev, items)
+            if out_of_batch:
+                log(f"  阶段B 丢弃 {out_of_batch} 条越批次 idx"
+                    f"（本批 {sorted(allowed_indexes)}）")
+                if quality is not None:
+                    quality["enrich_out_of_batch_idx"] = int(
+                        quality.get("enrich_out_of_batch_idx", 0)) + out_of_batch
     return picked
 
 
@@ -4710,10 +4796,16 @@ def audit_enrichment_support_interim(llm, picked, items, quality=None):
     quality["enrichment_audited_events"] += len(picked)
     for event in picked:
         ids = event.get("ids") or []
+        # 审计材料必须与生成材料同源。厚档条目是照抓来的正文写的，若审计只拿到 RSS
+        # 摘要，凡是引自正文的内容都会被判成「无来源支撑」并整段删除——那才是结构性
+        # 误杀。摘要档两边都只有 desc，本来就对齐（ADR 0020）。
+        rich = event_has_fulltext_evidence(event, items)
         reports = [{
             "id": i,
             "title": items[i].get("title", ""),
-            "summary": items[i].get("desc", ""),
+            "summary": (
+                (items[i].get("evidence_text") or items[i].get("desc", ""))[:ARTICLE_MAX_CHARS]
+                if rich else items[i].get("desc", "")),
             "source": items[i].get("source", ""),
         } for i in ids if isinstance(i, int) and not isinstance(i, bool) and 0 <= i < len(items)]
         extension = {field: event.get(field) for field in QUALITY_EXTENSION_FIELDS
@@ -9264,6 +9356,15 @@ def _run_pipeline(started_at, args, cfg, policy):
             # Snapshot membership before high-risk demotion; event objects remain live
             # so the summary still observes later repair/degradation results.
             shadow_selected = list(picked)
+    else:
+        # 分层材料等级（ADR 0020）：interim 只给得分最高的几条抓正文，其余留在摘要档。
+        # 抓失败的条目 evidence_basis 保持 snippet，enrich 自动按摘要档处理，不多花钱。
+        thick_picks = fulltext_tier_picks(picked, cfg)
+        if thick_picks:
+            log(f"证据采集：读取得分前 {len(thick_picks)} 条精选的公开文章正文 ...")
+            acquire_event_evidence(thick_picks, items, quality)
+            log(f"  正文抓取：成功 {quality['article_fetch_successes']} / "
+                f"尝试 {quality['article_fetch_attempts']}")
 
     # 评分回填全量档（独立故障域）：让「全部动态」能按分数过滤
     try:

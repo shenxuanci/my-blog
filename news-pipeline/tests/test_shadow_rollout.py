@@ -336,9 +336,12 @@ def test_config_declares_interim_default():
         "same_day_min_shared_keys": 4,
         "cross_source_novelty_batch_size": 20,
         "cross_source_novelty_max_calls": 8,
-        "generate_warn_usd": 0.06,
+        # 分层材料等级把日成本从 $0.055 抬到约 $0.079，告警随之上移（ADR 0020）。
+        # 预算口径 ¥1/天 ≈ $0.14，告警仍在其下。
+        "generate_warn_usd": 0.12,
         "shadow_warn_usd": 0.09,
     }
+    assert config["detail"]["fulltext_top_n"] == 8
 
 
 def test_shadow_summary_has_stable_shape_and_excludes_content_and_secrets():

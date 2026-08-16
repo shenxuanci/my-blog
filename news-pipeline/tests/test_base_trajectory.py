@@ -146,8 +146,16 @@ def test_interim_enrich_keeps_short_contract_and_omits_watch_detail():
     assert "watch_detail" not in llm.system
 
 
-def test_interim_detail_prompt_does_not_use_fulltext_depth_contract():
-    llm = EnrichLLM({
+def _snippet_source_item():
+    """A source whose article body was never fetched — the RSS blurb is all there is."""
+    item = _source_item()
+    item.pop("evidence_text", None)
+    item["evidence_basis"] = "snippet"
+    return item
+
+
+def _enrich_response(**overrides):
+    return {
         "idx": 0,
         "title": "Factory pilot expands",
         "summary": "Pilot production has begun.",
@@ -159,17 +167,98 @@ def test_interim_detail_prompt_does_not_use_fulltext_depth_contract():
         "claims": [],
         "status": "发展中",
         "tags": [],
-    })
+        **overrides,
+    }
 
-    dn.enrich(llm, [_event()], [_source_item()], {
+
+def _interim_cfg():
+    return {
         "_objectivity_runtime_mode": "interim",
         "topic_tags": [],
         "detail": {"enabled": True, "max_chars": 1000},
-    })
+    }
+
+
+def test_snippet_tier_prompt_does_not_use_fulltext_depth_contract():
+    """写作目标跟着材料走：只有 RSS 摘要时不得下达全文档的深度目标（ADR 0020）。"""
+    llm = EnrichLLM(_enrich_response())
+
+    dn.enrich(llm, [_event()], [_snippet_source_item()], _interim_cfg())
 
     assert "现状短叙述" in llm.system
     assert "普通条目约 250-600 字" not in llm.system
     assert "利益相关方变化和未决事实" not in llm.system
+
+
+def test_interim_event_with_fetched_fulltext_earns_the_depth_contract():
+    """材料等级决定合同，发布模式不决定。
+
+    ADR 0016 把 `objectivity.mode` 永久钉在 interim，此前这让 ADR 0015 的证据分级
+    成为永不执行的死代码。分层之后，interim 里抓到正文的条目照样拿厚档合同。
+    """
+    llm = EnrichLLM(_enrich_response())
+
+    dn.enrich(llm, [_event()], [_source_item()], _interim_cfg())
+
+    assert "利益相关方变化和未决事实" in llm.system
+    assert "现状短叙述" not in llm.system
+
+
+def test_snippet_tier_neither_asks_for_nor_keeps_a_watch():
+    """摘要材料里几乎没有可观察路标，模板句是通过审计的形状而不是内容（ADR 0020）。"""
+    llm = EnrichLLM(_enrich_response())
+    event = _event()
+
+    dn.enrich(llm, [event], [_snippet_source_item()], _interim_cfg())
+
+    assert "watch" not in llm.system
+    assert "watch" not in event
+
+
+def test_material_tier_is_per_event_within_one_interim_run():
+    """同一次运行里两档并存，各用各的提示词，批次下标仍指向真实的 picked 位置。"""
+    systems = []
+
+    class RecordingLLM:
+        def json_call(self, system, user):
+            systems.append((system, user))
+            return []
+
+    picked = [{**_event(), "ids": [0]}, {**_event(), "ids": [1]}]
+    dn.enrich(RecordingLLM(), picked,
+              [_source_item(), _snippet_source_item()], _interim_cfg())
+
+    assert len(systems) == 2
+    thick_system, thick_user = systems[0]
+    snippet_system, snippet_user = systems[1]
+    assert "利益相关方变化和未决事实" in thick_system
+    assert "现状短叙述" in snippet_system
+    assert "事件[0]" in thick_user
+    assert "事件[1]" in snippet_user
+
+
+def test_fulltext_tier_picks_takes_the_highest_scores_and_honours_the_knob():
+    picked = [{**_event(), "title": f"E{index}", "score": score}
+              for index, score in enumerate((70, 95, 80, 95))]
+
+    chosen = dn.fulltext_tier_picks(picked, {"detail": {"fulltext_top_n": 2}})
+
+    assert [event["score"] for event in chosen] == [95, 95]
+    # 同分按标题定序：同一批输入必须产生同一个抓取集合，否则成本和产出都不可复现。
+    assert [event["title"] for event in chosen] == ["E1", "E3"]
+    # 0 表示一条正文都不抓、全部落摘要档；这不等于回到分层之前，摘要档仍不生成走向。
+    assert dn.fulltext_tier_picks(picked, {"detail": {"fulltext_top_n": 0}}) == []
+    assert dn.fulltext_tier_picks(picked, {}) == []
+
+
+def test_failed_fetch_leaves_the_event_in_the_snippet_tier():
+    """抓取失败不升档，所以分层成本是上界而不是估算（ADR 0020）。"""
+    failed = _source_item()
+    failed["evidence_basis"] = "snippet"
+    failed["evidence_text"] = "长正文" * 500
+
+    assert dn.event_has_fulltext_evidence(_event(), [failed]) is False
+    assert dn.event_has_fulltext_evidence(_event(), [_source_item()]) is True
 
 
 def test_one_off_enrichment_outputs_an_evidence_constrained_trajectory():
@@ -401,19 +490,26 @@ def test_fulltext_enrich_batches_at_three_events_while_interim_keeps_six():
     items = [_source_item()]
     picked = [{**_event(), "ids": [0]} for _ in range(7)]
 
-    assert list(dn._enrich_batch_ranges(picked, items, False)) == [(0, 6), (6, 7)]
-    assert list(dn._enrich_batch_ranges(picked, items, True)) == [
-        (0, 3), (3, 6), (6, 7),
+    indexes = list(range(7))
+
+    assert dn._enrich_batches(picked, items, indexes, False) == [
+        [0, 1, 2, 3, 4, 5], [6],
     ]
+    assert dn._enrich_batches(picked, items, indexes, True) == [
+        [0, 1, 2], [3, 4, 5], [6],
+    ]
+    # 两档并存时批次不再连续，携带的必须是真实的 picked 下标。
+    assert dn._enrich_batches(picked, items, [1, 4, 6], True) == [[1, 4, 6]]
+    assert dn._enrich_batches(picked, items, [0, 2, 4, 6], False) == [[0, 2, 4, 6]]
 
 
 def test_zero_increment_cost_contract_stays_within_previous_reader_budget():
     picked = [{**_event(), "ids": [0]} for _ in range(45)]
     items = [_source_item()]
-    fulltext_batches = list(dn._enrich_batch_ranges(picked, items, True))
+    fulltext_batches = dn._enrich_batches(picked, items, list(range(45)), True)
 
     assert len(fulltext_batches) == 15
-    assert all(end - start <= 3 for start, end in fulltext_batches)
+    assert all(len(batch) <= 3 for batch in fulltext_batches)
     assert dn.ARTICLE_MAX_CHARS == 4000
     assert dn.FULLTEXT_OBJECTIVITY_FIELD_LIMITS["detail"] == 1200
     config = dn.yaml.safe_load(
