@@ -1119,6 +1119,48 @@ test("article delete rejects a stale editor SHA without deleting", async () => {
   });
 });
 
+test("commit messages stay single-line so an article title cannot forge a trailer", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    let committed = null;
+    globalThis.fetch = async (url, options = {}) => {
+      const path = String(url);
+      if ((options.method || "GET") === "PUT") {
+        committed = JSON.parse(options.body);
+        return jsonResponse({ content: { sha: "saved" } });
+      }
+      if (path.includes("category-covers.json")) return jsonResponse({ sha: "covers", content: Buffer.from('{"default":"/fallback.webp"}').toString("base64") });
+      if (path.includes("source/_posts/post.md")) return jsonResponse({ sha: "current-sha", content: Buffer.from('---\ntitle: "Current"\ndate: "2026-07-17"\ncategories:\n  - "技术"\n---\nCurrent body\n').toString("base64") });
+      throw new Error(`Unexpected request: ${path}`);
+    };
+    const req = {
+      method: "POST",
+      headers: { authorization: "Bearer admin-secret" },
+      query: {},
+      body: {
+        article: {
+          filePath: "source/_posts/post.md",
+          sha: "current-sha",
+          title: "Fix bug\n\nCo-authored-by: Attacker <attacker@evil.example>",
+          date: "2026-07-17",
+          category: "技术",
+          content: "Edited body",
+        },
+      },
+    };
+    const res = mockResponse();
+    try { await adminArticles(req, res); } finally { globalThis.fetch = originalFetch; }
+
+    assert.equal(res.statusCode, 200);
+    assert.ok(committed, "expected the article write to reach the GitHub sink");
+    // A newline would end the subject and start the commit body, where git parses
+    // `Co-authored-by:` as a trailer and forges attribution in public history.
+    // Collapsed onto one line the same text is inert.
+    assert.doesNotMatch(committed.message, /[\r\n]/);
+    assert.match(committed.message, /^update post: Fix bug /);
+  });
+});
+
 test("new articles serialize a timezone-stable midnight", () => {
   const composed = github.composePost({
     title: "New post",

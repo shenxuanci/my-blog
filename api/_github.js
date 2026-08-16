@@ -243,6 +243,17 @@ async function githubApiRequest(endpoint, options = {}) {
   return data;
 }
 
+// Git commit subjects are single-line: a newline inside one starts the commit
+// body, where `Co-authored-by:` and friends parse as trailers. Article titles
+// reach the sink from the admin editor, and the front-matter path escapes them
+// through yamlString while the commit-message path did not. Collapse whitespace
+// at the one point every message enters the API rather than at each call site,
+// so a new caller cannot reintroduce the gap.
+function commitMessage(message) {
+  const flat = String(message == null ? '' : message).replace(/\s+/g, ' ').trim();
+  return flat || 'update';
+}
+
 async function putTextFilesAtomic(files, message, options = {}) {
   if (!files.length) return null;
   const { branch } = repoConfig();
@@ -272,7 +283,7 @@ async function putTextFilesAtomic(files, message, options = {}) {
   });
   const commit = await githubApiRequest('git/commits', {
     method: 'POST',
-    body: { message, tree: tree.sha, parents: [headSha] }
+    body: { message: commitMessage(message), tree: tree.sha, parents: [headSha] }
   });
   await githubApiRequest(updateRefPath, {
     method: 'PATCH',
@@ -343,7 +354,7 @@ async function putTextFile(filePath, content, message, sha) {
   return githubRequest(filePath, {
     method: 'PUT',
     body: {
-      message,
+      message: commitMessage(message),
       content: Buffer.from(content, 'utf8').toString('base64'),
       sha
     }
@@ -354,7 +365,7 @@ async function putBase64File(filePath, contentBase64, message) {
   return githubRequest(filePath, {
     method: 'PUT',
     body: {
-      message,
+      message: commitMessage(message),
       content: contentBase64
     }
   });
@@ -363,7 +374,7 @@ async function putBase64File(filePath, contentBase64, message) {
 async function deleteFile(filePath, message, sha) {
   return githubRequest(filePath, {
     method: 'DELETE',
-    body: { message, sha }
+    body: { message: commitMessage(message), sha }
   });
 }
 
