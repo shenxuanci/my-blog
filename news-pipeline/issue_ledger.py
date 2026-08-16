@@ -21,19 +21,16 @@ GATES = ("selection", "trajectory", "enrich", "objectivity_shadow",
          "source_metrics")
 # Consecutive gates reset to zero on a failed day; cumulative gates only count
 # valid days, so a day without usable data never erases banked observations.
-# That exemption covers missing data only -- a runtime-fingerprint change still
-# zeroes both kinds (see RUNTIME_RESET_GATES below).
 CONSECUTIVE_GATES = ("selection", "trajectory", "objectivity_shadow")
 # ADR 0016 retired the unlock semantics: these streaks are a quality dashboard,
 # not a countdown toward enabling `objectivity active` or authorizing new
-# sources. There are deliberately no per-gate targets to reach -- the former
-# targets were unreachable in practice, because the reset below fires on any
-# change to the four fingerprinted pipeline files.
-# A shared runtime change restarts every clock: the sample composition moved, so
-# pre-change and post-change evidence must never be mixed. A trajectory-UI-only
-# change restarts trajectory alone.
-RUNTIME_RESET_GATES = GATES
-TRAJECTORY_UI_RESET_GATES = ("trajectory",)
+# sources. ADR 0019 then removed the fingerprint reset that used to zero every
+# clock on any change to the four fingerprinted pipeline files. A dashboard is
+# read for trend, not for consecutiveness, and the pipeline gets edited every
+# one to three days, so that reset only ever destroyed the reading. Fingerprints
+# are still recorded per day for diagnosis. `window_start` deliberately keeps
+# its own runtime-change restart: the enrich baseline compares against
+# pre-change data, and there the mixing really is invalid.
 ENRICH_SAFETY_MULTIPLIER = 1.2
 ENRICH_BASELINE_DAYS = 3
 
@@ -222,20 +219,13 @@ def _reset(streaks, gates):
 
 
 def compute_streaks(states):
-    """Compute independent gate streaks over chronological daily states."""
-    streaks = {gate: 0 for gate in GATES}
-    previous = {"runtime": "", "trajectory_ui": ""}
-    for state in sorted(states, key=lambda row: str(row.get("date") or "")):
-        fingerprints = state.get("fingerprints")
-        fingerprints = fingerprints if isinstance(fingerprints, dict) else {}
-        runtime = fingerprints.get("runtime")
-        trajectory_ui = fingerprints.get("trajectory_ui")
-        if previous["runtime"] and runtime and runtime != previous["runtime"]:
-            _reset(streaks, RUNTIME_RESET_GATES)
-        elif (previous["trajectory_ui"] and trajectory_ui
-              and trajectory_ui != previous["trajectory_ui"]):
-            _reset(streaks, TRAJECTORY_UI_RESET_GATES)
+    """Compute independent gate streaks over chronological daily states.
 
+    Fingerprints are recorded per day but deliberately do not reset the counts
+    (ADR 0019). Only a failed publication clears the consecutive gates.
+    """
+    streaks = {gate: 0 for gate in GATES}
+    for state in sorted(states, key=lambda row: str(row.get("date") or "")):
         aggregate = state.get("aggregate")
         aggregate = aggregate if isinstance(aggregate, dict) else {}
         if aggregate.get("publication") == "failure":
@@ -244,11 +234,6 @@ def compute_streaks(states):
             for gate in GATES:
                 streaks[gate] = _apply_gate(
                     streaks[gate], aggregate.get(gate), gate)
-
-        if runtime:
-            previous["runtime"] = runtime
-        if trajectory_ui:
-            previous["trajectory_ui"] = trajectory_ui
     return streaks
 
 

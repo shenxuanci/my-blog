@@ -189,8 +189,8 @@ def test_publication_failure_resets_every_consecutive_streak():
         source_metrics=2)
 
 
-def test_runtime_fingerprint_change_restarts_every_gate_clock():
-    """A shared runtime change moves the sample, so no clock may carry over."""
+def test_runtime_fingerprint_change_no_longer_resets_any_gate_clock():
+    """ADR 0019: the dashboard reads trend, so routine edits must not zero it."""
     il = ledger()
     states = [
         state("2026-07-21", [attempt(1, 1, runtime="a", trajectory_ui="b")]),
@@ -198,11 +198,12 @@ def test_runtime_fingerprint_change_restarts_every_gate_clock():
     ]
 
     assert il.compute_streaks(states) == streaks(
-        selection=1, trajectory=1, enrich=1, objectivity_shadow=1,
-        source_metrics=1)
+        selection=2, trajectory=2, enrich=2, objectivity_shadow=2,
+        source_metrics=2)
 
 
-def test_trajectory_ui_fingerprint_change_resets_only_trajectory():
+def test_trajectory_ui_fingerprint_change_no_longer_resets_trajectory():
+    """ADR 0019: the trajectory-UI fingerprint is recorded, not a reset trigger."""
     il = ledger()
     states = [
         state("2026-07-21", [attempt(1, 1, runtime="a", trajectory_ui="b")]),
@@ -210,7 +211,7 @@ def test_trajectory_ui_fingerprint_change_resets_only_trajectory():
     ]
 
     assert il.compute_streaks(states) == streaks(
-        selection=2, trajectory=1, enrich=2, objectivity_shadow=2,
+        selection=2, trajectory=2, enrich=2, objectivity_shadow=2,
         source_metrics=2)
 
 
@@ -399,10 +400,14 @@ def test_live_v1_comments_migrate_without_inventing_gate_evidence():
     for row in parsed:
         for gate in ("enrich", "objectivity_shadow", "source_metrics"):
             assert row["aggregate"][gate] == "neutral"
-    # 07-24 carries a different shared runtime fingerprint, so both clocks
-    # restart there — reproducing the streaks the live 07-24 comment shows.
+    # 07-24 carries a different shared runtime fingerprint. Before ADR 0019 that
+    # restarted every clock, reproducing the snapshot in the live 07-24 comment;
+    # now the fingerprint is recorded but no longer resets, so 07-23's trajectory
+    # pass carries forward. This test pins the *migration* contract — verdicts
+    # survive verbatim, gates that did not exist stay neutral — not the streak
+    # arithmetic, which recomputes from the full history by design.
     assert il.compute_streaks(parsed) == streaks(
-        selection=1, trajectory=1, enrich=0, objectivity_shadow=0,
+        selection=1, trajectory=2, enrich=0, objectivity_shadow=0,
         source_metrics=0)
 
 
