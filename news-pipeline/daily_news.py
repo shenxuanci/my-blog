@@ -9200,9 +9200,16 @@ def publish_to_blog(cfg, date_str):
 def resolve_rsshub_sources(sources):
     """把 sources.yaml 里的 {rsshub} 占位符替换成自建实例地址并追加访问密钥。
     base/key 从环境变量 RSSHUB_BASE / RSSHUB_KEY 读取——公开仓库不落地址与密钥。
-    未配置 RSSHUB_BASE 时，带占位符的源自动跳过，不影响其余源。"""
+    未配置或配错 RSSHUB_BASE 时，带占位符的源自动跳过，不影响其余源。"""
     base = os.environ.get("RSSHUB_BASE", "").strip().rstrip("/")
     key = os.environ.get("RSSHUB_KEY", "").strip()
+    # 只判空会漏掉「配错了」：缺协议前缀的 base 替换出的 URL 会让 requests 报
+    # "No scheme supplied"，错误因此伪装成抓取失败而不是跳过，排查方向差一截
+    # （2026-08-20 迁仓重配 secret 时六个自建源全灭）。base 是密钥，不进日志。
+    reason = "未配置 RSSHUB_BASE 环境变量"
+    if base and not base.startswith(("http://", "https://")):
+        reason = "RSSHUB_BASE 缺少 http(s):// 前缀，按未配置处理"
+        base = ""
     out = []
     for s in sources:
         url = s.get("url", "")
@@ -9210,7 +9217,7 @@ def resolve_rsshub_sources(sources):
             out.append(s)
             continue
         if not base:
-            log(f"  ⚠ 跳过 {s['name']}：未配置 RSSHUB_BASE 环境变量（自建 RSSHub 源）")
+            log(f"  ⚠ 跳过 {s['name']}：{reason}（自建 RSSHub 源）")
             continue
         resolved = url.replace("{rsshub}", base)
         if key:

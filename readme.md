@@ -296,6 +296,7 @@ GITHUB_BRANCH=main
 - 顶层 Python 依赖维护在 `news-pipeline/requirements.in`，使用与 Actions 一致的 Python 3.12 在仓库根目录运行 `py -3.12 -m piptools compile --generate-hashes --resolver=backtracking --output-file news-pipeline/requirements.txt news-pipeline/requirements.in`。日报与 rollout 相关 Actions 固定为 `ubuntu-24.04` + CPython `3.12.13`；升级 runner 或 Python 补丁版本时必须同步验证并更新 workflow。`sgmllib3k` 使用 `news-pipeline/vendor/` 内受控 wheel，生成后必须保持锁文件中的仓库相对路径并运行一次 `pip install --dry-run --require-hashes`，不能退回会动态下载构建工具的源码包。
 - 排查信源抓取时先跑 `py -3.12 news-pipeline/daily_news.py --dry-run`，只抓取、不调 LLM。
 - 踩坑：自建 RSSHub 的 `ACCESS_KEY` 是拼在 query 里的，而 requests 的异常字符串会带上整条 URL（或裸主机名）。抓取失败日志一律经 `redact()` 输出，同时盖掉 `key=` 的值、`RSSHUB_BASE` 的完整地址和它的裸主机名。**不能把 GitHub 的 secret 自动打码当作防线**——值一旦被转义或截断，打码就失效，而这是公开仓库的公开日志（2026-07-29 修复）。
+- 踩坑：**`RSSHUB_BASE` 必须带 `http(s)://` 协议前缀**（结尾斜杠可有可无，会被 `rstrip`）。原先的守卫只判空——未配置时跳过并告警，配错时却把 `{rsshub}` 替换成缺协议的裸地址直接喂进 requests，报的是 `Invalid URL ... No scheme supplied`。于是「配错了」伪装成「抓取失败」，排查方向差一截：2026-08-20 迁仓重配 secret 漏了前缀，六个自建源当天全灭，丢约 96 条候选（`cls-depth` 正常日贡献 7 条精选）。现在 `resolve_rsshub_sources` 把缺前缀的 base 按未配置处理并说明原因，**base 是密钥，值不进日志**。
 - 若通过 `publish.blog_dir` 把独立数据目录同步到博客，管线会完整镜像整个 `data/` 树并清理目标中的陈旧派生文件；切换使用临时目录和备份，失败时恢复旧目录，后续运行也会先恢复遗留备份。只有日报成功生成后才会进入发布同步。
 - 发布闸门会解析所有读者可见的来源和深读 URL，只接受带主机名、无空白且端口可解析的 HTTP(S) 地址；只检查 `http://` / `https://` 前缀不够，`https://`、带空格的主机和畸形端口都必须拒绝。生成 RSS 时还会重新校验历史日报：无效条目的 `<link>` 回退到 `/news/`，无效来源不会进入 description 的链接列表，避免旧数据绕过新闸门。
 

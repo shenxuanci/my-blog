@@ -79,6 +79,30 @@ def test_fetch_failure_logs_never_carry_the_rsshub_secret(monkeypatch):
         assert "[redacted]" in redacted
 
 
+def test_a_base_without_a_scheme_is_skipped_like_an_unset_one(monkeypatch):
+    """守卫只判空会漏掉「配错了」——而运维现场产生的正是错值，不是空值。
+
+    2026-08-20 迁仓重配 secret 时 RSSHUB_BASE 漏了 https://，占位符替换出
+    `rsshub.example.internal/cls/depth`，requests 报 "No scheme supplied"。
+    未配置时有跳过分支，配错时却把非法 URL 直接喂进抓取，于是错误以「抓取失败」
+    而不是「跳过」的面目出现，排查方向差了一截；当天六个自建源全灭。
+    """
+    sources = [{"id": "cls-depth", "name": "cls", "url": "{rsshub}/cls/depth"}]
+    monkeypatch.setenv("RSSHUB_KEY", "")
+
+    for bad in ("rsshub.example.internal", "//rsshub.example.internal",
+                "ftp://rsshub.example.internal", "  "):
+        monkeypatch.setenv("RSSHUB_BASE", bad)
+        assert dn.resolve_rsshub_sources(sources) == [], bad
+
+    for good in ("https://rsshub.example.internal",
+                 "http://rsshub.example.internal/"):
+        monkeypatch.setenv("RSSHUB_BASE", good)
+        resolved = dn.resolve_rsshub_sources(sources)
+        assert len(resolved) == 1, good
+        assert resolved[0]["url"] == good.rstrip("/") + "/cls/depth"
+
+
 def test_publication_gate_rejects_non_http_source_urls():
     """前端 safeUrl 挡住了页面，但 feed.xml 的 <item><link> 是原样输出的。
 
