@@ -10,4 +10,4 @@ twikooPath: "/"
 
 邮箱：antemeridiem@foxmail.com
 
-GitHub：[github.com/langhuanaibu](https://github.com/langhuanaibu)
+GitHub：[github.com/shenxuanci](https://github.com/shenxuanci)

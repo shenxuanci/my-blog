@@ -84,7 +84,7 @@ about:
   name: "Aoitsuki"
   intro: "一名富有人文情怀的工科生"
   icons:
-    - { class: "iconfont icon-github-fill", link: "https://github.com/langhuanaibu", tip: "GitHub" }
+    - { class: "iconfont icon-github-fill", link: "https://github.com/shenxuanci", tip: "GitHub" }
     - { class: "iconfont icon-mail", link: "mailto:antemeridiem@foxmail.com", tip: "Email" }
 
 links:

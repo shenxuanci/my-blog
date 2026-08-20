@@ -107,7 +107,7 @@ npm run test:post
 ```text
 ADMIN_TOKEN=后台登录口令
 GITHUB_TOKEN=具有目标仓库 contents 写权限的 GitHub token
-GITHUB_OWNER=langhuanaibu
+GITHUB_OWNER=shenxuanci
 GITHUB_REPO=my-blog
 GITHUB_BRANCH=main
 ```

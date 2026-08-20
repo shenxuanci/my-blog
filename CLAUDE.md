@@ -8,7 +8,7 @@ shared architecture, safety, verification, or Git rules back into this file.
 
 ## Engineering skill wayfinding
 
-- GitHub Issues are the issue and PRD tracker for `langhuanaibu/my-blog`.
+- GitHub Issues are the issue and PRD tracker for `shenxuanci/my-blog`.
   Use `gh` according to `docs/agents/issue-tracker.md`.
 - Triage uses `needs-triage`, `needs-info`, `ready-for-agent`,
   `ready-for-human`, and `wontfix`; see `docs/agents/triage-labels.md`.
