@@ -772,6 +772,10 @@ def test_shadow_status_cli_survives_a_missing_token_without_forcing_a_run(tmp_pa
     before answering shadow-status, a missing GITHUB_TOKEN or malformed
     GITHUB_REPOSITORY would exit non-zero and the workflow would pay for a
     shadow run because of an unset environment variable.
+
+    The environ below is deliberately bare: no token, no repository and no
+    LEDGER_ISSUE. shadow-status takes no --issue and never resolves one, so
+    configuring the ledger issue cannot become a new way to fail this step.
     """
     il = ledger()
     output = tmp_path / "gh_output"
@@ -780,7 +784,7 @@ def test_shadow_status_cli_survives_a_missing_token_without_forcing_a_run(tmp_pa
         raise AssertionError("no client may be built for shadow-status")
 
     result = il.main(
-        ["shadow-status", "--issue", "15"],
+        ["shadow-status"],
         environ={"GITHUB_OUTPUT": str(output)},
         client_factory=unusable_factory)
 
@@ -788,6 +792,58 @@ def test_shadow_status_cli_survives_a_missing_token_without_forcing_a_run(tmp_pa
     written = output.read_text(encoding="utf-8")
     assert "accepted=true" in written
     assert "needed=false" in written
+
+
+def test_ledger_issue_comes_from_the_environment_when_no_flag_is_passed(tmp_path):
+    """The issue number is deployment configuration, not a code constant.
+
+    It used to be hardcoded as `default=15` across five subparsers plus five
+    workflow call sites, which is what made moving the repository to another
+    account a code change rather than a settings change.
+    """
+    il = ledger()
+    client = FakeClient(issue_state="closed")
+
+    il.main(
+        ["check-open"],
+        environ={
+            "GITHUB_REPOSITORY": "owner/repo",
+            "GITHUB_TOKEN": "test-token",
+            "GITHUB_OUTPUT": str(tmp_path / "github-output"),
+            "LEDGER_ISSUE": "7",
+        },
+        client_factory=lambda _repo, _token: client,
+    )
+
+    assert client.calls == [("get_issue", 7)]
+
+
+@pytest.mark.parametrize("value", [None, "", "   ", "not-a-number", "0", "-3"])
+def test_an_unusable_ledger_issue_fails_instead_of_guessing(tmp_path, value):
+    """No fallback default: a plausible-but-wrong number writes to a live issue.
+
+    The ledger is append-only and the workflow runs unattended every day, so a
+    silent write into whatever issue happens to hold the old number would be
+    found late and could not be cleanly undone. Refusing to run is cheaper.
+
+    The client factory must never be reached: resolution happens before any
+    network object is built.
+    """
+    il = ledger()
+    environ = {
+        "GITHUB_REPOSITORY": "owner/repo",
+        "GITHUB_TOKEN": "test-token",
+        "GITHUB_OUTPUT": str(tmp_path / "github-output"),
+    }
+    if value is not None:
+        environ["LEDGER_ISSUE"] = value
+
+    def unusable_factory(repository, token):
+        raise AssertionError("no client may be built before the issue resolves")
+
+    with pytest.raises(ValueError, match="LEDGER_ISSUE"):
+        il.main(["check-open"], environ=environ,
+                client_factory=unusable_factory)
 
 
 def test_shadow_status_reports_zeroed_streaks_rather_than_faked_targets():

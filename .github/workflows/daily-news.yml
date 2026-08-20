@@ -337,7 +337,7 @@ jobs:
       - name: Read shadow gate status
         id: gate
         continue-on-error: true
-        run: python news-pipeline/issue_ledger.py shadow-status --issue 15
+        run: python news-pipeline/issue_ledger.py shadow-status
 
       - name: Decide shadow policy
         id: decide
@@ -476,7 +476,8 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python news-pipeline/issue_ledger.py check-open --issue 15
+          LEDGER_ISSUE: ${{ vars.LEDGER_ISSUE }}
+        run: python news-pipeline/issue_ledger.py check-open
 
       - name: Download rollout evidence
         if: ${{ steps.issue.outputs.open == 'true' }}
@@ -622,9 +623,9 @@ jobs:
           SHADOW_SUMMARY: ${{ env.REVIEW_DIR }}/shadow-summary/daily-news-shadow-summary.json
           QUALITY_HEALTH: ${{ github.workspace }}/source/news/data/quality-health.json
           SOURCE_HEALTH: ${{ github.workspace }}/source/news/data/source_health.json
+          LEDGER_ISSUE: ${{ vars.LEDGER_ISSUE }}
         run: |
           python news-pipeline/issue_ledger.py sync \
-            --issue 15 \
             --date "$REVIEW_DATE" \
             --publication "$PUBLICATION" \
             --publication-reason "$PUBLICATION_REASON" \

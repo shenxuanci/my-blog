@@ -73,8 +73,9 @@ jobs:
           REVIEW_RUN_ATTEMPT: ${{ inputs.run_attempt }}
           REVIEW_SAMPLES_PASSED: ${{ inputs.samples_passed }}
           REVIEW_SAMPLES_TOTAL: ${{ inputs.samples_total }}
+          LEDGER_ISSUE: ${{ vars.LEDGER_ISSUE }}
         run: |
-          set -- --issue 15 \
+          set -- \
             --date "$REVIEW_DATE" \
             --gate "$REVIEW_GATE" \
             --status "$REVIEW_STATUS" \

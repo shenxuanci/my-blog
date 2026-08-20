@@ -974,14 +974,13 @@ def parse_cli_args(argv=None):
     parser = argparse.ArgumentParser(description="Update the rollout Issue ledger")
     subparsers = parser.add_subparsers(dest="command", required=True)
     check = subparsers.add_parser("check-open")
-    check.add_argument("--issue", type=int, default=15)
-    shadow = subparsers.add_parser("shadow-status")
-    shadow.add_argument("--issue", type=int, default=15)
+    check.add_argument("--issue", type=int, default=None)
+    subparsers.add_parser("shadow-status")
     heartbeat = subparsers.add_parser("heartbeat")
-    heartbeat.add_argument("--issue", type=int, default=15)
+    heartbeat.add_argument("--issue", type=int, default=None)
     heartbeat.add_argument("--date", required=True, type=beijing_date)
     sync = subparsers.add_parser("sync")
-    sync.add_argument("--issue", type=int, default=15)
+    sync.add_argument("--issue", type=int, default=None)
     sync.add_argument("--date", required=True, type=beijing_date)
     sync.add_argument("--publication", required=True, choices=("success", "failure"))
     sync.add_argument("--publication-reason", default="")
@@ -995,7 +994,7 @@ def parse_cli_args(argv=None):
     sync.add_argument("--run-attempt", required=True, type=int)
     sync.add_argument("--sha", required=True)
     manual = subparsers.add_parser("manual-review")
-    manual.add_argument("--issue", type=int, default=15)
+    manual.add_argument("--issue", type=int, default=None)
     manual.add_argument("--date", required=True, type=beijing_date)
     manual.add_argument("--gate", required=True, choices=GATES)
     manual.add_argument(
@@ -1027,6 +1026,36 @@ def _load_report(path):
     return report if isinstance(report, dict) else None
 
 
+def _resolve_issue_number(explicit, environ):
+    """Resolve the ledger issue from --issue or LEDGER_ISSUE, never a default.
+
+    The number used to be hardcoded in ten places, which is what made moving the
+    repository to another account a code change. It now comes from a repo
+    variable. There is deliberately no fallback default: a plausible-but-wrong
+    number would append the daily ledger to whatever issue happens to hold it in
+    the new repository, silently, and the ledger is append-only. Failing loudly
+    is the cheaper mistake.
+
+    `shadow-status` never reaches this function -- see main().
+    """
+    if explicit is not None:
+        return explicit
+    raw = str(environ.get("LEDGER_ISSUE", "")).strip()
+    if not raw:
+        raise ValueError(
+            "LEDGER_ISSUE must be set to the ledger issue number (repo "
+            "variable), or --issue passed explicitly")
+    try:
+        number = int(raw)
+    except ValueError as exc:
+        raise ValueError(
+            f"LEDGER_ISSUE must be an integer, got {raw!r}") from exc
+    if number <= 0:
+        raise ValueError(
+            f"LEDGER_ISSUE must be a positive issue number, got {number}")
+    return number
+
+
 def main(argv=None, *, environ=None, client_factory=GitHubClient):
     environ = os.environ if environ is None else environ
     args = parse_cli_args(argv)
@@ -1047,16 +1076,21 @@ def main(argv=None, *, environ=None, client_factory=GitHubClient):
             result["streaks"]["source_metrics"])
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return result
+    # Resolved only after the shadow-status early return: that command does
+    # not use the issue number, and letting it fail on a missing
+    # LEDGER_ISSUE would reopen the fail-open path the early return exists
+    # to close.
+    issue_number = _resolve_issue_number(args.issue, environ)
     client = client_factory(
         environ.get("GITHUB_REPOSITORY", ""), environ.get("GITHUB_TOKEN", ""))
     if args.command == "check-open":
-        issue = client.get_issue(args.issue)
+        issue = client.get_issue(issue_number)
         is_open = str(issue.get("state") or "").lower() == "open"
         _write_output(environ, "open", str(is_open).lower())
         result = {"status": "open" if is_open else "closed", "open": is_open}
     elif args.command == "heartbeat":
         result = heartbeat_issue(
-            client, issue_number=args.issue, date=args.date)
+            client, issue_number=issue_number, date=args.date)
         if result["status"] == "gap_recorded":
             print(f"::warning::No daily ledger entry for {args.date}; "
                   "recorded a neutral gap row.")
@@ -1082,11 +1116,11 @@ def main(argv=None, *, environ=None, client_factory=GitHubClient):
                 enrich_sample=enrich_sample)
 
         result = sync_issue(
-            client, issue_number=args.issue, date=args.date,
+            client, issue_number=issue_number, date=args.date,
             attempt_builder=attempt_builder)
     else:
         result = manual_review_issue(
-            client, issue_number=args.issue, date=args.date,
+            client, issue_number=issue_number, date=args.date,
             gate=args.gate, status=args.status,
             run_id=args.run_id, run_attempt=args.run_attempt,
             samples_passed=args.samples_passed,

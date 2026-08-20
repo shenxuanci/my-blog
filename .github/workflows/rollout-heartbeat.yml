@@ -46,7 +46,8 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python news-pipeline/issue_ledger.py check-open --issue 15
+          LEDGER_ISSUE: ${{ vars.LEDGER_ISSUE }}
+        run: python news-pipeline/issue_ledger.py check-open
 
       - name: Resolve target date
         id: target
@@ -78,7 +79,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           REVIEW_DATE: ${{ steps.target.outputs.date }}
+          LEDGER_ISSUE: ${{ vars.LEDGER_ISSUE }}
         run: |
           python news-pipeline/issue_ledger.py heartbeat \
-            --issue 15 \
             --date "$REVIEW_DATE"
