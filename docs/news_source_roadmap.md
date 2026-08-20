@@ -4,7 +4,7 @@
 >
 > 最后更新：2026-08-12
 
-## 当前生产基线（以 Issue #15 为准）
+## 当前生产基线（以台账 issue 为准）
 
 生产 provider 仍为 DeepSeek；StepFun 实验 Run #30346999214 在正常新闻阶段 A 触发 HTTP 451，只保留人工实验能力，不作为自动回退。**`objectivity.mode` 永久保持 `interim`**——见下节，这不再是等待切换的过渡态。
 
@@ -21,7 +21,7 @@
 
 2026-08-05 的定时日报发布成功，但 objectivity shadow 在长驻进程内调用 `trafilatura` / `lxml` 时触发原生堆崩溃；提交 `a8941b0` / `1957a0b` 已把静态 HTML 解析隔离到可超时终止的一次性子进程，并将依赖锁、Python 完整版本与实现、runner OS/架构和 `RUNTIME_ENVIRONMENT_EPOCH` 纳入共享运行时指纹。该轮的生产树 `validate + shadow_mode:force` Run #31005512218 已成功，但那次的指纹此后已被两次生产改动取代，只作历史证据。
 
-**本文不再钉住指纹值**：指纹覆盖 `daily_news.py`、`rollout_validation.py`、`article_extractor.py`、`requirements.txt` 四个文件加运行环境投影，任何一次生产改动都会换值，写在文档里必然过期。**当前有效指纹一律从 Issue #15 最新台账行的 `fingerprints.runtime` 读**。指纹现在只用于判断台账里的样本能不能放在一起看，不再决定任何解锁。
+**本文不再钉住指纹值**：指纹覆盖 `daily_news.py`、`rollout_validation.py`、`article_extractor.py`、`requirements.txt` 四个文件加运行环境投影，任何一次生产改动都会换值，写在文档里必然过期。**当前有效指纹一律从台账 issue 最新一行的 `fingerprints.runtime` 读**（台账 issue 号由 repo variable `LEDGER_ISSUE` 指定；2026-08-20 迁仓后台账从空开始，下一次成功 publish 之前没有当前值）。指纹现在只用于判断台账里的样本能不能放在一起看，不再决定任何解锁。
 
 - 2026-08-09 的 `c9e6874` / `cf8ad85` 使指纹从 `6ddea22e1061` 变为 `554ec8975549`（2026-08-10 台账行，sha `b7902c6`）。
 - 2026-08-10 的 `0af1b8c`（周综述审修）又改了 `daily_news.py`，下一次 publish 会再换一次指纹。读台账时先比对指纹再读计数，跨指纹的日数不能连起来算。
@@ -33,7 +33,7 @@
 - `pass` 仅让对应计数 +1，`neutral` / `needs_review` 冻结对应计数。`fail` 只清零**连续型**计数（选材、轨迹、客观性 shadow）；**累计型**计数（enrich、信源指标）只统计有效日，缺数据的一天冻结而不清零——但**该豁免只针对缺数据，指纹变化仍然清零两类**。
 - **共享运行时指纹变化重置全部五项计数**——样本构成变了，变更前后的证据不得混用；指纹覆盖生产 Python、`requirements.txt`、Python 完整版本与实现、runner OS/架构及显式 epoch，且不读取 Secret。仅轨迹 UI 指纹变化只重置轨迹计数。
 - 同一北京日期重跑只更新当日台账，不增加日数；任一次发布失败都使当日各项按失败处理，后续成功重跑不覆盖。前一日完全没有台账记录时，`Rollout Heartbeat` 补一条 `neutral` 缺口行——冻结全部计数，不计入也不清零。初验、Judge 或台账异常只告警，不阻断发布、不自动回滚。
-- 达到任何计数都不再触发结论，也不自动关闭 #15 或 #10。
+- 达到任何计数都不再触发结论，也不自动关闭台账 issue。
 - 云端 `rollout-review` 继续一次性记录**五项**：选材、轨迹、enrich 安全指标、客观性 shadow、信源指标。`rollout-evidence-v2` 用独立的 `enrich_review_cases` 完整覆盖每日确定性抽样，原有 `review_cases` 继续只供轨迹 Judge 使用。单日 `pass` 表示机械安全通过；单条缺陷只写入 `samples_passed` / `samples_total`。证据不完整时提交 `neutral` 且不提交样本计数。修复前台账中缺失的抽样清单不能反推或补算人工通过率。45 条客观性夹具使用独立的、仅限 `main` 的手动 `Objectivity Acceptance` workflow，不属于每日自动台账。
 - 新闻阅读结构统一为「来龙／起因 → 现状 → 走向」；新数据不再生成或存储新闻 `why`，前端同时隐藏旧日报中的该字段，深读和论文不变。详情深化的长内容只在 shadow 中生成。客观性 Judge 已增加非法批次递归拆分、单条重试和每轮 60 次调用预算。**active mode is not enabled**，且按 ADR 0016 不再有通往它的既定路径。
 - 同日事件初次归并与发布前复核共享每次运行最多 20 次 LLM 调用；耗尽后仅合并共享同一原始条目的确定性重复，其余保留并告警。候选对数、桥接批次数、调用数、延后批次数和预算耗尽状态进入 `quality-health.json`，成本告警不阻断日报。
