@@ -12,15 +12,6 @@ title: 友情链接
     </span>
   </a>
 
-  <a class="friend-card" href="https://langhuanaibu.github.io/my-blog/" target="_blank" rel="noopener noreferrer">
-    <img src="/images/my-avatar.jpg" alt="Aoitsuki's Blog 头像">
-    <span>
-      <strong>Aoitsuki's Blog</strong>
-      <small>乌幕屏，海相续...</small>
-      <em>langhuanaibu.github.io/my-blog</em>
-    </span>
-  </a>
-
   <a class="friend-card" href="https://labuladong.online/zh/" target="_blank" rel="noopener noreferrer">
     <img src="/images/default-friend-avatar.svg" alt="labuladong 的算法笔记头像">
     <span>
