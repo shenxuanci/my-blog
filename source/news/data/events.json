@@ -16581,7 +16581,7 @@
    "event_id": "evt-20260805-d72bed",
    "title": "欧洲热浪引发干旱、野火及能源供应担忧",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-05",
    "last_seen": "2026-08-15",
@@ -17433,10 +17433,10 @@
    "event_id": "evt-20260806-d5a2ba",
    "title": "Anthropic组建芯片团队自研AI芯片降低对英伟达依赖",
    "category": "ai",
-   "status": "archived",
+   "status": "active",
    "pinned": false,
    "first_seen": "2026-08-06",
-   "last_seen": "2026-08-06",
+   "last_seen": "2026-08-23",
    "history": [
     {
      "date": "2026-08-06",
@@ -17451,6 +17451,20 @@
       "src-1cd2b3e55ebf02761fb22e3b"
      ],
      "event_identity": "set-910e5151cce96ebba64d7bfb"
+    },
+    {
+     "date": "2026-08-23",
+     "title": "Anthropic聘请谷歌TPU创始人组建自研芯片团队",
+     "summary": "Anthropic聘请谷歌定制芯片业务创始人Amir Salek组建自研AI芯片团队，并采购Fractile芯片、扩大与谷歌博通合作。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-23:pick-116",
+     "source_keys": [
+      "src-4ff141d114f0860b156ebab5"
+     ],
+     "event_identity": "set-ed76b8150aefad7d7d3daff2"
     }
    ]
   },
@@ -22999,7 +23013,7 @@
    "event_id": "evt-20260813-caf075",
    "title": "腾讯二季度业绩超预期，AI资本开支致自由现金流转负",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-13",
    "last_seen": "2026-08-15",
@@ -23967,7 +23981,7 @@
    "event_id": "evt-20260814-387c0e",
    "title": "美国对进口无人机及零部件征收10%至100%关税",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-14",
    "last_seen": "2026-08-15",
@@ -24514,7 +24528,7 @@
    "event_id": "evt-20260815-9bbeff",
    "title": "阿里开源Qwen3.8系列，27B模型超越Qwen3.7-Plus",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24548,7 +24562,7 @@
    "event_id": "evt-20260815-16e7f7",
    "title": "美军林肯号航母超长部署引发人道担忧，特朗普淡化",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24583,7 +24597,7 @@
    "event_id": "evt-20260815-1c5197",
    "title": "SpaceX完成600亿美元收购AI编程公司Cursor",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24610,7 +24624,7 @@
    "event_id": "evt-20260815-6d9b9b",
    "title": "路易吉·曼焦内就联合健康CEO谋杀案联邦指控认罪",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24686,7 +24700,7 @@
    "event_id": "evt-20260815-94bf6b",
    "title": "Mac屏幕共享漏洞正被积极利用，可致完全控制",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24711,7 +24725,7 @@
    "event_id": "evt-20260815-cfac71",
    "title": "OpenAI与Anthropic因中国AI对手崛起展开价格战",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24738,7 +24752,7 @@
    "event_id": "evt-20260815-179991",
    "title": "中国国产C919完成首次国际商业航班飞行",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24764,7 +24778,7 @@
    "event_id": "evt-20260815-3968ca",
    "title": "法国宪法委员会否决15岁以下青少年社交媒体禁令",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24791,7 +24805,7 @@
    "event_id": "evt-20260815-ae16b1",
    "title": "智谱AI发布GLM-5.3，声称最强开源编码模型",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24816,7 +24830,7 @@
    "event_id": "evt-20260815-3393d0",
    "title": "美国报告称数十国助中国规避特朗普关税",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24843,7 +24857,7 @@
    "event_id": "evt-20260815-b9a1ee",
    "title": "研究反驳Anthropic和OpenAI自主AI研究声明",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24868,7 +24882,7 @@
    "event_id": "evt-20260815-750333",
    "title": "Anthropic Q2营收超115亿美元同比增14倍",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24893,7 +24907,7 @@
    "event_id": "evt-20260815-6b415c",
    "title": "意大利警方追回被盗价值超千万美元名画",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24920,7 +24934,7 @@
    "event_id": "evt-20260815-bc503c",
    "title": "塔利班执政五周年对阿富汗教育造成毁灭性影响",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24945,7 +24959,7 @@
    "event_id": "evt-20260815-4e2c5c",
    "title": "苹果提议对应用外购买收取15%佣金",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24970,7 +24984,7 @@
    "event_id": "evt-20260815-26066e",
    "title": "Uber与Pony.ai拟在欧洲四城部署2000辆机器人出租车",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -24996,7 +25010,7 @@
    "event_id": "evt-20260815-572040",
    "title": "朱镕基逝世引发民众悼念与时代反思",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25021,7 +25035,7 @@
    "event_id": "evt-20260815-3c39fa",
    "title": "法官责令谷歌一周内修复Play商店反竞争下载问题",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25046,7 +25060,7 @@
    "event_id": "evt-20260815-c6bee7",
    "title": "比利时建筑工人在下水道施工中发现价值900万欧元黄金",
    "category": "society",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25073,7 +25087,7 @@
    "event_id": "evt-20260815-aa49e7",
    "title": "最大全电动飞机首飞仅耗电5美元",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25098,7 +25112,7 @@
    "event_id": "evt-20260815-63365c",
    "title": "自动驾驶卡车获准在加州高速公路上测试",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25123,7 +25137,7 @@
    "event_id": "evt-20260815-6305b3",
    "title": "美国水务设施遭疑似伊朗黑客攻击",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25148,7 +25162,7 @@
    "event_id": "evt-20260815-a5b7a4",
    "title": "千问办公接入智谱和DeepSeek模型，开启多模型聚合",
    "category": "tech",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25174,7 +25188,7 @@
    "event_id": "evt-20260815-17803c",
    "title": "Claude Code以46%合并率日常维护Anthropic软件",
    "category": "ai",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25200,7 +25214,7 @@
    "event_id": "evt-20260815-e35903",
    "title": "以色列计划将约旦河西岸执法权移交警察",
    "category": "world",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25265,7 +25279,7 @@
    "event_id": "evt-20260815-86134d",
    "title": "特朗普家族加密公司获银行牌照有条件批准",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -25291,7 +25305,7 @@
    "event_id": "evt-20260815-5d0ae4",
    "title": "高盛靠为AI基础设施融资成新增长点",
    "category": "finance",
-   "status": "active",
+   "status": "archived",
    "pinned": false,
    "first_seen": "2026-08-15",
    "last_seen": "2026-08-15",
@@ -26936,7 +26950,8 @@
      ],
      "event_identity": "set-10ceb286a0a00017dc36a906"
     }
-   ]
+   ],
+   "line_reconciled": true
   },
   {
    "event_id": "evt-20260822-88c341",
@@ -27292,7 +27307,7 @@
    "status": "active",
    "pinned": false,
    "first_seen": "2026-08-22",
-   "last_seen": "2026-08-22",
+   "last_seen": "2026-08-23",
    "history": [
     {
      "date": "2026-08-22",
@@ -27311,6 +27326,20 @@
       "src-e97100e4782e31f85c80351c"
      ],
      "event_identity": "set-55db6f1b4298293a3858ef6d"
+    },
+    {
+     "date": "2026-08-23",
+     "title": "苹果裁撤Siri与Vision Pro逾200个岗位集中押注AI",
+     "summary": "苹果裁减Siri、Vision Pro及相关AI软件团队逾200个职位，确认调整业务方向以集中资源押注AI。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-23:pick-117",
+     "source_keys": [
+      "src-681ddf5b8cb1ed01bc48b7b8"
+     ],
+     "event_identity": "set-3871e54d21fd100f091fba3f"
     }
    ]
   },
@@ -27469,31 +27498,6 @@
    ]
   },
   {
-   "event_id": "evt-20260822-3266b9",
-   "title": "DeepSeek发布实验性多模态视觉模型V4-Flash-Vision-Exp",
-   "category": "ai",
-   "status": "active",
-   "pinned": false,
-   "first_seen": "2026-08-22",
-   "last_seen": "2026-08-22",
-   "history": [
-    {
-     "date": "2026-08-22",
-     "title": "DeepSeek发布实验性多模态视觉模型V4-Flash-Vision-Exp",
-     "summary": "DeepSeek上线实验性多模态视觉理解模型V4-Flash-Vision-Exp，可通过API访问。",
-     "news_status": "已确认",
-     "sources": [
-      "aihot:DeepSeek：API更新日志"
-     ],
-     "item_ref": "2026-08-22:pick-268",
-     "source_keys": [
-      "src-b36e0124a3eeaa8e6fc0d5c9"
-     ],
-     "event_identity": "set-4f3beb7b6e6db76ff6b0d1f5"
-    }
-   ]
-  },
-  {
    "event_id": "evt-20260822-be4bc5",
    "title": "美国多地民众破坏和拆除Flock监控摄像头",
    "category": "society",
@@ -27596,6 +27600,487 @@
       "src-a9fb1dae276da9db98a80d6b"
      ],
      "event_identity": "set-28cea0a4123b1d54c4410dcb"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-55180f",
+   "title": "机器人百米跑9.39秒破人类纪录，第二届世界人形机器人运动会开幕",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "机器人百米跑9.39秒破人类纪录，第二届世界人形机器人运动会开幕",
+     "summary": "第二届世界人形机器人运动会在北京开幕，天工Ultra以9.39秒打破博尔特9.58秒的人类百米纪录，赛事规模较首届大幅增长。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "aihot:IT之家（RSS）",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-23:pick-34",
+     "source_keys": [
+      "src-3117b448b0f1101479f46709",
+      "src-aab901882be72006070c9850",
+      "src-c37d38795c9d218d084a4fbd"
+     ],
+     "event_identity": "set-be2453672b1114ece4b5e1cb"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-9923de",
+   "title": "美加贸易谈判破裂，加拿大宣布9月8日起实施报复性关税",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "美加贸易谈判破裂，加拿大宣布9月8日起实施报复性关税",
+     "summary": "美国对加拿大约200亿美元商品加征50%关税，加拿大总理卡尼宣布暂停谈判，将于9月8日起对美实施“对等”报复性关税。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "guardian",
+      "npr",
+      "aljazeera",
+      "cnbc"
+     ],
+     "item_ref": "2026-08-23:pick-24",
+     "source_keys": [
+      "src-0a6dee0fd9973cd0b402b483",
+      "src-193b91832b71d28bee938319",
+      "src-1940d4d758a9ba89f7f2b24d",
+      "src-1d65480c12031811f260a6f4",
+      "src-3d3879ac5408c7b23e764edf",
+      "src-a6bb3df61bcdad1faf5bd704",
+      "src-b459fb54cb2cfbef84faa8e1",
+      "src-d09dd0c6cbd10773c2e4234f",
+      "src-f2b771ddb3cd16d975e084cb",
+      "src-f8c947842c6b87204e34b798"
+     ],
+     "event_identity": "set-8689777e234788b12e813777"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-684776",
+   "title": "意大利“脑腐”版权案开庭，或定AI艺术所有权规则",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "意大利“脑腐”版权案开庭，或定AI艺术所有权规则",
+     "summary": "加州法院审理游戏公司Do Big Studios与法国Mementum Lab关于AI生成角色“Tung Tung Sahur”的版权纠纷，结果可能影响AI艺术所有权规则。",
+     "news_status": "发展中",
+     "sources": [
+      "npr"
+     ],
+     "item_ref": "2026-08-23:pick-90",
+     "source_keys": [
+      "src-bb9b6facbf2b8188e0f23388"
+     ],
+     "event_identity": "set-67693b45d2d77adfe1b385a8"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-27611f",
+   "title": "瑞典法格斯塔学校持剑袭击致17岁女孩死亡",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "瑞典法格斯塔学校持剑袭击致17岁女孩死亡",
+     "summary": "瑞典法格斯塔市布林内尔高中发生持剑袭击，一名17岁女孩死亡，三人受伤，一名18岁男子被捕。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-23:pick-56",
+     "source_keys": [
+      "src-6b574faf6c4eb822b93d1bcc",
+      "src-cd08fa02b5a9ba0bb1411439"
+     ],
+     "event_identity": "set-1eb2c6ba7e8adb4f3d6e037e"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-8dc26b",
+   "title": "法官裁定特朗普政府75国签证禁令非法",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "法官裁定特朗普政府75国签证禁令非法",
+     "summary": "美国联邦法官裁定特朗普政府对75国公民的移民签证禁令非法，称其违反联邦移民法，基于国籍歧视。",
+     "news_status": "已确认",
+     "sources": [
+      "npr"
+     ],
+     "item_ref": "2026-08-23:pick-86",
+     "source_keys": [
+      "src-b50c796e26e34dc7fd53bd9b"
+     ],
+     "event_identity": "set-cdd53d4e60477ac58c024196"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-92220e",
+   "title": "日本父亲将7岁疲惫儿子独自留在富士山继续登山",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "日本父亲将7岁疲惫儿子独自留在富士山继续登山",
+     "summary": "日本一名48岁父亲因7岁儿子疲惫将其独自留在富士山2000米处，自己继续登山，遭警方训诫。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-23:pick-40",
+     "source_keys": [
+      "src-00d28d9d5bd1ac4d68bafe06",
+      "src-0a0f0bb1bca1d899f13f561e"
+     ],
+     "event_identity": "set-3c6d98714c392812c0188588"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-fa6f7d",
+   "title": "高盛报告：AI商业化转向按结果收费，Agent进入执行时代",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "高盛报告：AI商业化转向按结果收费，Agent进入执行时代",
+     "summary": "高盛报告称AI商业化从按席位订阅转向按消费量、交易量和结果收费，Agent从辅助工具走向工作流执行者。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-23:pick-109",
+     "source_keys": [
+      "src-dedd416d9a142bdd59825f08"
+     ],
+     "event_identity": "set-d2953a56013cf999247c1328"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-ea4a8b",
+   "title": "英伟达警告大客户AI服务器因内存成本上涨可能涨价超15%",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "英伟达警告大客户AI服务器因内存成本上涨可能涨价超15%",
+     "summary": "英伟达告知多家最大客户，因内存芯片成本飙升，搭载其AI芯片的服务器价格涨幅很多情况下将超15%。",
+     "news_status": "发展中",
+     "sources": [
+      "cnbc",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-23:pick-23",
+     "source_keys": [
+      "src-83a39d21b64e9d66f7c0ce37",
+      "src-8c878d9938685009abe1edad"
+     ],
+     "event_identity": "set-7bb6da9b0acb927f130b5c29"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-c879c4",
+   "title": "三台风并存，华南江南持续强降雨",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "三台风并存，华南江南持续强降雨",
+     "summary": "第19号台风\"紫檀\"、第20号台风\"简拉维\"及第18号台风\"沙德尔\"并存，中央气象台发布台风和暴雨蓝色预警。",
+     "news_status": "发展中",
+     "sources": [
+      "thepaper",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-23:pick-152",
+     "source_keys": [
+      "src-0dfb19a9c8b0adcb98461dc9",
+      "src-3c64576122fb44a49ace0037"
+     ],
+     "event_identity": "set-0a86364dc371be245529ae43"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-6cc683",
+   "title": "特斯拉宣布9月3日举行Cybercab发布活动",
+   "category": "tech",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "特斯拉宣布9月3日举行Cybercab发布活动",
+     "summary": "特斯拉宣布将于9月3日在奥斯汀举行Cybercab发布活动，该车型为无方向盘和刹车踏板的Robotaxi专用车。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-23:pick-111",
+     "source_keys": [
+      "src-29ed54488a5a6d8758b61774"
+     ],
+     "event_identity": "set-db433c0fa254adffb14f4a30"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-150bc2",
+   "title": "英法百余名前外交官联名呼吁制裁以色列",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "英法百余名前外交官联名呼吁制裁以色列",
+     "summary": "逾百名英法前外交官致信马克龙和英国官员，指控以色列对巴勒斯坦实施种族清洗，呼吁采取包括贸易禁令在内的制裁措施。",
+     "news_status": "已确认",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-23:pick-66",
+     "source_keys": [
+      "src-936bba7509071aa437f23a21"
+     ],
+     "event_identity": "set-f190263029e64e85d93c00cf"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-09077d",
+   "title": "哈里梅根返英寻求新品牌定位",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "哈里梅根返英寻求新品牌定位",
+     "summary": "哈里和梅根返回英国，面临媒体合约大幅缩减，需在名人效应不再保证成功的行业中重新定位品牌。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world",
+      "guardian"
+     ],
+     "item_ref": "2026-08-23:pick-46",
+     "source_keys": [
+      "src-5606314d0545e1fcaa4e45d1",
+      "src-8c0764826e198fe0d8570d08"
+     ],
+     "event_identity": "set-c0e2d68e5fee77a4cbf289d0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-d9f99d",
+   "title": "缅甸一寺院遭袭致14人死亡",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "缅甸一寺院遭袭致14人死亡",
+     "summary": "缅甸一座寺院遭袭，造成14人死亡，救援人员称寺院在平民聚集参加冥想静修时被击中两次。",
+     "news_status": "已确认",
+     "sources": [
+      "bbc-world"
+     ],
+     "item_ref": "2026-08-23:pick-41",
+     "source_keys": [
+      "src-671de65e469cd9ebadd32faf"
+     ],
+     "event_identity": "set-2c14a3af7905bbab2f834319"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-86aef4",
+   "title": "热带风暴Moke逼近夏威夷，引发洪水预警",
+   "category": "world",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "热带风暴Moke逼近夏威夷，引发洪水预警",
+     "summary": "热带风暴Moke预计袭击夏威夷南部，气象部门警告可能引发洪水和泥石流，特别是在受此前风暴影响的地区。",
+     "news_status": "发展中",
+     "sources": [
+      "guardian",
+      "aljazeera"
+     ],
+     "item_ref": "2026-08-23:pick-52",
+     "source_keys": [
+      "src-2e241cf2b7cb9500fc9e8798",
+      "src-f5365a0f8694c64d425923d4"
+     ],
+     "event_identity": "set-93ee8b8ff57a155bef63593d"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-2961a0",
+   "title": "OpenAI呼吁加州加强AI安全法案SB 53",
+   "category": "ai",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "OpenAI呼吁加州加强AI安全法案SB 53",
+     "summary": "OpenAI呼吁加州加强AI安全法案SB 53，该公司此前曾反对该法案。",
+     "news_status": "已确认",
+     "sources": [
+      "techcrunch"
+     ],
+     "item_ref": "2026-08-23:pick-3",
+     "source_keys": [
+      "src-e12f6fb92c8c6024cd9c5b7c"
+     ],
+     "event_identity": "set-9668f4a14cd80252c18105e0"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-0d2aac",
+   "title": "美国召回4万瓶眼药水因无菌性问题",
+   "category": "society",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "美国召回4万瓶眼药水因无菌性问题",
+     "summary": "美国召回近4万瓶Clear Eyes眼药水，因产品无菌性问题，FDA发出警告后Prestige Brand Holdings自愿召回。",
+     "news_status": "已确认",
+     "sources": [
+      "guardian"
+     ],
+     "item_ref": "2026-08-23:pick-60",
+     "source_keys": [
+      "src-a5d32bf9fb96e4b0fd3d374b"
+     ],
+     "event_identity": "set-97fb29ad89e9c66ced53383b"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-c097b3",
+   "title": "东方财富半年报：非货基金保有规模首破万亿，证券业务占比创新高",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "东方财富半年报：非货基金保有规模首破万亿，证券业务占比创新高",
+     "summary": "东方财富2026年半年报显示，非货基金保有规模达10120亿元，首破万亿；证券业务营收占比78%，创三年新高。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn",
+      "cls-depth"
+     ],
+     "item_ref": "2026-08-23:pick-113",
+     "source_keys": [
+      "src-00deb521846aac79d4a09892",
+      "src-3dbe5a83ebe42caf65648987"
+     ],
+     "event_identity": "set-dbfc3cb047ed71beac83aae1"
+    }
+   ]
+  },
+  {
+   "event_id": "evt-20260823-43e585",
+   "title": "Moderna公布个性化mRNA黑色素瘤疫苗关键临床结果",
+   "category": "finance",
+   "status": "active",
+   "pinned": false,
+   "first_seen": "2026-08-23",
+   "last_seen": "2026-08-23",
+   "history": [
+    {
+     "date": "2026-08-23",
+     "title": "Moderna公布个性化mRNA黑色素瘤疫苗关键临床结果",
+     "summary": "Moderna与默克合作的个性化mRNA黑色素瘤疫苗，可将高风险患者复发或死亡风险降低44%，消息后市值一度增440亿美元。",
+     "news_status": "已确认",
+     "sources": [
+      "wscn"
+     ],
+     "item_ref": "2026-08-23:pick-107",
+     "source_keys": [
+      "src-bca130d2345575e4ffbde222"
+     ],
+     "event_identity": "set-63824a8fc01dbab70e5020ea"
     }
    ]
   }

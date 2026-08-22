@@ -1218,12 +1218,65 @@
       "llm_output_tokens": 45275,
       "llm_cost_usd": 0.0649,
       "llm_cost_known": true
+    },
+    {
+      "date": "2026-08-23",
+      "audited_events": 14,
+      "split_events": 5,
+      "removed_fields": 13,
+      "triage_invalid_rows": 0,
+      "triage_fallback_batches": 0,
+      "model_unusable_responses": 0,
+      "enrichment_audited_events": 20,
+      "duplicate_audited_events": 193,
+      "same_day_duplicates_merged": 10,
+      "duplicate_audit_failures": 0,
+      "same_day_candidate_pairs": 323,
+      "same_day_bridge_batches": 8,
+      "same_day_reconcile_calls": 14,
+      "same_day_deferred_batches": 0,
+      "same_day_budget_exhausted": false,
+      "event_lines_audited": 8,
+      "event_lines_merged": 1,
+      "event_line_audit_failures": 0,
+      "cross_day_duplicates": 16,
+      "material_updates": 1,
+      "update_judge_failures": 0,
+      "enrich_out_of_batch_idx": 0,
+      "removed_field_counts_version": 3,
+      "removed_field_counts": {
+        "context": 5,
+        "watch": 6,
+        "watch_detail": 0,
+        "detail": 1,
+        "claims": 1
+      },
+      "removed_field_reasons": {
+        "evidence_copy": 0,
+        "audit_unsupported": 12,
+        "claim_unsupported": 1,
+        "generation_invalid": 0
+      },
+      "degraded": false,
+      "cross_source_novelty_candidates": 28,
+      "cross_source_material_additions": 3,
+      "cross_source_restatements": 1,
+      "cross_source_novelty_failures": 0,
+      "cross_source_novelty_calls": 3,
+      "cross_source_novelty_deferred": 0,
+      "cross_source_novelty_budget_exhausted": false,
+      "llm_calls": 76,
+      "llm_input_tokens": 256658,
+      "llm_cached_input_tokens": 13440,
+      "llm_output_tokens": 24407,
+      "llm_cost_usd": 0.0409,
+      "llm_cost_known": true
     }
   ],
   "summary": {
-    "days": 34,
-    "audited_events": 1058,
-    "split_events": 378,
+    "days": 35,
+    "audited_events": 1072,
+    "split_events": 383,
     "split_rate": 0.3573
   }
 }
