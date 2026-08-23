@@ -6638,6 +6638,30 @@ def load_deep_seen(data_dir, date_str, filename="deep_seen.json"):
 
 DEEP_CHANNELS = ("ai_engineering", "tech_business", "society_finance")
 
+FINANCE_EVIDENCE_RE = re.compile(
+    r"(?:"
+    r"\b(?:economy|economies|economic|economics|macroeconomy|macroeconomic|gdp|"
+    r"inflation|deflation|recession|fiscal|monetary)\b|"
+    r"\bcentral banks?\b|\binterest rates?\b|\b(?:national|government) debt\b|"
+    r"\b(?:stocks?|stock markets?|equities|equity valuations?|bonds?|treasury yields?|"
+    r"market selloffs?|investors?|valuations?|ipos?|dividends?)\b|"
+    r"\b(?:industrial policy|manufacturing|supply chains?|revenues?|profits?|earnings|"
+    r"business models?|market shares?|capital expenditures?|capex|productivity|"
+    r"economic growth)\b|"
+    r"\b(?:employment|unemployment|wages?|jobs?|workforce|labor (?:market|demand|force)|"
+    r"labour (?:market|demand|force))\b|"
+    r"\b(?:taxes|taxation|tariffs?|subsid(?:y|ies)|budget deficits?|public spending|"
+    r"public procurement|economic regulation|financial regulation)\b|"
+    r"宏观经济|经济增长|经济衰退|国内生产总值|通货膨胀|通货紧缩|通胀|通缩|"
+    r"货币政策|财政政策|中央银行|央行|利率|国债|政府债务|"
+    r"股票市场|股市|股票|债券|收益率|投资者|估值|首次公开募股|分红|"
+    r"产业政策|制造业|供应链|营业收入|营收|利润|盈利|财报|商业模式|市场份额|"
+    r"资本支出|资本开支|生产率|劳动市场|劳动力|就业|失业|工资|薪资|"
+    r"税收|税率|关税|补贴|预算赤字|公共支出|政府采购|经济监管|金融监管"
+    r")",
+    re.IGNORECASE,
+)
+
 
 def normalize_deep_channel(channel):
     """兼容旧配置名；新数据统一写 society_finance。"""
@@ -6661,11 +6685,22 @@ def deep_fetcher(source):
     return FETCHERS.get(source.get("type", "rss"), fetch_rss)
 
 
-def deep_topic_matches(source, result):
-    """只对声明了主题过滤的综合源启用严格匹配。"""
-    if not source.get("topic_filter"):
+def deep_topic_matches(source, result, candidate):
+    """综合源须通过模型主题判断；finance 另须有确定性财经文本证据。"""
+    topic_filter = source.get("topic_filter")
+    if not topic_filter:
         return True
-    return result.get("topic_fit") is True
+    if result.get("topic_fit") is not True:
+        return False
+    if topic_filter != "finance":
+        return True
+    if not isinstance(candidate, dict):
+        return False
+    text = unicodedata.normalize(
+        "NFKC",
+        f"{candidate.get('title') or ''}\n{candidate.get('desc') or ''}",
+    ).casefold()
+    return bool(text.strip() and FINANCE_EVIDENCE_RE.search(text))
 
 
 def select_deep_soft_quota(scored, pick_max):
@@ -6818,7 +6853,7 @@ def deep_channel(llm, cfg, date_str, profile_text=""):
                 metrics = score_stats.setdefault(
                     sid, {"scored": 0, "topic_matched": 0, "above_threshold": 0})
                 metrics["scored"] += 1
-                if deep_topic_matches(source_by_id.get(sid, {}), r):
+                if deep_topic_matches(source_by_id.get(sid, {}), r, candidates[i]):
                     metrics["topic_matched"] += 1
                     if score >= threshold:
                         metrics["above_threshold"] += 1

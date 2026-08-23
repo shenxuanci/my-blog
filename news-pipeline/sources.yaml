@@ -582,8 +582,9 @@ pulse_sources:
 # ============================================================
 # 深度阅读长文源（独立频道，不进新闻管线）
 # 字段：id/name/url/lang(en|zh)/enabled/channel；type 默认 rss，专用适配器
-# 填 daily_news.py FETCHERS 里的类型；topic_filter 可选，当前仅 finance，
-# 用于拦截综合评论源里的 AI/泛政治偏题文章。参数在 config.yaml deep 块。
+# 填 daily_news.py FETCHERS 里的类型；topic_filter 可选，当前仅 finance。
+# finance 同时要求模型 topic_fit=true，且标题/摘要命中确定性财经证据，用于拦截
+# 综合评论源里的 AI/泛政治偏题文章。参数在 config.yaml deep 块。
 # ============================================================
 deep_sources:
   # ---------- AI/LLM 深度 ----------
@@ -714,10 +715,10 @@ deep_sources:
     channel: society_finance
     topic_filter: finance
     enabled: true
-  # 2026-08-12 停用：Actions 出口和抓取链路正常，但 finance 过滤将不含
+  # 2026-08-12 停用：Actions 出口和抓取链路正常，但旧 finance 过滤将不含
   # 宏观、商业、市场、劳动或公共经济机制的 AI 同行评审文判为匹配，并以
-  # 8 分实际进入 society_finance。源本身有偶发的财经数据价值，但在过滤器
-  # 修复前不能安全作为综合评论源启用。
+  # 8 分实际进入 society_finance。Issue #2 的确定性闸门进入 main 并通过
+  # Actions 验证前，本源继续停用；不得只凭本地回归提前启用。
   - id: marginal-revolution
     name: Marginal Revolution
     type: rss
