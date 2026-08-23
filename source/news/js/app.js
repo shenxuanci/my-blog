@@ -60,6 +60,17 @@ export function createNewsApp(options) {
     (options.scrollTo || win.scrollTo)?.call(win, { top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
   };
 
+  function replaceSelectOptions(select, values, label = (value) => value) {
+    if (!select) return;
+    const optionNodes = values.map((value) => {
+      const option = doc.createElement("option");
+      option.value = String(value);
+      option.textContent = String(label(value));
+      return option;
+    });
+    select.replaceChildren(...optionNodes);
+  }
+
   function syncChrome(route) {
     const active = route.view === "detail" ? "reports" : route.view;
     doc.body?.classList.toggle("reports-view", route.view === "reports");
@@ -88,7 +99,7 @@ export function createNewsApp(options) {
         app.innerHTML = renderDailyReport(data, { personal, misses: missesResult.state.entries || [], missesError: missesResult.error, hidden: storage.get(STORAGE_KEYS.hidden), ...personalState() }); announce(`已加载 ${date} 日报`, doc); currentRoute = { ...route, date }; return;
       }
       if (route.view === "reports" && route.period === "week") {
-        const weeks = await dataApi.weeklyManifest(); if (!isCurrent(requestId)) return; const select = doc.getElementById("weekSel"); if (select) { select.innerHTML = weeks.map((week) => `<option value="${week}">${week}</option>`).join(""); }
+        const weeks = await dataApi.weeklyManifest(); if (!isCurrent(requestId)) return; const select = doc.getElementById("weekSel"); replaceSelectOptions(select, weeks);
         const week = route.week || weeks[0]; if (!week) { app.innerHTML = '<div class="empty" role="status">暂无周报数据</div>'; return; }
         if (!route.week || win.location.search !== routeUrl({ ...route, week })) win.history.replaceState({}, "", routeUrl({ ...route, week }));
         const [weekly, missesResult] = await Promise.all([
@@ -123,7 +134,7 @@ export function createNewsApp(options) {
     if (started) return; started = true;
     installMobileSearch(doc);
     installThemeToggles(doc, win);
-    const dateSelect = doc.getElementById("dateSel"); if (dateSelect) { dateSelect.innerHTML = dailyManifest.map((date) => `<option value="${date}">${storage.get(STORAGE_KEYS.seenDays)[date] ? "✓ " : ""}${date}</option>`).join(""); dateSelect.addEventListener("change", () => go({ view: "reports", period: "day", date: dateSelect.value })); }
+    const dateSelect = doc.getElementById("dateSel"); if (dateSelect) { replaceSelectOptions(dateSelect, dailyManifest, (date) => `${storage.get(STORAGE_KEYS.seenDays)[date] ? "✓ " : ""}${date}`); dateSelect.addEventListener("change", () => go({ view: "reports", period: "day", date: dateSelect.value })); }
     doc.getElementById("weekSel")?.addEventListener("change", (event) => go({ view: "reports", period: "week", week: event.target.value }));
     doc.getElementById("prevBtn")?.addEventListener("click", () => { const index = dailyManifest.indexOf(currentRoute?.date); if (index < dailyManifest.length - 1) go({ view: "reports", period: "day", date: dailyManifest[index + 1] }); });
     doc.getElementById("nextBtn")?.addEventListener("click", () => { const index = dailyManifest.indexOf(currentRoute?.date); if (index > 0) go({ view: "reports", period: "day", date: dailyManifest[index - 1] }); });
