@@ -59,7 +59,7 @@
 ## 验证规则
 
 - 修改代码后，按需运行 `npm run build` 或 `npm run dev`。
-- 构建通过只说明构建没断，不说明改动正确。改前端后跑 `npm run test:post` 与 `npm run test:news`；**改 `api/` 后必跑 `npm run test:news`**（`test_admin_api.mjs` 与 `test_admin_comments_api.mjs` 共同守住后台信任边界，`test:post` 不加载 `api/`）；改 `news-pipeline/` 后按 `readme.md` 验证章节跑对应 Python 回归。
+- 构建通过只说明构建没断，不说明改动正确。改前端后跑 `npm run test:post` 与 `npm run test:news`；**改 `api/` 后必跑 `npm run test:news`**（`test_admin_api.mjs` 与 `test_admin_comments_api.mjs` 共同守住后台信任边界，`test:post` 不加载 `api/`）；改 `news-pipeline/` 后按 `docs/news-maintenance.md` 的验证章节跑对应 Python 回归。
 - 验证页面仍能正常加载、`source/admin/index.html` 仍兼容、API 改动已正确接通。
 - 验证结束后检查工作区，确认没有遗留测试文件、临时文件或临时调试代码。
 - 没有说明执行过哪些验证前，不要声称工作已完成。
@@ -67,7 +67,7 @@
 ## 文档规则
 
 - 动日报相关代码前，先读根目录 `CONTEXT.md`（术语表，含每个词的 `_Avoid_` 同义词禁用项）和 `docs/adr/` 里与改动区域相关的决策记录；输出里提到领域概念时用术语表的词，不要漂移到它明确避免的同义词。
-- 当架构、安装方式、运行行为或可复用的排障知识发生变化时，更新 `readme.md`。
+- 当项目定位、安装方式或顶层入口变化时更新 `readme.md`；具体运行行为或可复用排障知识写入对应维护文档。
 - 持久性的项目知识应写入受版本控制的文档，不要只放在临时笔记里。
 - 完成的实施计划和一次性分析报告不长期保留；有复用价值的结论应并入 `readme.md` 或对应维护文档。
 - `docs/archive/` 只保留仍有兼容、迁移或排障价值的历史记录，阅读时以文件日期为边界。
