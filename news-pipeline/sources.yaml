@@ -715,10 +715,9 @@ deep_sources:
     channel: society_finance
     topic_filter: finance
     enabled: true
-  # 2026-08-12 停用：Actions 出口和抓取链路正常，但旧 finance 过滤将不含
-  # 宏观、商业、市场、劳动或公共经济机制的 AI 同行评审文判为匹配，并以
-  # 8 分实际进入 society_finance。Issue #2 的确定性闸门进入 main 并通过
-  # Actions 验证前，本源继续停用；不得只凭本地回归提前启用。
+  # 2026-08-23 重新启用：Issue #2 的确定性 finance 闸门已进入 main，
+  # Actions validate Run #32629399798 通过。若启用后的 Actions 抓取或栏目
+  # 验证失败，只重新停用本源，不回退已经验证的过滤器。
   - id: marginal-revolution
     name: Marginal Revolution
     type: rss
@@ -726,7 +725,7 @@ deep_sources:
     lang: en
     channel: society_finance
     topic_filter: finance
-    enabled: false
+    enabled: true
   # 2026-07-26 判死，退出候选队列：feed 可达且可解析，但最新一篇停在
   # 2026-05-03，近三个月未更新；78 小时生产窗口下恒为 0 篇，不构成深读供给。
   - id: apricitas
