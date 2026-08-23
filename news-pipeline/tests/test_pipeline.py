@@ -163,10 +163,14 @@ check("deep按 type 分派专用适配器",
       and dn.deep_fetcher({"type": "latepost"}) is getattr(dn, "fetch_latepost", None))
 check("deep财经主题过滤接受匹配文章",
       hasattr(dn, "deep_topic_matches")
-      and dn.deep_topic_matches({"topic_filter": "finance"}, {"topic_fit": True}))
+      and dn.deep_topic_matches(
+          {"topic_filter": "finance"}, {"topic_fit": True},
+          {"title": "韩国股市下跌", "desc": "投资者重新评估股票估值"}))
 check("deep财经主题过滤拒绝偏题文章",
       hasattr(dn, "deep_topic_matches")
-      and not dn.deep_topic_matches({"topic_filter": "finance"}, {"topic_fit": False}))
+      and not dn.deep_topic_matches(
+          {"topic_filter": "finance"}, {"topic_fit": False},
+          {"title": "韩国股市下跌", "desc": "投资者重新评估股票估值"}))
 
 
 # ----------------------------------------------------------------
