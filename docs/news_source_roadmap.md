@@ -115,7 +115,7 @@
 ## 阶段三：英文财经深读（`society_finance` 栏串行）
 
 1. **Noahpinion（#31，保留）**：URL 用自有域名 `https://www.noahpinion.blog/feed`（非 `noahpinion.substack.com`，见上条出口封锁）。2026-08-09 抽查产业政策综述、韩国股市与 AI 内存周期、零售自动化政策三篇，均有独立机制分析，匹配 `society_finance`；14 日 `deep_health.json` 为 14/14 抓取成功、4 篇主题匹配过线且全部入选，说明 `topic_filter: finance` 能筛出财经与公共经济政策内容，保留并关闭 #31。
-2. ~~Marginal Revolution~~（#32，2026-08-12 停用）：Actions 出口验证已通过；截至 `main@eb2d578`，`deep_health.json` 的 08-10~08-12 为 3/3 抓取成功、fetched 15 / candidates 15 / scored 12 / topic matched 12 / 过线 2 / 入选 1。分层抽查了移民收入同化论文摘要、链接汇总与 AI 同行评审实验三类边界样本：前者有独特数据价值，但链接汇总把多个异质主题拼在一起；更关键的是，不含宏观、商业、市场、劳动或公共经济机制的 AI 同行评审文被 `topic_filter: finance` 放行，以 8 分实际进入 `society_finance`。这是读者可见的栏目越界，不是「最终没入选」的无害噪声，因此在 finance 过滤器修复并经回归前停用。后续修复由开放的 Issue #2 承接（旧仓库的 Issue #43 已随 2026-08-20 迁仓丢失）；在其变更进入 `main` 且 Actions 验证通过前，不重新启用该源。
+2. **Marginal Revolution（#2，2026-08-23 重新启用）**：Actions 出口和抓取链路原本正常；2026-08-12 因旧 `topic_filter: finance` 将不含经济机制的 AI 同行评审文放行并实际入选而停用。Issue #2 已增加“模型 `topic_fit` + 标题/摘要确定性财经证据”的双重准入，修复由 PR #3 进入 `main`，Actions validate Run #32629399798 成功后重新启用。下一次启用后运行仍须检查 `deep_health.json` 的抓取、主题匹配和入选数据；若出现抓取失败或栏目越界，只重新停用本源，不回退过滤器。
 3. ~~Apricitas Economics~~（#33 判死）：feed 可达可解析，但最新一篇停在 2026-05-03、近三个月未更，78 小时窗口恒为 0 篇。
 4. ~~Kyla's Newsletter~~（#34 判死）：`*.substack.com` 被封且 `kylascanlon.com/feed` 返回 404 无自有域名可换；源本身最新一篇停在 2026-05-28。
 
