@@ -33,15 +33,8 @@ def test_august_3_deepseek_restatement_is_only_in_raw_archives():
         (DATA / "score_history.json").read_text(encoding="utf-8"))
     assert score_history["days"]["2026-08-03"]["eligible_scores"].count(69) == 1
 
-    source_health = json.loads(
-        (DATA / "source_health.json").read_text(encoding="utf-8"))
-    assert source_health["days"]["2026-08-03"]["cls-depth"] == {
-        "count": 18,
-        "error": False,
-        "scored_events": 15,
-        "selected_events": 3,
-    }
-
+    # source_health.json intentionally retains only the latest 14 production
+    # days, so durable repair evidence must come from the archives below.
     cls_url = "https://www.cls.cn/detail/2443548"
     all_payload = _js_payload(DATA / "all" / "2026-08-03.js")
     all_row = next(row for row in all_payload["items"] if row.get("u") == cls_url)

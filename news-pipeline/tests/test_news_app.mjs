@@ -703,14 +703,34 @@ test("favorites sorts by saved time and filters news deep and paper through app 
 });
 
 test("route load errors render malicious week values as text", async () => {
-  const payload = '<img src=x onerror="globalThis.pwned=1"><script>globalThis.pwned=2</script>';
+  const payload = '"></option></select><img src=x onerror="globalThis.pwned=1"><script>globalThis.pwned=2</script>';
   const dom = shell(`https://example.test/news/?view=reports&period=week&week=${encodeURIComponent(payload)}`);
   const api = { ...dataApi(), weeklyManifest: async () => [payload], weekly: async () => { throw new Error(`坏周报 ${payload}`); } };
   const app = createNewsApp({ window: dom.window, document: dom.window.document, dataApi: api });
   await app.start();
   const main = dom.window.document.querySelector("main");
   assert.equal(main.querySelector("img,script"), null);
-  assert.match(main.textContent, /坏周报 <img/);
+  assert.equal(dom.window.document.querySelector("#weekArchive img, #weekArchive script"), null);
+  assert.equal(dom.window.document.querySelector("#weekSel").options[0].value, payload);
+  assert.equal(dom.window.document.querySelector("#weekSel").options[0].textContent, payload);
+  assert.match(main.textContent, /坏周报 .*<img/);
+  assert.equal(dom.window.pwned, undefined);
+});
+
+test("daily archive renders manifest values as option text", async () => {
+  const payload = '"></option></select><img src=x onerror="globalThis.pwned=1">';
+  const dom = shell();
+  const app = createNewsApp({
+    window: dom.window,
+    document: dom.window.document,
+    dataApi: dataApi(),
+    manifests: { daily: [payload] },
+  });
+  await app.start();
+  const select = dom.window.document.querySelector("#dateSel");
+  assert.equal(dom.window.document.querySelector("#dayArchive img"), null);
+  assert.equal(select.options[0].value, payload);
+  assert.equal(select.options[0].textContent, payload);
   assert.equal(dom.window.pwned, undefined);
 });
 

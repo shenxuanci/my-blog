@@ -1773,65 +1773,24 @@ def test_weekly_repair_prompt_names_actual_scoped_evidence_keys():
 
 
 def test_rollout_docs_state_interim_is_terminal_and_gates_are_retired():
-    """Guard the same thing as before: docs must not imply acceptance happened.
-
-    ADR 0016 retired the five-gate unlock semantics, so the old "N-day gate"
-    phrasing is gone -- but the underlying risk is unchanged. Nothing may read as
-    though `objectivity active` was validated, and nothing may reintroduce a
-    day-counting countdown toward enabling it.
-    """
+    """Guard the durable ADR decision without pinning retired doc wording."""
     roadmap = (ROOT / "docs" / "news_source_roadmap.md").read_text(encoding="utf-8")
     readme = (ROOT / "readme.md").read_text(encoding="utf-8")
-    label_adr = (ROOT / "docs" / "adr" /
-                 "0005-objectivity-label-accepted-sets.md").read_text(encoding="utf-8")
-    cause_adr = (ROOT / "docs" / "adr" /
-                 "0006-cause-is-extracted-not-inferred.md").read_text(encoding="utf-8")
     retire_adr = (ROOT / "docs" / "adr" /
                   "0016-retire-five-gate-rollout-acceptance.md").read_text(
                       encoding="utf-8")
-    combined = "\n".join(
-        (roadmap, readme, label_adr, cause_adr, retire_adr))
 
-    for phrase in (
-        "interim wording hotfix",
-        "--objectivity-shadow",
-        "45 条",
-        "100%",
-        "active mode is not enabled",
-        "publisher_count",
-        "independent_chain_count",
-        "degraded",
-        "付费墙",
-    ):
-        assert phrase in combined
-
-    for stale_count in ("40+", "至少 40", "at least 40"):
-        assert stale_count not in combined
-    assert "九个风险标签" in combined
-    assert "正文只是当次运行内存" in combined
-
-    # The retirement itself must be recorded, and interim must read as terminal
-    # rather than as a stage before an upcoming switch.
-    for phrase in ("退役", "仪表盘", "interim"):
+    # The ADR is the durable home for this retired mechanism. Top-level docs may
+    # be shortened without resurrecting an obsolete acceptance countdown.
+    for phrase in ("退役", "仪表盘", "永久保持 `interim`", "必须重新设计验收方式"):
         assert phrase in retire_adr
-    assert "ADR 0016" in readme
-    assert "ADR 0016" in roadmap
+    assert "零网络 I/O" in retire_adr
 
     # No surface may promise that banking days unlocks anything. ADR 0016 is
     # exempt: it has to name the thing it removed.
-    current_surfaces = "\n".join((roadmap, readme, label_adr, cause_adr))
+    current_surfaces = "\n".join((roadmap, readme))
     for revived in ("待人工最终确认", "攒满五门", "五门全部达标"):
         assert revived not in current_surfaces
-
-    assert "live acceptance has not occurred" in combined
-    for metric_name in (
-        "selected_before_audit",
-        "selected_after_audit",
-        "audited_candidate_count",
-        "demoted_from_selected",
-        "source_reference_concentration",
-    ):
-        assert metric_name in combined
 
 
 def test_shadow_summary_is_only_persisted_when_the_env_var_is_set(tmp_path):

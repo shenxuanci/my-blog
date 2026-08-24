@@ -1,6 +1,6 @@
 # Hexo + Fluid 迁移记录
 
-> 历史快照：本文记录 2026-06-18 的迁移过程，不描述当前全部功能。当前运行状态以根目录 `readme.md` 为准。
+> 历史快照：本文记录 2026-06-18 的迁移过程，不描述当前全部功能。当前运行状态见根目录 `readme.md` 与 `docs/blog-maintenance.md`。
 
 ## 背景
 
@@ -27,7 +27,7 @@
 
 ## 迁移方式
 
-迁移工具为 `tools/export-articles-to-hexo.mjs`（该脚本已于 2026-07-28 删除，原因见 `readme.md`；下面记录的是当时的迁移方式，需要脚本本身请翻 git 历史）：
+迁移工具为 `tools/export-articles-to-hexo.mjs`（该脚本已于 2026-07-28 删除，现行兼容约束见 `docs/blog-maintenance.md`；下面记录的是当时的迁移方式，需要脚本本身请翻 git 历史）：
 
 1. 调用 `https://aoiblog.top/api/getArticles?view=list` 获取公开文章列表。
 2. 逐篇调用 detail 接口获取正文。
