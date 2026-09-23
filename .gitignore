@@ -13,5 +13,6 @@ news-pipeline/run_log.txt
 # 密钥与本地环境变量（红线：密钥绝不进仓库）
 .env*
 
-# 本地工具配置（Claude Code 机器级设置/计划/预览配置，不进仓库）
+# 本地工具配置（Claude Code / WorkBuddy 的机器级设置、计划与工作区数据，不进仓库）
 .claude/
+.workbuddy-ai/
