@@ -59,6 +59,18 @@ function isHttpUrl(value) {
   }
 }
 
+function validatedUrl(value, required = false) {
+  const url = String(value || '').trim();
+  if (!url && !required) return '';
+  if (!isHttpUrl(url)) {
+    throw createHttpError(400, 'payload.url must be an http(s) URL');
+  }
+  if (url.length > 500) {
+    throw createHttpError(400, 'payload.url must be at most 500 characters');
+  }
+  return url;
+}
+
 function isRealIsoDate(value) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ''));
   if (!match) return false;
@@ -96,12 +108,9 @@ function validateEntry(type, payload) {
       throw createHttpError(400, 'payload.date must be a real calendar date in YYYY-MM-DD format');
     }
     const title = clip(payload.title, 200).trim();
-    const url = clip(payload.url, 500).trim();
+    const url = validatedUrl(payload.url);
     if (!title && !url) {
       throw createHttpError(400, 'payload.title or payload.url is required');
-    }
-    if (url && !isHttpUrl(url)) {
-      throw createHttpError(400, 'payload.url must be an http(s) URL');
     }
     if (!MISS_REASONS.includes(payload.reason)) {
       throw createHttpError(400, `payload.reason must be one of: ${MISS_REASONS.join(', ')}`);
@@ -152,11 +161,7 @@ function validateEntry(type, payload) {
       throw createHttpError(400, `payload.op must be one of: ${READ_LATER_OPS.join(', ')}`);
     }
     if (entry.op === 'add') {
-      const url = String(payload.url || '').trim();
-      if (!isHttpUrl(url)) {
-        throw createHttpError(400, 'payload.url must be an http(s) URL');
-      }
-      entry.url = clip(url, 500);
+      entry.url = validatedUrl(payload.url, true);
       entry.done = false;
     }
   } else {
@@ -167,11 +172,8 @@ function validateEntry(type, payload) {
       throw createHttpError(400, `payload.op must be one of: ${FAVORITES_OPS.join(', ')}`);
     }
     if (entry.op === 'add') {
-      const url = String(payload.url || '').trim();
-      if (url && !isHttpUrl(url)) {
-        throw createHttpError(400, 'payload.url must be an http(s) URL');
-      }
-      if (url) entry.url = clip(url, 500);
+      const url = validatedUrl(payload.url);
+      if (url) entry.url = url;
     }
   }
 

@@ -91,6 +91,9 @@ function assertPlainValue(label, value, maxLength, { allowQuotes = true } = {}) 
   if (/[\r\n]/.test(text)) {
     throw createHttpError(400, `${label} must not contain line breaks`);
   }
+  if (!allowQuotes && /[\u0000-\u001f\u007f]/.test(text)) {
+    throw createHttpError(400, `${label} must not contain control characters`);
+  }
   if (!allowQuotes && /["\\]/.test(text)) {
     throw createHttpError(400, `${label} must not contain quotes or backslashes`);
   }

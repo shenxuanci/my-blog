@@ -33,6 +33,7 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-theme-fluid": "^1.9.9",
+    "js-yaml": "^4.3.2",
     "pinyin-pro": "^3.28.1"
   },
   "devDependencies": {

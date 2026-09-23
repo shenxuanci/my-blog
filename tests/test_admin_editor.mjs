@@ -5,6 +5,10 @@ import test from "node:test";
 import vm from "node:vm";
 
 const require = createRequire(import.meta.url);
+const frontMatterCases = JSON.parse(await readFile(
+  new URL("./fixtures/markdown-front-matter-cases.json", import.meta.url),
+  "utf8",
+));
 let editorTools = null;
 try {
   editorTools = require("../source/admin/editor-tools.js");
@@ -194,6 +198,43 @@ test("Markdown import normalizes BOM and CRLF before reading front matter and a 
   });
 });
 
+test("Markdown import keeps the leading H1 when the title box already has a value", () => {
+  assert.ok(editorTools, "editor tools module should exist");
+  // 旧实现把 H1 从正文删掉又丢弃导入的标题，那一行会彻底消失。
+  const result = editorTools.markdownImportReplacement({
+    source: "---\ntitle: old\n---\n\n# Kept heading\nFirst paragraph\n",
+    title: "Existing title",
+    value: "unchanged",
+  });
+  assert.equal(result.title, "Existing title");
+  assert.match(result.value, /^# Kept heading/);
+  assert.match(result.value, /First paragraph/);
+});
+
+test("Markdown import does not treat --- delimited prose as front matter", () => {
+  assert.ok(editorTools, "editor tools module should exist");
+  // 旧的非贪婪正则会把两行 --- 之间的正文整段吃掉。
+  const result = editorTools.markdownImportReplacement({
+    source: "---\n\nFirst paragraph\n\n---\n\nSecond paragraph\n",
+    title: "",
+    value: "unchanged",
+  });
+  assert.equal(result.title, "");
+  assert.match(result.value, /First paragraph/);
+  assert.match(result.value, /Second paragraph/);
+});
+
+test("Markdown import strips only parseable article metadata", () => {
+  assert.ok(editorTools, "editor tools module should exist");
+  for (const fixture of frontMatterCases) {
+    const result = editorTools.markdownImportReplacement({
+      source: fixture.source,
+      title: "Existing title",
+    });
+    assert.equal(result.value, fixture.expectedBody, fixture.name);
+  }
+});
+
 test("Markdown import changes only top-level prose soft breaks", () => {
   assert.ok(editorTools, "editor tools module should exist");
   const source = [
@@ -337,14 +378,18 @@ test("Markdown import failure leaves the current editor state available to the c
   );
 });
 
-test("admin loads the vendored Markdown parser before editor tools", async () => {
+test("admin loads the vendored Markdown and YAML parsers before editor tools", async () => {
   const html = await readFile(new URL("../source/admin/index.html", import.meta.url), "utf8");
   const markedIndex = html.indexOf('<script src="/admin/marked.min.js"></script>');
+  const yamlIndex = html.indexOf('<script src="/admin/js-yaml.min.js"></script>');
   const toolsIndex = html.indexOf('<script src="/admin/editor-tools.js"></script>');
   assert.ok(markedIndex >= 0);
-  assert.ok(toolsIndex > markedIndex);
+  assert.ok(yamlIndex > markedIndex);
+  assert.ok(toolsIndex > yamlIndex);
   const markedSource = await readFile(new URL("../source/admin/marked.min.js", import.meta.url), "utf8");
+  const yamlSource = await readFile(new URL("../source/admin/js-yaml.min.js", import.meta.url), "utf8");
   assert.match(markedSource, /marked/i);
+  assert.match(yamlSource, /jsyaml/i);
 });
 
 test("admin wires session-only draft recovery, dirty guards, and the shared URL validator", async () => {
@@ -359,11 +404,13 @@ test("admin wires session-only draft recovery, dirty guards, and the shared URL 
   assert.match(html, /editorTools\.safeMarkdownUrl/);
 });
 
-test("vendored Marked and editor tools work together through browser globals", async () => {
+test("vendored parsers and editor tools work together through browser globals", async () => {
   const context = vm.createContext({});
   const markedSource = await readFile(new URL("../source/admin/marked.min.js", import.meta.url), "utf8");
+  const yamlSource = await readFile(new URL("../source/admin/js-yaml.min.js", import.meta.url), "utf8");
   const toolsSource = await readFile(new URL("../source/admin/editor-tools.js", import.meta.url), "utf8");
   vm.runInContext(markedSource, context);
+  vm.runInContext(yamlSource, context);
   vm.runInContext(toolsSource, context);
   const result = context.AoiAdminEditorTools.markdownImportReplacement({
     source: "First line\nSecond line",
@@ -371,6 +418,148 @@ test("vendored Marked and editor tools work together through browser globals", a
     value: "unchanged",
   });
   assert.equal(result.value, "First line\n\nSecond line");
+  for (const fixture of frontMatterCases) {
+    const imported = context.AoiAdminEditorTools.markdownImportReplacement({source: fixture.source, title: 'Existing'});
+    assert.equal(imported.value, fixture.expectedBody, fixture.name);
+  }
+});
+
+test('cover maintenance preserves body examples and literal dollar characters with BOM/CRLF', async () => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { fileURLToPath } = await import('node:url');
+  const { execFileSync } = await import('node:child_process');
+  const directory = await mkdtemp(join(tmpdir(), 'blog-cover-test-'));
+  try {
+    await mkdir(join(directory, 'source/_posts'), {recursive: true});
+    await mkdir(join(directory, 'source/_data'), {recursive: true});
+    const cover = "/images/$&-$'-$$.webp";
+    await writeFile(join(directory, 'source/_data/category-covers.json'), JSON.stringify({default: cover}));
+    const body = '```yaml\r\nindex_img: "example"old_id: demo\r\n```\r\n';
+    const source = '\uFEFF---\r\ntitle: "$& example"\r\n\r\n---\r\n' + body;
+    const postPath = join(directory, 'source/_posts/test.md');
+    await writeFile(postPath, source);
+    const script = fileURLToPath(new URL('../tools/apply-category-covers.mjs', import.meta.url));
+    execFileSync(process.execPath, [script], {cwd: directory});
+    const saved = await readFile(postPath, 'utf8');
+    assert.ok(saved.startsWith('\uFEFF---\r\n'));
+    assert.ok(saved.endsWith(body));
+    assert.ok(saved.includes('index_img: ' + JSON.stringify(cover)));
+    assert.doesNotMatch(saved, /(?<!\r)\n/);
+    execFileSync(process.execPath, [script], {cwd: directory});
+    assert.equal(await readFile(postPath, 'utf8'), saved);
+  } finally {
+    await rm(directory, {recursive: true, force: true});
+  }
+});
+
+test("admin default cover ignores inherited object keys", async () => {
+  const html = await readFile(new URL("../source/admin/index.html", import.meta.url), "utf8");
+  const match = html.match(/^    function defaultCover\(category\) \{[\s\S]*?^    \}/m);
+  assert.ok(match, "defaultCover should be present in the admin script");
+  const context = vm.createContext({ state: { coverMap: { default: "/fallback.webp", Essay: "/essay.webp" } } });
+  vm.runInContext(match[0], context);
+  for (const category of ["toString", "constructor", "valueOf", "__proto__"]) {
+    assert.equal(context.defaultCover(category), "/fallback.webp", category);
+  }
+  assert.equal(context.defaultCover("Essay"), "/essay.webp");
+});
+
+test("admin preview does not confuse prose with its code-block placeholder", async () => {
+  const html = await readFile(new URL("../source/admin/index.html", import.meta.url), "utf8");
+  const match = html.match(/^    function renderMarkdown\(markdown\) \{[\s\S]*?^    \}/m);
+  assert.ok(match);
+  const context = vm.createContext({
+    escapeHtml: (value) => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;"),
+    safeMarkdownUrl: (value) => value,
+  });
+  vm.runInContext(match[0], context);
+  const preview = context.renderMarkdown("@@CODE_BLOCK_0@@\n\n```js\nconst value = 1;\n```");
+  assert.match(preview, /<p>@@CODE_BLOCK_0@@<\/p>/);
+  assert.match(preview, /<pre><code>js\nconst value = 1;<\/code><\/pre>/);
+  assert.ok(preview.indexOf("@@CODE_BLOCK_0@@") < preview.indexOf("<pre>"));
+});
+
+test("admin lists oversized posts as disabled without opening an editor", async () => {
+  const html = await readFile(new URL("../source/admin/index.html", import.meta.url), "utf8");
+  const match = html.match(/^    function renderArticles\(\) \{[\s\S]*?^    \}/m);
+  assert.ok(match, "renderArticles should be present in the admin script");
+  const list = { innerHTML: "" };
+  const listeners = [];
+  const context = vm.createContext({
+    state: { articles: [
+      { filePath: "source/_posts/large.md", title: "large.md", editable: false },
+      { filePath: "source/_posts/invalid.md", title: "invalid.md", editable: false, unavailableReason: "Front Matter 无效，需在本地修复" },
+      { filePath: "source/_posts/small.md", title: "Small", date: "2026-01-01", category: "Essay" },
+    ] },
+    $: () => list,
+    escapeHtml: (value) => String(value),
+    document: { querySelectorAll: (selector) => {
+      assert.equal(selector, ".article-item:not(:disabled)");
+      return [{ dataset: { path: "source/_posts/small.md" }, addEventListener: (_, callback) => listeners.push(callback) }];
+    } },
+    editPost: (path) => { context.opened = path; },
+  });
+  vm.runInContext(match[0], context);
+  context.renderArticles();
+  assert.match(list.innerHTML, /data-path="source\/_posts\/large\.md" disabled/);
+  assert.match(list.innerHTML, /文章超过 1 MiB，需在本地编辑/);
+  assert.match(list.innerHTML, /Front Matter 无效，需在本地修复/);
+  assert.doesNotMatch(list.innerHTML, /data-path="source\/_posts\/small\.md" disabled/);
+  assert.equal(listeners.length, 1);
+  listeners[0]();
+  assert.equal(context.opened, "source/_posts/small.md");
+});
+
+test("cover maintenance reads inline YAML categories and never writes inherited values", async () => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { fileURLToPath } = await import('node:url');
+  const { execFileSync } = await import('node:child_process');
+  const directory = await mkdtemp(join(tmpdir(), 'blog-cover-categories-'));
+  try {
+    await mkdir(join(directory, 'source/_posts'), {recursive: true});
+    await mkdir(join(directory, 'source/_data'), {recursive: true});
+    await writeFile(join(directory, 'source/_data/category-covers.json'), JSON.stringify({
+      default: '/fallback.webp', Essay: '/essay.webp'
+    }));
+    const inlinePath = join(directory, 'source/_posts/inline.md');
+    const inheritedPath = join(directory, 'source/_posts/inherited.md');
+    await writeFile(inlinePath, '---\ntitle: Inline\ncategories: [Essay, Notes]\n---\nBody\n');
+    await writeFile(inheritedPath, '---\ntitle: Inherited\ncategories:\n  - toString\n---\nBody\n');
+    const script = fileURLToPath(new URL('../tools/apply-category-covers.mjs', import.meta.url));
+    execFileSync(process.execPath, [script], {cwd: directory});
+    assert.match(await readFile(inlinePath, 'utf8'), /index_img: "\/essay\.webp"/);
+    const inherited = await readFile(inheritedPath, 'utf8');
+    assert.match(inherited, /index_img: "\/fallback\.webp"/);
+    assert.doesNotMatch(inherited, /native code/);
+  } finally {
+    await rm(directory, {recursive: true, force: true});
+  }
+});
+
+test("cover maintenance leaves a post untouched when its YAML cannot be parsed", async () => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { fileURLToPath } = await import('node:url');
+  const { execFileSync } = await import('node:child_process');
+  const directory = await mkdtemp(join(tmpdir(), 'blog-cover-invalid-'));
+  try {
+    await mkdir(join(directory, 'source/_posts'), {recursive: true});
+    await mkdir(join(directory, 'source/_data'), {recursive: true});
+    await writeFile(join(directory, 'source/_data/category-covers.json'), JSON.stringify({default: '/fallback.webp'}));
+    const postPath = join(directory, 'source/_posts/invalid.md');
+    const source = '---\ntitle: [unclosed\ncategories: Essay\n---\nBody\n';
+    await writeFile(postPath, source);
+    const script = fileURLToPath(new URL('../tools/apply-category-covers.mjs', import.meta.url));
+    assert.throws(() => execFileSync(process.execPath, [script], {cwd: directory, stdio: 'ignore'}));
+    assert.equal(await readFile(postPath, 'utf8'), source);
+  } finally {
+    await rm(directory, {recursive: true, force: true});
+  }
 });
 
 test("browser editor reports a missing Markdown parser instead of changing content", async () => {

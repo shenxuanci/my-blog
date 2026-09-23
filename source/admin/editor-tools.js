@@ -207,17 +207,54 @@
       : "文章尚未保存，确认放弃吗？";
   }
 
+  const ARTICLE_FRONT_MATTER_KEYS = new Set([
+    "title",
+    "date",
+    "updated",
+    "categories",
+    "tags",
+    "layout",
+    "permalink",
+    "index_img",
+    "old_id",
+    "twikooPath",
+  ]);
+
+  function yamlApi() {
+    if (root?.jsyaml?.load) return root.jsyaml;
+    if (typeof require === "function") return require("js-yaml");
+    throw new Error("YAML parser is unavailable");
+  }
+
+  function leadingFrontMatter(text) {
+    const match = /^---[ \t]*\n(?:([\s\S]*?)\n)?---[ \t]*(?:\n|$)/.exec(text);
+    if (!match) return null;
+    const parser = yamlApi();
+    try {
+      const parsed = parser.load(match[1] || "");
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+      return Object.keys(parsed).some((key) => ARTICLE_FRONT_MATTER_KEYS.has(key))
+        ? match
+        : null;
+    } catch {
+      return null;
+    }
+  }
+
   function splitImportedMarkdown(source) {
     let body = String(source || "")
       .replace(/^\uFEFF/, "")
       .replace(/\r\n?/g, "\n");
-    body = body.replace(/^---\n[\s\S]*?\n---(?:\n|$)/, "");
+    const frontMatter = leadingFrontMatter(body);
+    if (frontMatter) body = body.slice(frontMatter[0].length);
 
     const leadingHeading = /^(?:[ \t]*\n)*#\s+([^\n]+)(?:\n|$)/.exec(body);
-    const title = leadingHeading ? leadingHeading[1].trim() : "";
-    if (leadingHeading) body = body.slice(leadingHeading[0].length);
 
-    return { title, body: body.replace(/^\n+|\n+$/g, "") };
+    return {
+      heading: leadingHeading ? leadingHeading[1].trim() : "",
+      headingLength: leadingHeading ? leadingHeading[0].length : 0,
+      body,
+    };
   }
 
   function normalizeParagraphToken(raw) {
@@ -235,27 +272,33 @@
 
   function markdownImportReplacement({ source, title, lexer }) {
     const imported = splitImportedMarkdown(source);
-    const tokens = (lexer || defaultLexer)(imported.body);
+    const existingTitle = String(title || "").trim();
+    // 标题框已有内容时不再消费开头 H1：旧实现把 H1 从正文删掉又丢弃 imported.heading，
+    // 那一行会彻底消失（既不在正文也不在标题框）。
+    const body = existingTitle
+      ? imported.body
+      : imported.body.slice(imported.headingLength);
+    const tokens = (lexer || defaultLexer)(body);
     if (!Array.isArray(tokens)) throw new Error("Markdown parser returned invalid tokens");
-    const definitionRanges = referenceDefinitionRanges(imported.body, tokens);
+    const definitionRanges = referenceDefinitionRanges(body, tokens);
     let cursor = 0;
     let value = "";
     for (const token of tokens) {
       if (!token.raw) continue;
       const tokenStart = tokenStartOutsideRanges(
-        imported.body,
+        body,
         token.raw,
         cursor,
         token.type === "paragraph" ? definitionRanges : [],
       );
       if (tokenStart < 0) throw new Error("Markdown parser returned inconsistent tokens");
-      value += imported.body.slice(cursor, tokenStart);
+      value += body.slice(cursor, tokenStart);
       value += token.type === "paragraph" ? normalizeParagraphToken(token.raw) : token.raw;
       cursor = tokenStart + token.raw.length;
     }
-    value = `${value}${imported.body.slice(cursor)}`.replace(/^\n+|\n+$/g, "");
+    value = `${value}${body.slice(cursor)}`.replace(/^\n+|\n+$/g, "");
     return {
-      title: String(title || "") || imported.title,
+      title: existingTitle || imported.heading,
       value,
     };
   }

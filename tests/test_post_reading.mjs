@@ -465,6 +465,20 @@ test("legacy article redirect falls back when the URL hash is malformed", () => 
   assert.equal(target, "/archives/");
 });
 
+test("legacy article redirect ignores inherited map keys", () => {
+  const script = /<script>([\s\S]*?)<\/script>/.exec(legacyArticlesHtml)?.[1];
+  assert.ok(script);
+  for (const id of ["__proto__", "constructor", "toString"]) {
+    let target = "";
+    const context = vm.createContext({
+      decodeURIComponent,
+      window: { location: { hash: `#${id}`, replace(value) { target = value; } } },
+    });
+    vm.runInContext(script, context);
+    assert.equal(target, "/archives/", id);
+  }
+});
+
 function createHighlightDom(themeCss) {
   return new JSDOM(`
     <!doctype html>

@@ -1,5 +1,6 @@
 const {
   POSTS_DIR,
+  MAX_EDITABLE_FILE_BYTES,
   setCors,
   sendJson,
   createHttpError,
@@ -42,8 +43,32 @@ async function listPosts() {
 
   // 并发拉取文章内容，串行逐篇会随文章数增长撞上函数超时
   const posts = await mapConcurrent(files, 8, async (file) => {
-    const { content, sha } = await readTextFile(file.path);
-    return parsePost(file.path, content, sha);
+    const unavailable = (reason = '') => ({
+      filePath: file.path,
+      sha: file.sha,
+      title: file.name,
+      date: '',
+      category: '',
+      editable: false,
+      ...(reason ? { unavailableReason: reason } : {})
+    });
+    if (file.size > MAX_EDITABLE_FILE_BYTES) return unavailable();
+    let content;
+    let sha;
+    try {
+      ({ content, sha } = await readTextFile(file.path));
+    } catch (error) {
+      // A post can grow between directory listing and reading. Keep it visible
+      // without pretending its body or metadata were successfully loaded.
+      if (error?.status === 413) return unavailable();
+      throw error;
+    }
+    try {
+      return parsePost(file.path, content, sha);
+    } catch (error) {
+      if (error?.status === 422) return unavailable('Front Matter 无效，需在本地修复');
+      throw error;
+    }
   });
 
   posts.sort((a, b) => String(b.date).localeCompare(String(a.date)));
@@ -101,7 +126,8 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'POST') {
-      const body = await readJsonBody(req);
+      // JSON includes field names and editor metadata in addition to the file body.
+      const body = await readJsonBody(req, MAX_EDITABLE_FILE_BYTES * 2);
       const article = body.article || {};
       const coverMap = await readCoverMap();
       let filePath = article.filePath ? validatePostPath(article.filePath) : '';
@@ -120,6 +146,9 @@ module.exports = async (req, res) => {
       }
 
       const next = composePost(article, coverMap, existing, filePath);
+      if (Buffer.byteLength(next.content, 'utf8') > MAX_EDITABLE_FILE_BYTES) {
+        throw createHttpError(413, 'Article is too large to edit in the admin');
+      }
       const result = await putTextFile(
         filePath,
         next.content,

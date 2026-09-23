@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const yaml = require('js-yaml');
 const { pinyin } = require('pinyin-pro');
 const {
   clearLoginAttempts,
@@ -16,6 +17,7 @@ const ADMIN_SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 // 将来可能出现的「只登日报」入口，也让权限判定在代码里是显式的。
 const ADMIN_SESSION_SCOPES = new Set(['personal', 'admin']);
 const DEFAULT_JSON_BODY_BYTES = 1024 * 1024;
+const MAX_EDITABLE_FILE_BYTES = 1024 * 1024;
 
 function setCors(res) {
   // 管理接口仅允许同源调用；不返回 Allow-Origin，避免第三方站点探测认证状态。
@@ -341,12 +343,42 @@ async function readJsonBody(req, maxBytes = DEFAULT_JSON_BODY_BYTES) {
 
 async function listDirectory(dirPath) {
   const data = await githubRequest(dirPath);
-  return Array.isArray(data) ? data : [];
+  if (!Array.isArray(data)) {
+    throw createHttpError(502, 'GitHub did not provide a directory listing');
+  }
+  return data;
 }
 
 async function readTextFile(filePath) {
   const data = await githubRequest(filePath);
-  const content = Buffer.from(String(data.content || '').replace(/\n/g, ''), 'base64').toString('utf8');
+  if (data?.encoding === 'none' && data.size > MAX_EDITABLE_FILE_BYTES) {
+    throw createHttpError(413, 'Repository file is too large to edit in the admin');
+  }
+  if (data?.encoding !== 'base64'
+    || typeof data.content !== 'string'
+    || !Number.isSafeInteger(data.size)
+    || data.size < 0
+    || typeof data.sha !== 'string'
+    || !data.sha) {
+    throw createHttpError(502, 'GitHub did not provide readable file content');
+  }
+  if (data.size > MAX_EDITABLE_FILE_BYTES) {
+    throw createHttpError(413, 'Repository file is too large to edit in the admin');
+  }
+  const encoded = data.content.replace(/\r?\n/g, '');
+  if (encoded.length % 4 !== 0 || !/^[A-Za-z0-9+/]*={0,2}$/.test(encoded)) {
+    throw createHttpError(502, 'GitHub returned invalid file content');
+  }
+  const bytes = Buffer.from(encoded, 'base64');
+  if (bytes.length !== data.size || bytes.toString('base64') !== encoded) {
+    throw createHttpError(502, 'GitHub returned incomplete file content');
+  }
+  let content;
+  try {
+    content = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(bytes);
+  } catch {
+    throw createHttpError(502, 'GitHub returned invalid UTF-8 file content');
+  }
   return { content, sha: data.sha };
 }
 
@@ -397,66 +429,67 @@ function yamlString(value) {
   return JSON.stringify(String(value ?? ''));
 }
 
-function unquote(value) {
-  const text = String(value || '').trim();
-  if (text.startsWith('"') && text.endsWith('"')) {
-    try {
-      return JSON.parse(text);
-    } catch {
-      return text.slice(1, -1);
-    }
+function loadFrontMatter(frontMatter) {
+  try {
+    // JSON_SCHEMA keeps date scalars as their written calendar string, not UTC Date objects.
+    const value = yaml.load(frontMatter, { schema: yaml.JSON_SCHEMA });
+    if (value == null) return {};
+    if (typeof value === 'object' && !Array.isArray(value)) return value;
+  } catch {
+    // A malformed post must not take down the entire admin article list.
   }
-  if (text.startsWith("'") && text.endsWith("'")) {
-    return text.slice(1, -1).replace(/''/g, "'");
-  }
-  return text;
+  throw createHttpError(422, 'Article Front Matter is invalid; edit the article locally');
 }
 
-function readScalar(frontMatter, key) {
-  const match = frontMatter.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
-  return match ? unquote(match[1]) : '';
+function readScalar(metadata, key) {
+  const value = metadata[key];
+  return ['string', 'number', 'boolean'].includes(typeof value) ? String(value) : '';
 }
 
-function readList(frontMatter, key) {
-  const match = frontMatter.match(new RegExp(`^${key}:\\n((?:\\s+-\\s*.+\\n?)+)`, 'm'));
-  if (!match) return [];
-  return match[1]
-    .split(/\r?\n/)
-    .map((line) => line.replace(/^\s+-\s*/, '').trim())
-    .filter(Boolean)
-    .map(unquote);
+function readList(metadata, key) {
+  const value = metadata[key];
+  const values = Array.isArray(value) ? value : value == null ? [] : [value];
+  return values.filter((item) => ['string', 'number', 'boolean'].includes(typeof item)).map(String);
+}
+
+function leadingFrontMatter(text) {
+  return /^---[ \t]*\n(?:([\s\S]*?)\n)?---[ \t]*(?:\n|$)/.exec(text);
 }
 
 function splitLegacyComments(content) {
   const match = content.match(/\n*<section class="legacy-comments">[\s\S]*?<\/section>\s*$/);
   return {
-    editableContent: match ? content.slice(0, match.index).trimEnd() : content.trimEnd(),
+    editableContent: (match ? content.slice(0, match.index) : content).replace(/\n+$/, ''),
     legacySuffix: match ? match[0].trim() : ''
   };
 }
 
 function parsePost(filePath, source, sha, includeContent = false) {
-  const match = source.match(/^---\n([\s\S]*?)\n---\n?/);
-  const frontMatter = match ? match[1] : '';
-  const rawContent = match ? source.slice(match[0].length) : source;
+  // 统一 BOM 与行尾：仓库 blob 可能是 CRLF，而下面的匹配只认 \n，
+  // 失配会让 front matter 被当成正文，保存时写出两段 front matter。
+  const text = String(source || '').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+  const match = leadingFrontMatter(text);
+  const frontMatter = match ? match[1] || '' : '';
+  const metadata = loadFrontMatter(frontMatter);
+  const rawContent = match ? text.slice(match[0].length) : text;
   const { editableContent, legacySuffix } = splitLegacyComments(rawContent);
-  const categories = readList(frontMatter, 'categories');
+  const categories = readList(metadata, 'categories');
 
   const article = {
     filePath,
     sha,
-    title: readScalar(frontMatter, 'title') || filePath.replace(/^.*\/|\.md$/g, ''),
-    date: readScalar(frontMatter, 'date'),
-    updated: readScalar(frontMatter, 'updated'),
+    title: readScalar(metadata, 'title') || filePath.replace(/^.*\/|\.md$/g, ''),
+    date: readScalar(metadata, 'date'),
+    updated: readScalar(metadata, 'updated'),
     category: categories[0] || '未分类',
     categories,
-    index_img: readScalar(frontMatter, 'index_img'),
-    old_id: readScalar(frontMatter, 'old_id'),
-    twikooPath: readScalar(frontMatter, 'twikooPath'),
+    index_img: readScalar(metadata, 'index_img'),
+    old_id: readScalar(metadata, 'old_id'),
+    twikooPath: readScalar(metadata, 'twikooPath'),
     excerpt: editableContent.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().slice(0, 160)
   };
 
-  const permalink = readScalar(frontMatter, 'permalink');
+  const permalink = readScalar(metadata, 'permalink');
   if (permalink) article.permalink = permalink;
 
   if (includeContent) {
@@ -551,10 +584,6 @@ function slugify(title, fallback = 'post') {
   return slug || fallback;
 }
 
-function stripFrontMatter(content) {
-  return String(content || '').replace(/^---\n[\s\S]*?\n---\n?/, '').trim();
-}
-
 // 封面只有两种合法形态：站内绝对路径（/images/covers/...）或外部 http(s) 图片。
 // 主题用 <%= url_for(index_img) %> 输出到 <img src>，EJS 转义挡住了属性逃逸，
 // 所以这里不是可利用的 XSS；但 index_img 是唯一没做协议校验的用户可控 URL，
@@ -616,22 +645,36 @@ function datedPermalink(day, slug) {
 }
 
 function replaceFrontMatterScalar(frontMatter, key, value) {
-  const line = `${key}: ${yamlString(value)}`;
-  const pattern = new RegExp(`^${key}:.*$`, 'm');
-  if (pattern.test(frontMatter)) return frontMatter.replace(pattern, line);
-  return `${frontMatter}${frontMatter ? '\n' : ''}${line}`;
+  const pattern = new RegExp(`^(?:${key}|"${key}"|'${key}'):[^\\n]*(?:\\n(?:[ \\t]+[^\\n]+|[ \\t]*|-[ \\t]+[^\\n]*))*(?:\\n|$)`, 'm');
+  if (pattern.test(frontMatter)) return frontMatter.replace(pattern, (matched) => {
+    const anchor = /^[^:\n]+:[ \t]*(&[^\s,\[\]{}]+)/.exec(matched)?.[1];
+    const line = `${key}: ${anchor ? `${anchor} ` : ''}${yamlString(value)}`;
+    return line + (matched.endsWith('\n') ? '\n' : '');
+  });
+  return `${frontMatter}${frontMatter ? '\n' : ''}${key}: ${yamlString(value)}`;
 }
 
 function replacePrimaryCategory(frontMatter, category) {
+  const anchor = /^(?:categories|"categories"|'categories'):[ \t]*(&[^\s,\[\]{}]+)/m.exec(frontMatter)?.[1];
+  const label = `categories:${anchor ? ` ${anchor}` : ''}`;
+  // Inline and scalar categories must be replaced, not appended as a duplicate key.
+  if (!/^categories:[ \t]*\n[ \t]+-/m.test(frontMatter)) {
+    const remaining = readList(loadFrontMatter(frontMatter), 'categories').slice(1);
+    const values = [category, ...remaining];
+    const pattern = /^(?:categories|"categories"|'categories'):[^\n]*(?:\n(?:[ \t]+[^\n]+|[ \t]*|-[ \t]+[^\n]*))*(?:\n|$)/m;
+    const block = `${label}\n${values.map((item) => `  - ${yamlString(item)}`).join('\n')}\n`;
+    if (pattern.test(frontMatter)) return frontMatter.replace(pattern, () => block);
+    return `${frontMatter}${frontMatter ? '\n' : ''}${block}`;
+  }
   const list = /^categories:\s*\n((?:[ \t]+-[^\n]*(?:\n|$))*)/m;
   const match = list.exec(frontMatter);
-  if (!match) return `${frontMatter}${frontMatter ? '\n' : ''}categories:\n  - ${yamlString(category)}`;
+  if (!match) return `${frontMatter}${frontMatter ? '\n' : ''}${label}\n  - ${yamlString(category)}`;
   const items = match[1];
   if (!items) {
-    return frontMatter.replace(match[0], `categories:\n  - ${yamlString(category)}\n`);
+    return frontMatter.replace(match[0], () => `${label}\n  - ${yamlString(category)}\n`);
   }
-  const updatedItems = items.replace(/^([ \t]+-)[^\n]*/m, `$1 ${yamlString(category)}`);
-  return `${frontMatter.slice(0, match.index)}categories:\n${updatedItems}${frontMatter.slice(match.index + match[0].length)}`;
+  const updatedItems = items.replace(/^([ \t]+-)[^\n]*/m, (_, prefix) => `${prefix} ${yamlString(category)}`);
+  return `${frontMatter.slice(0, match.index)}${label}\n${updatedItems}${frontMatter.slice(match.index + match[0].length)}`;
 }
 
 function patchExistingFrontMatter(frontMatter, values) {
@@ -642,6 +685,7 @@ function patchExistingFrontMatter(frontMatter, values) {
   next = replaceFrontMatterScalar(next, 'updated', values.updated);
   next = replacePrimaryCategory(next, values.category);
   next = replaceFrontMatterScalar(next, 'index_img', values.indexImg);
+  loadFrontMatter(next);
   return next;
 }
 
@@ -676,7 +720,8 @@ function composePost(article, coverMap, existing, filePath = article.filePath) {
   } else if (dateChanged) {
     permalink = datedPermalink(requestedDay, fileSlug);
   }
-  let body = stripFrontMatter(article.content);
+  // content 是编辑器正文，不是完整文件。导入器已处理文件元数据，保存时不能再猜测剥离。
+  let body = String(article.content || '').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').replace(/\n+$/, '');
 
   if (existing?.legacySuffix && !body.includes('legacy-comments')) {
     body = `${body}\n\n${existing.legacySuffix}`;
@@ -708,7 +753,7 @@ function composePost(article, coverMap, existing, filePath = article.filePath) {
   }
 
   return {
-    content: `---\n${frontMatter}\n---\n${body.trim()}\n`,
+    content: `---\n${frontMatter}\n---\n${body}\n`,
     date,
     category,
     indexImg,
@@ -738,6 +783,7 @@ async function readCoverMap() {
 
 module.exports = {
   POSTS_DIR,
+  MAX_EDITABLE_FILE_BYTES,
   setCors,
   sendJson,
   sendError,

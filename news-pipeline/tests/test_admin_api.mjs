@@ -5,6 +5,10 @@ import test from "node:test";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
+const frontMatterCases = JSON.parse(await readFile(
+  new URL("../../tests/fixtures/markdown-front-matter-cases.json", import.meta.url),
+  "utf8",
+));
 const github = require("../../api/_github.js");
 const loginGuard = require("../../api/_loginGuard.js");
 const adminArticles = require("../../api/adminArticles.js");
@@ -19,6 +23,13 @@ function jsonResponse(data, status = 200) {
     status,
     text: async () => JSON.stringify(data)
   };
+}
+
+function githubFileResponse(content, sha) {
+  const bytes = Buffer.from(content, "utf8");
+  return jsonResponse({
+    encoding: "base64", content: bytes.toString("base64"), size: bytes.length, sha,
+  });
 }
 
 function mockResponse() {
@@ -161,6 +172,48 @@ test("JSON body reader rejects malformed and oversized pre-parsed bodies", async
   );
 });
 
+test("GitHub file reader rejects unavailable or malformed content but accepts an empty file", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    try {
+      for (const data of [
+        { sha: "large-sha", size: 1_048_577, encoding: "none", content: "" },
+        { sha: "missing-sha", size: 12, encoding: "base64" },
+        { sha: "bad-sha", size: 3, encoding: "base64", content: "%%%" },
+        { sha: "short-sha", size: 5, encoding: "base64", content: Buffer.from("abc").toString("base64") },
+        { sha: "utf8-sha", size: 1, encoding: "base64", content: "/w==" },
+      ]) {
+        globalThis.fetch = async () => jsonResponse(data);
+        await assert.rejects(github.readTextFile("source/_posts/post.md"),
+          (error) => error.status === (data.encoding === "none" ? 413 : 502));
+      }
+      globalThis.fetch = async () => jsonResponse({ sha: "empty-sha", size: 0, encoding: "base64", content: "" });
+      assert.deepEqual(await github.readTextFile("source/_posts/empty.md"), { content: "", sha: "empty-sha" });
+      globalThis.fetch = async () => githubFileResponse("\uFEFF---\nBody", "bom-sha");
+      assert.equal((await github.readTextFile("source/_posts/bom.md")).content, "\uFEFF---\nBody");
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("GitHub directory reader rejects malformed responses instead of showing an empty article list", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    try {
+      for (const data of [null, {}, { message: "upstream failure" }]) {
+        globalThis.fetch = async () => jsonResponse(data);
+        await assert.rejects(
+          github.listDirectory("source/_posts"),
+          (error) => error.status === 502,
+        );
+      }
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
 test("malformed personal-session cookies are rejected as unauthorized", async () => {
   await withRepoEnv(async () => {
     const req = {
@@ -237,10 +290,7 @@ test("personal state rejects an invalid stored shape without overwriting it", as
         writes += 1;
         return jsonResponse({ content: { sha: "next-sha" } });
       }
-      return jsonResponse({
-        content: Buffer.from('{"version":1,"items":"corrupted"}\n', "utf8").toString("base64"),
-        sha: "state-sha",
-      });
+      return githubFileResponse('{"version":1,"items":"corrupted"}\n', "state-sha");
     };
     try {
       const session = github.createAdminSession("admin-secret", Date.now());
@@ -270,10 +320,7 @@ test("misses API persists create, read, and remove through the repository file",
     globalThis.fetch = async (url, options = {}) => {
       assert.match(String(url), /contents\/source\/news\/data\/misses\.json/);
       if ((options.method || "GET") === "GET") {
-        return jsonResponse({
-          content: Buffer.from(`${JSON.stringify(stored)}\n`, "utf8").toString("base64"),
-          sha,
-        });
+        return githubFileResponse(`${JSON.stringify(stored)}\n`, sha);
       }
       assert.equal(options.method, "PUT");
       const body = JSON.parse(options.body);
@@ -338,6 +385,22 @@ test("misses URL validation rejects malformed HTTP prefixes", () => {
         reason: "deep_read",
       }),
       /http\(s\)/i,
+    );
+  }
+});
+
+test("personal state preserves 500-character URLs and rejects longer ones", () => {
+  const valid = `https://example.com/${"a".repeat(480)}`;
+  assert.equal(valid.length, 500);
+  for (const type of ["misses", "read_later", "favorites"]) {
+    const payload = {
+      date: "2026-07-15", item_id: "pick-1", reason: "deep_read", op: "add", url: valid,
+    };
+    assert.equal(newsState._test.validateEntry(type, payload).url, valid, type);
+    assert.throws(
+      () => newsState._test.validateEntry(type, { ...payload, url: `${valid}b` }),
+      (error) => error.status === 400 && /url/i.test(error.message),
+      type,
     );
   }
 });
@@ -529,6 +592,12 @@ test("nav labels that would break the YAML round trip are rejected", () => {
     () => adminSettings._test.applySettings("", fluidConfig, { nav: { home: "a\nb" } }),
     (error) => error.status === 400 && /line breaks/i.test(error.message),
   );
+  for (const control of ["\t", "\u0001"]) {
+    assert.throws(
+      () => adminSettings._test.applySettings("", fluidConfig, { nav: { home: `A${control}B` } }),
+      (error) => error.status === 400 && /control/i.test(error.message),
+    );
+  }
   assert.throws(
     () => adminSettings._test.applySettings("", fluidConfig, {
       nav: { home: "x".repeat(adminSettings._test.NAV_VALUE_MAX + 1) },
@@ -575,7 +644,7 @@ test("admin frontend authenticates by cookie, never by an in-page bearer token",
   assert.doesNotMatch(source, /state\.token/);
   assert.match(source, /credentials:\s*['"]same-origin['"]/);
   // 代码块回填必须用函数形式，否则代码里的 $& / $` / $' 会被当成替换模式展开。
-  assert.match(source, /html\.replace\(`@@CODE_BLOCK_\$\{index\}@@`, \(\) => block\)/);
+  assert.match(source, /html\.replace\(`\$\{marker\}\$\{index\}@@`, \(\) => block\)/);
 });
 
 test("admin upload rejects bytes that do not match the claimed image type", async () => {
@@ -1084,6 +1153,207 @@ test("atomic multi-file update rejects stale source blobs before creating a comm
   });
 });
 
+test("article save never writes when GitHub omits the existing file content", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    let writes = 0;
+    globalThis.fetch = async (url, options = {}) => {
+      if ((options.method || "GET") === "PUT") {
+        writes += 1;
+        return jsonResponse({ content: { sha: "saved" } });
+      }
+      if (String(url).includes("category-covers.json")) {
+        return githubFileResponse("{}", "covers");
+      }
+      return jsonResponse({ sha: "current-sha", size: 1_048_577, encoding: "none", content: "" });
+    };
+    try {
+      const res = mockResponse();
+      await adminArticles({
+        method: "POST",
+        headers: { authorization: "Bearer admin-secret" },
+        body: { article: {
+          filePath: "source/_posts/post.md", sha: "current-sha", title: "Edited",
+          date: "2026-07-17", category: "技术", content: "",
+        } },
+      }, res);
+      assert.equal(res.statusCode, 413);
+      assert.equal(writes, 0);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("admin upload rejects non-canonical base64 instead of silently truncating image bytes", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    let requests = 0;
+    globalThis.fetch = async () => { requests += 1; return jsonResponse([]); };
+    try {
+      const png = Buffer.from("89504e470d0a1a0a00000000", "hex").toString("base64");
+      const res = mockResponse();
+      await adminUpload({
+        method: "POST", headers: { authorization: "Bearer admin-secret" },
+        body: { fileName: "corrupt.png", contentBase64: `${png}%%%%` },
+      }, res);
+      assert.equal(res.statusCode, 400);
+      assert.equal(requests, 0);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("same-second uploads with the same name and different bytes get distinct content-derived paths", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    const writes = [];
+    globalThis.fetch = async (url, options = {}) => {
+      if ((options.method || "GET") === "GET") return jsonResponse([]);
+      writes.push(decodeURIComponent(String(url)));
+      return jsonResponse({ content: { sha: "saved" } });
+    };
+    try {
+      const paths = [];
+      for (const lastByte of [4, 5]) {
+        const png = Buffer.from(`89504e470d0a1a0a0000000${lastByte}`, "hex");
+        const res = mockResponse();
+        await adminUpload({
+          method: "POST", headers: { authorization: "Bearer admin-secret" },
+          body: { fileName: "same.png", contentBase64: png.toString("base64"), purpose: "content" },
+        }, res);
+        assert.equal(res.statusCode, 200);
+        assert.match(res.body.data.path, new RegExp(`-same-${gitBlobSha(png).slice(0, 16)}\\.png$`));
+        paths.push(res.body.data.path);
+      }
+      assert.notEqual(paths[0], paths[1]);
+      assert.equal(writes.length, 2);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("oversized posts remain visible but uneditable while other posts load", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    const requested = [];
+    globalThis.fetch = async (url) => {
+      const target = decodeURIComponent(String(url));
+      requested.push(target);
+      if (target.includes("category-covers.json")) return githubFileResponse("{}", "covers");
+      if (target.includes("contents/source/_posts?")) return jsonResponse([
+        { type: "file", name: "2026-07-17-large.md", path: "source/_posts/2026-07-17-large.md", sha: "large-sha", size: 1_048_577 },
+        { type: "file", name: "2026-07-16-small.md", path: "source/_posts/2026-07-16-small.md", sha: "small-sha", size: 62 },
+      ]);
+      if (target.includes("2026-07-16-small.md")) {
+        return githubFileResponse('---\ntitle: "Small"\ndate: "2026-07-16"\n---\nBody\n', "small-sha");
+      }
+      throw new Error(`Unexpected request: ${target}`);
+    };
+    try {
+      const res = mockResponse();
+      await adminArticles({ method: "GET", headers: { authorization: "Bearer admin-secret" }, query: {} }, res);
+      assert.equal(res.statusCode, 200, JSON.stringify(res.body));
+      assert.equal(res.body.data.length, 2);
+      const large = res.body.data.find((post) => post.filePath.endsWith("large.md"));
+      assert.equal(large.editable, false);
+      assert.equal(large.title, "2026-07-17-large.md");
+      assert.equal(large.date, "");
+      assert.equal(large.permalink, undefined);
+      assert.equal(res.body.data.find((post) => post.title === "Small").editable, undefined);
+      assert.equal(requested.some((target) => target.includes("2026-07-17-large.md")), false);
+
+      const single = mockResponse();
+      globalThis.fetch = async (url) => String(url).includes("category-covers.json")
+        ? githubFileResponse("{}", "covers")
+        : jsonResponse({ sha: "large-sha", size: 1_048_577, encoding: "none", content: "" });
+      await adminArticles({
+        method: "GET", headers: { authorization: "Bearer admin-secret" },
+        query: { filePath: "source/_posts/2026-07-17-large.md" },
+      }, single);
+      assert.equal(single.statusCode, 413);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("one invalid YAML post does not hide healthy posts from the admin list", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      const target = decodeURIComponent(String(url));
+      if (target.includes("category-covers.json")) return githubFileResponse("{}", "covers");
+      if (target.includes("contents/source/_posts?")) return jsonResponse([
+        { type: "file", name: "bad.md", path: "source/_posts/bad.md", sha: "bad-sha", size: 30 },
+        { type: "file", name: "good.md", path: "source/_posts/good.md", sha: "good-sha", size: 42 },
+      ]);
+      if (target.includes("bad.md")) return githubFileResponse("---\ntitle: [unclosed\n---\nBody\n", "bad-sha");
+      if (target.includes("good.md")) return githubFileResponse("---\ntitle: Healthy\n---\nBody\n", "good-sha");
+      throw new Error(`Unexpected request: ${target}`);
+    };
+    try {
+      const res = mockResponse();
+      await adminArticles({ method: "GET", headers: { authorization: "Bearer admin-secret" }, query: {} }, res);
+      assert.equal(res.statusCode, 200);
+      assert.equal(res.body.data.length, 2);
+      const broken = res.body.data.find((post) => post.filePath.endsWith("bad.md"));
+      assert.equal(broken.editable, false);
+      assert.match(broken.unavailableReason, /Front Matter/i);
+      assert.equal(broken.permalink, undefined);
+      assert.equal(res.body.data.find((post) => post.title === "Healthy").editable, undefined);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+test("article saves allow request metadata overhead but never write an unreadable file", async () => {
+  await withRepoEnv(async () => {
+    const originalFetch = globalThis.fetch;
+    const max = github.MAX_EDITABLE_FILE_BYTES;
+    const filePath = "source/_posts/post.md";
+    const existing = "---\n---\nBody\n";
+    const parsed = github.parsePost(filePath, existing, "current-sha", true);
+    const fields = {
+      filePath, sha: "current-sha", title: "Edited", date: "2026-07-17",
+      category: "Essay", content: "",
+    };
+    const overhead = Buffer.byteLength(github.composePost(fields, { default: "/fallback.webp" }, parsed, filePath).content);
+    fields.content = "x".repeat(max - overhead);
+    assert.ok(Buffer.byteLength(JSON.stringify({ article: fields })) > max);
+    let writes = 0;
+    globalThis.fetch = async (url, options = {}) => {
+      if ((options.method || "GET") === "PUT") {
+        writes += 1;
+        return jsonResponse({ content: { sha: "saved-sha" } });
+      }
+      if (String(url).includes("category-covers.json")) return githubFileResponse('{"default":"/fallback.webp"}', "covers");
+      if (String(url).includes("source/_posts/post.md")) return githubFileResponse(existing, "current-sha");
+      if (String(url).includes("contents/source/_posts?")) return jsonResponse([]);
+      throw new Error(`Unexpected request: ${url}`);
+    };
+    try {
+      const nearLimit = mockResponse();
+      await adminArticles({ method: "POST", headers: { authorization: "Bearer admin-secret" }, body: { article: fields } }, nearLimit);
+      assert.equal(nearLimit.statusCode, 200, JSON.stringify(nearLimit.body));
+      assert.equal(writes, 1);
+
+      const tooLarge = mockResponse();
+      await adminArticles({
+        method: "POST", headers: { authorization: "Bearer admin-secret" },
+        body: { article: { title: "New", date: "2026-07-17", category: "Essay", content: "x".repeat(max) } },
+      }, tooLarge);
+      assert.equal(tooLarge.statusCode, 413);
+      assert.equal(writes, 1);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
 test("article save rejects a stale editor SHA without writing", async () => {
   await withRepoEnv(async () => {
     const originalFetch = globalThis.fetch;
@@ -1091,8 +1361,8 @@ test("article save rejects a stale editor SHA without writing", async () => {
     globalThis.fetch = async (url, options = {}) => {
       const path = String(url);
       if ((options.method || "GET") === "PUT") { writes += 1; return jsonResponse({ content: { sha: "saved" } }); }
-      if (path.includes("category-covers.json")) return jsonResponse({ sha: "covers", content: Buffer.from('{"default":"/fallback.webp"}').toString("base64") });
-      if (path.includes("source/_posts/post.md")) return jsonResponse({ sha: "current-sha", content: Buffer.from('---\ntitle: "Current"\ndate: "2026-07-17"\ncategories:\n  - "技术"\n---\nCurrent body\n').toString("base64") });
+      if (path.includes("category-covers.json")) return githubFileResponse('{"default":"/fallback.webp"}', "covers");
+      if (path.includes("source/_posts/post.md")) return githubFileResponse('---\ntitle: "Current"\ndate: "2026-07-17"\ncategories:\n  - "技术"\n---\nCurrent body\n', "current-sha");
       throw new Error(`Unexpected request: ${path}`);
     };
     const req = { method: "POST", headers: { authorization: "Bearer admin-secret" }, query: {}, body: { article: { filePath: "source/_posts/post.md", sha: "editor-sha", title: "Edited", date: "2026-07-17", category: "技术", content: "Edited body" } } };
@@ -1109,7 +1379,7 @@ test("article delete rejects a stale editor SHA without deleting", async () => {
     let deletes = 0;
     globalThis.fetch = async (url, options = {}) => {
       if ((options.method || "GET") === "DELETE") { deletes += 1; return jsonResponse({}); }
-      return jsonResponse({ sha: "current-sha", content: Buffer.from("post").toString("base64") });
+      return githubFileResponse("post", "current-sha");
     };
     const req = { method: "DELETE", headers: { authorization: "Bearer admin-secret" }, query: {}, body: { filePath: "source/_posts/post.md", sha: "editor-sha" } };
     const res = mockResponse();
@@ -1129,8 +1399,8 @@ test("commit messages stay single-line so an article title cannot forge a traile
         committed = JSON.parse(options.body);
         return jsonResponse({ content: { sha: "saved" } });
       }
-      if (path.includes("category-covers.json")) return jsonResponse({ sha: "covers", content: Buffer.from('{"default":"/fallback.webp"}').toString("base64") });
-      if (path.includes("source/_posts/post.md")) return jsonResponse({ sha: "current-sha", content: Buffer.from('---\ntitle: "Current"\ndate: "2026-07-17"\ncategories:\n  - "技术"\n---\nCurrent body\n').toString("base64") });
+      if (path.includes("category-covers.json")) return githubFileResponse('{"default":"/fallback.webp"}', "covers");
+      if (path.includes("source/_posts/post.md")) return githubFileResponse('---\ntitle: "Current"\ndate: "2026-07-17"\ncategories:\n  - "技术"\n---\nCurrent body\n', "current-sha");
       throw new Error(`Unexpected request: ${path}`);
     };
     const req = {
@@ -1171,6 +1441,139 @@ test("new articles serialize a timezone-stable midnight", () => {
 
   assert.match(composed.content, /^date: "2026-08-01 00:00:00"$/m);
   assert.match(composed.content, /^permalink: "\/2026\/08\/01\/new-post\/"$/m);
+});
+
+test("composing a post keeps prose delimited by ---", () => {
+  const composed = github.composePost({
+    title: "Dashes",
+    date: "2026-09-22",
+    category: "随笔",
+    content: "---\n\nFirst paragraph\n\n---\n\nSecond paragraph\n",
+  }, { default: "/fallback.webp" }, null, "source/_posts/2026-09-22-dashes.md");
+
+  assert.match(composed.content, /First paragraph/);
+  assert.match(composed.content, /Second paragraph/);
+});
+
+test("CRLF posts are read without corrupting front matter", () => {
+  const source = "---\r\ntitle: 旧标题\r\ndate: 2026-01-01 00:00:00\r\n---\r\n\r\n正文\r\n";
+  const parsed = github.parsePost("source/_posts/2026-01-01-x.md", source, "sha", true);
+
+  assert.equal(parsed.title, "旧标题");
+  assert.doesNotMatch(parsed.content, /^---/m);
+
+  const composed = github.composePost(
+    { ...parsed, content: parsed.content },
+    { default: "/fallback.webp" },
+    parsed,
+    parsed.filePath,
+  );
+  assert.equal((composed.content.match(/^---$/gm) || []).length, 2);
+});
+
+test("import, save and reopen preserve the imported body through repeated edits", () => {
+  const editor = require('../../source/admin/editor-tools.js');
+  for (const fixture of frontMatterCases) {
+    const imported = editor.markdownImportReplacement({ source: fixture.source, title: 'Front matter contract' });
+    const composed = github.composePost({
+      title: "Front matter contract",
+      date: "2026-09-23",
+      category: "随笔",
+      content: imported.value,
+    }, { default: "/fallback.webp" }, null, "source/_posts/2026-09-23-contract.md");
+    const parsed = github.parsePost(
+      "source/_posts/2026-09-23-contract.md",
+      composed.content,
+      "sha",
+      true,
+    );
+    assert.equal(parsed.content, fixture.expectedBody, fixture.name);
+    const savedAgain = github.composePost(parsed, { default: '/fallback.webp' }, parsed, parsed.filePath);
+    assert.equal(github.parsePost(parsed.filePath, savedAgain.content, 'sha2', true).content, fixture.expectedBody, fixture.name);
+  }
+});
+
+test('saving body never strips a metadata-looking Markdown block or code indentation', () => {
+  const editor = require('../../source/admin/editor-tools.js');
+  const bodies = ['---\ntitle: example syntax\n---\nBody', '    const code = 1;\n    second line\nlast line  '];
+  for (const body of bodies) {
+    const imported = editor.markdownImportReplacement({source: '# Heading\n' + body, title: ''});
+    const saved = github.composePost({title: imported.title, date: '2026-09-23', content: imported.value}, {}, null, 'source/_posts/2026-09-23-body.md');
+    const parsed = github.parsePost('source/_posts/2026-09-23-body.md', saved.content, 'sha', true);
+    assert.equal(parsed.content, imported.value);
+    const again = github.composePost(parsed, {}, parsed, parsed.filePath);
+    assert.equal(github.parsePost(parsed.filePath, again.content, 'sha2', true).content, imported.value);
+  }
+});
+
+test('editing metadata preserves literal replacement tokens', () => {
+  const literal = "$& $' $` $$ $1";
+  const source = '---\ntitle: Original\ndate: 2026-09-23\ncategories:\n  - First\n  - Second\ncustom: retained\n---\nBody';
+  const existing = github.parsePost('source/_posts/2026-09-23-literal.md', source, 'sha', true);
+  const saved = github.composePost({...existing, title: literal, category: literal}, {}, existing, existing.filePath);
+  const parsed = github.parsePost(existing.filePath, saved.content, 'sha2', true);
+  assert.equal(parsed.title, literal);
+  assert.deepEqual(parsed.categories, [literal, 'Second']);
+  assert.equal(parsed.content, 'Body');
+  assert.match(saved.content, /^custom: retained$/m);
+});
+
+test('editing multiline titles and inline categories keeps valid metadata and extra categories', () => {
+  const yaml = require('js-yaml');
+  const source = '---\ntitle: >-\n  Original\n  multiline title\ndate: 2026-09-23\ncategories: [First, Second]\ncustom: |\n  retained text\n---\nBody';
+  const existing = github.parsePost('source/_posts/2026-09-23-multiline.md', source, 'sha', true);
+  assert.equal(existing.title, 'Original multiline title');
+  assert.deepEqual(existing.categories, ['First', 'Second']);
+  const saved = github.composePost({...existing, title: 'Renamed', category: 'Changed'}, {}, existing, existing.filePath);
+  const block = /^---\n([\s\S]*?)\n---/.exec(saved.content)[1];
+  const metadata = yaml.load(block);
+  assert.equal(metadata.title, 'Renamed');
+  assert.deepEqual(metadata.categories, ['Changed', 'Second']);
+  assert.equal(metadata.custom, 'retained text\n');
+  assert.equal(github.parsePost(existing.filePath, saved.content, 'sha2', true).content, 'Body');
+});
+
+test('editing anchored front matter keeps aliases valid and updates their values', () => {
+  const yaml = require('js-yaml');
+  for (const categories of ['categories: &labels.v1 [Essay, Notes]', 'categories: &labels.v1\n  - Essay\n  - Notes']) {
+    const source = [
+      '---',
+      'title: &headline.v1 Original',
+      'date: 2026-09-23',
+      categories,
+      'custom: { headline: *headline.v1, labels: *labels.v1 }',
+      '---',
+      'Body'
+    ].join('\n');
+    const existing = github.parsePost('source/_posts/2026-09-23-anchors.md', source, 'sha', true);
+    const saved = github.composePost({ ...existing, title: 'Renamed', category: 'Changed' }, {}, existing, existing.filePath);
+    const block = /^---\n([\s\S]*?)\n---/.exec(saved.content)[1];
+    const metadata = yaml.load(block, { schema: yaml.JSON_SCHEMA });
+    assert.equal(metadata.title, 'Renamed');
+    assert.deepEqual(metadata.categories, ['Changed', 'Notes']);
+    assert.deepEqual(metadata.custom, { headline: 'Renamed', labels: ['Changed', 'Notes'] });
+  }
+});
+
+test("repository parsing accepts standard front matter with blank lines and comments", () => {
+  const source = [
+    "---",
+    "# retained repository metadata",
+    "title: Standard front matter",
+    "",
+    "description: |",
+    "  first line",
+    "",
+    "  second line",
+    "date: 2026-09-23 00:00:00",
+    "---",
+    "Body",
+  ].join("\n");
+  const parsed = github.parsePost("source/_posts/2026-09-23-standard.md", source, "sha", true);
+
+  assert.equal(parsed.title, "Standard front matter");
+  assert.equal(parsed.date, "2026-09-23 00:00:00");
+  assert.equal(parsed.content, "Body");
 });
 
 test("new articles preserve an explicit publication time", () => {
@@ -1378,10 +1781,10 @@ test("category cover lookup falls back only for a missing mapping file", async (
       global.fetch = async () => jsonResponse({ message: "server error" }, 500);
       await assert.rejects(github.readCoverMap(), (error) => error.status === 500);
 
-      global.fetch = async () => jsonResponse({ content: Buffer.from("not json").toString("base64"), sha: "sha" });
+      global.fetch = async () => githubFileResponse("not json", "sha");
       await assert.rejects(github.readCoverMap(), /cover map|JSON/i);
 
-      global.fetch = async () => jsonResponse({ content: Buffer.from("[]").toString("base64"), sha: "sha" });
+      global.fetch = async () => githubFileResponse("[]", "sha");
       await assert.rejects(github.readCoverMap(), /cover map|object/i);
     } finally {
       global.fetch = originalFetch;

@@ -56,7 +56,13 @@ function parseUpload(body) {
     throw new Error('Unsupported image type');
   }
 
+  if (base64.length % 4 !== 0 || !/^[A-Za-z0-9+/]*={0,2}$/.test(base64)) {
+    throw new Error('Invalid image encoding');
+  }
   const buffer = Buffer.from(base64, 'base64');
+  if (buffer.toString('base64') !== base64) {
+    throw new Error('Invalid image encoding');
+  }
   if (!buffer.length || buffer.length > MAX_BYTES) {
     throw new Error('Image is empty or too large');
   }
@@ -101,14 +107,15 @@ function destination(upload) {
   const stamp = timestamp();
   const baseName = upload.originalName.replace(/\.[^.]+$/, '');
   const safeName = slugify(baseName, 'image');
+  const fileName = `${stamp}-${safeName}-${gitBlobSha(upload.buffer).slice(0, 16)}.${upload.extension}`;
 
   if (upload.purpose === 'cover') {
-    return `source/images/covers/custom/${stamp}-${safeName}.${upload.extension}`;
+    return `source/images/covers/custom/${fileName}`;
   }
 
   const year = stamp.slice(0, 4);
   const month = stamp.slice(4, 6);
-  return `source/images/uploads/${year}/${month}/${stamp}-${safeName}.${upload.extension}`;
+  return `source/images/uploads/${year}/${month}/${fileName}`;
 }
 
 module.exports = async (req, res) => {

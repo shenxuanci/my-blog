@@ -12,7 +12,7 @@
 | **`/source`** | Hexo 内容源 | 所有博客内容存放于此，Hexo 构建时以这里为入口。 |
 | ├── `/source/_posts` | 文章 Markdown | 文件名格式 `YYYY-MM-DD-slug.md`，包含 front matter（title, date, categories, index_img 等）。 |
 | ├── `/source/images` | 图片资源 | 存放博客文章插图、头像等（如 `my-avatar.jpg`, `img_*.png`），含 `covers/` 子目录。 |
-| ├── `/source/admin` | 在线后台页面 | 存放 `index.html`，通过 `/admin/` 访问。 |
+| ├── `/source/admin` | 在线后台页面 | 存放 `index.html`、编辑与评论辅助脚本及自托管解析器，通过 `/admin/` 访问。 |
 | ├── `/source/js` & `/source/css` | 自定义前端脚本和样式 | 存放如 `aoiblog-home.js`、`aoiblog-home.css` 等自定义资源。 |
 | ├── `/source/about` | 关于页面 | 存放 `index.md`。 |
 | ├── `/source/friends` | 友情链接页面 | 存放 `index.md`。 |
@@ -41,7 +41,7 @@
 - **规则**：全小写，单词间用连字符 `-` 连接。因为这些文件名通常直接暴露在 URL 中。
 - **适用范围**：`/source/images/`、`/source/js/`、`/source/css/`。
 - **示例**：`friend-avatar.jpg`、`aoiblog-home.css`。
-- *注：通过工具自动上传生成的图片，保留原时间戳格式即可（如 `img_1774010498471.png`）。*
+- *注：旧有自动生成图片可保留原时间戳文件名（如 `img_1774010498471.png`）；当前后台上传使用 `时间戳-slug-内容摘要.扩展名`，不要手工去掉摘要或迁移旧路径。*
 
 ### 2.3 后端接口文件 (camelCase)
 - **规则**：小驼峰命名法，清晰表达接口意图。

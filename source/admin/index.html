@@ -177,9 +177,14 @@
       text-align: left;
     }
 
-    .article-item:hover,
+    .article-item:hover:not(:disabled),
     .article-item.active {
       background: #edf6f8;
+    }
+
+    .article-item:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
     }
 
     .article-title {
@@ -733,6 +738,7 @@
   <input id="markdownFile" class="hidden" type="file" accept=".md,.markdown,text/markdown,text/plain">
 
   <script src="/admin/marked.min.js"></script>
+  <script src="/admin/js-yaml.min.js"></script>
   <script src="/admin/editor-tools.js"></script>
   <script src="/admin/comment-tools.js"></script>
   <script>
@@ -1232,21 +1238,31 @@
 
       $('articleList').innerHTML = state.articles.map((article) => {
         const active = state.current?.filePath === article.filePath ? ' active' : '';
+        const unavailable = article.editable === false;
+        const meta = unavailable
+          ? article.unavailableReason || '文章超过 1 MiB，需在本地编辑'
+          : `${String(article.date || '').slice(0, 10)} / ${article.category || ''}`;
         return `
-          <button class="article-item${active}" type="button" data-path="${escapeHtml(article.filePath)}">
+          <button class="article-item${active}" type="button" data-path="${escapeHtml(article.filePath)}"${unavailable ? ' disabled' : ''}>
             <span class="article-title">${escapeHtml(article.title)}</span>
-            <span class="article-meta">${escapeHtml(String(article.date || '').slice(0, 10))} / ${escapeHtml(article.category || '')}</span>
+            <span class="article-meta">${escapeHtml(meta)}</span>
           </button>
         `;
       }).join('');
 
-      document.querySelectorAll('.article-item').forEach((item) => {
+      document.querySelectorAll('.article-item:not(:disabled)').forEach((item) => {
         item.addEventListener('click', () => editPost(item.dataset.path));
       });
     }
 
     function defaultCover(category) {
-      return state.coverMap[category] || state.coverMap.default || '/images/covers/defaults/fallback.webp';
+      const coverMap = state.coverMap || {};
+      for (const key of [category, 'default']) {
+        if (Object.hasOwn(coverMap, key) && typeof coverMap[key] === 'string' && coverMap[key]) {
+          return coverMap[key];
+        }
+      }
+      return '/images/covers/defaults/fallback.webp';
     }
 
     function updateCoverPreview() {
@@ -1467,9 +1483,12 @@
 
     function renderMarkdown(markdown) {
       const codeBlocks = [];
-      let html = String(markdown || '').replace(/```([\s\S]*?)```/g, (_, code) => {
+      const source = String(markdown || '');
+      let marker = '@@CODE_BLOCK_';
+      while (source.includes(marker)) marker += '_';
+      let html = source.replace(/```([\s\S]*?)```/g, (_, code) => {
         codeBlocks.push(`<pre><code>${escapeHtml(code.trim())}</code></pre>`);
-        return `@@CODE_BLOCK_${codeBlocks.length - 1}@@`;
+        return `${marker}${codeBlocks.length - 1}@@`;
       });
 
       html = escapeHtml(html)
@@ -1487,7 +1506,7 @@
       html = `<p>${html}</p>`.replace(/<p>\s*<\/p>/g, '');
       codeBlocks.forEach((block, index) => {
         // 用函数形式回填：字符串形式会让代码块里的 $&、$`、$' 被当成替换模式展开。
-        html = html.replace(`@@CODE_BLOCK_${index}@@`, () => block);
+        html = html.replace(`${marker}${index}@@`, () => block);
       });
       return html;
     }
@@ -1872,6 +1891,11 @@
     $('markdownFile').addEventListener('change', async (event) => {
       const file = event.target.files[0];
       if (!file) return;
+      // 导入是整体覆盖编辑器：已有正文时先确认，避免一次误点丢掉手上写的内容。
+      if ($('content').value.trim() && !confirm('导入会覆盖编辑器里现有的正文，确认继续吗？')) {
+        event.target.value = '';
+        return;
+      }
       try {
         const replacement = editorTools.markdownImportReplacement({
           source: await file.text(),

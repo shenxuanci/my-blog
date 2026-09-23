@@ -1,0 +1,47 @@
+[
+  {
+    "name": "metadata with a blank line",
+    "source": "---\ntitle: Blank sections\n\ndate: 2026-09-23\n---\nBody",
+    "expectedBody": "Body"
+  },
+  {
+    "name": "metadata with a leading comment",
+    "source": "---\n# exported by another editor\ntitle: Commented\ndate: 2026-09-23\n---\nBody",
+    "expectedBody": "Body"
+  },
+  {
+    "name": "metadata with a multiline scalar",
+    "source": "---\ntitle: Multiline\ndescription: |\n  first line\n\n  second line\n---\nBody",
+    "expectedBody": "Body"
+  },
+  {
+    "name": "BOM and CRLF metadata",
+    "source": "\ufeff---\r\ntitle: Windows export\r\ndate: 2026-09-23\r\n---\r\nBody",
+    "expectedBody": "Body"
+  },
+  {
+    "name": "layout-only article metadata",
+    "source": "---\nlayout: post\n---\nBody",
+    "expectedBody": "Body"
+  },
+  {
+    "name": "empty delimiter block",
+    "source": "---\n---\nBody",
+    "expectedBody": "---\n---\nBody"
+  },
+  {
+    "name": "prose between thematic breaks",
+    "source": "---\n\nFirst paragraph\n\n---\n\nSecond paragraph",
+    "expectedBody": "---\n\nFirst paragraph\n\n---\n\nSecond paragraph"
+  },
+  {
+    "name": "colon prose with an unknown key",
+    "source": "---\nnote: this is prose\n---\nActual second paragraph",
+    "expectedBody": "---\nnote: this is prose\n---\nActual second paragraph"
+  },
+  {
+    "name": "invalid YAML that mentions metadata",
+    "source": "---\ntitle: [unfinished\n---\nBody",
+    "expectedBody": "---\ntitle: [unfinished\n---\nBody"
+  }
+]

@@ -31,7 +31,7 @@
     try {
       id = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
     } catch (_) {}
-    const target = articleMap[id];
+    const target = Object.hasOwn(articleMap, id) ? articleMap[id] : '';
     window.location.replace(target || '/archives/');
   </script>
 </head>
